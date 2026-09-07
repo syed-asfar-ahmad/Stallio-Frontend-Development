@@ -1,0 +1,70 @@
+{
+  "howItWorks": {
+    "hero": {
+      "titleLine1": "Three moves.",
+      "titleLine2": "One sharp link.",
+      "subtitle": "Open your store, load your catalog, then paste the same URL everywhere buyers already find you. Built for thumbs, not for IT tickets.",
+      "noteDraft": "~5 min first draft",
+      "noteMobile": "Mobile first",
+      "startFree": "Start Free",
+      "viewDemoStore": "View Demo Store",
+      "previewCards": [
+        { "n": "01", "t": "Name + URL", "d": "stallio.shop/you" },
+        { "n": "02", "t": "Add products", "d": "Photos & prices" },
+        { "n": "03", "t": "Share link", "d": "Bio, Stories, Chat" }
+      ]
+    },
+    "flow": {
+      "eyebrow": "The flow",
+      "title": "Open. List. Share.",
+      "subtitle": "Three deliberate beats so you ship a storefront that feels intentional, not improvised.",
+      "steps": [
+        {
+          "title": "Create your shop",
+          "description": "Sign up, name your store, pick your URL. You get a live link you can paste anywhere. No DNS, no deploy, no drama.",
+          "items": [
+            "Create your account",
+            "Add store name and details",
+            "Get your link (stallio.shop/you)"
+          ]
+        },
+        {
+          "title": "Add your products",
+          "description": "Photos, prices, short descriptions. One catalog you can refine anytime. Buyers see clarity, not chaos.",
+          "items": ["Add product photos", "Set prices and descriptions", "Keep one organized catalog"]
+        },
+        {
+          "title": "Share and take orders",
+          "description": "Same link in bio, stories, and chats. They browse on the phone. You track everything in your dashboard.",
+          "items": [
+            "Put the link in your profile or bio",
+            "Share in chat or social posts",
+            "Track orders in one place"
+          ]
+        }
+      ]
+    },
+    "strip": "Same link, Every channel, Real storefront",
+    "live": {
+      "eyebrow": "When you are live",
+      "title": "Buyers see polish. You see control.",
+      "subtitle": "A fast storefront on the outside. A calm dashboard on the inside.",
+      "commandTitle": "Command center",
+      "commandBody": "Orders, products, and requests in one view. Update stock between deliveries without opening ten apps.",
+      "commandBullets": [
+        "Mark paid, ship, and download invoice PDFs",
+        "Coupons, delivery, and stock in one place",
+        "Export orders or add a manual phone order"
+      ],
+      "thumbTitle": "Thumb friendly",
+      "thumbBody": "Categories, cart, coupons, and checkout on the phone. Buyers can switch English, Spanish, or Arabic on your store.",
+      "thumbTags": ["Cart", "Coupons", "Invoices"]
+    },
+    "cta": {
+      "title": "Ship the link tonight.",
+      "subtitle": "Free to start. No card on file. If it feels right, keep selling from the same URL tomorrow.",
+      "createYourShop": "Start Free",
+      "exploreFeatures": "Explore Features"
+    }
+  }
+}

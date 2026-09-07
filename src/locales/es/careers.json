@@ -1,0 +1,38 @@
+{
+  "careers": {
+    "metaTitle": "Carreras — Stallio",
+    "hero": {
+      "eyebrow": "Carreras",
+      "title": "Haz crecer tu carrera con Stallio",
+      "subtitle": "Explora oportunidades para trabajar con nosotros, ganar experiencia real y ayudar a los vendedores a hacer crecer sus negocios en línea."
+    },
+    "apply": "Postular ahora",
+    "applyAria": "Postular a {{program}} (se abre en una pestaña nueva)",
+    "closed": "Cerrado",
+    "internship": {
+      "badge": "Prácticas",
+      "title": "Programa de prácticas de verano Stallio",
+      "description": "Pasa el verano trabajando de cerca con el equipo de Stallio en proyectos reales de producto, marketing y operaciones. Ideal para estudiantes que buscan experiencia en startups y un portafolio sólido.",
+      "highlights": [
+        "Trabaja en iniciativas reales de producto y crecimiento",
+        "Mentoría semanal del equipo fundador",
+        "Horario flexible y compatible con trabajo remoto",
+        "Certificado y carta de referencia para los mejores",
+        "Prioridad para futuros roles en Stallio"
+      ]
+    },
+    "ambassador": {
+      "badge": "Campus",
+      "title": "Programa de embajadores universitarios Stallio",
+      "description": "Representa a Stallio en tu universidad. Ayuda a pequeños negocios y vendedores sociales a descubrir Stallio mientras desarrollas habilidades de marketing, contenido y outreach en el campus.",
+      "highlights": [
+        "Crea al menos un video corto al mes",
+        "Contacta vendedores potenciales a través de tu red",
+        "Promueve Stallio en comunidades estudiantiles y de vendedores",
+        "Título oficial de embajador, certificado y kit de embajador",
+        "Incentivos por rendimiento por vendedores incorporados",
+        "Mentoría directa y networking con otros embajadores"
+      ]
+    }
+  }
+}

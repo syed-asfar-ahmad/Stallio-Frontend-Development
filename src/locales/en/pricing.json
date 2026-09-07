@@ -1,0 +1,107 @@
+{
+  "pricing": {
+    "hero": {
+      "eyebrow": "Pricing",
+      "titleLine1": "Simple numbers.",
+      "titleLine2": "One full product.",
+      "subtitle": "One month on us, then choose monthly or yearly. Same features either way: storefront, dashboard, and tools included.",
+      "fromMonthly": "From ${{amount}}/mo after trial",
+      "noCard": "No card to start",
+      "startFreeTrial": "Start Free",
+      "whatYouGet": "What You Get"
+    },
+    "billing": {
+      "eyebrow": "Choose billing",
+      "title": "Monthly or yearly, your choice",
+      "subtitle": "Preview local amounts by country. Subscriptions are charged in US dollars.",
+      "estimate": "Estimate",
+      "yourCountry": "Your country",
+      "countryHelp": "Search and select to see approximate prices in your currency on the plans.",
+      "countryLabelSr": "Country for price estimate",
+      "searchCountryPlaceholder": "Search country...",
+      "noCountryFound": "No country found",
+      "updatingRates": "Updating rates...",
+      "fxError": "Could not load rates for this currency. Amounts below stay in USD.",
+      "plansBillUsd": "Plans bill in USD.",
+      "monthly": "Monthly",
+      "yearly": "Yearly",
+      "saveAmount": "Save ${{amount}}",
+      "perMo": "/mo",
+      "perYr": "/yr",
+      "approxPerMonth": "≈ {{amount}} / month",
+      "approxPerYear": "≈ {{amount}} / year",
+      "afterTrial": "After trial",
+      "monthlyDesc": "Flexible billing. Cancel anytime from your account.",
+      "startMonthly": "Start Monthly",
+      "yearlyDesc": "Pay once per year. Best if you are committed to growing your shop.",
+      "startYearly": "Start Yearly",
+      "includedEyebrow": "Included",
+      "includedTitle": "Everything in both plans",
+      "includedItems": [
+        "Hosted stallio.shop link (no domain)",
+        "Unlimited products, photos, and orders",
+        "Mobile storefront, cart, and checkout",
+        "Variants, sale prices, and stock",
+        "About and Contact pages",
+        "Coupons and delivery fees",
+        "PDF invoice per order",
+        "Mark paid, ship, and export CSV",
+        "Shop and dashboard in EN, ES, and AR",
+        "Revenue and order charts",
+        "Buyer messages and support chat",
+        "First month free, no card required"
+      ],
+      "trustTitle": "Trial first, then you choose",
+      "trustBody": "Your first month is free. We will remind you before the trial ends so you can pick monthly or yearly, or cancel if it is not a fit."
+    },
+    "faq": {
+      "eyebrow": "FAQ",
+      "title": "Pricing questions, answered",
+      "subtitle": "Quick answers about trials, billing, and what happens when you subscribe.",
+      "items": [
+        {
+          "q": "Do I need my own domain or hosting?",
+          "a": "No. Your shop lives at stallio.shop/your-username. Share that link everywhere; we host the storefront and dashboard."
+        },
+        {
+          "q": "Does Stallio process payments from my customers?",
+          "a": "No. You tell buyers how to pay (bank transfer, payment link, cash on delivery, etc.). Stallio handles the order, invoice PDF, and paid or awaiting status; you confirm when money arrives."
+        },
+        {
+          "q": "Are products and orders unlimited?",
+          "a": "Yes. Both monthly and yearly plans include unlimited products, product images, and orders. Same full feature set on either plan."
+        },
+        {
+          "q": "Do I need a card to start?",
+          "a": "No. You can explore Stallio without putting a card on file. When you choose a paid plan, you will add payment details through our secure checkout."
+        },
+        {
+          "q": "What happens after the free trial?",
+          "a": "We remind you before the trial ends. You can pick monthly or yearly billing, or cancel if it is not a fit. Until you subscribe, you are not charged subscription fees."
+        },
+        {
+          "q": "Are prices in US dollars?",
+          "a": "Subscriptions are billed in USD. The country picker on this page shows approximate local amounts for planning; your bank may apply its own exchange rate or fees."
+        },
+        {
+          "q": "Can I cancel anytime?",
+          "a": "Yes for monthly plans. Cancel from your account and you will not be billed for future months. Yearly plans are prepaid for the term; see Terms for details on refunds if we offer them."
+        },
+        {
+          "q": "Do both plans include the same features?",
+          "a": "Yes. Monthly and yearly include the same storefront, dashboard, and tools. Yearly is discounted because you commit for a full year."
+        },
+        {
+          "q": "Who do I contact about billing?",
+          "a": "Use the Contact page and choose a billing-related subject. Include your shop email so we can find your account quickly."
+        }
+      ]
+    },
+    "bottomCta": {
+      "title": "Still deciding?",
+      "subtitle": "Ask us anything on the contact page, or start a trial and see the product for yourself.",
+      "contactUs": "Contact Us",
+      "createYourShop": "Start Free"
+    }
+  }
+}

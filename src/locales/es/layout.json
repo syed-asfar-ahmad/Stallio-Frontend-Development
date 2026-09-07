@@ -1,0 +1,48 @@
+{
+  "layout": {
+    "metaTitle": "Stallio",
+    "language": {
+      "label": "Idioma"
+    },
+    "nav": {
+      "home": "Inicio",
+      "about": "Acerca de",
+      "howItWorks": "Proceso",
+      "features": "Funciones",
+      "pricing": "Precios",
+      "contact": "Contacto",
+      "careers": "Carreras"
+    },
+    "navCta": {
+      "logIn": "Iniciar sesión",
+      "createYourShop": "Empieza gratis"
+    },
+    "aria": {
+      "homeLogo": "Inicio de Stallio",
+      "mainNav": "Principal",
+      "mobileMainNav": "Principal móvil",
+      "openMenu": "Abrir menú",
+      "closeMenu": "Cerrar menú"
+    },
+    "footer": {
+      "howItWorks": "Cómo funciona",
+      "tagline": "Un enlace para tu catálogo y pedidos, para que los clientes sepan dónde comprar y tú te mantengas organizado.",
+      "getStartedFree": "Empieza gratis",
+      "linksHeading": "Enlaces",
+      "legalNavAria": "Enlaces legales",
+      "privacy": "Política de privacidad",
+      "terms": "Términos del servicio",
+      "refund": "Política de reembolso",
+      "contactHeading": "Contacto",
+      "socialHeading": "Redes sociales",
+      "legalHeading": "Legales",
+      "copyright": "© {{year}} Stallio. Todos los derechos reservados."
+    },
+    "theme": {
+      "lightMode": "Modo claro",
+      "darkMode": "Modo oscuro",
+      "switchToLight": "Cambiar a modo claro",
+      "switchToDark": "Cambiar a modo oscuro"
+    }
+  }
+}

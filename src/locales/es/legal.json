@@ -1,0 +1,159 @@
+{
+  "legalDoc": {
+    "backHome": "Volver al inicio",
+    "lastUpdated": "Última actualización: 1 de junio de 2026"
+  },
+  "legalPrivacy": {
+    "metaTitle": "Política de privacidad | Stallio",
+    "title": "Política de privacidad",
+    "intro": "Esta política explica qué información recopila Stallio cuando usas nuestro sitio web, el panel de vendedor y tu tienda alojada en stallio.shop.",
+    "sections": [
+      {
+        "heading": "1. Quiénes somos",
+        "paragraphs": [
+          "Stallio ofrece a los vendedores un enlace de tienda alojado y un panel para gestionar productos y pedidos. Stallio es responsable de los datos de cuenta y plataforma descritos a continuación."
+        ]
+      },
+      {
+        "heading": "2. Qué recopilamos",
+        "paragraphs": [
+          "Datos de cuenta: correo, contraseña (almacenada de forma segura), nombre de tienda, usuario, país, moneda, logo y ajustes del panel.",
+          "Contenido de la tienda: productos, imágenes, categorías, cupones, ajustes de envío y páginas que publicas (Inicio, Acerca de, Contacto y similares).",
+          "Pedidos en tu tienda: nombre del cliente, teléfono, dirección, correo opcional, artículos del carrito y totales. Tú eliges cómo pagan los clientes. Stallio no procesa pagos de clientes en tu tienda.",
+          "Mensajes: envíos del formulario de contacto y chat de soporte entre tú y Stallio.",
+          "Datos técnicos: sesión de inicio de sesión, preferencia de tema o idioma en el navegador y registros de seguridad estándar de nuestros proveedores de hosting y correo."
+        ]
+      },
+      {
+        "heading": "3. Cómo usamos tus datos",
+        "paragraphs": [
+          "Usamos esta información para operar la plataforma, iniciar tu sesión, alojar tu tienda, enviar pedidos a tu panel, enviar correos del servicio (restablecer contraseña, bienvenida, avisos de pedido, recordatorios de suscripción), prevenir abusos y responder solicitudes de soporte.",
+          "No vendemos tu información personal."
+        ]
+      },
+      {
+        "heading": "4. Compartición y almacenamiento",
+        "paragraphs": [
+          "Usamos proveedores de confianza para hosting, almacenamiento de imágenes y correo. Solo pueden procesar datos para operar el servicio para nosotros.",
+          "Podemos compartir información si la ley lo exige o para proteger a los usuarios y la plataforma.",
+          "Los datos pueden almacenarse o procesarse en países donde operan nuestros proveedores."
+        ]
+      },
+      {
+        "heading": "5. Cuánto tiempo guardamos los datos",
+        "paragraphs": [
+          "Guardamos tu información mientras tu cuenta esté activa y un tiempo razonable después para copias de seguridad, seguridad y necesidades legales.",
+          "Puedes eliminar tu cuenta de vendedor desde los ajustes del panel. Esto elimina tu cuenta y los datos de la tienda de nuestros sistemas, salvo cuando debamos conservar algunos registros por ley."
+        ]
+      },
+      {
+        "heading": "6. Tus derechos y actualizaciones",
+        "paragraphs": [
+          "Según tu ubicación, puedes pedirnos acceder, corregir, exportar o eliminar los datos personales que tenemos sobre ti. Usa la página de Contacto para hacer una solicitud.",
+          "Podemos actualizar esta política publicando una nueva versión en esta página."
+        ]
+      }
+    ]
+  },
+  "legalTerms": {
+    "metaTitle": "Términos de servicio | Stallio",
+    "title": "Términos de servicio",
+    "intro": "Estos términos aplican cuando usas Stallio como vendedor. Al usar el servicio, aceptas estos términos.",
+    "sections": [
+      {
+        "heading": "1. Qué ofrece Stallio",
+        "paragraphs": [
+          "Stallio te da una tienda alojada en stallio.shop/tu-usuario y un panel para gestionar productos, pedidos, cupones, envío y páginas de la tienda.",
+          "Stallio no procesa ni liquida pagos entre tú y tus clientes. Indicas a los clientes cómo pagar y marcas los pedidos como pagados en tu panel.",
+          "Podemos añadir, cambiar o eliminar funciones con aviso razonable cuando sea posible."
+        ]
+      },
+      {
+        "heading": "2. Tu cuenta",
+        "paragraphs": [
+          "Debes dar datos de registro correctos y mantener tu acceso seguro. Eres responsable de la actividad en tu cuenta.",
+          "Podemos suspender tu tienda o panel por falta de pago, abuso o riesgo para otros usuarios, como se describe en la página de Precios o en mensajes que te enviemos."
+        ]
+      },
+      {
+        "heading": "3. Uso aceptable",
+        "paragraphs": [
+          "No uses Stallio para productos o servicios ilegales, fraude, acoso, malware ni contenido que no tengas derecho a usar.",
+          "Podemos eliminar contenido o cerrar cuentas que incumplan estas reglas."
+        ]
+      },
+      {
+        "heading": "4. Tu contenido",
+        "paragraphs": [
+          "Eres dueño del contenido que subes. Das permiso a Stallio para alojarlo y mostrarlo solo para operar el servicio de tu tienda.",
+          "Eres responsable del contenido de tu tienda y de tratar los datos de clientes de forma legal."
+        ]
+      },
+      {
+        "heading": "5. Suscripciones y tarifas",
+        "paragraphs": [
+          "Puedes empezar sin tarjeta de pago. Los planes de pago y precios se muestran en la página de Precios.",
+          "Los pagos de suscripción se cobran como se describe en Precios o por nuestro equipo y se registran en tu cuenta.",
+          "Pueden aplicarse impuestos. Cancelar un plan mensual detiene cargos futuros como se explica en Precios o en los mensajes de tu cuenta."
+        ]
+      },
+      {
+        "heading": "6. Responsabilidad y general",
+        "paragraphs": [
+          "El servicio se ofrece tal cual y según disponibilidad, en la medida que permita la ley.",
+          "Donde la ley lo permita, la responsabilidad de Stallio por reclamaciones sobre el servicio se limita a las tarifas que nos pagaste en los doce meses anteriores a la reclamación, o cincuenta dólares estadounidenses si no pagaste tarifas.",
+          "Podemos actualizar estos términos publicando una nueva versión en esta página. Preguntas: usa la página de Contacto."
+        ]
+      }
+    ]
+  },
+  "legalRefund": {
+    "metaTitle": "Política de reembolso | Stallio",
+    "title": "Política de reembolso",
+    "intro": "Esta política explica cuándo Stallio reembolsa las tarifas de suscripción que los vendedores nos pagan por usar la plataforma.",
+    "sections": [
+      {
+        "heading": "1. Qué cubre esta política",
+        "paragraphs": [
+          "Esta política aplica solo a las tarifas de suscripción que pagas a Stallio por planes de vendedor en stallio.shop.",
+          "No cubre pedidos realizados en tu tienda. Tú gestionas los reembolsos de los pedidos de tu tienda con tus clientes."
+        ]
+      },
+      {
+        "heading": "2. Plan gratuito",
+        "paragraphs": [
+          "Puedes crear una cuenta de vendedor y usar funciones gratuitas sin tarjeta de pago. Sin tarifa de suscripción no aplica reembolso."
+        ]
+      },
+      {
+        "heading": "3. Planes mensuales",
+        "paragraphs": [
+          "Al cancelar un plan mensual de pago, se detienen los cobros futuros. Mantienes el acceso hasta el final del periodo que ya pagaste, como se muestra en la página de Precios o en los mensajes de tu cuenta.",
+          "Normalmente no reembolsamos días no usados de un mes que ya pagaste, salvo que la ley lo exija o confirmemos un error de facturación de nuestra parte."
+        ]
+      },
+      {
+        "heading": "4. Planes anuales",
+        "paragraphs": [
+          "Los planes anuales se pagan por adelantado por el plazo completo mostrado en la página de Precios.",
+          "Si cancelas antes, no reembolsamos automáticamente los meses restantes salvo que lo confirmemos por escrito o tu ley local lo exija."
+        ]
+      },
+      {
+        "heading": "5. Errores de facturación",
+        "paragraphs": [
+          "Si te cobramos dos veces por el mismo periodo, un monto incorrecto o seguimos cobrando tras una cancelación confirmada, contáctanos en un plazo de 30 días desde el cargo.",
+          "Tras verificar el problema, corregiremos el cargo o enviaremos un reembolso al mismo método de pago cuando sea posible."
+        ]
+      },
+      {
+        "heading": "6. Cómo solicitar un reembolso",
+        "paragraphs": [
+          "Usa la página de Contacto en este sitio web. Incluye el correo de tu cuenta, usuario de la tienda, fecha del cargo y una breve descripción del problema.",
+          "Podemos pedir más detalles para verificar la solicitud. Los reembolsos aprobados suelen procesarse en 5 a 10 días hábiles, según tu proveedor de pago.",
+          "Podemos actualizar esta política publicando una nueva versión en esta página."
+        ]
+      }
+    ]
+  }
+}

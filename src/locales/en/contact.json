@@ -1,0 +1,50 @@
+{
+  "contact": {
+    "toastSent": "Message sent! We'll get back to you soon.",
+    "success": {
+      "title": "Message sent",
+      "body": "Thanks for reaching out. We will get back to you soon.",
+      "hint": "For urgent help with your shop, check your dashboard settings.",
+      "backHome": "Back To Home",
+      "openShop": "Start Free"
+    },
+    "hero": {
+      "eyebrow": "Contact",
+      "title": "We read every message",
+      "subtitle": "Product questions, partnership ideas, or something broken: send a note and we will point you in the right direction."
+    },
+    "info": {
+      "title": "Contact info",
+      "body": "Prefer email or phone? Use either below. Typical reply time is a few business days.",
+      "social": "Social"
+    },
+    "form": {
+      "title": "Send a message",
+      "intro": "All fields are required so we can respond with context.",
+      "name": "Name",
+      "email": "Email",
+      "subject": "Subject",
+      "message": "Message",
+      "placeholderName": "Your name",
+      "placeholderSubject": "What is this about?",
+      "placeholderMessage": "Your message...",
+      "send": "Send Message",
+      "sending": "Sending...",
+      "errors": {
+        "nameRequired": "Name is required",
+        "emailRequired": "Email is required",
+        "emailInvalid": "Enter a valid email",
+        "subjectRequired": "Subject is required",
+        "messageRequired": "Message is required",
+        "messageMin": "Message should be at least 10 characters"
+      }
+    },
+    "strip": {
+      "eyebrow": "Self-serve",
+      "title": "Trying Stallio first?",
+      "body": "Most answers live in How it works and Features. Start Free anytime.",
+      "howItWorks": "How It Works",
+      "features": "Features"
+    }
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "about": {
+    "hero": {
+      "eyebrow": "About Stallio",
+      "title": "A calm storefront for people who already have buyers.",
+      "subtitle": "We built Stallio for sellers who already have buyers: one hosted link, a real storefront, and a dashboard. No domain bill, site builder maze, or payment gateway to wire up first.",
+      "startFree": "Start Free",
+      "viewDemoStore": "View Demo Store",
+      "mockRows": [
+        "stallio.shop link, no domain to buy",
+        "Unlimited products, photos, and orders",
+        "PDF invoices and coupons built in",
+        "You collect payment your way"
+      ]
+    },
+    "mission": {
+      "eyebrow": "Why we exist",
+      "title": "Selling on social should not feel improvised.",
+      "subtitle": "Most small sellers juggle screenshots, voice notes, and scattered chats. Stallio gives you a single shelf: catalog, checkout cues, and orders in one dashboard.",
+      "frictionTitle": "The friction",
+      "frictionIntro": "Relying only on messages and posts often means:",
+      "problems": [
+        "Products are hard to showcase properly",
+        "Orders get lost in messages",
+        "Customers feel confused",
+        "The business does not look professional"
+      ],
+      "solutionTitle": "What Stallio does",
+      "solutionIntro": "You get:",
+      "solutions": [
+        "A hosted mini store at stallio.shop/yourname",
+        "Unlimited catalog, checkout, and order inbox",
+        "PDF invoices, coupons, and delivery rules included",
+        "Sign up, add products, share one link tonight"
+      ]
+    },
+    "pillars": {
+      "eyebrow": "What you get",
+      "title": "Everything in one loop: show, sell, ship.",
+      "offers": [
+        {
+          "title": "Live in minutes",
+          "detail": "Sign up, name your store, pick your URL path. No technical setup."
+        },
+        {
+          "title": "Products with photos and prices",
+          "detail": "Upload images, set prices and descriptions. Keep everything in one place."
+        },
+        {
+          "title": "One link everywhere",
+          "detail": "Bio, stories, chats: the same link works on any platform your buyers use."
+        },
+        {
+          "title": "Orders in one dashboard",
+          "detail": "See requests, update stock, and stay on top of fulfillment without digging through DMs."
+        },
+        {
+          "title": "Storefront buyers trust",
+          "detail": "Fast, mobile-first layout so your catalog feels intentional, not improvised."
+        },
+        {
+          "title": "Seller tools included",
+          "detail": "Mark orders paid, track delivery, export CSV, and download invoice PDFs without extra apps."
+        }
+      ]
+    },
+    "values": {
+      "eyebrow": "How we think",
+      "title": "Principles behind the product",
+      "items": [
+        {
+          "title": "Built for real sellers",
+          "detail": "Home kitchens, studios, and side hustles. Not enterprise procurement."
+        },
+        {
+          "title": "Straightforward by design",
+          "detail": "Fewer knobs and plugins. A clear path from catalog to order."
+        },
+        {
+          "title": "Room to grow",
+          "detail": "Start small, add products and polish as your audience grows with you."
+        }
+      ],
+      "momentumTitle": "Built for momentum",
+      "momentumBody": "Whether you are testing a new line or shipping every week, Stallio is meant to stay out of the way: update products, tweak copy, and keep selling without rebuilding a whole site.",
+      "visionTitle": "Our vision",
+      "visionBody": "We want independent sellers to have tools that feel premium and honest: clear pricing, clear fulfillment, and a storefront that respects the buyer's time as much as yours."
+    },
+    "promise": {
+      "simple": "Simple",
+      "simpleSub": "No code, no theme maze",
+      "fast": "Fast",
+      "fastSub": "Draft a store in minutes",
+      "credible": "Credible",
+      "credibleSub": "A link buyers recognize"
+    },
+    "cta": {
+      "title": "Ready to look as serious as you are?",
+      "subtitle": "Create a free store, add a few products, and drop your link where people already find you.",
+      "createFreeStore": "Start Free",
+      "contactUs": "Contact Us"
+    }
+  }
+}

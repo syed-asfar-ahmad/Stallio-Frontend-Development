@@ -1,0 +1,159 @@
+{
+  "legalDoc": {
+    "backHome": "Back To Home",
+    "lastUpdated": "Last updated: 1st June 2026"
+  },
+  "legalPrivacy": {
+    "metaTitle": "Privacy Policy | Stallio",
+    "title": "Privacy Policy",
+    "intro": "This policy explains what information Stallio collects when you use our website, seller dashboard, and your hosted shop at stallio.shop.",
+    "sections": [
+      {
+        "heading": "1. Who we are",
+        "paragraphs": [
+          "Stallio gives sellers a hosted shop link and a dashboard to manage products and orders. Stallio is responsible for the account and platform data described below."
+        ]
+      },
+      {
+        "heading": "2. What we collect",
+        "paragraphs": [
+          "Account details: email, password (stored securely), shop name, username, country, currency, logo, and dashboard settings.",
+          "Shop content: products, images, categories, coupons, delivery settings, and pages you publish (Home, About, Contact, and similar).",
+          "Orders on your shop: customer name, phone, address, optional email, cart items, and order totals. You choose how customers pay. Stallio does not process customer payments for your shop.",
+          "Messages: contact form submissions and support chat between you and Stallio.",
+          "Technical data: sign-in session, theme or language preference in your browser, and standard security logs from our hosting and email providers."
+        ]
+      },
+      {
+        "heading": "3. How we use your data",
+        "paragraphs": [
+          "We use this information to run the platform, sign you in, host your shop, send orders to your dashboard, send service emails (password reset, welcome, order alerts, subscription reminders), prevent abuse, and reply to support requests.",
+          "We do not sell your personal information."
+        ]
+      },
+      {
+        "heading": "4. Sharing and storage",
+        "paragraphs": [
+          "We use trusted providers for hosting, image storage, and email. They may only process data to run the service for us.",
+          "We may share information if the law requires it or to protect users and the platform.",
+          "Data may be stored or processed in countries where our providers operate."
+        ]
+      },
+      {
+        "heading": "5. How long we keep data",
+        "paragraphs": [
+          "We keep your information while your account is active and for a reasonable time after that for backups, security, and legal needs.",
+          "You can delete your seller account from dashboard settings. This removes your account and shop data from our systems, except where we must keep some records by law."
+        ]
+      },
+      {
+        "heading": "6. Your rights and updates",
+        "paragraphs": [
+          "Depending on your location, you may ask us to access, correct, export, or delete personal data we hold about you. Use the Contact page to make a request.",
+          "We may update this policy by posting a new version on this page."
+        ]
+      }
+    ]
+  },
+  "legalTerms": {
+    "metaTitle": "Terms of Service | Stallio",
+    "title": "Terms of Service",
+    "intro": "These terms apply when you use Stallio as a seller. By using the service, you agree to them.",
+    "sections": [
+      {
+        "heading": "1. What Stallio provides",
+        "paragraphs": [
+          "Stallio gives you a hosted shop at stallio.shop/your-username and a dashboard to manage products, orders, coupons, delivery settings, and shop pages.",
+          "Stallio does not process or settle payments between you and your customers. You tell customers how to pay and mark orders paid in your dashboard.",
+          "We may add, change, or remove features with reasonable notice when possible."
+        ]
+      },
+      {
+        "heading": "2. Your account",
+        "paragraphs": [
+          "You must give accurate signup details and keep your login secure. You are responsible for activity on your account.",
+          "We may suspend your shop or dashboard for non-payment, abuse, or risk to other users, as described on the Pricing page or in messages we send you."
+        ]
+      },
+      {
+        "heading": "3. Acceptable use",
+        "paragraphs": [
+          "Do not use Stallio for illegal products or services, fraud, harassment, malware, or content you do not have rights to use.",
+          "We may remove content or close accounts that break these rules."
+        ]
+      },
+      {
+        "heading": "4. Your content",
+        "paragraphs": [
+          "You own the content you upload. You give Stallio permission to host and display it only to run the service for your shop.",
+          "You are responsible for your shop content and for handling customer data in a lawful way."
+        ]
+      },
+      {
+        "heading": "5. Subscriptions and fees",
+        "paragraphs": [
+          "You can start without a payment card. Paid plans and prices are shown on the Pricing page.",
+          "Subscription payments are collected as described on Pricing or by our team and recorded on your account.",
+          "Taxes may apply. Cancelling a monthly plan stops future charges as explained on Pricing or in your account messages."
+        ]
+      },
+      {
+        "heading": "6. Liability and general",
+        "paragraphs": [
+          "The service is provided as is and as available, to the extent allowed by law.",
+          "Where the law allows, Stallio’s liability for claims about the service is limited to the fees you paid us in the twelve months before the claim, or fifty US dollars if you paid no fees.",
+          "We may update these terms by posting a new version on this page. Questions: use the Contact page."
+        ]
+      }
+    ]
+  },
+  "legalRefund": {
+    "metaTitle": "Refund Policy | Stallio",
+    "title": "Refund Policy",
+    "intro": "This policy explains when Stallio refunds subscription fees that sellers pay us to use the platform.",
+    "sections": [
+      {
+        "heading": "1. What this policy covers",
+        "paragraphs": [
+          "This policy applies only to subscription fees you pay Stallio for seller plans on stallio.shop.",
+          "It does not cover orders placed on your shop. You handle refunds for your own shop orders with your customers."
+        ]
+      },
+      {
+        "heading": "2. Free plan",
+        "paragraphs": [
+          "You can create a seller account and use free features without a payment card. No subscription fee means no refund applies."
+        ]
+      },
+      {
+        "heading": "3. Monthly plans",
+        "paragraphs": [
+          "When you cancel a monthly paid plan, future billing stops. You keep access until the end of the period you already paid for, as shown on the Pricing page or in your account messages.",
+          "We usually do not refund unused days in a month you already paid for, unless the law requires it or we confirm a billing mistake on our side."
+        ]
+      },
+      {
+        "heading": "4. Yearly plans",
+        "paragraphs": [
+          "Yearly plans are paid in advance for the full term shown on the Pricing page.",
+          "If you cancel early, we do not automatically refund the remaining months unless we confirm it in writing or your local law requires it."
+        ]
+      },
+      {
+        "heading": "5. Billing mistakes",
+        "paragraphs": [
+          "If we charged you twice for the same period, charged the wrong amount, or kept billing after a confirmed cancellation, contact us within 30 days of the charge.",
+          "After we verify the issue, we will fix the charge or send a refund to the same payment method when possible."
+        ]
+      },
+      {
+        "heading": "6. How to request a refund",
+        "paragraphs": [
+          "Use the Contact page on this website. Include your account email, shop username, charge date, and a short description of the issue.",
+          "We may ask for more details to verify the request. Approved refunds are usually processed within 5 to 10 business days, depending on your payment provider.",
+          "We may update this policy by posting a new version on this page."
+        ]
+      }
+    ]
+  }
+}

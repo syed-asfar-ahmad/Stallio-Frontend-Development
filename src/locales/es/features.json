@@ -1,0 +1,81 @@
+{
+  "features": {
+    "hero": {
+      "eyebrow": "Características",
+      "titleLine1": "Todo lo que necesitas",
+      "titleLine2": "para vender desde un enlace.",
+      "subtitle": "Una mini tienda centrada para quienes ya tienen compradores: productos claros, un solo camino de pedido y pedidos que no desaparecen en el desplazamiento del chat.",
+      "checklist": [
+        "Un enlace para la biografía, historias y chat",
+        "Cuadrícula de productos con fotos y precios",
+        "Pedidos mostrados en un solo panel",
+        "Flujo de pedido pensado primero para el teléfono"
+      ],
+      "startFree": "Empieza gratis",
+      "seeHowItWorks": "Ver cómo funciona",
+      "mockRows": [
+        "Pedidos en vivo con el estado a la vista",
+        "Productos, fotos y precios en una cuadrícula",
+        "Tu enlace de tienda, listo para pegar",
+        "Del carrito al pedido en un solo flujo"
+      ],
+      "flowHeading": "Cuatro pasos en un solo ciclo: ver pedidos, mostrar productos, compartir tu enlace y cerrar ventas."
+    },
+    "grid": {
+      "eyebrow": "Lo que obtienes",
+      "title": "Capacidades que no se interponen",
+      "subtitle": "Lo esencial para mostrar productos con claridad, compartir un enlace en todas partes y mantener el cumplimiento bajo control.",
+      "flagship": {
+        "title": "Un escaparate, no un proyecto científico",
+        "description": "Los compradores obtienen una cuadrícula clara, páginas de producto y un camino de pedido que se siente intencionado. Tú obtienes algo que puedes compartir esta noche sin tocar DNS ni claves de despliegue.",
+        "bullets": [
+          "Se ve creíble en el móvil",
+          "Fácil de ajustar entre lanzamientos",
+          "La misma URL dondequiera que vendas"
+        ]
+      },
+      "core": [
+        {
+          "title": "Enlace de tienda personalizado",
+          "description": "Una ruta de marca que pegas en biografías, respuestas y códigos QR. Sin malabarismos de «enlace en la biografía» entre cinco herramientas."
+        },
+        {
+          "title": "Gestión de productos",
+          "description": "Fotos, precios y texto en un catálogo. Actualiza existencias entre entregas sin reconstruir una página."
+        },
+        {
+          "title": "Panel de pedidos",
+          "description": "Las solicitudes y los pedidos llegan a una sola vista para que nada desaparezca bajo una avalancha de mensajes directos."
+        },
+        {
+          "title": "Diseño primero para móvil",
+          "description": "Objetivos de toque, espaciado y tipografía pensados primero para el pulgar, porque ahí es donde deciden los compradores."
+        }
+      ],
+      "quality": [
+        {
+          "title": "Presentación pulida",
+          "description": "Tipografía y espaciado limpios para que tu catálogo se lea como una tienda de verdad, no como un formulario improvisado."
+        },
+        {
+          "title": "Rápido de lanzar",
+          "description": "Pon nombre a tu tienda, añade unos anuncios y ya estás en línea. Sin laberinto de temas ni de complementos."
+        },
+        {
+          "title": "Hecho para seguir siendo fiable",
+          "description": "Flujos sencillos y menos piezas móviles para que pases el tiempo vendiendo, no depurando."
+        },
+        {
+          "title": "Espacio para crecer",
+          "description": "Empieza con un catálogo ajustado y amplía a medida que crece tu audiencia. El mismo enlace crece contigo."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Míralo en un escaparate real",
+      "subtitle": "Monta tu tienda en minutos, o explora primero la demostración. Sin tarjeta registrada.",
+      "createYourShop": "Empieza gratis",
+      "viewDemoStore": "Ver tienda de demostración"
+    }
+  }
+}

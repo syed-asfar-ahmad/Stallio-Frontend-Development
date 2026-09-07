@@ -1,0 +1,132 @@
+{
+  "home": {
+    "hero": {
+      "titleLine1": "One link.",
+      "titleLine2": "A real storefront.",
+      "subtitle": "Your catalog on stallio.shop/you. No domain, hosting, or payment gateway to set up. Buyers order; you get a dashboard and PDF invoices.",
+      "startFree": "Start Free",
+      "viewDemoStore": "View Demo Store",
+      "deviceLive": "Live",
+      "deviceYourShop": "Your Shop",
+      "deviceUrl": "stallio.shop/you",
+      "checkoutReady": "Place Order Now"
+    },
+    "bullets": [
+      "One stallio.shop link for bio, WhatsApp, and stories",
+      "Unlimited products, photos, and orders on every plan",
+      "PDF invoices, coupons, delivery rules, and a real checkout"
+    ],
+    "whoFor": [
+      { "label": "Home bakers" },
+      { "label": "Social sellers" },
+      { "label": "Clothing labels" },
+      { "label": "Handmade & craft" },
+      { "label": "Local shops" }
+    ],
+    "audience": {
+      "eyebrow": "Who it fits",
+      "title": "Your audience already follows you. Give them a shelf.",
+      "subtitle": "For people who sell from kitchens, studios, and counters, not for teams who live inside enterprise dashboards."
+    },
+    "beforeAfter": {
+      "eyebrow": "Before & after",
+      "title": "DMs are loud. A store is legible.",
+      "vs": "VS",
+      "chatOnly": "Chat-only selling",
+      "withStallio": "With Stallio",
+      "problems": [
+        "Orders scattered across chats",
+        "No single place for prices & photos",
+        "Customers ask the same questions on repeat",
+        "Payments and delivery feel improvised"
+      ],
+      "solutions": [
+        "One link: catalog + cart",
+        "Clear product pages you can share anywhere",
+        "Fewer “how much?” messages",
+        "A storefront that looks intentional"
+      ]
+    },
+    "stepsSection": {
+      "eyebrow": "How it works",
+      "title": "Three moves. You’re live.",
+      "subtitle": "No staging servers. No theme rabbit holes.",
+      "steps": [
+        {
+          "title": "Open Your Shop",
+          "desc": "Name it, add basics, pick your URL path.",
+          "sub": "Under five minutes."
+        },
+        {
+          "title": "List products",
+          "desc": "Photos, price, stock, ready to share.",
+          "sub": "No spreadsheet gymnastics."
+        },
+        {
+          "title": "Drop the link",
+          "desc": "Bio, stories, DMs: same link everywhere.",
+          "sub": "Orders land in your dashboard."
+        }
+      ]
+    },
+    "preview": {
+      "eyebrow": "Inside the box",
+      "title": "What buyers actually tap through",
+      "subtitle": "Grid, product detail, cart cues: tight enough to feel premium, simple enough to ship today.",
+      "bullets": [
+        "Categories, variants, and sale prices buyers understand",
+        "Coupons and delivery fees at checkout",
+        "About and contact pages on the same link",
+        "Store in English, Spanish, or Arabic",
+        "You mark paid and ship; payments stay with you and the buyer"
+      ],
+      "openYourShop": "Open Your Shop",
+      "demoStore": "Sweet Cravings Studio",
+      "demoUrl": "stallio.shop/sweet-cravings-studio",
+      "browseDemo": "Browse Demo"
+    },
+    "included": {
+      "eyebrow": "What's included",
+      "title": "One plan. The full seller toolkit.",
+      "subtitle": "Everything below is part of Stallio, not add-ons. Start free, then pick monthly or yearly when you are ready.",
+      "items": [
+        "Hosted stallio.shop link (no domain)",
+        "Unlimited products, photos, and orders",
+        "Mobile storefront, cart, and checkout",
+        "Variants, sale prices, and stock",
+        "About and Contact pages",
+        "Coupons and delivery fees",
+        "PDF invoice per order",
+        "Mark paid, ship, and export CSV",
+        "Shop and dashboard in EN, ES, and AR",
+        "Revenue and order charts",
+        "Buyer messages and support chat",
+        "First month free, no card required"
+      ]
+    },
+    "benefits": {
+      "eyebrow": "Why it lands",
+      "title": "Sharp where money moves. Quiet everywhere else.",
+      "subtitle": "Fewer tools to babysit. More time making and shipping.",
+      "items": [
+        { "title": "No Domain Stress", "desc": "Your link is ready on stallio.shop. No DNS, hosting, or deploy keys." },
+        { "title": "You Collect Payment", "desc": "Add bank, link, or COD instructions. Stallio does not sit in the middle of buyer payments." },
+        { "title": "Built For Thumbs", "desc": "Buyers browse and order on the phone, where your sales actually happen." },
+        { "title": "Orders In One Place", "desc": "Payment status, delivery, PDF invoice, and history. Not scattered DMs." },
+        { "title": "Run Promotions", "desc": "Coupon codes and delivery fees without a second app." },
+        { "title": "Start Free", "desc": "Full product for a month. No card on file to begin." }
+      ]
+    },
+    "stats": [
+      { "value": "$0", "label": "To explore", "sub": "Try before you commit" },
+      { "value": "1", "label": "Link", "sub": "Catalog + cart" },
+      { "value": "~5 min", "label": "First draft", "sub": "Then refine anytime" }
+    ],
+    "finalCta": {
+      "title": "Ready when you are.",
+      "subtitle": "Spin up a store in minutes. Share the link tonight. Wake up to orders that did not vanish in your inbox.",
+      "createFreeStore": "Start Free",
+      "logIn": "Log In"
+    }
+  }
+}

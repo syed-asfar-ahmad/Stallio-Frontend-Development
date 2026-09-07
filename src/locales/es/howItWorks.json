@@ -1,0 +1,74 @@
+{
+  "howItWorks": {
+    "hero": {
+      "titleLine1": "Tres movimientos.",
+      "titleLine2": "Un enlace claro.",
+      "subtitle": "Abre tu tienda, carga tu catálogo y luego pega la misma URL dondequiera que los compradores ya te encuentren. Hecho para el pulgar, no para tickets de TI.",
+      "noteDraft": "~5 min primer borrador",
+      "noteMobile": "Primero móvil",
+      "startFree": "Empieza gratis",
+      "viewDemoStore": "Ver tienda de demostración",
+      "previewCards": [
+        { "n": "01", "t": "Nombre + URL", "d": "stallio.shop/you" },
+        { "n": "02", "t": "Añadir productos", "d": "Fotos y precios" },
+        { "n": "03", "t": "Compartir enlace", "d": "Biografía, Historias, Chat" }
+      ]
+    },
+    "flow": {
+      "eyebrow": "El flujo",
+      "title": "Abre. Cataloga. Comparte.",
+      "subtitle": "Tres pasos deliberados para publicar un escaparate que se sienta intencionado, no improvisado.",
+      "steps": [
+        {
+          "title": "Crea tu tienda",
+          "description": "Regístrate, pon nombre a tu tienda y elige tu URL. Obtienes un enlace activo que puedes pegar en cualquier parte. Sin DNS, sin despliegue, sin drama.",
+          "items": [
+            "Crea tu cuenta",
+            "Añade el nombre de la tienda y los datos",
+            "Obtén tu enlace (stallio.shop/you)"
+          ]
+        },
+        {
+          "title": "Añade tus productos",
+          "description": "Fotos, precios, descripciones breves. Un catálogo que puedes refinar en cualquier momento. Los compradores ven claridad, no caos.",
+          "items": [
+            "Añade fotos de producto",
+            "Establece precios y descripciones",
+            "Mantén un catálogo organizado"
+          ]
+        },
+        {
+          "title": "Comparte y recibe pedidos",
+          "description": "El mismo enlace en la biografía, historias y chats. Ellos navegan en el teléfono. Tú sigues todo en tu panel.",
+          "items": [
+            "Pon el enlace en tu perfil o biografía",
+            "Comparte en el chat o en publicaciones sociales",
+            "Haz un seguimiento de los pedidos en un solo lugar"
+          ]
+        }
+      ]
+    },
+    "strip": "Mismo enlace, Cada canal, Escaparate de verdad",
+    "live": {
+      "eyebrow": "Cuando estás en línea",
+      "title": "Los compradores ven pulido. Tú ves control.",
+      "subtitle": "Un escaparate rápido por fuera. Un panel sereno por dentro.",
+      "commandTitle": "Centro de mando",
+      "commandBody": "Pedidos, productos y solicitudes en una sola vista. Actualiza existencias entre entregas sin abrir diez aplicaciones.",
+      "commandBullets": [
+        "Los pedidos nuevos aparecen primero",
+        "Edita productos con unos pocos toques",
+        "Menos momentos de «¿recibiste mi mensaje directo?»"
+      ],
+      "thumbTitle": "Amigable para el pulgar",
+      "thumbBody": "Objetivos de toque grandes, precios claros y un flujo de pedido que no se siente como deberes en el teléfono.",
+      "thumbTags": ["Rápido", "Claro", "Compartible"]
+    },
+    "cta": {
+      "title": "Publica el enlace esta noche.",
+      "subtitle": "Gratis para empezar. Sin tarjeta registrada. Si encaja, sigue vendiendo desde la misma URL mañana.",
+      "createYourShop": "Empieza gratis",
+      "exploreFeatures": "Explorar características"
+    }
+  }
+}

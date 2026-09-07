@@ -1,0 +1,48 @@
+{
+  "layout": {
+    "metaTitle": "Stallio",
+    "language": {
+      "label": "اللغة"
+    },
+    "nav": {
+      "home": "الرئيسية",
+      "about": "من نحن",
+      "howItWorks": "كيف يعمل",
+      "features": "الميزات",
+      "pricing": "الأسعار",
+      "contact": "اتصل بنا",
+      "careers": "الوظائف"
+    },
+    "navCta": {
+      "logIn": "تسجيل الدخول",
+      "createYourShop": "ابدأ مجانًا"
+    },
+    "aria": {
+      "homeLogo": "الصفحة الرئيسية لـ Stallio",
+      "mainNav": "التنقل الرئيسي",
+      "mobileMainNav": "التنقل الرئيسي للجوال",
+      "openMenu": "فتح القائمة",
+      "closeMenu": "إغلاق القائمة"
+    },
+    "footer": {
+      "howItWorks": "كيف يعمل",
+      "tagline": "رابط واحد لكتالوجك وطلباتك، فيعرف الزبائن أين يشترون وتبقى منظمًا.",
+      "getStartedFree": "ابدأ مجانًا",
+      "linksHeading": "روابط",
+      "legalNavAria": "روابط قانونية",
+      "privacy": "سياسة الخصوصية",
+      "terms": "شروط الخدمة",
+      "refund": "سياسة الاسترداد",
+      "contactHeading": "تواصل",
+      "socialHeading": "وسائل التواصل",
+      "legalHeading": "قانوني",
+      "copyright": "© {{year}} Stallio. جميع الحقوق محفوظة."
+    },
+    "theme": {
+      "lightMode": "الوضع الفاتح",
+      "darkMode": "الوضع الداكن",
+      "switchToLight": "التبديل إلى الوضع الفاتح",
+      "switchToDark": "التبديل إلى الوضع الداكن"
+    }
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "pricing": {
+    "hero": {
+      "eyebrow": "Precios",
+      "titleLine1": "Números sencillos.",
+      "titleLine2": "Un producto completo.",
+      "subtitle": "Un mes por nuestra cuenta; luego elige mensual o anual. Las mismas funciones en ambos casos: escaparate, panel y herramientas incluidas.",
+      "fromMonthly": "Desde ${{amount}}/mes después de la prueba",
+      "noCard": "Sin tarjeta para empezar",
+      "startFreeTrial": "Empieza gratis",
+      "whatYouGet": "Lo que obtienes"
+    },
+    "billing": {
+      "eyebrow": "Elige la facturación",
+      "title": "Mensual o anual, tú eliges",
+      "subtitle": "Previsualiza importes locales por país. Las suscripciones se cobran en dólares estadounidenses.",
+      "estimate": "Estimación",
+      "yourCountry": "Tu país",
+      "countryHelp": "Busca y selecciona para ver precios aproximados en tu moneda en los planes.",
+      "countryLabelSr": "País para estimar el precio",
+      "searchCountryPlaceholder": "Buscar país...",
+      "noCountryFound": "No se encontró el país",
+      "updatingRates": "Actualizando tipos de cambio...",
+      "fxError": "No se pudieron cargar los tipos para esta moneda. Los importes de abajo permanecen en USD.",
+      "plansBillUsd": "Los planes se facturan en USD.",
+      "monthly": "Mensual",
+      "yearly": "Anual",
+      "saveAmount": "Ahorra ${{amount}}",
+      "perMo": "/mes",
+      "perYr": "/año",
+      "approxPerMonth": "≈ {{amount}} / mes",
+      "approxPerYear": "≈ {{amount}} / año",
+      "afterTrial": "Después de la prueba",
+      "monthlyDesc": "Facturación flexible. Cancela en cualquier momento desde tu cuenta.",
+      "startMonthly": "Empezar mensual",
+      "yearlyDesc": "Paga una vez al año. Lo mejor si te comprometes a hacer crecer tu tienda.",
+      "startYearly": "Empezar anual",
+      "includedEyebrow": "Incluido",
+      "includedTitle": "Todo en ambos planes",
+      "includedItems": [
+        "Escaparate completo y enlace de tienda personalizado",
+        "Productos y fotos ilimitados",
+        "Panel de pedidos y solicitudes de compradores",
+        "Experiencia de escaparate pensada primero para móvil",
+        "Ajustes de cuenta y tienda",
+        "Soporte por correo electrónico durante la prueba y los planes de pago"
+      ],
+      "trustTitle": "Primero la prueba, luego tú eliges",
+      "trustBody": "Tu primer mes es gratis. Te recordaremos antes de que termine la prueba para que puedas elegir mensual o anual, o cancelar si no encaja."
+    },
+    "faq": {
+      "eyebrow": "Preguntas frecuentes",
+      "title": "Dudas sobre precios, resueltas",
+      "subtitle": "Respuestas rápidas sobre pruebas, facturación y qué pasa al suscribirte.",
+      "items": [
+        {
+          "q": "¿Necesito tarjeta para empezar?",
+          "a": "No. Puedes explorar Stallio sin añadir tarjeta. Cuando elijas un plan de pago, introducirás los datos en un checkout seguro."
+        },
+        {
+          "q": "¿Qué pasa después de la prueba gratuita?",
+          "a": "Te avisamos antes de que termine. Puedes elegir facturación mensual o anual, o cancelar si no encaja. Hasta que te suscribas, no hay cargo por suscripción."
+        },
+        {
+          "q": "¿Los precios están en dólares estadounidenses?",
+          "a": "Las suscripciones se cobran en USD. El selector de país muestra importes locales aproximados para planificar; tu banco puede aplicar su tipo de cambio o comisiones."
+        },
+        {
+          "q": "¿Puedo cancelar en cualquier momento?",
+          "a": "Sí en planes mensuales: cancela desde tu cuenta y no se te cobrarán meses futuros. Los planes anuales se pagan por adelantado; consulta los Términos sobre reembolsos si los ofrecemos."
+        },
+        {
+          "q": "¿Ambos planes incluyen las mismas funciones?",
+          "a": "Sí. Mensual y anual incluyen el mismo escaparate, panel y herramientas. El anual tiene descuento porque te comprometes un año."
+        },
+        {
+          "q": "¿A quién contacto por facturación?",
+          "a": "Usa la página de Contacto con un asunto relacionado con facturación. Incluye el correo de tu tienda para localizar tu cuenta."
+        }
+      ]
+    },
+    "bottomCta": {
+      "title": "¿Sigues decidiendo?",
+      "subtitle": "Pregúntanos lo que quieras en la página de contacto, o empieza una prueba y ve el producto por ti mismo.",
+      "contactUs": "Contáctanos",
+      "createYourShop": "Empieza gratis"
+    }
+  }
+}

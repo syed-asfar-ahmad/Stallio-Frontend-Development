@@ -1,0 +1,50 @@
+{
+  "contact": {
+    "toastSent": "¡Mensaje enviado! Nos pondremos en contacto contigo pronto.",
+    "success": {
+      "title": "Mensaje enviado",
+      "body": "Gracias por escribirnos. Nos pondremos en contacto contigo pronto.",
+      "hint": "Para ayuda urgente con tu tienda, revisa los ajustes de tu panel.",
+      "backHome": "Volver al inicio",
+      "openShop": "Empieza gratis"
+    },
+    "hero": {
+      "eyebrow": "Contacto",
+      "title": "Leemos cada mensaje",
+      "subtitle": "Dudas sobre el producto, ideas de colaboración o algo roto: envía una nota y te indicaremos la dirección adecuada."
+    },
+    "info": {
+      "title": "Datos de contacto",
+      "body": "¿Prefieres correo electrónico o teléfono? Usa cualquiera de los dos abajo. El tiempo de respuesta habitual es de unos pocos días laborables.",
+      "social": "Redes sociales"
+    },
+    "form": {
+      "title": "Enviar un mensaje",
+      "intro": "Todos los campos son obligatorios para que podamos responder con contexto.",
+      "name": "Nombre",
+      "email": "Correo electrónico",
+      "subject": "Asunto",
+      "message": "Mensaje",
+      "placeholderName": "Tu nombre",
+      "placeholderSubject": "¿De qué se trata?",
+      "placeholderMessage": "Tu mensaje...",
+      "send": "Enviar mensaje",
+      "sending": "Enviando...",
+      "errors": {
+        "nameRequired": "El nombre es obligatorio",
+        "emailRequired": "El correo electrónico es obligatorio",
+        "emailInvalid": "Introduce un correo electrónico válido",
+        "subjectRequired": "El asunto es obligatorio",
+        "messageRequired": "El mensaje es obligatorio",
+        "messageMin": "El mensaje debe tener al menos 10 caracteres"
+      }
+    },
+    "strip": {
+      "eyebrow": "Autoservicio",
+      "title": "¿Probando Stallio primero?",
+      "body": "La mayoría de las respuestas están en Cómo funciona y Características. Empieza gratis cuando quieras.",
+      "howItWorks": "Cómo funciona",
+      "features": "Características"
+    }
+  }
+}

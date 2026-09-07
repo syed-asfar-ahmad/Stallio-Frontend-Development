@@ -1,0 +1,99 @@
+{
+  "about": {
+    "hero": {
+      "eyebrow": "Acerca de Stallio",
+      "title": "Un escaparate sereno para quienes ya tienen compradores.",
+      "subtitle": "Construimos Stallio para que puedas mostrar los productos con claridad, recibir pedidos en un solo lugar y compartir un enlace dondequiera que vendas, con el sitio en inglés, español o árabe. Sin laberintos de creadores de sitios web.",
+      "startFree": "Empieza gratis",
+      "viewDemoStore": "Ver tienda de demostración",
+      "mockRows": [
+        "Un enlace para compartir donde vendas",
+        "Pedidos organizados, no perdidos en el chat",
+        "Sin laberintos de creadores de sitios ni despliegues"
+      ]
+    },
+    "mission": {
+      "eyebrow": "Por qué existimos",
+      "title": "Vender en redes sociales no debería sentirse improvisado.",
+      "subtitle": "La mayoría de los vendedores pequeños hacen malabares con capturas de pantalla, notas de voz y chats dispersos. Stallio te da un solo estante: catálogo, cierre de pedido claro y pedidos en un solo panel.",
+      "frictionTitle": "La fricción",
+      "frictionIntro": "Depender solo de mensajes y publicaciones suele significar:",
+      "problems": [
+        "Los productos son difíciles de mostrar correctamente",
+        "Los pedidos se pierden en los mensajes",
+        "Los clientes se sienten confundidos",
+        "El negocio no se ve profesional"
+      ],
+      "solutionTitle": "Lo que hace Stallio",
+      "solutionIntro": "Obtienes:",
+      "solutions": [
+        "Tu propia mini tienda con un enlace",
+        "Páginas de producto limpias y un panel sencillo",
+        "Sin sitio web que construir, sin programación, sin complejidad",
+        "Regístrate, añade productos, comparte tu enlace"
+      ]
+    },
+    "pillars": {
+      "eyebrow": "Lo que obtienes",
+      "title": "Todo en un solo ciclo: mostrar, vender, enviar.",
+      "offers": [
+        {
+          "title": "En línea en minutos",
+          "detail": "Regístrate, pon nombre a tu tienda y elige la ruta de tu URL. Sin configuración técnica."
+        },
+        {
+          "title": "Productos con fotos y precios",
+          "detail": "Sube imágenes, establece precios y descripciones. Mantén todo en un solo lugar."
+        },
+        {
+          "title": "Un enlace en todas partes",
+          "detail": "Biografía, historias, chats: el mismo enlace funciona en cualquier plataforma que usen tus compradores."
+        },
+        {
+          "title": "Pedidos en un solo panel",
+          "detail": "Ve solicitudes, actualiza existencias y mantén el cumplimiento bajo control sin hurgar en los mensajes directos."
+        },
+        {
+          "title": "Un escaparate en el que los compradores confían",
+          "detail": "Diseño rápido y pensado primero para móvil, para que tu catálogo se sienta intencionado, no improvisado."
+        }
+      ]
+    },
+    "values": {
+      "eyebrow": "Cómo pensamos",
+      "title": "Principios detrás del producto",
+      "items": [
+        {
+          "title": "Hecho para vendedores de verdad",
+          "detail": "Cocinas en casa, estudios y trabajos extra. No adquisición empresarial."
+        },
+        {
+          "title": "Sencillo por diseño",
+          "detail": "Menos controles y complementos. Un camino claro del catálogo al pedido."
+        },
+        {
+          "title": "Espacio para crecer",
+          "detail": "Empieza en pequeño, añade productos y pulido a medida que tu audiencia crece contigo."
+        }
+      ],
+      "momentumTitle": "Hecho para el impulso",
+      "momentumBody": "Ya sea que estés probando una línea nueva o enviando cada semana, Stallio está pensado para no estorbar: actualiza productos, ajusta el texto y sigue vendiendo sin reconstruir un sitio entero.",
+      "visionTitle": "Nuestra visión",
+      "visionBody": "Queremos que los vendedores independientes tengan herramientas que se sientan premium y honestas: precios claros, cumplimiento claro y un escaparate que respete el tiempo del comprador tanto como el tuyo."
+    },
+    "promise": {
+      "simple": "Sencillo",
+      "simpleSub": "Sin código, sin laberinto de temas",
+      "fast": "Rápido",
+      "fastSub": "Crea el borrador de una tienda en minutos",
+      "credible": "Creíble",
+      "credibleSub": "Un enlace que los compradores reconocen"
+    },
+    "cta": {
+      "title": "¿Listo para verte tan serio como eres?",
+      "subtitle": "Crea una tienda gratis, añade unos cuantos productos y deja tu enlace donde la gente ya te encuentra.",
+      "createFreeStore": "Empieza gratis",
+      "contactUs": "Contáctanos"
+    }
+  }
+}

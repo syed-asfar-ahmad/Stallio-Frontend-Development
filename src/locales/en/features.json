@@ -1,0 +1,97 @@
+{
+  "features": {
+    "hero": {
+      "eyebrow": "Features",
+      "titleLine1": "Everything you need",
+      "titleLine2": "to sell from one link.",
+      "subtitle": "Storefront, dashboard, and seller tools in one place: hosted link, unlimited catalog and orders, no buyer payment gateway required.",
+      "checklist": [
+        "stallio.shop link, no domain purchase",
+        "Unlimited products, photos, and orders",
+        "PDF invoices and order export",
+        "Coupons, delivery fees, and COD at checkout"
+      ],
+      "startFree": "Start Free",
+      "seeHowItWorks": "See How It Works",
+      "mockRows": [
+        "Orders with payment and delivery status",
+        "Products with variants, sales, and stock",
+        "Coupons and delivery at checkout",
+        "PDF invoice ready to send"
+      ],
+      "flowHeading": "Catalog, checkout, orders, and invoices in one dashboard loop."
+    },
+    "grid": {
+      "eyebrow": "What you get",
+      "title": "Capabilities that stay out of your way",
+      "subtitle": "Built for sellers who already have buyers, not for teams managing DNS, plugins, and payment gateways.",
+      "flagship": {
+        "title": "A storefront, not a science project",
+        "description": "Buyers browse categories, pick variants, apply coupons, and place orders on their phone. Share one link tonight with no hosting bill, custom domain, or deploy keys.",
+        "bullets": [
+          "Hosted on stallio.shop/yourname",
+          "English, Spanish, or Arabic storefront",
+          "About, contact, and home page included"
+        ]
+      },
+      "core": [
+        {
+          "title": "Custom Store Link",
+          "description": "One path for bio, WhatsApp, stories, and QR. Copy and paste; we host the shop."
+        },
+        {
+          "title": "Product Catalog",
+          "description": "Unlimited products and images. Variants, sale prices, stock, and hide/show without deleting."
+        },
+        {
+          "title": "Order Dashboard",
+          "description": "Every order in one inbox. Search, filter, mark paid, set delivery status, add tracking."
+        },
+        {
+          "title": "Mobile-First Storefront",
+          "description": "Grid, product pages, and checkout tuned for thumbs, where your buyers actually are."
+        },
+        {
+          "title": "Coupons And Promos",
+          "description": "Percent or fixed-off codes with optional expiry. Buyers apply them at checkout."
+        },
+        {
+          "title": "PDF Invoices",
+          "description": "Download a professional invoice per order to send on WhatsApp or email."
+        },
+        {
+          "title": "Delivery And COD",
+          "description": "Fixed or free-above-minimum delivery, ETA text, checkout notes, and cash on delivery toggle."
+        },
+        {
+          "title": "Categories And Pages",
+          "description": "Group products, run a custom home hero, trust lines, reviews, plus About and Contact."
+        }
+      ],
+      "quality": [
+        {
+          "title": "You Control Payment",
+          "description": "Tell buyers how to pay by bank, link, or COD. Stallio tracks the order; you confirm when money arrives."
+        },
+        {
+          "title": "Revenue Overview",
+          "description": "Charts and totals for paid orders across today, the week, or a custom range."
+        },
+        {
+          "title": "Buyer Messages",
+          "description": "Contact form submissions land in your inbox so nothing sits only on Instagram."
+        },
+        {
+          "title": "Seller Support",
+          "description": "Chat with the Stallio team from your dashboard when you need a hand."
+        }
+      ]
+    },
+    "cta": {
+      "title": "See it on a real storefront",
+      "subtitle": "Spin up your shop in minutes, or browse the demo first. No card on file.",
+      "createYourShop": "Start Free",
+      "viewDemoStore": "View Demo Store"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "notFound": {
+    "metaTitle": "Página no encontrada | Stallio",
+    "title": "Página no encontrada",
+    "body": "La página que buscas no existe o el enlace está roto. Prueba uno de los enlaces de abajo.",
+    "backHome": "Volver al inicio",
+    "viewPricing": "Precios",
+    "contactUs": "Contacto"
+  }
+}
