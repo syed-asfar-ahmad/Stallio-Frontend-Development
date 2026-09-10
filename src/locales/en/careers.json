@@ -1,38 +1,50 @@
 {
   "careers": {
-    "metaTitle": "Careers — Stallio",
+    "metaTitle": "Careers | Stallio",
     "hero": {
       "eyebrow": "Careers",
-      "title": "Grow your career with Stallio",
-      "subtitle": "Explore opportunities to work with us, build real-world experience, and help sellers grow their businesses online."
+      "title": "Build your career with Stallio",
+      "subtitle": "Internships, jobs, and other opportunities to work on real seller growth with the team shipping the product.",
+      "viewRoles": "View open roles",
+      "contactUs": "Contact us"
+    },
+    "programs": {
+      "eyebrow": "Openings",
+      "title": "Internships and jobs",
+      "subtitle": "Apply when a role is open. Closed roles stay listed so you know what is coming next."
     },
     "apply": "Apply now",
     "applyAria": "Apply for {{program}} (opens in a new tab)",
-    "closed": "Closed",
+    "closed": "Applications closed",
+    "closedAria": "{{program}} is closed for applications",
     "internship": {
       "badge": "Internship",
-      "title": "Stallio Summer Internship Program",
-      "description": "Spend your summer working closely with the Stallio team on real projects in product, marketing, and operations. Ideal for students who want startup experience and a portfolio they can show employers.",
+      "title": "Summer internship",
+      "description": "Spend the summer on live product, marketing, and operations work with the Stallio team. Built for students who want startup experience and a portfolio they can show.",
       "highlights": [
-        "Work on live product and growth initiatives",
+        "Ship work on live product and growth projects",
         "Weekly mentorship from the founding team",
         "Flexible remote-friendly schedule",
         "Certificate and reference letter for strong performers",
-        "Priority consideration for future roles at Stallio"
+        "Priority consideration for future Stallio roles"
       ]
     },
-    "ambassador": {
-      "badge": "Campus",
-      "title": "Stallio Campus Ambassador Program",
-      "description": "Represent Stallio at your university. Help small businesses and social sellers discover Stallio while building marketing, content, and outreach skills on your campus.",
+    "jobs": {
+      "badge": "Jobs",
+      "title": "Full-time and contract roles",
+      "description": "We hire when we need help shipping Stallio for sellers. Check back for product, growth, and operations openings.",
       "highlights": [
-        "Create at least one short-form video per month",
-        "Reach potential sellers through your network",
-        "Promote Stallio in student and seller communities",
-        "Official ambassador title, certificate, and ambassador kit",
-        "Performance-based incentives for onboarded sellers",
-        "Direct mentorship and networking with other ambassadors"
+        "Work on a product used by real sellers",
+        "Small team with clear ownership",
+        "Remote-friendly collaboration",
+        "Direct impact on seller growth outcomes"
       ]
+    },
+    "strip": {
+      "title": "Not seeing the right role?",
+      "body": "Tell us how you want to help sellers. We read every note.",
+      "about": "About Stallio",
+      "contact": "Get in touch"
     }
   }
 }

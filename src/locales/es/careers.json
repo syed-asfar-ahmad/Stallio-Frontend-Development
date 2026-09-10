@@ -1,38 +1,50 @@
 {
   "careers": {
-    "metaTitle": "Carreras — Stallio",
+    "metaTitle": "Carreras | Stallio",
     "hero": {
       "eyebrow": "Carreras",
-      "title": "Haz crecer tu carrera con Stallio",
-      "subtitle": "Explora oportunidades para trabajar con nosotros, ganar experiencia real y ayudar a los vendedores a hacer crecer sus negocios en línea."
+      "title": "Construye tu carrera con Stallio",
+      "subtitle": "Prácticas, empleos y otras oportunidades para trabajar en el crecimiento real de vendedores con el equipo que construye el producto.",
+      "viewRoles": "Ver roles abiertos",
+      "contactUs": "Contáctanos"
+    },
+    "programs": {
+      "eyebrow": "Vacantes",
+      "title": "Prácticas y empleos",
+      "subtitle": "Postula cuando un rol esté abierto. Los roles cerrados siguen visibles para que sepas qué viene."
     },
     "apply": "Postular ahora",
     "applyAria": "Postular a {{program}} (se abre en una pestaña nueva)",
-    "closed": "Cerrado",
+    "closed": "Postulaciones cerradas",
+    "closedAria": "{{program}} está cerrado a postulaciones",
     "internship": {
       "badge": "Prácticas",
-      "title": "Programa de prácticas de verano Stallio",
-      "description": "Pasa el verano trabajando de cerca con el equipo de Stallio en proyectos reales de producto, marketing y operaciones. Ideal para estudiantes que buscan experiencia en startups y un portafolio sólido.",
+      "title": "Prácticas de verano",
+      "description": "Pasa el verano en proyectos reales de producto, marketing y operaciones con el equipo de Stallio. Pensado para estudiantes que quieren experiencia en startups y un portafolio sólido.",
       "highlights": [
-        "Trabaja en iniciativas reales de producto y crecimiento",
+        "Trabaja en proyectos vivos de producto y crecimiento",
         "Mentoría semanal del equipo fundador",
-        "Horario flexible y compatible con trabajo remoto",
+        "Horario flexible y compatible con remoto",
         "Certificado y carta de referencia para los mejores",
         "Prioridad para futuros roles en Stallio"
       ]
     },
-    "ambassador": {
-      "badge": "Campus",
-      "title": "Programa de embajadores universitarios Stallio",
-      "description": "Representa a Stallio en tu universidad. Ayuda a pequeños negocios y vendedores sociales a descubrir Stallio mientras desarrollas habilidades de marketing, contenido y outreach en el campus.",
+    "jobs": {
+      "badge": "Empleos",
+      "title": "Roles a tiempo completo y por contrato",
+      "description": "Contratamos cuando necesitamos ayuda para construir Stallio para vendedores. Vuelve pronto para vacantes de producto, crecimiento y operaciones.",
       "highlights": [
-        "Crea al menos un video corto al mes",
-        "Contacta vendedores potenciales a través de tu red",
-        "Promueve Stallio en comunidades estudiantiles y de vendedores",
-        "Título oficial de embajador, certificado y kit de embajador",
-        "Incentivos por rendimiento por vendedores incorporados",
-        "Mentoría directa y networking con otros embajadores"
+        "Trabaja en un producto usado por vendedores reales",
+        "Equipo pequeño con ownership claro",
+        "Colaboración compatible con remoto",
+        "Impacto directo en el crecimiento de vendedores"
       ]
+    },
+    "strip": {
+      "title": "¿No ves el rol adecuado?",
+      "body": "Cuéntanos cómo quieres ayudar a los vendedores. Leemos cada mensaje.",
+      "about": "Sobre Stallio",
+      "contact": "Escribirnos"
     }
   }
 }
