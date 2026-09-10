@@ -29,6 +29,7 @@ import {
   Banknote,
 } from 'lucide-react';
 import PublicLayout from '../components/PublicLayout';
+import { HeroAtmosphere, heroBleedClassName } from '../components/marketing/HeroAtmosphere';
 import { MARKETING_DEMO_SHOP_PATH } from '../lib/marketingDemoShop';
 
 const BULLET_ICONS = [Link2, Image, BarChart3] as const;
@@ -146,19 +147,8 @@ export default function Home() {
   return (
     <PublicLayout>
       <div className="home-marketing min-w-0 w-full overflow-x-clip">
-      <section className="relative isolate overflow-hidden bg-white text-stone-900 max-lg:min-h-0 lg:min-h-[min(92svh,920px)]">
-        <div
-          className="pointer-events-none absolute -left-32 top-1/4 h-[280px] w-[280px] rounded-full bg-brand-400/15 blur-[80px] animate-blob max-lg:opacity-70 sm:h-[360px] sm:w-[360px] sm:blur-[90px] lg:h-[420px] lg:w-[420px] lg:blur-[100px] lg:opacity-100"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute -right-20 bottom-0 h-[240px] w-[240px] rounded-full bg-brand-400/12 blur-[70px] animate-blob animate-blob-delayed max-lg:opacity-70 sm:h-[320px] sm:w-[320px] sm:blur-[80px] lg:h-[380px] lg:w-[380px] lg:blur-[90px] lg:opacity-100"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute left-1/2 top-0 h-[min(55%,480px)] w-[120%] -translate-x-1/2 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,rgba(91,69,229,0.14),transparent_58%)]"
-          aria-hidden
-        />
+      <section className={`${heroBleedClassName} bg-white text-stone-900 max-lg:min-h-0 lg:min-h-[min(92svh,920px)]`}>
+        <HeroAtmosphere sparkleId="home-hero-sparkles" variant="home" />
 
         <div className="relative mx-auto flex w-full max-w-7xl flex-col px-4 pb-12 pt-10 max-lg:min-h-0 sm:pb-14 sm:pt-12 md:px-5 md:pt-16 lg:min-h-0 lg:pb-16 lg:pt-20">
           <div className="grid flex-1 items-center gap-8 text-center max-lg:gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-10 lg:text-start xl:gap-14">

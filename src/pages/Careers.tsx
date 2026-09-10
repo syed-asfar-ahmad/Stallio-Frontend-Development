@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { GraduationCap, Check, ExternalLink, Sun } from 'lucide-react';
 import PublicLayout from '../components/PublicLayout';
+import { HeroAtmosphere, heroBleedClassName } from '../components/marketing/HeroAtmosphere';
 
 const INTERNSHIP_FORM_URL = 'https://forms.gle/sLyEVVnSfDG6Lmf39';
 const AMBASSADOR_FORM_URL = 'https://forms.gle/9DjnukUrwMTuDTj6A';
@@ -189,15 +190,8 @@ export default function Careers() {
   return (
     <PublicLayout>
       <div className="home-marketing min-w-0 w-full overflow-x-clip">
-        <section className="relative isolate overflow-hidden bg-white text-stone-900 dark:bg-zinc-950 dark:text-zinc-50">
-          <div
-            className="pointer-events-none absolute -left-32 top-1/4 h-[280px] w-[280px] rounded-full bg-brand-400/15 blur-[80px] animate-blob max-lg:opacity-70 sm:h-[360px] sm:w-[360px] lg:h-[420px] lg:w-[420px]"
-            aria-hidden
-          />
-          <div
-            className="pointer-events-none absolute -right-20 bottom-0 h-[240px] w-[240px] rounded-full bg-brand-400/12 blur-[70px] animate-blob animate-blob-delayed max-lg:opacity-70 sm:h-[320px] sm:w-[320px] lg:h-[380px] lg:w-[380px]"
-            aria-hidden
-          />
+        <section className={`${heroBleedClassName} bg-white text-stone-900 dark:bg-zinc-950 dark:text-zinc-50`}>
+          <HeroAtmosphere sparkleId="careers-hero-sparkles" />
 
           <div className="relative mx-auto w-full min-w-0 max-w-7xl px-4 py-10 sm:py-14 md:px-5 md:py-20 lg:py-24">
             <div className="mx-auto max-w-3xl text-center">

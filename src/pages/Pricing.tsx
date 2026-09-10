@@ -17,6 +17,7 @@ import {
   ChevronDown,
 } from 'lucide-react';
 import PublicLayout from '../components/PublicLayout';
+import { HeroAtmosphere, heroBleedClassName } from '../components/marketing/HeroAtmosphere';
 import { useTheme } from '../context/ThemeContext';
 import { getCountryOptionsList, getCurrencyForCountry, getFlagUrl } from '../lib/countryCurrencyOptions';
 import type { CountryOption } from '../lib/countryCurrencyOptions';
@@ -221,19 +222,8 @@ export default function Pricing() {
   return (
     <PublicLayout>
       <div className="home-marketing min-w-0 w-full overflow-x-clip bg-stone-50">
-        <section className="relative isolate overflow-hidden border-b border-stone-200/60 bg-white text-stone-900">
-          <div
-            className="pointer-events-none absolute -left-32 top-1/4 h-[280px] w-[280px] rounded-full bg-brand-400/15 blur-[80px] animate-blob max-lg:opacity-70 sm:h-[360px] sm:w-[360px] sm:blur-[90px] lg:h-[420px] lg:w-[420px] lg:blur-[100px] lg:opacity-100"
-            aria-hidden
-          />
-          <div
-            className="pointer-events-none absolute -right-20 bottom-0 h-[240px] w-[240px] rounded-full bg-brand-400/12 blur-[70px] animate-blob animate-blob-delayed max-lg:opacity-70 sm:h-[320px] sm:w-[320px] sm:blur-[80px] lg:h-[380px] lg:w-[380px] lg:blur-[90px] lg:opacity-100"
-            aria-hidden
-          />
-          <div
-            className="pointer-events-none absolute left-1/2 top-0 h-[min(55%,480px)] w-[120%] -translate-x-1/2 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,rgba(91,69,229,0.14),transparent_58%)]"
-            aria-hidden
-          />
+        <section className={`${heroBleedClassName} border-b border-stone-200/60 bg-white text-stone-900`}>
+          <HeroAtmosphere sparkleId="pricing-hero-sparkles" />
 
           <div className="relative z-[1] mx-auto w-full min-w-0 max-w-7xl px-4 pb-10 pt-10 max-lg:px-4 md:px-5 md:pb-24 md:pt-20">
             <div className="grid min-w-0 items-center gap-8 text-center max-lg:gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-10 lg:text-start xl:gap-14">
