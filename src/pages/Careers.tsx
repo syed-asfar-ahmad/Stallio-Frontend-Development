@@ -166,14 +166,14 @@ export default function Careers() {
 
   const programs = useMemo(
     () => [
-      {
-        key: 'ambassador' as const,
-        icon: GraduationCap,
-        applyUrl: AMBASSADOR_FORM_URL,
-        closed: false,
-        accentClass:
-          'bg-brand-50 text-brand-700 ring-brand-100 dark:bg-brand-950/50 dark:text-brand-300 dark:ring-brand-800/60',
-      },
+      // {
+      //   key: 'ambassador' as const,
+      //   icon: GraduationCap,
+      //   applyUrl: AMBASSADOR_FORM_URL,
+      //   closed: false,
+      //   accentClass:
+      //     'bg-brand-50 text-brand-700 ring-brand-100 dark:bg-brand-950/50 dark:text-brand-300 dark:ring-brand-800/60',
+      // },
       {
         key: 'internship' as const,
         icon: Sun,

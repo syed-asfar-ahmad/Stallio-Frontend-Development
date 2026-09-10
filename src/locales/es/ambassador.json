@@ -1,0 +1,22 @@
+{
+  "ambassador": {
+    "hero": {
+      "eyebrow": "EMBAJADORES",
+      "title": "Conviértete en Embajador Universitario de Stallio",
+      "subtitle": "Representa a Stallio en tu universidad y ayuda a pequeños negocios y vendedores sociales a crecer, mientras desarrollas habilidades reales de marketing y difusión."
+    },
+    "badge": "CAMPUS",
+    "title": "Programa de Embajadores Universitarios de Stallio",
+    "description": "Representa a Stallio en tu universidad. Ayuda a pequeños negocios y vendedores sociales a descubrir Stallio mientras desarrollas habilidades de marketing, contenido y difusión en tu campus.",
+    "highlights": [
+      "Crea al menos un video corto por mes",
+      "Llega a posibles vendedores a través de tu red",
+      "Promociona Stallio en comunidades de estudiantes y vendedores",
+      "Título oficial de embajador, certificado y kit de embajador",
+      "Incentivos basados en el desempeño por vendedores incorporados",
+      "Mentoría directa y networking con otros embajadores"
+    ],
+    "apply": "Aplicar ahora",
+    "applyAria": "Aplicar al Programa de Embajadores Universitarios de Stallio"
+  }
+}
