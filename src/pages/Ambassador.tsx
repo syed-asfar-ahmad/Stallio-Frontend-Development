@@ -105,16 +105,16 @@ export default function Ambassador() {
               <SpotlightCard className="rounded-3xl border border-stone-200/90 bg-white p-8 shadow-sm shadow-stone-200/40 dark:border-zinc-700/90 dark:bg-zinc-900 dark:shadow-black/20 sm:p-10 lg:p-12">
                 <div className="flex items-start gap-4">
                   <span
-                    className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-brand-50 text-brand-700 ring-1 ring-brand-100 dark:bg-brand-950/50 dark:text-brand-300 dark:ring-brand-800/60"
+                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-brand-50 text-brand-700 ring-1 ring-brand-100 dark:bg-brand-950/50 dark:text-brand-300 dark:ring-brand-800/60"
                     aria-hidden
                   >
-                    <GraduationCap className="h-7 w-7" />
+                    <GraduationCap className="h-6 w-6" />
                   </span>
                   <div className="min-w-0 flex-1">
-                    <p className="text-sm font-bold uppercase tracking-[0.16em] text-brand-600 dark:text-brand-400">
+                    <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-600 dark:text-brand-400">
                       {t('ambassador.badge')}
                     </p>
-                    <h2 className="mt-2 text-balance text-2xl font-bold leading-snug text-stone-900 dark:text-zinc-50 sm:text-3xl">
+                    <h2 className="mt-1 text-balance text-xl font-bold leading-snug text-stone-900 dark:text-zinc-50 sm:text-3xl">
                       {t('ambassador.title')}
                     </h2>
                   </div>
