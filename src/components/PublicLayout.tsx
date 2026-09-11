@@ -8,10 +8,6 @@ import {
   Zap,
   CreditCard,
   Mail,
-  LogIn,
-  UserPlus,
-  Menu,
-  X,
   ArrowRight,
   FileText,
   Scale,
@@ -23,41 +19,17 @@ import ContactLtrText from './ContactLtrText';
 import ThemeToggle from './ThemeToggle';
 import LanguageSwitcher from './LanguageSwitcher';
 import { marketingSocialLinks } from '../lib/marketingSocialLinks';
-
-function NavPillLink({
-  to,
-  label,
-  icon: Icon,
-  active,
-  onClick,
-}: {
-  to: string;
-  label: string;
-  icon: typeof Home;
-  active: boolean;
-  onClick?: () => void;
-}) {
-  return (
-    <Link
-      to={to}
-      onClick={() => {
-        onClick?.();
-        window.scrollTo(0, 0);
-      }}
-      className={`inline-flex items-center gap-1 rounded-full px-2 py-2 text-xs font-medium leading-snug no-underline transition-colors duration-200 xl:gap-1.5 xl:px-2.5 xl:text-sm ${
-        active
-          ? 'bg-brand-50 text-brand-900 shadow-sm ring-1 ring-brand-100 dark:bg-brand-950/60 dark:text-brand-100 dark:ring-brand-800/80'
-          : 'text-stone-600 hover:bg-white hover:text-stone-900 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-white'
-      }`}
-    >
-      <Icon
-        className={`hidden h-3.5 w-3.5 shrink-0 xl:block ${active ? 'text-brand-600 dark:text-brand-400' : 'text-stone-400 dark:text-zinc-400'}`}
-        aria-hidden
-      />
-      <span className="whitespace-nowrap">{label}</span>
-    </Link>
-  );
-}
+import {
+  MobileNav,
+  MobileNavHeader,
+  MobileNavMenu,
+  MobileNavToggle,
+  Navbar,
+  NavbarButton,
+  NavbarLogo,
+  NavBody,
+  NavItems,
+} from './ui/resizable-navbar';
 
 function CtaSignupLink({
   to,
@@ -112,16 +84,16 @@ export default function PublicLayout({ children, hideFooter }: { children: React
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const mainNav = useMemo(
+  const navItems = useMemo(
     () =>
       [
-        { to: '/', labelKey: 'layout.nav.home' as const, icon: Home },
-        { to: '/about', labelKey: 'layout.nav.about' as const, icon: Info },
-        { to: '/how-it-works', labelKey: 'layout.nav.howItWorks' as const, icon: ListOrdered },
-        { to: '/features', labelKey: 'layout.nav.features' as const, icon: Zap },
-        { to: '/pricing', labelKey: 'layout.nav.pricing' as const, icon: CreditCard },
-        { to: '/contact', labelKey: 'layout.nav.contact' as const, icon: Mail },
-      ].map((item) => ({ ...item, label: t(item.labelKey) })),
+        { link: '/', labelKey: 'layout.nav.home' as const },
+        { link: '/about', labelKey: 'layout.nav.about' as const },
+        { link: '/how-it-works', labelKey: 'layout.nav.howItWorks' as const },
+        { link: '/features', labelKey: 'layout.nav.features' as const },
+        { link: '/pricing', labelKey: 'layout.nav.pricing' as const },
+        { link: '/contact', labelKey: 'layout.nav.contact' as const },
+      ].map((item) => ({ name: t(item.labelKey), link: item.link })),
     [t],
   );
 
@@ -181,8 +153,13 @@ export default function PublicLayout({ children, hideFooter }: { children: React
     if (!mobileMenuOpen) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileMenuOpen(false);
+    };
+    document.addEventListener('keydown', onKey);
     return () => {
       document.body.style.overflow = prev;
+      document.removeEventListener('keydown', onKey);
     };
   }, [mobileMenuOpen]);
 
@@ -192,162 +169,113 @@ export default function PublicLayout({ children, hideFooter }: { children: React
         hideFooter ? 'h-[100dvh] max-h-[100dvh] overflow-hidden' : 'min-h-screen'
       }`}
     >
-      <header className="sticky top-0 z-50 border-b border-stone-200/80 bg-white/90 pt-[max(0.5rem,env(safe-area-inset-top,0px))] backdrop-blur-md shadow-sm shadow-stone-200/40 dark:border-zinc-700/80 dark:bg-zinc-900/90 dark:shadow-black/20">
-        <div
-          className={`relative mx-auto flex min-h-[3.5rem] w-full max-w-7xl items-center gap-2 px-4 py-2 max-lg:px-4 sm:min-h-[4rem] sm:py-2.5 lg:min-h-[4.5rem] lg:gap-2 lg:px-5 xl:px-6${
-            mobileMenuOpen
-              ? ' max-lg:relative max-lg:z-[52] max-lg:bg-white/90 max-lg:pb-4 dark:max-lg:bg-zinc-900/90'
-              : ''
-          }`}
-        >
-          <Link
-            to="/"
-            onClick={() => window.scrollTo(0, 0)}
-            className="group relative z-[52] inline-flex min-w-0 shrink-0 items-end gap-1.5 no-underline sm:gap-2"
-            aria-label={t('layout.aria.homeLogo')}
-          >
+      <Navbar className="pt-[max(0.5rem,env(safe-area-inset-top,0px))]">
+        <NavBody>
+          <NavbarLogo to="/" aria-label={t('layout.aria.homeLogo')}>
             <img
               src="/assets/logo.png"
               alt=""
               width={180}
               height={44}
               decoding="async"
-              className="block h-8 w-auto max-h-8 max-w-[min(140px,34vw)] object-contain object-start transition-opacity group-hover:opacity-90 sm:h-9 sm:max-w-[min(160px,38vw)] lg:h-10 lg:max-h-10 lg:max-w-[min(200px,46vw)]"
+              className="block h-8 w-auto max-h-8 object-contain object-start sm:h-9"
               aria-hidden
             />
             <span
-              className="nav-brand-wordmark hidden shrink-0 text-[1.75rem] text-brand-950 transition-opacity duration-300 group-hover:opacity-80 xl:inline sm:text-[1.9rem] lg:text-[2.05rem] dark:text-brand-50"
+              className="nav-brand-wordmark hidden shrink-0 text-[1.65rem] leading-none text-brand-950 xl:inline dark:text-brand-50"
               aria-hidden
             >
               Stallio
             </span>
-          </Link>
+          </NavbarLogo>
 
-          <div className="hidden min-w-0 flex-1 justify-center px-1 lg:flex">
-            <nav
-              className="inline-flex max-w-full flex-nowrap items-center gap-0.5 rounded-full border border-stone-200/90 bg-stone-50/90 p-0.5 dark:border-zinc-600/90 dark:bg-zinc-800/90"
-              aria-label={t('layout.aria.mainNav')}
-            >
-              {mainNav.map(({ to, label, icon }) => (
-                <NavPillLink key={to} to={to} label={label} icon={icon} active={location.pathname === to} />
+          <NavItems items={navItems} />
+
+          <div className="relative z-20 flex shrink-0 items-center justify-end gap-1.5 xl:gap-2">
+            <LanguageSwitcher className="shrink-0" />
+            <ThemeToggle className="h-9 w-9 rounded-full" />
+            <NavbarButton to="/login" variant="secondary" className="px-3 xl:px-4">
+              {t('layout.navCta.logIn')}
+            </NavbarButton>
+            <NavbarButton to="/signup" variant="primary" className="px-3 xl:px-4">
+              {t('layout.navCta.createYourShop')}
+            </NavbarButton>
+          </div>
+        </NavBody>
+
+        <MobileNav>
+          <MobileNavHeader>
+            <NavbarLogo to="/" aria-label={t('layout.aria.homeLogo')}>
+              <img
+                src="/assets/logo.png"
+                alt=""
+                width={160}
+                height={40}
+                decoding="async"
+                className="block h-7 w-auto max-h-7 object-contain object-start"
+                aria-hidden
+              />
+              <span
+                className="nav-brand-wordmark shrink-0 text-[1.5rem] leading-none text-brand-950 dark:text-brand-50"
+                aria-hidden
+              >
+                Stallio
+              </span>
+            </NavbarLogo>
+
+            <div className="flex items-center gap-2 pe-2">
+              <LanguageSwitcher className="shrink-0" />
+              <ThemeToggle className="h-9 w-9 rounded-full" />
+              <MobileNavToggle
+                isOpen={mobileMenuOpen}
+                onClick={() => setMobileMenuOpen((open) => !open)}
+                openLabel={t('layout.aria.openMenu')}
+                closeLabel={t('layout.aria.closeMenu')}
+              />
+            </div>
+          </MobileNavHeader>
+
+          <MobileNavMenu
+            isOpen={mobileMenuOpen}
+            onClose={() => setMobileMenuOpen(false)}
+            closeLabel={t('layout.aria.closeMenu')}
+          >
+            <nav className="flex w-full flex-col" aria-label={t('layout.aria.mobileMainNav')}>
+              {navItems.map((item) => (
+                <Link
+                  key={item.link}
+                  to={item.link}
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    window.scrollTo(0, 0);
+                  }}
+                  className="relative w-full px-1 py-2.5 text-sm font-medium text-stone-800 no-underline dark:text-zinc-100"
+                >
+                  {item.name}
+                </Link>
               ))}
             </nav>
-          </div>
-
-          <div className="relative z-[52] ms-auto flex shrink-0 items-center gap-1.5 sm:gap-2">
-            <LanguageSwitcher className="shrink-0" />
-            <ThemeToggle className="h-10 w-10 max-lg:h-10 max-lg:w-10" />
-            <Link
-              to="/login"
-              onClick={() => window.scrollTo(0, 0)}
-              className="hidden items-center justify-center gap-1.5 whitespace-nowrap rounded-full border border-brand-200 bg-white px-3 py-2 text-sm font-semibold text-brand-900 transition-colors hover:border-brand-300 hover:bg-brand-50/80 no-underline min-[1200px]:inline-flex dark:border-zinc-500 dark:bg-zinc-800 dark:text-brand-100 dark:hover:border-brand-500 dark:hover:bg-zinc-700"
-            >
-              <LogIn className="h-4 w-4 shrink-0 text-brand-600 dark:text-brand-400" aria-hidden />
-              {t('layout.navCta.logIn')}
-            </Link>
-            <CtaSignupLink
-              to="/signup"
-              className="hidden md:inline-flex max-lg:px-3.5 max-lg:py-2 max-lg:text-xs lg:px-5"
-              onClick={() => window.scrollTo(0, 0)}
-            >
-              <UserPlus className="h-4 w-4 shrink-0" aria-hidden />
-              {t('layout.navCta.createYourShop')}
-            </CtaSignupLink>
-
-            <button
-              type="button"
-              onClick={() => setMobileMenuOpen((o) => !o)}
-              className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border bg-white transition-colors lg:hidden dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:border-brand-500/40 dark:hover:bg-zinc-700 ${
-                mobileMenuOpen
-                  ? 'border-red-200 text-red-600 hover:bg-red-50 hover:border-red-300 dark:border-red-800/60 dark:hover:bg-red-950/40'
-                  : 'border-stone-200 text-stone-800 hover:border-brand-200 hover:bg-brand-50/40'
-              }`}
-              aria-label={mobileMenuOpen ? t('layout.aria.closeMenu') : t('layout.aria.openMenu')}
-              aria-expanded={mobileMenuOpen}
-            >
-              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </button>
-          </div>
-        </div>
-
-        {mobileMenuOpen && (
-          <button
-            type="button"
-            className="fixed inset-0 top-[calc(max(0.5rem,env(safe-area-inset-top,0px))+4rem)] z-40 bg-stone-900/40 backdrop-blur-[2px] sm:top-[calc(max(0.5rem,env(safe-area-inset-top,0px))+4.25rem)] lg:hidden"
-            aria-label={t('layout.aria.closeMenu')}
-            onClick={() => setMobileMenuOpen(false)}
-          />
-        )}
-
-        <div
-          className={`relative z-50 lg:hidden ${
-            mobileMenuOpen ? 'pointer-events-auto' : 'pointer-events-none'
-          }`}
-        >
-          <div
-            className={`overflow-hidden transition-[max-height,opacity] duration-300 ease-out ${
-              mobileMenuOpen ? 'max-h-[min(88dvh,560px)] opacity-100' : 'max-h-0 opacity-0'
-            }`}
-          >
-            <div className="mx-4 mb-3 mt-3 overflow-y-auto overscroll-contain rounded-2xl border border-stone-200/80 bg-white shadow-xl shadow-stone-300/25 dark:border-zinc-600 dark:bg-zinc-900 dark:shadow-black/40 max-lg:mx-4 sm:mb-3">
-              <nav
-                className="flex max-h-[min(80dvh,520px)] flex-col gap-0.5 p-2 sm:p-3"
-                aria-label={t('layout.aria.mobileMainNav')}
+            <div className="flex w-full flex-col gap-3 pt-2">
+              <NavbarButton
+                to="/login"
+                variant="secondary"
+                className="w-full"
+                onClick={() => setMobileMenuOpen(false)}
               >
-                {mainNav.map(({ to, label, icon: Icon }) => {
-                  const active = location.pathname === to;
-                  return (
-                    <Link
-                      key={to}
-                      to={to}
-                      onClick={() => {
-                        setMobileMenuOpen(false);
-                        window.scrollTo(0, 0);
-                      }}
-                      className={`flex min-h-[2.75rem] items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium no-underline transition-colors ${
-                        active
-                          ? 'bg-brand-50 text-brand-900 ring-1 ring-brand-100 dark:bg-brand-950/50 dark:text-brand-100 dark:ring-brand-800/60'
-                          : 'text-stone-700 hover:bg-stone-50 dark:text-zinc-300 dark:hover:bg-zinc-800'
-                      }`}
-                    >
-                      <Icon
-                        className={`h-4 w-4 shrink-0 ${active ? 'text-brand-600 dark:text-brand-400' : 'text-stone-400 dark:text-zinc-500'}`}
-                        aria-hidden
-                      />
-                      {label}
-                    </Link>
-                  );
-                })}
-                <div className="my-2 h-px bg-stone-100 dark:bg-zinc-700 md:hidden" aria-hidden />
-                <div className="grid grid-cols-2 gap-2 md:hidden">
-                  <Link
-                    to="/login"
-                    onClick={() => {
-                      setMobileMenuOpen(false);
-                      window.scrollTo(0, 0);
-                    }}
-                    className="flex min-h-[2.75rem] min-w-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-xl border border-brand-200 bg-white px-2.5 py-2.5 text-xs font-semibold text-brand-900 no-underline hover:bg-brand-50/60 sm:px-3 sm:text-sm dark:border-brand-700/50 dark:bg-zinc-800 dark:text-brand-100 dark:hover:bg-brand-950/40"
-                  >
-                    <LogIn className="h-4 w-4 shrink-0 text-brand-600 dark:text-brand-400" aria-hidden />
-                    {t('layout.navCta.logIn')}
-                  </Link>
-                  <CtaSignupLink
-                    to="/signup"
-                    className="min-h-[2.75rem] min-w-0 px-2.5 py-2.5 text-xs sm:px-3 sm:text-sm"
-                    onClick={() => {
-                      setMobileMenuOpen(false);
-                      window.scrollTo(0, 0);
-                    }}
-                  >
-                    <UserPlus className="h-4 w-4 shrink-0" aria-hidden />
-                    {t('layout.navCta.createYourShop')}
-                  </CtaSignupLink>
-                </div>
-              </nav>
+                {t('layout.navCta.logIn')}
+              </NavbarButton>
+              <NavbarButton
+                to="/signup"
+                variant="primary"
+                className="w-full"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t('layout.navCta.createYourShop')}
+              </NavbarButton>
             </div>
-          </div>
-        </div>
-      </header>
+          </MobileNavMenu>
+        </MobileNav>
+      </Navbar>
 
       <main
         className={

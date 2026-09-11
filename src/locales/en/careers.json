@@ -1,37 +1,23 @@
 {
   "careers": {
-    "metaTitle": "Careers — Stallio",
+    "metaTitle": "Careers | Stallio",
     "hero": {
       "eyebrow": "Careers",
-      "title": "Grow your career with Stallio",
-      "subtitle": "Explore opportunities to work with us, build real-world experience, and help sellers grow their businesses online."
+      "title": "Build your career with Stallio",
+      "subtitle": "Internships, jobs, and other opportunities to work on real seller growth with the team shipping the product."
     },
-    "apply": "Apply now",
-    "applyAria": "Apply for {{program}} (opens in a new tab)",
-    "closed": "Closed",
+    "closed": "Applications Closed",
+    "closedAria": "{{program}} is closed for applications",
     "internship": {
       "badge": "Internship",
-      "title": "Stallio Summer Internship Program",
-      "description": "Spend your summer working closely with the Stallio team on real projects in product, marketing, and operations. Ideal for students who want startup experience and a portfolio they can show employers.",
+      "title": "Summer Internship",
+      "description": "Spend the summer on live product, marketing, and operations work with the Stallio team. Built for students who want startup experience and a portfolio they can show.",
       "highlights": [
-        "Work on live product and growth initiatives",
+        "Ship work on live product and growth projects",
         "Weekly mentorship from the founding team",
         "Flexible remote-friendly schedule",
         "Certificate and reference letter for strong performers",
-        "Priority consideration for future roles at Stallio"
-      ]
-    },
-    "ambassador": {
-      "badge": "Campus",
-      "title": "Stallio Campus Ambassador Program",
-      "description": "Represent Stallio at your university. Help small businesses and social sellers discover Stallio while building marketing, content, and outreach skills on your campus.",
-      "highlights": [
-        "Create at least one short-form video per month",
-        "Reach potential sellers through your network",
-        "Promote Stallio in student and seller communities",
-        "Official ambassador title, certificate, and ambassador kit",
-        "Performance-based incentives for onboarded sellers",
-        "Direct mentorship and networking with other ambassadors"
+        "Priority consideration for future Stallio roles"
       ]
     }
   }
