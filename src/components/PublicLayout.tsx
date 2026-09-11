@@ -153,8 +153,13 @@ export default function PublicLayout({ children, hideFooter }: { children: React
     if (!mobileMenuOpen) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileMenuOpen(false);
+    };
+    document.addEventListener('keydown', onKey);
     return () => {
       document.body.style.overflow = prev;
+      document.removeEventListener('keydown', onKey);
     };
   }, [mobileMenuOpen]);
 
@@ -230,7 +235,11 @@ export default function PublicLayout({ children, hideFooter }: { children: React
             </div>
           </MobileNavHeader>
 
-          <MobileNavMenu isOpen={mobileMenuOpen}>
+          <MobileNavMenu
+            isOpen={mobileMenuOpen}
+            onClose={() => setMobileMenuOpen(false)}
+            closeLabel={t('layout.aria.closeMenu')}
+          >
             <nav className="flex w-full flex-col" aria-label={t('layout.aria.mobileMainNav')}>
               {navItems.map((item) => (
                 <Link

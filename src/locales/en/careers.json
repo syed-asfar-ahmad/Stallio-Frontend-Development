@@ -4,22 +4,13 @@
     "hero": {
       "eyebrow": "Careers",
       "title": "Build your career with Stallio",
-      "subtitle": "Internships, jobs, and other opportunities to work on real seller growth with the team shipping the product.",
-      "viewRoles": "View open roles",
-      "contactUs": "Contact us"
+      "subtitle": "Internships, jobs, and other opportunities to work on real seller growth with the team shipping the product."
     },
-    "programs": {
-      "eyebrow": "Openings",
-      "title": "Internships and jobs",
-      "subtitle": "Apply when a role is open. Closed roles stay listed so you know what is coming next."
-    },
-    "apply": "Apply now",
-    "applyAria": "Apply for {{program}} (opens in a new tab)",
-    "closed": "Applications closed",
+    "closed": "Applications Closed",
     "closedAria": "{{program}} is closed for applications",
     "internship": {
       "badge": "Internship",
-      "title": "Summer internship",
+      "title": "Summer Internship",
       "description": "Spend the summer on live product, marketing, and operations work with the Stallio team. Built for students who want startup experience and a portfolio they can show.",
       "highlights": [
         "Ship work on live product and growth projects",
@@ -28,23 +19,6 @@
         "Certificate and reference letter for strong performers",
         "Priority consideration for future Stallio roles"
       ]
-    },
-    "jobs": {
-      "badge": "Jobs",
-      "title": "Full-time and contract roles",
-      "description": "We hire when we need help shipping Stallio for sellers. Check back for product, growth, and operations openings.",
-      "highlights": [
-        "Work on a product used by real sellers",
-        "Small team with clear ownership",
-        "Remote-friendly collaboration",
-        "Direct impact on seller growth outcomes"
-      ]
-    },
-    "strip": {
-      "title": "Not seeing the right role?",
-      "body": "Tell us how you want to help sellers. We read every note.",
-      "about": "About Stallio",
-      "contact": "Get in touch"
     }
   }
 }

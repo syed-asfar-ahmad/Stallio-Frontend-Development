@@ -49,6 +49,8 @@ interface MobileNavMenuProps {
   children: React.ReactNode;
   className?: string;
   isOpen: boolean;
+  onClose?: () => void;
+  closeLabel?: string;
 }
 
 export const Navbar = ({ children, className }: NavbarProps) => {
@@ -170,7 +172,12 @@ export const MobileNavHeader = ({
   className,
 }: MobileNavHeaderProps) => {
   return (
-    <div className={cn('flex w-full flex-row items-center justify-between', className)}>
+    <div
+      className={cn(
+        'relative z-[60] flex w-full flex-row items-center justify-between',
+        className,
+      )}
+    >
       {children}
     </div>
   );
@@ -180,22 +187,38 @@ export const MobileNavMenu = ({
   children,
   className,
   isOpen,
+  onClose,
+  closeLabel = 'Close menu',
 }: MobileNavMenuProps) => {
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -6 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -6 }}
-          transition={{ duration: 0.35, ease: [0.32, 0.72, 0, 1] }}
-          className={cn(
-            'absolute inset-x-0 top-16 z-50 flex w-full flex-col items-stretch justify-start gap-4 rounded-2xl bg-white/90 px-4 py-8 shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] backdrop-blur-xl dark:bg-zinc-950/90',
-            className,
-          )}
-        >
-          {children}
-        </motion.div>
+        <>
+          <motion.button
+            key="mobile-nav-backdrop"
+            type="button"
+            aria-label={closeLabel}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-40 cursor-default border-0 bg-stone-900/25 p-0 dark:bg-black/35"
+            onClick={onClose}
+          />
+          <motion.div
+            key="mobile-nav-panel"
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.35, ease: [0.32, 0.72, 0, 1] }}
+            className={cn(
+              'absolute inset-x-0 top-16 z-50 flex w-full flex-col items-stretch justify-start gap-3 rounded-2xl border border-stone-200/80 bg-white px-4 py-5 shadow-[0_12px_40px_rgba(15,_23,_42,_0.12)] dark:border-zinc-700 dark:bg-zinc-900 dark:shadow-[0_12px_40px_rgba(0,_0,_0,_0.45)]',
+              className,
+            )}
+          >
+            {children}
+          </motion.div>
+        </>
       )}
     </AnimatePresence>
   );

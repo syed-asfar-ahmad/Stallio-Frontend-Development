@@ -4,17 +4,8 @@
     "hero": {
       "eyebrow": "Carreras",
       "title": "Construye tu carrera con Stallio",
-      "subtitle": "Prácticas, empleos y otras oportunidades para trabajar en el crecimiento real de vendedores con el equipo que construye el producto.",
-      "viewRoles": "Ver roles abiertos",
-      "contactUs": "Contáctanos"
+      "subtitle": "Prácticas, empleos y otras oportunidades para trabajar en el crecimiento real de vendedores con el equipo que construye el producto."
     },
-    "programs": {
-      "eyebrow": "Vacantes",
-      "title": "Prácticas y empleos",
-      "subtitle": "Postula cuando un rol esté abierto. Los roles cerrados siguen visibles para que sepas qué viene."
-    },
-    "apply": "Postular ahora",
-    "applyAria": "Postular a {{program}} (se abre en una pestaña nueva)",
     "closed": "Postulaciones cerradas",
     "closedAria": "{{program}} está cerrado a postulaciones",
     "internship": {
@@ -28,23 +19,6 @@
         "Certificado y carta de referencia para los mejores",
         "Prioridad para futuros roles en Stallio"
       ]
-    },
-    "jobs": {
-      "badge": "Empleos",
-      "title": "Roles a tiempo completo y por contrato",
-      "description": "Contratamos cuando necesitamos ayuda para construir Stallio para vendedores. Vuelve pronto para vacantes de producto, crecimiento y operaciones.",
-      "highlights": [
-        "Trabaja en un producto usado por vendedores reales",
-        "Equipo pequeño con ownership claro",
-        "Colaboración compatible con remoto",
-        "Impacto directo en el crecimiento de vendedores"
-      ]
-    },
-    "strip": {
-      "title": "¿No ves el rol adecuado?",
-      "body": "Cuéntanos cómo quieres ayudar a los vendedores. Leemos cada mensaje.",
-      "about": "Sobre Stallio",
-      "contact": "Escribirnos"
     }
   }
 }
