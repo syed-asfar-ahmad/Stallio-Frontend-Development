@@ -10,6 +10,7 @@ import enFeatures from '../locales/en/features.json';
 import enPricing from '../locales/en/pricing.json';
 import enContact from '../locales/en/contact.json';
 import enCareers from '../locales/en/careers.json';
+import enAmbassador from '../locales/en/ambassador.json';
 import enAuth from '../locales/en/auth.json';
 import enLegal from '../locales/en/legal.json';
 import enNotFound from '../locales/en/notFound.json';
@@ -23,6 +24,7 @@ import esFeatures from '../locales/es/features.json';
 import esPricing from '../locales/es/pricing.json';
 import esContact from '../locales/es/contact.json';
 import esCareers from '../locales/es/careers.json';
+import esAmbassador from '../locales/es/ambassador.json';
 import esAuth from '../locales/es/auth.json';
 import esLegal from '../locales/es/legal.json';
 import esNotFound from '../locales/es/notFound.json';
@@ -36,6 +38,7 @@ import arFeatures from '../locales/ar/features.json';
 import arPricing from '../locales/ar/pricing.json';
 import arContact from '../locales/ar/contact.json';
 import arCareers from '../locales/ar/careers.json';
+import arAmbassador from '../locales/ar/ambassador.json';
 import arAuth from '../locales/ar/auth.json';
 import arLegal from '../locales/ar/legal.json';
 import arNotFound from '../locales/ar/notFound.json';
@@ -50,6 +53,7 @@ const enTranslation = {
   ...enPricing,
   ...enContact,
   ...enCareers,
+  ...enAmbassador,
   ...enAuth,
   ...enLegal,
   ...enNotFound,
@@ -65,6 +69,7 @@ const esTranslation = {
   ...esPricing,
   ...esContact,
   ...esCareers,
+  ...esAmbassador,
   ...esAuth,
   ...esLegal,
   ...esNotFound,
@@ -80,6 +85,7 @@ const arTranslation = {
   ...arPricing,
   ...arContact,
   ...arCareers,
+  ...arAmbassador,
   ...arAuth,
   ...arLegal,
   ...arNotFound,
