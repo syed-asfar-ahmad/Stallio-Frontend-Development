@@ -222,7 +222,9 @@
       "feature": "Destacar",
       "unfeature": "Quitar destacado",
       "toastFeatured": "Producto destacado en la página de inicio.",
-      "toastUnfeatured": "Eliminado de destacados."
+      "toastUnfeatured": "Eliminado de destacados.",
+      "planLimitBody": "Tu plan Basic permite hasta {{max}} productos. Mejora tu plan para agregar más.",
+      "planLimitUsage": "{{count}} / {{max}} productos usados"
     },
     "home": {
       "section": "Tu tienda",
@@ -408,7 +410,9 @@
       "validationName": "El nombre es obligatorio",
       "validationPrice": "Se requiere un precio válido",
       "validationImage": "Se requiere al menos una imagen",
-      "toastSaved": "Producto guardado."
+      "toastSaved": "Producto guardado.",
+      "imagesLimitBody": "Tu plan Basic permite hasta {{max}} imágenes por producto.",
+      "imagesLimitUsage": "{{count}} / {{max}} imágenes usadas"
     },
     "orders": {
       "paymentInvoiceHelp": "Indica cómo debe pagar el cliente (enlace, transferencia, contra reembolso, etc.). Descarga el PDF para enviarlo por WhatsApp o correo. Cuando recibas el dinero, marca el pedido como pagado para que cuente en tus ingresos.",
@@ -511,7 +515,8 @@
       "discountLine": "Descuento: {{amount}}{{code}}",
       "paymentReceived": "Pago recibido",
       "updating": "Actualizando...",
-      "orderItemsCount": "{{count}} artículos"
+      "orderItemsCount": "{{count}} artículos",
+      "planLimitBody": "Tu plan Basic permite hasta {{max}} pedidos. Mejora tu plan para agregar más."
     },
     "coupons": {
       "section": "Promociones",
@@ -780,7 +785,9 @@
       "toastImage": "Añade una imagen de categoría.",
       "toastUpload": "Imagen subida.",
       "ariaClose": "Cerrar",
-      "ariaRemoveImage": "Quitar imagen"
+      "ariaRemoveImage": "Quitar imagen",
+      "planLimitBody": "Tu plan Basic permite hasta {{max}} categorías. Mejora tu plan para agregar más.",
+      "planLimitUsage": "{{count}} / {{max}} categorías usadas"
     },
     "delivery": {
       "section": "Tu tienda",

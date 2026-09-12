@@ -6,6 +6,7 @@ type User = {
   id: string;
   email: string;
   role?: 'seller' | 'admin';
+  plan?: 'basic' | 'business' | null;
   username: string;
   shopName: string;
   logo?: string | null;

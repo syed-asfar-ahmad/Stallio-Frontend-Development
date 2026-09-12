@@ -222,7 +222,9 @@
       "feature": "Feature",
       "unfeature": "Unfeature",
       "toastFeatured": "Product featured on home page.",
-      "toastUnfeatured": "Removed from featured."
+      "toastUnfeatured": "Removed from featured.",
+      "planLimitBody": "Basic Plan allows up to {{max}} products.",
+      "planLimitUsage": "{{count}} / {{max}} products used"
     },
     "home": {
       "section": "Your storefront",
@@ -408,7 +410,9 @@
       "validationName": "Name is required",
       "validationPrice": "Valid price is required",
       "validationImage": "At least one image is required",
-      "toastSaved": "Product saved."
+      "toastSaved": "Product saved.",
+      "imagesLimitBody": "Basic Plan allows up to {{max}} images per product.",
+      "imagesLimitUsage": "{{count}} / {{max}} images used"
     },
     "orders": {
       "paymentInvoiceHelp": "Add how the customer should pay (link, bank transfer, cash on delivery, etc.). Download the PDF to send by WhatsApp or email. When you have the money, mark the order as paid so it appears in your revenue.",
@@ -511,7 +515,8 @@
       "discountLine": "Discount: {{amount}}{{code}}",
       "paymentReceived": "Payment Received",
       "updating": "Updating...",
-      "orderItemsCount": "{{count}} items"
+      "orderItemsCount": "{{count}} items",
+      "planLimitBody": "Basic Plan allows up to {{max}} orders."
     },
     "coupons": {
       "section": "Promotions",
@@ -780,7 +785,9 @@
       "toastImage": "Add a category image.",
       "toastUpload": "Image uploaded.",
       "ariaClose": "Close",
-      "ariaRemoveImage": "Remove image"
+      "ariaRemoveImage": "Remove image",
+      "planLimitBody": "Basic Plan allows up to {{max}} categories.",
+      "planLimitUsage": "{{count}} / {{max}} categories used"
     },
     "delivery": {
       "section": "Your storefront",
