@@ -1,9 +1,3 @@
 node_modules/
-<<<<<<< HEAD
 .env
 dist/
-=======
-dist/
-.env
-
->>>>>>> ammar/seller-dashboard
