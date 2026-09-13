@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import { api, fetchAuthorizedBlob } from '../lib/api';
 import { useAuth } from '../context/AuthContext';
 import { formatPrice, formatQuantity } from '../lib/countryCurrencyOptions';
+import { getSellerPlanLimits } from '../lib/sellerPlanLimits';
 import { getProductImageDisplayUrl } from '../lib/productImageUrl';
 import DashboardLayout from '../components/DashboardLayout';
 import DashboardLoading, { AdminLoadingInline } from '../components/DashboardLoading';
@@ -140,6 +141,8 @@ export default function DashboardOrders() {
   const { t } = useTranslation();
   const { user } = useAuth();
   const [orders, setOrders] = useState<Order[]>([]);
+  const planLimits = getSellerPlanLimits(user?.plan);
+  const orderLimitReached = planLimits.maxOrders !== null && orders.length >= planLimits.maxOrders;
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [dialogOrder, setDialogOrder] = useState<Order | null>(null);
@@ -243,6 +246,10 @@ export default function DashboardOrders() {
   }
 
   async function openManualOrder() {
+    if (orderLimitReached) {
+      toast.error(t('dashboard.orders.planLimitBody', { max: planLimits.maxOrders }));
+      return;
+    }
     setManualOpen(true);
     setManualErrors({});
     setManualName('');
@@ -468,13 +475,19 @@ export default function DashboardOrders() {
             <button
               type="button"
               onClick={openManualOrder}
-              className={`${DASHBOARD_BTN_PRIMARY} w-full justify-center whitespace-nowrap max-lg:py-2.5 max-lg:text-sm lg:w-auto lg:shrink-0`}
+              disabled={orderLimitReached}
+              className={`${DASHBOARD_BTN_PRIMARY} w-full justify-center whitespace-nowrap max-lg:py-2.5 max-lg:text-sm lg:w-auto lg:shrink-0 disabled:opacity-50`}
             >
               <Plus className="w-4 h-4 shrink-0" />
               {t('dashboard.orders.manualOrder')}
             </button>
           </div>
         </div>
+        {orderLimitReached && (
+          <p className="text-xs text-red-500 dark:text-red-400 font-medium">
+            {t('dashboard.orders.planLimitBody', { max: planLimits.maxOrders })}
+          </p>
+        )}
       </div>
 
       {orders.length === 0 ? (

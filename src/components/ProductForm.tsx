@@ -96,6 +96,7 @@ type Props = {
   title?: string;
   adminButtons?: boolean;
   catalogProducts?: Product[];
+  maxImages?: number;
 };
 
 export default function ProductForm({
@@ -109,6 +110,7 @@ export default function ProductForm({
   title,
   adminButtons = false,
   catalogProducts = [],
+  maxImages,
 }: Props) {
   const { t } = useTranslation();
   const btn = (key: string, adminLabel: string) => (adminButtons ? adminLabel : t(key));
@@ -335,18 +337,29 @@ export default function ProductForm({
       toast.error(t('dashboard.home.cropImageOnly'));
       return;
     }
+    const currentCount = displayImages.length;
+    const slotsLeft = maxImages !== undefined ? Math.max(0, maxImages - currentCount) : picked.length;
+    if (maxImages !== undefined && slotsLeft <= 0) {
+      toast.error(t('dashboard.productForm.imagesLimitBody', { max: maxImages }));
+      return;
+    }
+    const toUpload = picked.slice(0, slotsLeft);
+    const skipped = picked.length - toUpload.length;
     setError('');
     setUploading(true);
     try {
-      for (const file of picked) {
+      for (const file of toUpload) {
         const { url, publicId } = await uploadImageFile(file);
         appendUploadedImage(url, publicId);
       }
       toast.success(
-        picked.length === 1
+        toUpload.length === 1
           ? t('dashboard.productForm.toastSingleUpload')
-          : t('dashboard.productForm.toastMultiUpload', { count: picked.length }),
+          : t('dashboard.productForm.toastMultiUpload', { count: toUpload.length }),
       );
+      if (skipped > 0 && maxImages !== undefined) {
+        toast.error(t('dashboard.productForm.imagesLimitBody', { max: maxImages }));
+      }
     } catch (err) {
       setError((err as Error).message);
       toast.error((err as Error).message);
@@ -1056,14 +1069,14 @@ export default function ProductForm({
                 accept="image/*"
                 multiple
                 onChange={handleImageChange}
-                disabled={uploading}
+                disabled={uploading || (maxImages !== undefined && displayImages.length >= maxImages)}
                 className="hidden"
               />
               <SharedLockedField locked={sharedLocked}>
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                disabled={uploading || sharedLocked}
+                disabled={uploading || sharedLocked || (maxImages !== undefined && displayImages.length >= maxImages)}
                 className="w-full flex items-center justify-center gap-2 py-5 rounded-xl border-2 border-dashed border-stone-200 dark:border-zinc-700 bg-stone-50/30 dark:bg-zinc-950/50 text-stone-600 dark:text-zinc-400 hover:border-brand-300 hover:bg-brand-50 dark:hover:bg-brand-950/40 hover:text-brand-600 dark:hover:text-brand-300 transition-all disabled:opacity-60 font-medium"
               >
                 {uploading ? (
@@ -1079,6 +1092,13 @@ export default function ProductForm({
                 )}
               </button>
               </SharedLockedField>
+              {maxImages !== undefined && (
+                <p className={`mt-2 text-xs ${displayImages.length >= maxImages ? 'text-red-500 dark:text-red-400 font-medium' : 'text-stone-500 dark:text-zinc-500'}`}>
+                  {displayImages.length >= maxImages
+                    ? t('dashboard.productForm.imagesLimitBody', { max: maxImages })
+                    : t('dashboard.productForm.imagesLimitUsage', { count: displayImages.length, max: maxImages })}
+                </p>
+              )}
               {displayImages.length > 0 && (
                 <div className="mt-4 flex flex-wrap gap-3">
                   {displayImages.map((url, i) => (
