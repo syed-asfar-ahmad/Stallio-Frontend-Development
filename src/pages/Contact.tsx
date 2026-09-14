@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 import { Mail, User, MessageSquare, Send, CheckCircle, ArrowRight, MessageCircle } from 'lucide-react';
 import PublicLayout from '../components/PublicLayout';
+import { HeroAtmosphere, heroBleedClassName } from '../components/marketing/HeroAtmosphere';
 import ContactLtrText from '../components/ContactLtrText';
 import { getSocialBrandColor, SocialIcon } from '../components/SocialIcons';
 import { getApiBase } from '../lib/api';
@@ -143,19 +144,8 @@ export default function Contact() {
   return (
     <PublicLayout>
       <div className="home-marketing min-w-0 w-full overflow-x-clip bg-white">
-        <section className="relative isolate overflow-hidden bg-white text-stone-900">
-          <div
-            className="pointer-events-none absolute -left-28 top-1/4 h-56 w-56 rounded-full bg-brand-400/14 blur-[80px] animate-blob max-lg:opacity-70 sm:h-72 sm:w-72 sm:blur-[90px] md:h-80 md:w-80 md:blur-[100px] md:opacity-100"
-            aria-hidden
-          />
-          <div
-            className="pointer-events-none absolute -right-20 bottom-[15%] h-48 w-48 rounded-full bg-brand-400/12 blur-[70px] animate-blob animate-blob-delayed max-lg:opacity-70 sm:h-64 sm:w-64 sm:blur-[80px] md:h-72 md:w-72 md:blur-[90px] md:opacity-100"
-            aria-hidden
-          />
-          <div
-            className="pointer-events-none absolute left-1/2 top-0 h-[min(50%,420px)] w-[120%] -translate-x-1/2 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,rgba(91,69,229,0.14),transparent_58%)]"
-            aria-hidden
-          />
+        <section className={`${heroBleedClassName} bg-white text-stone-900`}>
+          <HeroAtmosphere sparkleId="contact-hero-sparkles" />
 
           <div className="relative mx-auto w-full min-w-0 max-w-3xl px-4 py-10 text-center max-lg:px-4 sm:py-12 md:px-5 md:py-20">
             <SectionEyebrow>{t('contact.hero.eyebrow')}</SectionEyebrow>

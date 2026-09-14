@@ -13,6 +13,7 @@ import {
   Zap,
 } from 'lucide-react';
 import PublicLayout from '../components/PublicLayout';
+import { HeroAtmosphere, heroBleedClassName } from '../components/marketing/HeroAtmosphere';
 import { MARKETING_DEMO_SHOP_PATH } from '../lib/marketingDemoShop';
 
 const STEP_LAYOUT = [
@@ -128,19 +129,8 @@ export default function HowItWorks() {
   return (
     <PublicLayout>
       <div className="home-marketing min-w-0 w-full overflow-x-clip bg-white">
-        <section className="relative isolate overflow-hidden bg-white text-stone-900 max-lg:min-h-0 lg:min-h-[min(88svh,880px)]">
-          <div
-            className="pointer-events-none absolute -left-40 top-0 h-[280px] w-[280px] rounded-full bg-brand-400/14 blur-[80px] animate-blob max-lg:opacity-70 sm:h-[min(100%,420px)] sm:w-[min(100%,420px)] sm:blur-[90px] lg:h-[min(100%,520px)] lg:w-[min(100%,520px)] lg:blur-[100px] lg:opacity-100"
-            aria-hidden
-          />
-          <div
-            className="pointer-events-none absolute -right-32 bottom-[-10%] h-[240px] w-[240px] rounded-full bg-brand-400/10 blur-[70px] animate-blob animate-blob-delayed max-lg:opacity-70 sm:h-[360px] sm:w-[360px] sm:blur-[90px] lg:h-[480px] lg:w-[480px] lg:blur-[100px] lg:opacity-100"
-            aria-hidden
-          />
-          <div
-            className="pointer-events-none absolute inset-x-0 top-0 h-[65%] bg-[radial-gradient(ellipse_90%_60%_at_70%_-5%,rgba(91,69,229,0.12),transparent_55%)]"
-            aria-hidden
-          />
+        <section className={`${heroBleedClassName} bg-white text-stone-900 max-lg:min-h-0 lg:min-h-[min(88svh,880px)]`}>
+          <HeroAtmosphere sparkleId="how-hero-sparkles" />
 
           <div className="relative mx-auto grid w-full min-w-0 max-w-7xl items-center gap-8 px-4 py-10 max-lg:px-4 sm:gap-10 sm:py-14 md:px-5 md:py-20 lg:min-h-[min(88svh,880px)] lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:py-24">
             <div className="min-w-0 text-center lg:text-start">
