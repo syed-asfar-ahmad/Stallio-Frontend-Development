@@ -17,7 +17,9 @@ import {
   DASHBOARD_TOGGLE_ROW_SWITCH,
 } from '../lib/dashboardFormClasses';
 import ConfirmDialog from '../components/ConfirmDialog';
-import { getSellerPlanLimits } from '../lib/sellerPlanLimits';
+import { getSellerPlanLimits, canUpgradePlan } from '../lib/sellerPlanLimits';
+import PlanLimitBanner from '../components/plan/PlanLimitBanner';
+import PlanUsageBar from '../components/plan/PlanUsageBar';
 import { FieldLabelWithHelp, FieldTitleWithHelp } from '../components/FieldLabelWithHelp';
 import DashboardBulkSelectBar from '../components/DashboardBulkSelectBar';
 import BulkItemCheckbox from '../components/BulkItemCheckbox';
@@ -404,11 +406,12 @@ const [categoryModal, setCategoryModal] = useState<null | 'add' | number>(null);
                 <Plus className="h-4 w-4 shrink-0" />
                 {t('dashboard.categories.addCategory')}
               </button>
-              <p className={`text-xs ${categoryLimitReached ? 'text-red-500 dark:text-red-400 font-medium' : 'text-stone-500 dark:text-zinc-500'}`}>
-                {categoryLimitReached
-                  ? t('dashboard.categories.planLimitBody', { max: planLimits.maxCategories })
-                  : t('dashboard.categories.planLimitUsage', { count: categories.length, max: planLimits.maxCategories })}
-              </p>
+              <PlanUsageBar
+                count={categories.length}
+                max={planLimits.maxCategories}
+                label={t('dashboard.categories.planLimitUsage', { count: categories.length, max: planLimits.maxCategories })}
+                limitReached={categoryLimitReached}
+              />
               {categories.length > 0 && (
                 bulk.selectionMode ? (
                   <div className="w-full min-w-0 [&>div]:w-full [&>div]:flex [&>div]:flex-col [&>div]:gap-2 [&_button]:w-full [&_button]:justify-center">
@@ -464,7 +467,7 @@ const [categoryModal, setCategoryModal] = useState<null | 'add' | number>(null);
             </div>
 
             <div className="mt-4 hidden min-w-0 flex-wrap items-center justify-between gap-3 lg:flex">
-              <div className="flex flex-wrap items-center gap-2">
+              <div className="flex flex-wrap items-center gap-3">
                 <button
                   type="button"
                   onClick={openAddModal}
@@ -474,11 +477,14 @@ const [categoryModal, setCategoryModal] = useState<null | 'add' | number>(null);
                   <Plus className="h-5 w-5 shrink-0" />
                   {t('dashboard.categories.addCategory')}
                 </button>
-                <span className={`text-xs ${categoryLimitReached ? 'text-red-500 dark:text-red-400 font-medium' : 'text-stone-500 dark:text-zinc-500'}`}>
-                  {categoryLimitReached
-                    ? t('dashboard.categories.planLimitBody', { max: planLimits.maxCategories })
-                    : t('dashboard.categories.planLimitUsage', { count: categories.length, max: planLimits.maxCategories })}
-                </span>
+                <div className="min-w-[140px]">
+                  <PlanUsageBar
+                    count={categories.length}
+                    max={planLimits.maxCategories}
+                    label={t('dashboard.categories.planLimitUsage', { count: categories.length, max: planLimits.maxCategories })}
+                    limitReached={categoryLimitReached}
+                  />
+                </div>
                 {filteredCategories.length > 0 && (
                   <DashboardBulkSelectBar
                     selectionMode={bulk.selectionMode}
@@ -515,6 +521,10 @@ const [categoryModal, setCategoryModal] = useState<null | 'add' | number>(null);
           </>
         )}
       </div>
+
+      {categoriesEnabled && (
+        <PlanLimitBanner show={categoryLimitReached && canUpgradePlan(user?.plan)} />
+      )}
 
       <div className="w-full max-w-6xl mx-auto space-y-4 max-lg:space-y-4 lg:space-y-6 min-w-0">
         {error && (

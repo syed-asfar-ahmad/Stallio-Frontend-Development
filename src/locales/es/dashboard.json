@@ -85,7 +85,16 @@
       "notifications": "Notificaciones",
       "viewStore": "Ver tienda",
       "viewStoreDisabled": "Configura la URL de tu tienda en Cuenta para abrir la tienda pública",
-      "supportChat": "Chat Con Admin"
+      "supportChat": "Chat Con Admin",
+      "planBadgeBasic": "Plan Basic",
+      "planBadgeBusiness": "Plan Business",
+      "upgradeBannerTitle": "Has alcanzado el límite de tu plan",
+      "upgradeBannerBody": "Mejora al Plan Business para obtener {{products}} productos, {{categories}} categorías, {{images}} imágenes por producto y pedidos ilimitados.",
+      "upgradeBannerCta": "Ver Plan Business",
+      "upgradeBannerDismiss": "Cerrar",
+      "planBadgeBasicDesc": "Nivel estándar de vendedor",
+      "planBadgeBusinessDesc": "Nivel profesional de alto volumen",
+      "planTopTier": "Nivel superior activo"
     },
     "supportChat": {
       "title": "Chat Con Admin",
@@ -223,7 +232,7 @@
       "unfeature": "Quitar destacado",
       "toastFeatured": "Producto destacado en la página de inicio.",
       "toastUnfeatured": "Eliminado de destacados.",
-      "planLimitBody": "Tu plan Basic permite hasta {{max}} productos. Mejora tu plan para agregar más.",
+      "planLimitBody": "Tu plan permite hasta {{max}} productos.",
       "planLimitUsage": "{{count}} / {{max}} productos usados"
     },
     "home": {
@@ -411,8 +420,11 @@
       "validationPrice": "Se requiere un precio válido",
       "validationImage": "Se requiere al menos una imagen",
       "toastSaved": "Producto guardado.",
-      "imagesLimitBody": "Tu plan Basic permite hasta {{max}} imágenes por producto.",
-      "imagesLimitUsage": "{{count}} / {{max}} imágenes usadas"
+      "imagesLimitBody": "Tu plan permite hasta {{max}} imágenes por producto.",
+      "imagesLimitUsage": "{{count}} / {{max}} imágenes usadas",
+      "slots": "espacios",
+      "mainCover": "Portada",
+      "unlockWithBusiness": "Desbloquear con Business"
     },
     "orders": {
       "paymentInvoiceHelp": "Indica cómo debe pagar el cliente (enlace, transferencia, contra reembolso, etc.). Descarga el PDF para enviarlo por WhatsApp o correo. Cuando recibas el dinero, marca el pedido como pagado para que cuente en tus ingresos.",
@@ -516,7 +528,8 @@
       "paymentReceived": "Pago recibido",
       "updating": "Actualizando...",
       "orderItemsCount": "{{count}} artículos",
-      "planLimitBody": "Tu plan Basic permite hasta {{max}} pedidos. Mejora tu plan para agregar más."
+      "planLimitBody": "Tu plan permite hasta {{max}} pedidos.",
+      "planLimitUsage": "{{count}} / {{max}} pedidos usados"
     },
     "coupons": {
       "section": "Promociones",
@@ -786,7 +799,7 @@
       "toastUpload": "Imagen subida.",
       "ariaClose": "Cerrar",
       "ariaRemoveImage": "Quitar imagen",
-      "planLimitBody": "Tu plan Basic permite hasta {{max}} categorías. Mejora tu plan para agregar más.",
+      "planLimitBody": "Tu plan permite hasta {{max}} categorías.",
       "planLimitUsage": "{{count}} / {{max}} categorías usadas"
     },
     "delivery": {

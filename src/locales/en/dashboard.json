@@ -85,7 +85,16 @@
       "notifications": "Notifications",
       "viewStore": "View Store",
       "viewStoreDisabled": "Set your store URL in Settings to open your storefront",
-      "supportChat": "Chat With Admin"
+      "supportChat": "Chat With Admin",
+      "planBadgeBasic": "Basic Plan",
+      "planBadgeBusiness": "Business Plan",
+      "upgradeBannerTitle": "You've reached your plan limit",
+      "upgradeBannerBody": "Upgrade to Business Plan for {{products}} products, {{categories}} categories, {{images}} images per product, and unlimited orders.",
+      "upgradeBannerCta": "View Business Plan",
+      "upgradeBannerDismiss": "Dismiss",
+      "planBadgeBasicDesc": "Standard Seller Tier",
+      "planBadgeBusinessDesc": "High Volume Pro Tier",
+      "planTopTier": "Top tier active"
     },
     "supportChat": {
       "title": "Chat With Admin",
@@ -223,7 +232,7 @@
       "unfeature": "Unfeature",
       "toastFeatured": "Product featured on home page.",
       "toastUnfeatured": "Removed from featured.",
-      "planLimitBody": "Basic Plan allows up to {{max}} products.",
+      "planLimitBody": "Your plan allows up to {{max}} products.",
       "planLimitUsage": "{{count}} / {{max}} products used"
     },
     "home": {
@@ -411,8 +420,11 @@
       "validationPrice": "Valid price is required",
       "validationImage": "At least one image is required",
       "toastSaved": "Product saved.",
-      "imagesLimitBody": "Basic Plan allows up to {{max}} images per product.",
-      "imagesLimitUsage": "{{count}} / {{max}} images used"
+      "imagesLimitBody": "Your plan allows up to {{max}} images per product.",
+      "imagesLimitUsage": "{{count}} / {{max}} images used",
+      "slots": "slots",
+      "mainCover": "Cover",
+      "unlockWithBusiness": "Unlock with Business"
     },
     "orders": {
       "paymentInvoiceHelp": "Add how the customer should pay (link, bank transfer, cash on delivery, etc.). Download the PDF to send by WhatsApp or email. When you have the money, mark the order as paid so it appears in your revenue.",
@@ -516,7 +528,8 @@
       "paymentReceived": "Payment Received",
       "updating": "Updating...",
       "orderItemsCount": "{{count}} items",
-      "planLimitBody": "Basic Plan allows up to {{max}} orders."
+      "planLimitBody": "Your plan allows up to {{max}} orders.",
+      "planLimitUsage": "{{count}} / {{max}} orders used"
     },
     "coupons": {
       "section": "Promotions",
@@ -786,7 +799,7 @@
       "toastUpload": "Image uploaded.",
       "ariaClose": "Close",
       "ariaRemoveImage": "Remove image",
-      "planLimitBody": "Basic Plan allows up to {{max}} categories.",
+      "planLimitBody": "Your plan allows up to {{max}} categories.",
       "planLimitUsage": "{{count}} / {{max}} categories used"
     },
     "delivery": {

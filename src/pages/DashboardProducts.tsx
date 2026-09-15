@@ -36,7 +36,9 @@ import { scrollOnPaginationChange } from '../lib/scrollDashboardMainToTop';
 import { PRODUCT_CARD_ASPECT_CLASS, PRODUCT_IMAGE_FRAME_CLASS } from '../lib/imageCropViewports';
 import { DASHBOARD_SEARCH_INPUT, DASHBOARD_FILTER_SELECT } from '../lib/dashboardFormClasses';
 import ProductImage from '../components/ProductImage';
-import { getSellerPlanLimits } from '../lib/sellerPlanLimits';
+import { getSellerPlanLimits, canUpgradePlan } from '../lib/sellerPlanLimits';
+import PlanLimitBanner from '../components/plan/PlanLimitBanner';
+import PlanUsageBar from '../components/plan/PlanUsageBar';
 
 const PAGE_SIZE = 15;
 const CATEGORY_UNCATEGORIZED = '__uncategorized__';
@@ -247,11 +249,12 @@ export default function DashboardProducts() {
             <Plus className="h-4 w-4 shrink-0" />
             {t('dashboard.products.addProduct')}
           </button>
-          <p className={`text-xs ${productLimitReached ? 'text-red-500 dark:text-red-400 font-medium' : 'text-stone-500 dark:text-zinc-500'}`}>
-            {productLimitReached
-              ? t('dashboard.products.planLimitBody', { max: planLimits.maxProducts })
-              : t('dashboard.products.planLimitUsage', { count: products.length, max: planLimits.maxProducts })}
-          </p>
+          <PlanUsageBar
+            count={products.length}
+            max={planLimits.maxProducts}
+            label={t('dashboard.products.planLimitUsage', { count: products.length, max: planLimits.maxProducts })}
+            limitReached={productLimitReached}
+          />
           {products.length > 0 && (
             bulk.selectionMode ? (
               <div className="w-full min-w-0 [&>div]:w-full [&>div]:flex [&>div]:flex-col [&>div]:gap-2 [&_button]:w-full [&_button]:justify-center">
@@ -313,7 +316,7 @@ export default function DashboardProducts() {
         </div>
 
         <div className="mt-4 hidden min-w-0 flex-wrap items-center justify-between gap-3 lg:flex">
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center gap-3">
             <button
               type="button"
               onClick={handleAddProductClick}
@@ -323,11 +326,14 @@ export default function DashboardProducts() {
               <Plus className="h-5 w-5 shrink-0" />
               {t('dashboard.products.addProduct')}
             </button>
-            <span className={`text-xs ${productLimitReached ? 'text-red-500 dark:text-red-400 font-medium' : 'text-stone-500 dark:text-zinc-500'}`}>
-              {productLimitReached
-                ? t('dashboard.products.planLimitBody', { max: planLimits.maxProducts })
-                : t('dashboard.products.planLimitUsage', { count: products.length, max: planLimits.maxProducts })}
-            </span>
+            <div className="min-w-[140px]">
+              <PlanUsageBar
+                count={products.length}
+                max={planLimits.maxProducts}
+                label={t('dashboard.products.planLimitUsage', { count: products.length, max: planLimits.maxProducts })}
+                limitReached={productLimitReached}
+              />
+            </div>
             {filteredProducts.length > 0 && (
               <DashboardBulkSelectBar
                 selectionMode={bulk.selectionMode}
@@ -366,6 +372,8 @@ export default function DashboardProducts() {
           )}
         </div>
       </div>
+
+      <PlanLimitBanner show={productLimitReached && canUpgradePlan(user?.plan)} />
 
       {showForm && (
         <ProductForm

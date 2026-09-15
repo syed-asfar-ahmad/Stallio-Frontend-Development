@@ -511,9 +511,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 </span>
               )}
             </span>
-            <div>
+            <div className="min-w-0">
               <span className="font-bold text-lg text-stone-800 dark:text-zinc-100 block">{t('dashboard.layout.title')}</span>
-              <span className="text-xs text-stone-500 dark:text-zinc-400">{user.shopName}</span>
+              <span className="text-xs text-stone-500 dark:text-zinc-400 block truncate">{user.shopName}</span>
             </div>
           </Link>
           <button

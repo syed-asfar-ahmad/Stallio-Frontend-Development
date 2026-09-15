@@ -85,7 +85,16 @@
       "notifications": "الإشعارات",
       "viewStore": "عرض المتجر",
       "viewStoreDisabled": "عيّن رابط متجرك في الحساب لفتح واجهة المتجر",
-      "supportChat": "محادثة مع الإدارة"
+      "supportChat": "محادثة مع الإدارة",
+      "planBadgeBasic": "الخطة الأساسية",
+      "planBadgeBusiness": "خطة الأعمال",
+      "upgradeBannerTitle": "لقد وصلت إلى حد خطتك",
+      "upgradeBannerBody": "قم بالترقية إلى خطة الأعمال للحصول على {{products}} منتجاً، {{categories}} تصنيفاً، {{images}} صور لكل منتج، وطلبات غير محدودة.",
+      "upgradeBannerCta": "عرض خطة الأعمال",
+      "upgradeBannerDismiss": "إغلاق",
+      "planBadgeBasicDesc": "المستوى القياسي للبائعين",
+      "planBadgeBusinessDesc": "المستوى الاحترافي لحجم مبيعات عالي",
+      "planTopTier": "أعلى مستوى مفعل"
     },
     "supportChat": {
       "title": "محادثة مع الإدارة",
@@ -223,7 +232,7 @@
       "unfeature": "إلغاء التمييز",
       "toastFeatured": "تم تمييز المنتج في الصفحة الرئيسية.",
       "toastUnfeatured": "تمت الإزالة من المميز.",
-      "planLimitBody": "تسمح خطة Basic الخاصة بك بحد أقصى {{max}} منتج. قم بترقية خطتك لإضافة المزيد.",
+      "planLimitBody": "تسمح خطتك بحد أقصى {{max}} منتج.",
       "planLimitUsage": "{{count}} / {{max}} منتج مستخدم"
     },
     "home": {
@@ -411,8 +420,11 @@
       "validationPrice": "سعر صالح مطلوب",
       "validationImage": "صورة واحدة على الأقل مطلوبة",
       "toastSaved": "تم حفظ المنتج.",
-      "imagesLimitBody": "تسمح خطة Basic الخاصة بك بحد أقصى {{max}} صور لكل منتج.",
-      "imagesLimitUsage": "{{count}} / {{max}} صورة مستخدمة"
+      "imagesLimitBody": "تسمح خطتك بحد أقصى {{max}} صور لكل منتج.",
+      "imagesLimitUsage": "{{count}} / {{max}} صورة مستخدمة",
+      "slots": "فتحات",
+      "mainCover": "الغلاف",
+      "unlockWithBusiness": "الفتح مع خطة الأعمال"
     },
     "orders": {
       "paymentInvoiceHelp": "أضف كيفية دفع العميل (رابط، تحويل، عند الاستلام...). نزّل PDF لإرساله. عند استلام المال علّم الطلب كمدفوع ليُحسب في إيراداتك.",
@@ -516,7 +528,8 @@
       "paymentReceived": "تم استلام الدفع",
       "updating": "جاري التحديث...",
       "orderItemsCount": "{{count}} عناصر",
-      "planLimitBody": "تسمح خطة Basic الخاصة بك بحد أقصى {{max}} طلب. قم بترقية خطتك لإضافة المزيد."
+      "planLimitBody": "تسمح خطتك بحد أقصى {{max}} طلب.",
+      "planLimitUsage": "{{count}} / {{max}} طلب مستخدم"
     },
     "coupons": {
       "section": "العروض",
@@ -786,7 +799,7 @@
       "toastUpload": "تم رفع الصورة.",
       "ariaClose": "إغلاق",
       "ariaRemoveImage": "إزالة الصورة",
-      "planLimitBody": "تسمح خطة Basic الخاصة بك بحد أقصى {{max}} فئة. قم بترقية خطتك لإضافة المزيد.",
+      "planLimitBody": "تسمح خطتك بحد أقصى {{max}} فئة.",
       "planLimitUsage": "{{count}} / {{max}} فئة مستخدمة"
     },
     "delivery": {
