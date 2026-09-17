@@ -5,6 +5,7 @@ export type SellerPlanLimits = {
   maxProducts: number;
   maxCategories: number;
   maxOrders: number | null;
+  maxThemes: number;
 };
 
 export const SELLER_PLAN_LIMITS: Record<SellerPlanTier, SellerPlanLimits> = {
@@ -13,12 +14,14 @@ export const SELLER_PLAN_LIMITS: Record<SellerPlanTier, SellerPlanLimits> = {
     maxProducts: 25,
     maxCategories: 5,
     maxOrders: 70,
+    maxThemes: 2,
   },
   business: {
     maxImagesPerProduct: 5,
     maxProducts: 70,
     maxCategories: 20,
     maxOrders: null,
+    maxThemes: 5,
   },
 };
 
