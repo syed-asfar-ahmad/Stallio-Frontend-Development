@@ -29,6 +29,7 @@ const DashboardFooter = lazy(() => import('./pages/DashboardFooter'));
 const DashboardHome = lazy(() => import('./pages/DashboardHome'));
 const DashboardDelivery = lazy(() => import('./pages/DashboardDelivery'));
 const DashboardCoupons = lazy(() => import('./pages/DashboardCoupons'));
+const DashboardThemes = lazy(() => import('./pages/DashboardThemes'));
 const DashboardNotifications = lazy(() => import('./pages/DashboardNotifications'));
 const Shop = lazy(() => import('./pages/Shop'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
@@ -113,6 +114,7 @@ export default function App() {
         <Route path="/dashboard/notifications" element={<DashboardNotifications />} />
         <Route path="/dashboard/footer" element={<DashboardFooter />} />
         <Route path="/dashboard/delivery" element={<DashboardDelivery />} />
+        <Route path="/dashboard/themes" element={<DashboardThemes />} />
         <Route path="/shop/*" element={<LegacyShopRedirect />} />
         <Route path="/:username/product/:productId" element={<Shop />} />
         <Route path="/:username/category/:categorySlug" element={<Shop />} />

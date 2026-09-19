@@ -75,6 +75,8 @@ type User = {
   availability24Hours?: boolean;
   availabilityHours?: { day: 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun'; enabled: boolean; openTime: string; closeTime: string }[];
   defaultProductOptions?: { name: string; choices: string[]; choicePriceModifiers?: number[]; required?: boolean }[];
+  themeId?: import('../themes/types').ThemeId;
+  themeConfig?: import('../themes/types').ShopThemeConfig;
 };
 
 type AuthContextType = {
