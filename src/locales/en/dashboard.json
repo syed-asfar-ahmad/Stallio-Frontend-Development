@@ -85,7 +85,8 @@
       "notifications": "Notifications",
       "viewStore": "View Store",
       "viewStoreDisabled": "Set your store URL in Settings to open your storefront",
-      "supportChat": "Chat With Admin"
+      "supportChat": "Chat With Admin",
+      "storefrontTheme": "Theme"
     },
     "supportChat": {
       "title": "Chat With Admin",
@@ -915,6 +916,18 @@
     "error": {
       "loadPage": "Something went wrong loading this page.",
       "back": "Back to Dashboard"
+    },
+    "storefrontTheme": {
+      "section": "Your storefront",
+      "title": "Theme",
+      "subtitle": "Choose how your storefront looks to shoppers.",
+      "active": "Active",
+      "useTheme": "Use theme",
+      "saving": "Saving",
+      "locked": "Locked",
+      "businessPlan": "Business plan",
+      "lockedToast": "This theme needs the Business plan.",
+      "toastSaved": "Storefront theme updated."
     }
   }
 }

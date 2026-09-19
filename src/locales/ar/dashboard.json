@@ -85,7 +85,8 @@
       "notifications": "الإشعارات",
       "viewStore": "عرض المتجر",
       "viewStoreDisabled": "عيّن رابط متجرك في الحساب لفتح واجهة المتجر",
-      "supportChat": "محادثة مع الإدارة"
+      "supportChat": "محادثة مع الإدارة",
+      "storefrontTheme": "المظهر"
     },
     "supportChat": {
       "title": "محادثة مع الإدارة",
@@ -915,6 +916,18 @@
     "error": {
       "loadPage": "حدث خطأ أثناء تحميل هذه الصفحة.",
       "back": "العودة إلى لوحة التحكم"
+    },
+    "storefrontTheme": {
+      "section": "متجرك",
+      "title": "المظهر",
+      "subtitle": "اختر شكل متجرك للمتسوقين.",
+      "active": "مفعل",
+      "useTheme": "استخدام هذا المظهر",
+      "saving": "جارٍ الحفظ",
+      "locked": "مقفل",
+      "businessPlan": "خطة الأعمال",
+      "lockedToast": "يتطلب هذا المظهر خطة الأعمال.",
+      "toastSaved": "تم تحديث مظهر المتجر."
     }
   }
 }

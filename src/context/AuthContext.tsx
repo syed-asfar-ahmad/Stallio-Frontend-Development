@@ -7,6 +7,8 @@ type User = {
   email: string;
   role?: 'seller' | 'admin';
   plan?: 'basic' | 'business' | null;
+ themeId?: string | null;
+ themeConfig?: import('../themes').ShopThemeConfig | null; 
   username: string;
   shopName: string;
   logo?: string | null;

@@ -117,6 +117,9 @@ export type Shop = {
   logo: string | null;
   country?: string | null;
   currency?: string | null;
+  plan?: 'basic' | 'business' | null;
+ themeId?: string | null;
+ themeConfig?: import('../themes').ShopThemeConfig | null;
   aboutEnabled?: boolean;
   aboutTitle?: string;
   aboutTitleEs?: string | null;

@@ -85,7 +85,8 @@
       "notifications": "Notificaciones",
       "viewStore": "Ver tienda",
       "viewStoreDisabled": "Configura la URL de tu tienda en Cuenta para abrir la tienda pública",
-      "supportChat": "Chat Con Admin"
+      "supportChat": "<the real Spanish text here>",
+      "storefrontTheme": "Tema"
     },
     "supportChat": {
       "title": "Chat Con Admin",
@@ -915,6 +916,18 @@
     "error": {
       "loadPage": "Algo salió mal al cargar esta página.",
       "back": "Volver al panel"
+    },
+    "storefrontTheme": {
+      "section": "Tu tienda",
+      "title": "Tema",
+      "subtitle": "Elige el aspecto de tu tienda para los compradores.",
+      "active": "Activo",
+      "useTheme": "Usar tema",
+      "saving": "Guardando",
+      "locked": "Bloqueado",
+      "businessPlan": "Plan Business",
+      "lockedToast": "Este tema requiere el plan Business.",
+      "toastSaved": "Tema de la tienda actualizado."
     }
   }
 }
