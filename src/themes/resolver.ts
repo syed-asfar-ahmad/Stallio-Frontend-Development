@@ -11,14 +11,18 @@ export interface ResolvedTheme {
   tokens: ThemeTokens;
   layout: ThemeLayoutSettings;
   cssVariables: Record<string, string>;
+  mode: 'light' | 'dark';
 }
 
 export function resolveShopTheme(
-  themeId?: string | null,
-  customConfig?: ShopThemeConfig | null
+  customConfig?: ShopThemeConfig | null,
+  colorMode: 'light' | 'dark' = 'light'
 ): ResolvedTheme {
-  const definition = getThemeDefinition(themeId || customConfig?.themeId);
-  const baseTokens = definition.defaultTokens;
+  const definition = getThemeDefinition(customConfig?.themeId);
+  const baseTokens =
+    colorMode === 'dark' && definition.defaultDarkTokens
+      ? definition.defaultDarkTokens
+      : definition.defaultTokens;
   const baseLayout = definition.defaultLayout;
 
   const userTokens = customConfig?.tokens;
@@ -85,5 +89,7 @@ export function resolveShopTheme(
     tokens: mergedTokens,
     layout: mergedLayout,
     cssVariables,
+    mode: colorMode,
   };
 }
+

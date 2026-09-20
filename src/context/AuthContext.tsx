@@ -7,8 +7,7 @@ type User = {
   email: string;
   role?: 'seller' | 'admin';
   plan?: 'basic' | 'business' | null;
- themeId?: string | null;
- themeConfig?: import('../themes').ShopThemeConfig | null; 
+  themeConfig?: import('../themes').ShopThemeConfig | null;
   username: string;
   shopName: string;
   logo?: string | null;
@@ -114,10 +113,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const res = await fetch(`${API_BASE}/api/user`, { headers: { Authorization: `Bearer ${t}` } });
       if (res.ok) {
         const data = (await res.json()) as User;
+        if (data.username) {
+          const localThemeId = localStorage.getItem(`stallio_theme_${data.username}`);
+          const localThemeConfig = localStorage.getItem(`stallio_theme_config_${data.username}`);
+          if (!data.themeConfig && localThemeConfig) {
+            try {
+              data.themeConfig = JSON.parse(localThemeConfig);
+            } catch {}
+          }
+          if (!data.themeConfig && localThemeId) {
+            data.themeConfig = { version: 1, themeId: localThemeId as import('../themes').ThemeId };
+          }
+        }
         setUser(data);
         setToken(t);
         return data;
       }
+
       const data = await res.json().catch(() => ({} as { code?: string; error?: string }));
       localStorage.removeItem(TOKEN_KEY);
       setUser(null);

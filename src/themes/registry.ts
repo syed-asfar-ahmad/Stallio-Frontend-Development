@@ -1,10 +1,15 @@
 import type { ThemeId, ThemeDefinition } from './types';
 import {
   classicCleanTokens,
+  classicCleanDarkTokens,
   modernMinimalTokens,
+  modernMinimalDarkTokens,
   boldEditorialTokens,
+  boldEditorialDarkTokens,
   boutiqueArtisanTokens,
+  boutiqueArtisanDarkTokens,
   retailCatalogTokens,
+  retailCatalogDarkTokens,
 } from './tokens';
 import { DEFAULT_THEME_ID } from './constants';
 
@@ -26,6 +31,7 @@ export const THEME_REGISTRY: Record<ThemeId, ThemeDefinition> = {
       'Support for category carousels and hero banners',
     ],
     defaultTokens: classicCleanTokens,
+    defaultDarkTokens: classicCleanDarkTokens,
     defaultLayout: {
       heroVariant: 'full-banner',
       productCardVariant: 'bordered',
@@ -56,6 +62,7 @@ export const THEME_REGISTRY: Record<ThemeId, ThemeDefinition> = {
       'Curated lookbook and collection spotlights',
     ],
     defaultTokens: modernMinimalTokens,
+    defaultDarkTokens: modernMinimalDarkTokens,
     defaultLayout: {
       heroVariant: 'minimal-clean',
       productCardVariant: 'flat',
@@ -86,6 +93,7 @@ export const THEME_REGISTRY: Record<ThemeId, ThemeDefinition> = {
       'Editorial style story and testimonial blocks',
     ],
     defaultTokens: boldEditorialTokens,
+    defaultDarkTokens: boldEditorialDarkTokens,
     defaultLayout: {
       heroVariant: 'split-image',
       productCardVariant: 'editorial',
@@ -116,6 +124,7 @@ export const THEME_REGISTRY: Record<ThemeId, ThemeDefinition> = {
       'Floating card showcases and artisan trust badges',
     ],
     defaultTokens: boutiqueArtisanTokens,
+    defaultDarkTokens: boutiqueArtisanDarkTokens,
     defaultLayout: {
       heroVariant: 'card-showcase',
       productCardVariant: 'elevated',
@@ -146,6 +155,7 @@ export const THEME_REGISTRY: Record<ThemeId, ThemeDefinition> = {
       'Comprehensive footer with store delivery and support specs',
     ],
     defaultTokens: retailCatalogTokens,
+    defaultDarkTokens: retailCatalogDarkTokens,
     defaultLayout: {
       heroVariant: 'full-banner',
       productCardVariant: 'compact',
@@ -168,3 +178,4 @@ export function getThemeDefinition(themeId?: string | null): ThemeDefinition {
   }
   return THEME_REGISTRY[DEFAULT_THEME_ID];
 }
+

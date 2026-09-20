@@ -48,3 +48,7 @@ export function getAvailableThemesForPlan(plan?: string | null): ThemeId[] {
   const tier: SellerPlanTier = plan === 'business' ? 'business' : 'basic';
   return THEMES_BY_PLAN[tier];
 }
+
+export function canCustomizeTokens(plan?: string | null): boolean {
+  return plan === 'business';
+}

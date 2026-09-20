@@ -18,9 +18,6 @@ import {
   Type,
   Maximize2,
   Zap,
-  ShoppingBag,
-  Star,
-  ShieldCheck,
   Layers,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
@@ -28,19 +25,24 @@ import { api } from '../lib/api';
 import DashboardLayout from '../components/DashboardLayout';
 import DashboardLoading from '../components/DashboardLoading';
 import DashboardSwitch from '../components/DashboardSwitch';
+import ThemePreviewModal from '../components/ThemePreviewModal';
+import StorefrontThemeSimulator, { type PreviewDevice } from '../components/StorefrontThemeSimulator';
 import {
   THEME_LIST,
   THEME_REGISTRY,
   DEFAULT_THEME_ID,
   FONT_PRESETS,
   RADIUS_PRESETS,
+  SAMPLE_PREVIEWS,
   isThemeAllowedForPlan,
+  canCustomizeTokens,
   resolveShopTheme,
   type ThemeId,
   type ShopThemeConfig,
   type ThemeColorTokens,
   type ThemeTypographyTokens,
   type ThemeRadiusTokens,
+  type ThemeShadowTokens,
   type ThemeLayoutSettings,
   type HeroLayoutVariant,
   type ProductCardVariant,
@@ -56,7 +58,6 @@ import {
 } from '../lib/dashboardFormClasses';
 
 type ViewTab = 'gallery' | 'customize';
-type PreviewDevice = 'desktop' | 'mobile';
 
 const PRESET_COLOR_SWATCHES = [
   '#4f46e5', // Indigo
@@ -72,13 +73,14 @@ const PRESET_COLOR_SWATCHES = [
 
 export default function DashboardThemes() {
   const { t } = useTranslation();
-  const { user, loading: authLoading, fetchUser } = useAuth();
+  const { user, loading: authLoading, fetchUser, replaceUser } = useAuth();
 
   const [activeTab, setActiveTab] = useState<ViewTab>('gallery');
   const [selectedThemeId, setSelectedThemeId] = useState<ThemeId>(DEFAULT_THEME_ID);
   const [customColors, setCustomColors] = useState<Partial<ThemeColorTokens>>({});
   const [customTypography, setCustomTypography] = useState<Partial<ThemeTypographyTokens>>({});
   const [customRadii, setCustomRadii] = useState<Partial<ThemeRadiusTokens>>({});
+  const [customShadows, setCustomShadows] = useState<Partial<ThemeShadowTokens>>({});
   const [customLayout, setCustomLayout] = useState<Partial<ThemeLayoutSettings>>({});
   const [previewDevice, setPreviewDevice] = useState<PreviewDevice>('desktop');
   const [saving, setSaving] = useState(false);
@@ -86,13 +88,14 @@ export default function DashboardThemes() {
   // Initialize from user's current saved theme settings
   useEffect(() => {
     if (user) {
-      const currentThemeId = (user.themeId as ThemeId) || DEFAULT_THEME_ID;
+      const currentThemeId = user.themeConfig?.themeId || DEFAULT_THEME_ID;
       setSelectedThemeId(currentThemeId in THEME_REGISTRY ? currentThemeId : DEFAULT_THEME_ID);
 
       if (user.themeConfig) {
         setCustomColors(user.themeConfig.tokens?.colors || {});
         setCustomTypography(user.themeConfig.tokens?.typography || {});
         setCustomRadii(user.themeConfig.tokens?.radii || {});
+        setCustomShadows(user.themeConfig.tokens?.shadows || {});
         setCustomLayout(user.themeConfig.layout || {});
       }
     }
@@ -110,17 +113,20 @@ export default function DashboardThemes() {
         colors: customColors,
         typography: customTypography,
         radii: customRadii,
+        shadows: customShadows,
       },
       layout: customLayout,
     };
-  }, [selectedThemeId, customColors, customTypography, customRadii, customLayout]);
+  }, [selectedThemeId, customColors, customTypography, customRadii, customShadows, customLayout]);
 
   const resolvedTheme = useMemo(() => {
-    return resolveShopTheme(selectedThemeId, previewThemeConfig);
+    return resolveShopTheme(previewThemeConfig);
   }, [selectedThemeId, previewThemeConfig]);
 
-  // Handle theme selection from gallery
-  function handleSelectTheme(themeId: ThemeId) {
+  const [previewModalTheme, setPreviewModalTheme] = useState<ThemeId | null>(null);
+
+  // Handle theme selection and instant activation from gallery
+  async function handleApplyTheme(themeId: ThemeId) {
     if (!isThemeAllowedForPlan(themeId, user?.plan)) {
       toast.error('Upgrade to the Business Plan to unlock this premium theme.');
       return;
@@ -128,12 +134,42 @@ export default function DashboardThemes() {
 
     setSelectedThemeId(themeId);
     const def = THEME_REGISTRY[themeId];
-    // Reset customizations to new theme's defaults
-    setCustomColors(def.defaultTokens.colors);
-    setCustomTypography(def.defaultTokens.typography);
-    setCustomRadii(def.defaultTokens.radii);
+    setCustomColors({});
+    setCustomTypography({});
+    setCustomRadii({});
+    setCustomShadows({});
     setCustomLayout(def.defaultLayout);
-    toast.success(`Selected "${def.displayName}" theme.`);
+
+    const nextConfig: ShopThemeConfig = {
+      version: 1,
+      themeId: themeId,
+      tokens: {},
+      layout: def.defaultLayout,
+    };
+
+    if (user) {
+      replaceUser({ ...user, themeConfig: nextConfig });
+    }
+
+    setSaving(true);
+    try {
+      await api('/api/user', {
+        method: 'PATCH',
+        body: {
+          themeConfig: nextConfig,
+        },
+      });
+      if (user?.username) {
+        localStorage.setItem(`stallio_theme_${user.username}`, themeId);
+        localStorage.setItem(`stallio_theme_config_${user.username}`, JSON.stringify(nextConfig));
+      }
+      await fetchUser();
+      toast.success(`"${def.displayName}" applied to your storefront!`);
+    } catch (err) {
+      toast.error((err as Error).message || 'Failed to apply theme.');
+    } finally {
+      setSaving(false);
+    }
   }
 
   // Reset to current theme's original defaults
@@ -142,6 +178,7 @@ export default function DashboardThemes() {
     setCustomColors({});
     setCustomTypography({});
     setCustomRadii({});
+    setCustomShadows({});
     setCustomLayout({});
     toast.success(`Reset "${def.displayName}" to default design tokens.`);
   }
@@ -153,24 +190,39 @@ export default function DashboardThemes() {
       return;
     }
 
+    if (!isBusinessPlan) {
+      toast.error('Design token customization is exclusive to the Business Plan. Upgrade to publish custom styling.');
+      return;
+    }
+
+    const nextConfig: ShopThemeConfig = {
+      version: 1,
+      themeId: selectedThemeId,
+      tokens: {
+        colors: customColors,
+        typography: customTypography,
+        radii: customRadii,
+        shadows: customShadows,
+      },
+      layout: customLayout,
+    };
+
+    if (user) {
+      replaceUser({ ...user, themeConfig: nextConfig });
+    }
+
     setSaving(true);
     try {
       await api('/api/user', {
         method: 'PATCH',
         body: {
-          themeId: selectedThemeId,
-          themeConfig: {
-            version: 1,
-            themeId: selectedThemeId,
-            tokens: {
-              colors: customColors,
-              typography: customTypography,
-              radii: customRadii,
-            },
-            layout: customLayout,
-          },
+          themeConfig: nextConfig,
         },
       });
+      if (user?.username) {
+        localStorage.setItem(`stallio_theme_${user.username}`, selectedThemeId);
+        localStorage.setItem(`stallio_theme_config_${user.username}`, JSON.stringify(nextConfig));
+      }
 
       await fetchUser();
       toast.success('Theme settings published successfully!');
@@ -180,6 +232,7 @@ export default function DashboardThemes() {
       setSaving(false);
     }
   }
+
 
   if (authLoading) {
     return (
@@ -221,25 +274,37 @@ export default function DashboardThemes() {
               Live Storefront
             </Link>
 
-            <button
-              type="button"
-              onClick={handleResetDefaults}
-              className={DASHBOARD_BTN_SECONDARY}
-              title="Reset current theme to factory defaults"
-            >
-              <RotateCcw className="w-4 h-4" />
-              Reset Defaults
-            </button>
+            {isBusinessPlan ? (
+              <>
+                <button
+                  type="button"
+                  onClick={handleResetDefaults}
+                  className={DASHBOARD_BTN_SECONDARY}
+                  title="Reset current theme to factory defaults"
+                >
+                  <RotateCcw className="w-4 h-4" />
+                  Reset Defaults
+                </button>
 
-            <button
-              type="button"
-              onClick={handleSave}
-              disabled={saving}
-              className={DASHBOARD_BTN_PRIMARY}
-            >
-              <Save className="w-4 h-4" />
-              {saving ? 'Publishing...' : 'Save & Publish'}
-            </button>
+                <button
+                  type="button"
+                  onClick={handleSave}
+                  disabled={saving}
+                  className={DASHBOARD_BTN_PRIMARY}
+                >
+                  <Save className="w-4 h-4" />
+                  {saving ? 'Publishing...' : 'Save & Publish'}
+                </button>
+              </>
+            ) : (
+              <Link
+                to="/pricing"
+                className="px-4 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-amber-500 to-orange-500 text-white flex items-center gap-1.5 shadow-sm shadow-amber-500/20 hover:brightness-105 transition-all"
+              >
+                <Lock className="w-3.5 h-3.5" />
+                Upgrade to Customize Tokens
+              </Link>
+            )}
           </div>
         </div>
 
@@ -252,10 +317,10 @@ export default function DashboardThemes() {
               </span>
               <div>
                 <p className="text-sm font-bold text-amber-950 dark:text-amber-200">
-                  Basic Plan: 2 Themes Included
+                  Basic Plan: 2 Themes Included • Standard Tokens
                 </p>
                 <p className="text-xs text-amber-800/80 dark:text-amber-300/80 mt-0.5">
-                  Upgrade to the Business Plan to unlock 3 additional high-conversion themes (Bold Editorial, Boutique Artisan, & Retail Catalog).
+                  Upgrade to the Business Plan to unlock 3 additional high-conversion themes and the full Design Token Customizer (colors, typography, geometry & layout).
                 </p>
               </div>
             </div>
@@ -293,7 +358,13 @@ export default function DashboardThemes() {
             }`}
           >
             <Sliders className="w-4 h-4" />
-            Design Tokens & Customizer
+            <span>Design Tokens & Customizer</span>
+            {!isBusinessPlan && (
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30">
+                <Lock className="w-2.5 h-2.5" />
+                Business
+              </span>
+            )}
           </button>
         </div>
 
@@ -314,86 +385,78 @@ export default function DashboardThemes() {
                       : 'border-stone-200/80 dark:border-zinc-800 hover:border-stone-300 dark:hover:border-zinc-700 hover:shadow-lg'
                   }`}
                 >
-                  {/* Visual Header / Palette Simulation */}
-                  <div className="relative h-44 p-4 flex flex-col justify-between border-b border-stone-100 dark:border-zinc-800"
+                  {/* Visual Header / Real Sample Photography Banner */}
+                  <div
+                    onClick={() => setPreviewModalTheme(theme.id)}
+                    className="relative h-48 overflow-hidden border-b border-stone-100 dark:border-zinc-800 cursor-pointer group/banner"
                     style={{ backgroundColor: palette.background }}
                   >
+                    {SAMPLE_PREVIEWS[theme.id]?.heroImage ? (
+                      <img
+                        src={SAMPLE_PREVIEWS[theme.id].heroImage}
+                        alt={`${theme.displayName} preview`}
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover/banner:scale-105"
+                      />
+                    ) : null}
+
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/20" />
+
                     {/* Floating Tier Badge */}
-                    <div className="flex items-center justify-between z-10">
+                    <div className="absolute top-3 inset-x-3 flex items-center justify-between z-10">
                       <span
-                        className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold tracking-wide uppercase ${
+                        className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold tracking-wide uppercase backdrop-blur-md ${
                           theme.tier === 'business'
-                            ? 'bg-amber-100 text-amber-800 dark:bg-amber-950/70 dark:text-amber-300 border border-amber-300 dark:border-amber-800/60'
-                            : 'bg-stone-100 text-stone-700 dark:bg-zinc-800 dark:text-zinc-300 border border-stone-200 dark:border-zinc-700'
+                            ? 'bg-amber-500/90 text-white shadow-sm shadow-amber-500/30'
+                            : 'bg-stone-900/80 text-white border border-white/20'
                         }`}
                       >
-                        {theme.tier === 'business' && <Sparkles className="w-3 h-3 text-amber-500 fill-current" />}
+                        {theme.tier === 'business' && <Sparkles className="w-3 h-3 text-amber-200 fill-current" />}
                         {theme.tier === 'business' ? 'Business Plan' : 'Basic Plan'}
                       </span>
 
                       {isSelected && (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold bg-brand-600 text-white shadow-sm">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-600 text-white shadow-md">
                           <Check className="w-3 h-3 stroke-[3]" /> Active
                         </span>
                       )}
                     </div>
 
-                    {/* Miniature Simulated UI Card */}
-                    <div
-                      className="rounded-xl p-3 shadow-md border flex items-center gap-3 transition-transform group-hover:scale-[1.02]"
-                      style={{
-                        backgroundColor: palette.surface,
-                        borderColor: palette.border,
-                        borderRadius: theme.defaultTokens.radii.card,
-                      }}
-                    >
-                      <div
-                        className="w-12 h-12 rounded-lg flex items-center justify-center shrink-0"
-                        style={{
-                          backgroundColor: palette.primaryLight,
-                          color: palette.primary,
-                        }}
-                      >
-                        <ShoppingBag className="w-6 h-6" />
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <div
-                          className="h-3 w-3/4 rounded font-bold text-xs truncate"
-                          style={{ color: palette.textPrimary }}
-                        >
-                          {theme.displayName}
-                        </div>
-                        <div
-                          className="h-2 w-1/2 rounded mt-1 opacity-70 text-[10px]"
-                          style={{ color: palette.textSecondary }}
-                        >
-                          {theme.category}
-                        </div>
-                      </div>
-                      <span
-                        className="px-2 py-1 text-[10px] font-bold rounded"
-                        style={{
-                          backgroundColor: palette.primary,
-                          color: '#ffffff',
-                          borderRadius: theme.defaultTokens.radii.button,
-                        }}
-                      >
-                        CTA
+                    {/* Quick Preview Hover Pill */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/banner:opacity-100 transition-opacity bg-black/30 backdrop-blur-[2px]">
+                      <span className="px-4 py-2 rounded-xl bg-white/95 text-stone-900 font-bold text-xs shadow-lg flex items-center gap-1.5 transform translate-y-2 group-hover/banner:translate-y-0 transition-transform">
+                        <Eye className="w-4 h-4 text-brand-600" />
+                        Click to Live Preview
                       </span>
                     </div>
 
-                    {/* Color Swatch Dot Strip */}
-                    <div className="flex items-center gap-1.5 z-10">
-                      {[palette.primary, palette.secondary, palette.surface, palette.textPrimary].map(
-                        (color, idx) => (
-                          <span
-                            key={idx}
-                            className="w-4 h-4 rounded-full border border-black/10 dark:border-white/20 shadow-xs"
-                            style={{ backgroundColor: color }}
-                            title={color}
-                          />
-                        )
-                      )}
+                    {/* Bottom strip inside banner */}
+                    <div className="absolute bottom-3 inset-x-3 flex items-end justify-between z-10 text-white">
+                      <div>
+                        <div
+                          className="font-bold text-sm tracking-tight drop-shadow"
+                          style={{ fontFamily: theme.defaultTokens.typography.fontFamilyHeading }}
+                        >
+                          {theme.displayName}
+                        </div>
+                        <div className="text-[10px] text-white/80">
+                          {theme.category}
+                        </div>
+                      </div>
+
+                      {/* Palette Dots */}
+                      <div className="flex items-center gap-1 p-1 rounded-full bg-black/40 backdrop-blur-sm">
+                        {[palette.primary, palette.surfaceSecondary, palette.textPrimary].map(
+                          (color, idx) => (
+                            <span
+                              key={idx}
+                              className="w-3 h-3 rounded-full border border-white/40"
+                              style={{ backgroundColor: color }}
+                              title={color}
+                            />
+                          )
+                        )}
+                      </div>
                     </div>
                   </div>
 
@@ -423,18 +486,29 @@ export default function DashboardThemes() {
 
                     {/* Action Bar */}
                     <div className="mt-5 pt-4 border-t border-stone-100 dark:border-zinc-800 flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() => setPreviewModalTheme(theme.id)}
+                        className="py-2.5 px-3 rounded-xl border border-stone-200 dark:border-zinc-700 text-xs font-bold text-stone-700 dark:text-zinc-300 hover:bg-stone-50 dark:hover:bg-zinc-800 transition-colors flex items-center gap-1.5"
+                        title="Open interactive full sample preview"
+                      >
+                        <Eye className="w-4 h-4 text-stone-500" />
+                        <span className="hidden sm:inline">Preview</span>
+                      </button>
+
                       {isAllowed ? (
                         <>
                           <button
                             type="button"
-                            onClick={() => handleSelectTheme(theme.id)}
-                            className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all ${
+                            disabled={saving}
+                            onClick={() => handleApplyTheme(theme.id)}
+                            className={`flex-1 py-2.5 px-3 rounded-xl text-xs font-bold transition-all ${
                               isSelected
-                                ? 'bg-brand-50 dark:bg-brand-950/40 text-brand-700 dark:text-brand-300 border border-brand-200 dark:border-brand-800'
+                                ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800'
                                 : 'bg-stone-900 text-white hover:bg-stone-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200 shadow-sm'
                             }`}
                           >
-                            {isSelected ? 'Currently Applied' : 'Apply Theme'}
+                            {isSelected ? '✓ Active Theme' : saving ? 'Applying...' : 'Apply Theme'}
                           </button>
                           <button
                             type="button"
@@ -443,7 +517,7 @@ export default function DashboardThemes() {
                               setActiveTab('customize');
                             }}
                             className="py-2.5 px-3 rounded-xl border border-stone-200 dark:border-zinc-700 text-xs font-bold text-stone-700 dark:text-zinc-300 hover:bg-stone-50 dark:hover:bg-zinc-800 transition-colors"
-                            title="Customize tokens for this theme"
+                            title="Customize design tokens for this theme"
                           >
                             <Sliders className="w-4 h-4" />
                           </button>
@@ -451,10 +525,10 @@ export default function DashboardThemes() {
                       ) : (
                         <Link
                           to="/pricing"
-                          className="flex-1 py-2.5 px-4 rounded-xl text-xs font-bold bg-gradient-to-r from-amber-500 to-orange-500 text-white text-center hover:brightness-105 shadow-sm shadow-amber-500/20 flex items-center justify-center gap-1.5"
+                          className="flex-1 py-2.5 px-3 rounded-xl text-xs font-bold bg-gradient-to-r from-amber-500 to-orange-500 text-white text-center hover:brightness-105 shadow-sm shadow-amber-500/20 flex items-center justify-center gap-1.5"
                         >
                           <Lock className="w-3.5 h-3.5" />
-                          Unlock with Business Plan
+                          Business Plan
                         </Link>
                       )}
                     </div>
@@ -467,27 +541,59 @@ export default function DashboardThemes() {
 
         {/* TAB 2: DESIGN TOKENS CUSTOMIZER & LIVE PREVIEW */}
         {activeTab === 'customize' && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            {/* LEFT CONTROLS: 7 COLUMNS */}
-            <div className="lg:col-span-6 space-y-6">
-              {/* Selected Theme Badge Banner */}
-              <div className="p-4 rounded-2xl border border-stone-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 flex items-center justify-between">
-                <div>
-                  <span className="text-xs font-bold uppercase text-brand-600 dark:text-brand-400">
-                    Editing Theme
+          <div className="space-y-6">
+            {/* Business Plan Gating Hero Callout */}
+            {!isBusinessPlan && (
+              <div className="rounded-2xl border-2 border-amber-300 dark:border-amber-700/60 bg-gradient-to-r from-amber-500/10 via-orange-500/10 to-amber-500/10 p-5 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 shadow-sm">
+                <div className="flex items-start sm:items-center gap-4">
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 text-white shadow-md shadow-amber-500/30">
+                    <Lock className="w-6 h-6" />
                   </span>
-                  <h3 className="text-lg font-bold text-stone-900 dark:text-zinc-100">
-                    {activeThemeDef.displayName}
-                  </h3>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-base sm:text-lg font-bold text-stone-900 dark:text-zinc-100">
+                        Design Token Customizer is a Business Plan Feature
+                      </h3>
+                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-500 text-white uppercase tracking-wide">
+                        Business Tier
+                      </span>
+                    </div>
+                    <p className="text-xs sm:text-sm text-stone-600 dark:text-zinc-400 mt-1 max-w-2xl leading-relaxed">
+                      You are in <strong>Sandbox Preview Mode</strong>. Upgrade to the Business Plan to unlock full customization over your brand colors, serif & display typography, corner geometries, and section layout settings.
+                    </p>
+                  </div>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => setActiveTab('gallery')}
-                  className={DASHBOARD_BTN_SECONDARY}
+                <Link
+                  to="/pricing"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white text-xs font-bold shadow-md shadow-amber-500/25 hover:brightness-105 transition-all shrink-0"
                 >
-                  Switch Theme
-                </button>
+                  <Sparkles className="w-4 h-4" />
+                  Upgrade to Business Plan
+                </Link>
               </div>
+            )}
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              {/* LEFT CONTROLS: 6 COLUMNS */}
+              <div className="lg:col-span-6 space-y-6">
+                {/* Selected Theme Badge Banner */}
+                <div className="p-4 rounded-2xl border border-stone-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 flex items-center justify-between">
+                  <div>
+                    <span className="text-xs font-bold uppercase text-brand-600 dark:text-brand-400">
+                      Editing Theme
+                    </span>
+                    <h3 className="text-lg font-bold text-stone-900 dark:text-zinc-100">
+                      {activeThemeDef.displayName}
+                    </h3>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setActiveTab('gallery')}
+                    className={DASHBOARD_BTN_SECONDARY}
+                  >
+                    Switch Theme
+                  </button>
+                </div>
 
               {/* 1. Color Palette Tokens */}
               <div className="p-6 rounded-2xl border border-stone-200/80 dark:border-zinc-800 bg-white dark:bg-zinc-900 space-y-5">
@@ -808,177 +914,42 @@ export default function DashboardThemes() {
               </div>
 
               {/* Interactive Simulation Frame */}
-              <div
-                className={`mx-auto rounded-2xl border-4 border-stone-800 dark:border-zinc-700 overflow-hidden shadow-2xl transition-all duration-300 ${
-                  previewDevice === 'mobile' ? 'max-w-[340px]' : 'w-full'
-                }`}
-                style={{
-                  backgroundColor: resolvedTheme.tokens.colors.background,
-                  color: resolvedTheme.tokens.colors.textPrimary,
-                  fontFamily: resolvedTheme.tokens.typography.fontFamilyBody,
-                }}
-              >
-                {/* Simulated Announcement Bar */}
-                <div
-                  className="py-1.5 px-3 text-center text-[10px] font-bold"
-                  style={{
-                    backgroundColor: resolvedTheme.tokens.colors.primary,
-                    color: '#ffffff',
-                  }}
-                >
-                  ✨ Free Worldwide Shipping Over $50
-                </div>
-
-                {/* Simulated Storefront Header */}
-                <div
-                  className="p-3 border-b flex items-center justify-between"
-                  style={{
-                    backgroundColor: resolvedTheme.tokens.colors.surface,
-                    borderColor: resolvedTheme.tokens.colors.border,
-                  }}
-                >
-                  <span
-                    className="font-bold text-sm tracking-tight"
-                    style={{
-                      fontFamily: resolvedTheme.tokens.typography.fontFamilyHeading,
-                      letterSpacing: resolvedTheme.tokens.typography.headingLetterSpacing,
-                    }}
-                  >
-                    {user?.shopName || 'Urban Threads'}
-                  </span>
-                  <div className="flex items-center gap-2">
-                    <span
-                      className="px-2.5 py-1 text-[11px] font-semibold rounded"
-                      style={{
-                        backgroundColor: resolvedTheme.tokens.colors.primaryLight,
-                        color: resolvedTheme.tokens.colors.primary,
-                        borderRadius: resolvedTheme.tokens.radii.button,
-                      }}
-                    >
-                      Cart (2)
-                    </span>
-                  </div>
-                </div>
-
-                {/* Simulated Hero Section */}
-                <div className="p-5 border-b" style={{ borderColor: resolvedTheme.tokens.colors.border }}>
-                  <span
-                    className="px-2 py-0.5 text-[9px] font-bold uppercase rounded-full inline-block mb-2"
-                    style={{
-                      backgroundColor: resolvedTheme.tokens.colors.badgeBg,
-                      color: resolvedTheme.tokens.colors.badgeText,
-                    }}
-                  >
-                    New Season Arrival
-                  </span>
-                  <h2
-                    className="text-xl font-bold leading-tight"
-                    style={{
-                      fontFamily: resolvedTheme.tokens.typography.fontFamilyHeading,
-                      fontWeight: resolvedTheme.tokens.typography.headingFontWeight,
-                      textTransform: resolvedTheme.tokens.typography.headingTransform,
-                    }}
-                  >
-                    Crafted For Modern Living
-                  </h2>
-                  <p
-                    className="text-xs mt-1.5 opacity-80"
-                    style={{ color: resolvedTheme.tokens.colors.textSecondary }}
-                  >
-                    Explore our newest premium catalog with responsive theme styling.
-                  </p>
-                  <button
-                    type="button"
-                    className="mt-3.5 px-4 py-2 text-xs font-bold text-white shadow-sm flex items-center gap-1.5 transition-transform hover:scale-105"
-                    style={{
-                      backgroundColor: resolvedTheme.tokens.colors.primary,
-                      borderRadius: resolvedTheme.tokens.radii.button,
-                    }}
-                  >
-                    <ShoppingBag className="w-3.5 h-3.5" />
-                    Shop Now
-                  </button>
-                </div>
-
-                {/* Simulated Product Card Showcase */}
-                <div className="p-4 space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold">Featured Product</span>
-                    <span className="text-[10px] text-emerald-600 font-semibold">In Stock</span>
-                  </div>
-
-                  <div
-                    className="p-3.5 border transition-all"
-                    style={{
-                      backgroundColor: resolvedTheme.tokens.colors.surface,
-                      borderColor: resolvedTheme.tokens.colors.border,
-                      borderRadius: resolvedTheme.tokens.radii.card,
-                      boxShadow: resolvedTheme.tokens.shadows.card,
-                    }}
-                  >
-                    <div className="h-28 rounded-lg bg-stone-200/70 dark:bg-zinc-800 flex items-center justify-center text-stone-400">
-                      <ShoppingBag className="w-8 h-8 opacity-40" />
-                    </div>
-
-                    <div className="mt-3 flex items-start justify-between gap-2">
-                      <div>
-                        <h4
-                          className="font-bold text-xs"
-                          style={{ fontFamily: resolvedTheme.tokens.typography.fontFamilyHeading }}
-                        >
-                          Minimalist Linen Overshirt
-                        </h4>
-                        <div className="flex items-center gap-1.5 mt-1">
-                          <span
-                            className="font-bold text-sm"
-                            style={{ color: resolvedTheme.tokens.colors.primary }}
-                          >
-                            $89.00
-                          </span>
-                          <span className="line-through text-stone-400 text-xs">$120.00</span>
-                        </div>
-                      </div>
-                      <span
-                        className="px-2 py-0.5 text-[9px] font-bold rounded"
-                        style={{
-                          backgroundColor: resolvedTheme.tokens.colors.badgeBg,
-                          color: resolvedTheme.tokens.colors.badgeText,
-                          borderRadius: resolvedTheme.tokens.radii.badge,
-                        }}
-                      >
-                        -25%
-                      </span>
-                    </div>
-
-                    <button
-                      type="button"
-                      className="w-full mt-3 py-2 text-xs font-bold text-white transition-opacity hover:opacity-90"
-                      style={{
-                        backgroundColor: resolvedTheme.tokens.colors.primary,
-                        borderRadius: resolvedTheme.tokens.radii.button,
-                      }}
-                    >
-                      Add to Cart
-                    </button>
-                  </div>
-
-                  {/* Trust Badge Simulation */}
-                  <div
-                    className="p-2.5 rounded-lg border flex items-center gap-2 text-[11px]"
-                    style={{
-                      backgroundColor: resolvedTheme.tokens.colors.surfaceSecondary,
-                      borderColor: resolvedTheme.tokens.colors.border,
-                    }}
-                  >
-                    <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span>100% Authentic & Certified Quality</span>
-                  </div>
-                </div>
-              </div>
+              <StorefrontThemeSimulator
+                resolvedTheme={resolvedTheme}
+                sampleData={SAMPLE_PREVIEWS[selectedThemeId] || SAMPLE_PREVIEWS[DEFAULT_THEME_ID]}
+                device={previewDevice}
+                shopName={user?.shopName || 'Sample Storefront'}
+              />
             </div>
           </div>
+        </div>
+      )}
+
+        {/* PREVIEW MODAL FOR EACH THEME WITH SAMPLE DATA */}
+        {previewModalTheme && (
+          <ThemePreviewModal
+            themeId={previewModalTheme}
+            device={previewDevice}
+            onDeviceChange={setPreviewDevice}
+            onClose={() => setPreviewModalTheme(null)}
+            isAllowed={isThemeAllowedForPlan(previewModalTheme, user?.plan)}
+            isBusinessPlan={isBusinessPlan}
+            isActive={selectedThemeId === previewModalTheme}
+            shopName={user?.shopName || 'Sample Storefront'}
+            saving={saving}
+            onApply={async () => {
+              await handleApplyTheme(previewModalTheme);
+              setPreviewModalTheme(null);
+            }}
+            onCustomize={() => {
+              setSelectedThemeId(previewModalTheme);
+              setActiveTab('customize');
+              setPreviewModalTheme(null);
+            }}
+          />
         )}
       </div>
     </DashboardLayout>
   );
 }
+

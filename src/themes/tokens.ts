@@ -37,28 +37,53 @@ export const classicCleanTokens: ThemeTokens = {
   },
 };
 
+export const classicCleanDarkTokens: ThemeTokens = {
+  ...classicCleanTokens,
+  colors: {
+    primary: '#6366f1',
+    primaryHover: '#4f46e5',
+    primaryLight: '#312e81',
+    secondary: '#94a3b8',
+    background: '#090d16',
+    surface: '#111827',
+    surfaceSecondary: '#1f2937',
+    textPrimary: '#f8fafc',
+    textSecondary: '#94a3b8',
+    textMuted: '#64748b',
+    border: '#1e293b',
+    borderFocus: '#6366f1',
+    badgeBg: '#312e81',
+    badgeText: '#e0e7ff',
+  },
+  shadows: {
+    card: '0 1px 3px 0 rgb(0 0 0 / 0.3)',
+    cardHover: '0 10px 20px -5px rgb(0 0 0 / 0.4)',
+    dropdown: '0 12px 24px -4px rgb(0 0 0 / 0.5)',
+  },
+};
+
 export const modernMinimalTokens: ThemeTokens = {
   colors: {
     primary: '#18181b',
-    primaryHover: '#09090b',
+    primaryHover: '#000000',
     primaryLight: '#f4f4f5',
     secondary: '#71717a',
-    background: '#ffffff',
+    background: '#faf9f6',
     surface: '#ffffff',
-    surfaceSecondary: '#fafafa',
-    textPrimary: '#09090b',
-    textSecondary: '#71717a',
-    textMuted: '#a1a1aa',
-    border: '#e4e4e7',
-    borderFocus: '#18181b',
-    badgeBg: '#f4f4f5',
-    badgeText: '#18181b',
+    surfaceSecondary: '#f4f3ef',
+    textPrimary: '#1c1917',
+    textSecondary: '#78716c',
+    textMuted: '#a8a29e',
+    border: '#e7e5e4',
+    borderFocus: '#1c1917',
+    badgeBg: '#1c1917',
+    badgeText: '#ffffff',
   },
   typography: {
-    fontFamilyHeading: 'Inter, ui-sans-serif, system-ui, sans-serif',
-    fontFamilyBody: 'Inter, ui-sans-serif, system-ui, sans-serif',
-    headingLetterSpacing: '-0.025em',
-    headingFontWeight: '600',
+    fontFamilyHeading: '"Playfair Display", "Cinzel", "Cormorant Garamond", Georgia, serif',
+    fontFamilyBody: '"Plus Jakarta Sans", Inter, ui-sans-serif, system-ui, sans-serif',
+    headingLetterSpacing: '0.04em',
+    headingFontWeight: '500',
     headingTransform: 'none',
   },
   radii: {
@@ -70,7 +95,32 @@ export const modernMinimalTokens: ThemeTokens = {
   shadows: {
     card: 'none',
     cardHover: 'none',
-    dropdown: '0 4px 12px 0 rgb(0 0 0 / 0.08)',
+    dropdown: '0 4px 20px 0 rgb(0 0 0 / 0.06)',
+  },
+};
+
+export const modernMinimalDarkTokens: ThemeTokens = {
+  ...modernMinimalTokens,
+  colors: {
+    primary: '#fafaf9',
+    primaryHover: '#ffffff',
+    primaryLight: '#27272a',
+    secondary: '#a1a1aa',
+    background: '#09090b',
+    surface: '#141416',
+    surfaceSecondary: '#1f1f23',
+    textPrimary: '#fafaf9',
+    textSecondary: '#a1a1aa',
+    textMuted: '#71717a',
+    border: '#27272a',
+    borderFocus: '#fafaf9',
+    badgeBg: '#27272a',
+    badgeText: '#fafaf9',
+  },
+  shadows: {
+    card: 'none',
+    cardHover: 'none',
+    dropdown: '0 4px 20px 0 rgb(0 0 0 / 0.4)',
   },
 };
 
@@ -111,6 +161,31 @@ export const boldEditorialTokens: ThemeTokens = {
   },
 };
 
+export const boldEditorialDarkTokens: ThemeTokens = {
+  ...boldEditorialTokens,
+  colors: {
+    primary: '#ef4444',
+    primaryHover: '#dc2626',
+    primaryLight: '#450a0a',
+    secondary: '#e4e4e7',
+    background: '#09090b',
+    surface: '#18181b',
+    surfaceSecondary: '#27272a',
+    textPrimary: '#fafafa',
+    textSecondary: '#a1a1aa',
+    textMuted: '#71717a',
+    border: '#3f3f46',
+    borderFocus: '#ef4444',
+    badgeBg: '#ef4444',
+    badgeText: '#ffffff',
+  },
+  shadows: {
+    card: '3px 3px 0px 0px #27272a',
+    cardHover: '5px 5px 0px 0px #27272a',
+    dropdown: '4px 4px 0px 0px #27272a',
+  },
+};
+
 export const boutiqueArtisanTokens: ThemeTokens = {
   colors: {
     primary: '#854d0e',
@@ -145,6 +220,31 @@ export const boutiqueArtisanTokens: ThemeTokens = {
     card: '0 4px 20px -4px rgb(69 26 3 / 0.06)',
     cardHover: '0 12px 28px -6px rgb(69 26 3 / 0.12)',
     dropdown: '0 16px 32px -8px rgb(69 26 3 / 0.15)',
+  },
+};
+
+export const boutiqueArtisanDarkTokens: ThemeTokens = {
+  ...boutiqueArtisanTokens,
+  colors: {
+    primary: '#d97706',
+    primaryHover: '#b45309',
+    primaryLight: '#451a03',
+    secondary: '#fed7aa',
+    background: '#120e0b',
+    surface: '#1c1612',
+    surfaceSecondary: '#2a211b',
+    textPrimary: '#faf6f0',
+    textSecondary: '#d6cfc7',
+    textMuted: '#a89f91',
+    border: '#382c23',
+    borderFocus: '#d97706',
+    badgeBg: '#451a03',
+    badgeText: '#fde68a',
+  },
+  shadows: {
+    card: '0 4px 20px -4px rgb(0 0 0 / 0.4)',
+    cardHover: '0 12px 28px -6px rgb(0 0 0 / 0.5)',
+    dropdown: '0 16px 32px -8px rgb(0 0 0 / 0.6)',
   },
 };
 
@@ -184,3 +284,29 @@ export const retailCatalogTokens: ThemeTokens = {
     dropdown: '0 10px 15px -3px rgb(0 0 0 / 0.1)',
   },
 };
+
+export const retailCatalogDarkTokens: ThemeTokens = {
+  ...retailCatalogTokens,
+  colors: {
+    primary: '#10b981',
+    primaryHover: '#059669',
+    primaryLight: '#064e3b',
+    secondary: '#38bdf8',
+    background: '#0a0f1d',
+    surface: '#0f172a',
+    surfaceSecondary: '#1e293b',
+    textPrimary: '#f8fafc',
+    textSecondary: '#94a3b8',
+    textMuted: '#64748b',
+    border: '#1e293b',
+    borderFocus: '#10b981',
+    badgeBg: '#450a0a',
+    badgeText: '#fca5a5',
+  },
+  shadows: {
+    card: '0 1px 2px 0 rgb(0 0 0 / 0.3)',
+    cardHover: '0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3)',
+    dropdown: '0 10px 15px -3px rgb(0 0 0 / 0.5)',
+  },
+};
+

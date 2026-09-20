@@ -46,7 +46,7 @@ import type { ShopProductLinkState } from '../lib/shopProductNav';
 
 const API_BASE = import.meta.env.VITE_API_URL ?? '';
 const containerClass = 'w-full max-w-7xl mx-auto px-3 sm:px-4 lg:px-5';
-const shopPageClass = 'shop-storefront min-h-screen bg-stone-50 dark:bg-zinc-950 flex flex-col text-stone-900 dark:text-zinc-100';
+const shopPageClass = 'shop-storefront min-h-screen flex flex-col transition-colors duration-200';
 const DEFAULT_ABOUT_TEXT_COLOR = '#ffffff';
 const ADD_TO_CART_ANIM_MS = 750;
 const ADD_TO_CART_SUCCESS_MS = 400;
@@ -201,13 +201,26 @@ export default function Shop() {
       .then((res) => res.json())
       .then((data) => {
         if (data.shop) {
-          setShop(data.shop);
+          const localThemeId = localStorage.getItem(`stallio_theme_${username}`);
+          const localThemeConfig = localStorage.getItem(`stallio_theme_config_${username}`);
+          let parsedConfig = undefined;
+          if (localThemeConfig) {
+            try {
+              parsedConfig = JSON.parse(localThemeConfig);
+            } catch {}
+          }
+          const effectiveShop = {
+            ...data.shop,
+            themeConfig: data.shop.themeConfig || parsedConfig || (localThemeId ? { version: 1, themeId: localThemeId } : undefined),
+          };
+          setShop(effectiveShop);
           setProducts(data.products || []);
         }
       })
       .catch(() => {})
       .finally(() => setLoading(false));
   }, [username]);
+
 
   useEffect(() => {
     document.title = shop?.shopName ?? 'Stallio';
@@ -483,7 +496,7 @@ export default function Shop() {
     }
 
     return (
-      <ShopDirRoot className={shopPageClass} themeId={shop?.themeId} themeConfig={shop?.themeConfig}>
+      <ShopDirRoot className={shopPageClass} themeConfig={shop?.themeConfig}>
         <Navbar />
         <main className={`${containerClass} pt-4 max-lg:pt-4 pb-8 max-lg:pb-8 lg:pt-6 lg:pb-12`}>
           <div className="mb-4 max-lg:mb-4 flex flex-col items-start gap-2.5 max-lg:gap-2.5 lg:mb-6 lg:gap-3">
@@ -761,7 +774,7 @@ export default function Shop() {
     const { t, lang } = useShopLanguage();
     const refundContentHtml = getLocalizedRefundContent(shop!, lang);
     return (
-      <ShopDirRoot className={shopPageClass} themeId={shop?.themeId} themeConfig={shop?.themeConfig}>
+      <ShopDirRoot className={shopPageClass} themeConfig={shop?.themeConfig}>
         <Navbar />
         <main className="flex-1 pb-8 max-lg:pb-8 lg:pb-14">
           <section className={`${containerClass} pt-4 max-lg:pt-4 lg:pt-8`}>
@@ -806,7 +819,7 @@ export default function Shop() {
     const heroImage = shop!.aboutImages?.[0];
     const aboutHeroTextColor = getSafeHexColor(shop!.aboutTextColor);
     return (
-      <ShopDirRoot className={shopPageClass} themeId={shop?.themeId} themeConfig={shop?.themeConfig}>
+      <ShopDirRoot className={shopPageClass} themeConfig={shop?.themeConfig}>
         <Navbar />
         <main className="flex-1 pb-8 max-lg:pb-8 lg:pb-14">
           <section className={`${containerClass} pt-4 max-lg:pt-4 lg:pt-8`}>
@@ -875,7 +888,7 @@ export default function Shop() {
   function ContactSentView() {
     const { t } = useShopLanguage();
     return (
-      <ShopDirRoot className={shopPageClass} themeId={shop?.themeId} themeConfig={shop?.themeConfig}>
+      <ShopDirRoot className={shopPageClass} themeConfig={shop?.themeConfig}>
         <Navbar />
         <main className={`${containerClass} flex-1 pt-6 pb-8 max-lg:pt-6 max-lg:pb-8 max-w-xl mx-auto text-center lg:pt-10 lg:pb-12`}>
           <div className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm dark:border-zinc-700 dark:bg-zinc-900 max-lg:p-6 sm:p-10 lg:rounded-3xl">
@@ -928,7 +941,7 @@ export default function Shop() {
     }
 
     return (
-      <ShopDirRoot className={shopPageClass} themeId={shop?.themeId} themeConfig={shop?.themeConfig}>
+      <ShopDirRoot className={shopPageClass} themeConfig={shop?.themeConfig}>
         <Navbar />
         <main className={`${containerClass} flex-1 pt-4 pb-8 max-lg:pt-4 max-lg:pb-8 lg:pt-8 lg:pb-12`}>
           <section className="relative mb-5 max-lg:mb-5 overflow-hidden rounded-2xl border border-stone-200 bg-gradient-to-br from-white via-brand-50/45 to-brand-50/45 p-4 shadow-sm dark:border-zinc-700 dark:from-zinc-900 dark:via-brand-950/30 dark:to-brand-950/20 max-lg:p-4 lg:mb-8 lg:rounded-3xl lg:p-10">
@@ -1090,7 +1103,7 @@ export default function Shop() {
   if (isProducts) {
     return (
       <ShopLang username={username!} shop={shop}>
-      <ShopDirRoot className={shopPageClass} themeId={shop?.themeId} themeConfig={shop?.themeConfig}>
+      <ShopDirRoot className={shopPageClass} themeConfig={shop?.themeConfig}>
         <Navbar />
         <ShopProductsPage shop={shop} products={products} username={username!} containerClass={containerClass} />
         <ShopFooterEl />
@@ -1133,7 +1146,7 @@ export default function Shop() {
   if (isCategories) {
     return (
       <ShopLang username={username!} shop={shop}>
-      <ShopDirRoot className={shopPageClass} themeId={shop?.themeId} themeConfig={shop?.themeConfig}>
+      <ShopDirRoot className={shopPageClass} themeConfig={shop?.themeConfig}>
         <Navbar />
         <ShopCategoriesPage shop={shop} products={products} username={username!} containerClass={containerClass} />
         <ShopFooterEl />
@@ -1145,7 +1158,7 @@ export default function Shop() {
   if (isCategory) {
     return (
       <ShopLang username={username!} shop={shop}>
-      <ShopDirRoot className={shopPageClass} themeId={shop?.themeId} themeConfig={shop?.themeConfig}>
+      <ShopDirRoot className={shopPageClass} themeConfig={shop?.themeConfig}>
         <Navbar />
         <ShopCategoryPage
           shop={shop}
@@ -1168,7 +1181,7 @@ export default function Shop() {
   }
   return (
     <ShopLang username={username!} shop={shop}>
-    <ShopDirRoot className={shopPageClass} themeId={shop?.themeId} themeConfig={shop?.themeConfig}>
+    <ShopDirRoot className={shopPageClass} themeConfig={shop?.themeConfig}>
       <Navbar />
       <ThemedHome shop={shop} products={products} username={username!} containerClass={containerClass} />
       <ShopFooterEl />

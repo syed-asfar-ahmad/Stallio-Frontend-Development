@@ -64,7 +64,7 @@ export interface ThemeTypographyTokens {
   fontFamilyHeading: string;
   fontFamilyBody: string;
   headingLetterSpacing: string;
-  headingFontWeight: '600' | '700' | '800';
+  headingFontWeight: '400' | '500' | '600' | '700' | '800';
   headingTransform: 'none' | 'uppercase' | 'capitalize';
 }
 
@@ -124,5 +124,7 @@ export interface ThemeDefinition {
   demoUrl?: string;
   features: string[];
   defaultTokens: ThemeTokens;
+  defaultDarkTokens?: ThemeTokens;
   defaultLayout: ThemeLayoutSettings;
 }
+
