@@ -181,6 +181,5 @@ export type Shop = {
   availability24Hours?: boolean;
   availabilityHours?: ShopAvailabilitySlot[];
   themeId?: import('../themes/types').ThemeId;
-  themeConfig?: import('../themes/types').ShopThemeConfig;
 };
 
