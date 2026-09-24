@@ -5,7 +5,7 @@ import type { Product, Shop, ShopCategory } from '../../types';
 import { useShopLanguage } from '../../context/ShopLanguageContext';
 import { CATEGORY_CARD_ASPECT_CLASS } from '../../lib/imageCropViewports';
 import { SHOP_LIST_PAGE_SIZE } from '../../lib/shopPagination';
-import { ShopProductCard } from './ShopHomePage';
+import ProductCard from './theme-parts/ProductCard';
 import ShopPagination from './ShopPagination';
 import { ShopViewAllLink } from './ShopSectionHeading';
 
@@ -186,7 +186,7 @@ export default function ShopCategoryPage({
           </div>
           <div className="relative z-0 grid grid-cols-2 gap-2.5 max-lg:gap-2.5 lg:gap-5 xl:grid-cols-4">
             {displayedProducts.map((p) => (
-              <ShopProductCard
+              <ProductCard
                 key={p.id}
                 product={p}
                 shopUsername={username}

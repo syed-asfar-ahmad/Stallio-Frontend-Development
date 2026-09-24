@@ -4,7 +4,7 @@ import { Search, ShoppingBag, SlidersHorizontal, X } from 'lucide-react';
 import type { Product, Shop } from '../../types';
 import { useShopLanguage } from '../../context/ShopLanguageContext';
 import { getLocalizedProductName } from '../../lib/shopContentLanguages';
-import { ShopProductCard } from './ShopHomePage';
+import ProductCard from './theme-parts/ProductCard';
 import ShopSelect from './ShopSelect';
 import ShopPagination from './ShopPagination';
 import { SHOP_LIST_PAGE_SIZE } from '../../lib/shopPagination';
@@ -256,7 +256,7 @@ export default function ShopProductsPage({ shop, products, username, containerCl
             <>
               <div className="relative z-0 grid grid-cols-2 gap-2.5 max-lg:gap-2.5 lg:gap-5 xl:grid-cols-4">
                 {displayed.map((p) => (
-                  <ShopProductCard
+                  <ProductCard
                     key={p.id}
                     product={p}
                     shopUsername={username}

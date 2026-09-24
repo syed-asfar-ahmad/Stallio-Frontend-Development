@@ -5,9 +5,7 @@ import toast from 'react-hot-toast';
 import { api, fetchAuthorizedBlob } from '../lib/api';
 import { useAuth } from '../context/AuthContext';
 import { formatPrice, formatQuantity } from '../lib/countryCurrencyOptions';
-import { getSellerPlanLimits, canUpgradePlan } from '../lib/sellerPlanLimits';
-import PlanLimitBanner from '../components/plan/PlanLimitBanner';
-import PlanUsageBar from '../components/plan/PlanUsageBar';
+import { getSellerPlanLimits } from '../lib/sellerPlanLimits';
 import { getProductImageDisplayUrl } from '../lib/productImageUrl';
 import DashboardLayout from '../components/DashboardLayout';
 import DashboardLoading, { AdminLoadingInline } from '../components/DashboardLoading';
@@ -483,18 +481,13 @@ export default function DashboardOrders() {
               <Plus className="w-4 h-4 shrink-0" />
               {t('dashboard.orders.manualOrder')}
             </button>
-            {planLimits.maxOrders !== null && (
-              <div className="min-w-[130px] w-full lg:w-auto">
-                <PlanUsageBar
-                  count={orders.length}
-                  max={planLimits.maxOrders}
-                  label={t('dashboard.orders.planLimitUsage', { count: orders.length, max: planLimits.maxOrders })}
-                  limitReached={orderLimitReached}
-                />
-              </div>
-            )}
           </div>
         </div>
+        {orderLimitReached && (
+          <p className="text-xs text-red-500 dark:text-red-400 font-medium">
+            {t('dashboard.orders.planLimitBody', { max: planLimits.maxOrders })}
+          </p>
+        )}
       </div>
 
       <PlanLimitBanner show={orderLimitReached && canUpgradePlan(user?.plan)} />

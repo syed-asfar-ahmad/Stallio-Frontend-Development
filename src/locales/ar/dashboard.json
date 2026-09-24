@@ -86,15 +86,7 @@
       "viewStore": "عرض المتجر",
       "viewStoreDisabled": "عيّن رابط متجرك في الحساب لفتح واجهة المتجر",
       "supportChat": "محادثة مع الإدارة",
-      "planBadgeBasic": "الخطة الأساسية",
-      "planBadgeBusiness": "خطة الأعمال",
-      "upgradeBannerTitle": "لقد وصلت إلى حد خطتك",
-      "upgradeBannerBody": "قم بالترقية إلى خطة الأعمال للحصول على {{products}} منتجاً، {{categories}} تصنيفاً، {{images}} صور لكل منتج، وطلبات غير محدودة.",
-      "upgradeBannerCta": "عرض خطة الأعمال",
-      "upgradeBannerDismiss": "إغلاق",
-      "planBadgeBasicDesc": "المستوى القياسي للبائعين",
-      "planBadgeBusinessDesc": "المستوى الاحترافي لحجم مبيعات عالي",
-      "planTopTier": "أعلى مستوى مفعل"
+      "storefrontTheme": "المظهر"
     },
     "supportChat": {
       "title": "محادثة مع الإدارة",
@@ -231,9 +223,7 @@
       "feature": "تمييز",
       "unfeature": "إلغاء التمييز",
       "toastFeatured": "تم تمييز المنتج في الصفحة الرئيسية.",
-      "toastUnfeatured": "تمت الإزالة من المميز.",
-      "planLimitBody": "تسمح خطتك بحد أقصى {{max}} منتج.",
-      "planLimitUsage": "{{count}} / {{max}} منتج مستخدم"
+      "toastUnfeatured": "تمت الإزالة من المميز."
     },
     "home": {
       "section": "متجرك",
@@ -419,12 +409,7 @@
       "validationName": "الاسم مطلوب",
       "validationPrice": "سعر صالح مطلوب",
       "validationImage": "صورة واحدة على الأقل مطلوبة",
-      "toastSaved": "تم حفظ المنتج.",
-      "imagesLimitBody": "تسمح خطتك بحد أقصى {{max}} صور لكل منتج.",
-      "imagesLimitUsage": "{{count}} / {{max}} صورة مستخدمة",
-      "slots": "فتحات",
-      "mainCover": "الغلاف",
-      "unlockWithBusiness": "الفتح مع خطة الأعمال"
+      "toastSaved": "تم حفظ المنتج."
     },
     "orders": {
       "paymentInvoiceHelp": "أضف كيفية دفع العميل (رابط، تحويل، عند الاستلام...). نزّل PDF لإرساله. عند استلام المال علّم الطلب كمدفوع ليُحسب في إيراداتك.",
@@ -527,9 +512,7 @@
       "discountLine": "الخصم: {{amount}}{{code}}",
       "paymentReceived": "تم استلام الدفع",
       "updating": "جاري التحديث...",
-      "orderItemsCount": "{{count}} عناصر",
-      "planLimitBody": "تسمح خطتك بحد أقصى {{max}} طلب.",
-      "planLimitUsage": "{{count}} / {{max}} طلب مستخدم"
+      "orderItemsCount": "{{count}} عناصر"
     },
     "coupons": {
       "section": "العروض",
@@ -798,9 +781,7 @@
       "toastImage": "أضف صورة للتصنيف.",
       "toastUpload": "تم رفع الصورة.",
       "ariaClose": "إغلاق",
-      "ariaRemoveImage": "إزالة الصورة",
-      "planLimitBody": "تسمح خطتك بحد أقصى {{max}} فئة.",
-      "planLimitUsage": "{{count}} / {{max}} فئة مستخدمة"
+      "ariaRemoveImage": "إزالة الصورة"
     },
     "delivery": {
       "section": "متجرك",
@@ -928,6 +909,18 @@
     "error": {
       "loadPage": "حدث خطأ أثناء تحميل هذه الصفحة.",
       "back": "العودة إلى لوحة التحكم"
+    },
+    "storefrontTheme": {
+      "section": "متجرك",
+      "title": "المظهر",
+      "subtitle": "اختر شكل متجرك للمتسوقين.",
+      "active": "مفعل",
+      "useTheme": "استخدام هذا المظهر",
+      "saving": "جارٍ الحفظ",
+      "locked": "مقفل",
+      "businessPlan": "خطة الأعمال",
+      "lockedToast": "يتطلب هذا المظهر خطة الأعمال.",
+      "toastSaved": "تم تحديث مظهر المتجر."
     }
   }
 }

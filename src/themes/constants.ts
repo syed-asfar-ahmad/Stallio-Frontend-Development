@@ -3,11 +3,6 @@ import type { ThemeId, FontFamilyPreset, RadiusPreset } from './types';
 
 export const DEFAULT_THEME_ID: ThemeId = 'classic-clean';
 
-/**
- * Categorization of themes by subscription plan tier.
- * Basic plan: 2 core themes
- * Business plan: 3 additional themes (5 total)
- */
 export const THEMES_BY_PLAN: Record<SellerPlanTier, ThemeId[]> = {
   basic: ['classic-clean', 'modern-minimal'],
   business: [
@@ -52,4 +47,8 @@ export function isThemeAllowedForPlan(themeId: ThemeId, plan?: string | null): b
 export function getAvailableThemesForPlan(plan?: string | null): ThemeId[] {
   const tier: SellerPlanTier = plan === 'business' ? 'business' : 'basic';
   return THEMES_BY_PLAN[tier];
+}
+
+export function canCustomizeTokens(plan?: string | null): boolean {
+  return plan === 'business';
 }

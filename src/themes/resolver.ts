@@ -11,18 +11,18 @@ export interface ResolvedTheme {
   tokens: ThemeTokens;
   layout: ThemeLayoutSettings;
   cssVariables: Record<string, string>;
+  mode: 'light' | 'dark';
 }
 
-/**
- * Merges a shop's custom theme configuration on top of the base theme defaults.
- * Produces fully hydrated tokens, layout settings, and CSS Custom Properties.
- */
 export function resolveShopTheme(
-  themeId?: string | null,
-  customConfig?: ShopThemeConfig | null
+  customConfig?: ShopThemeConfig | null,
+  colorMode: 'light' | 'dark' = 'light'
 ): ResolvedTheme {
-  const definition = getThemeDefinition(themeId || customConfig?.themeId);
-  const baseTokens = definition.defaultTokens;
+  const definition = getThemeDefinition(customConfig?.themeId);
+  const baseTokens =
+    colorMode === 'dark' && definition.defaultDarkTokens
+      ? definition.defaultDarkTokens
+      : definition.defaultTokens;
   const baseLayout = definition.defaultLayout;
 
   const userTokens = customConfig?.tokens;
@@ -53,7 +53,6 @@ export function resolveShopTheme(
   };
 
   const cssVariables: Record<string, string> = {
-
     '--theme-primary': mergedTokens.colors.primary,
     '--theme-primary-hover': mergedTokens.colors.primaryHover,
     '--theme-primary-light': mergedTokens.colors.primaryLight,
@@ -69,19 +68,16 @@ export function resolveShopTheme(
     '--theme-badge-bg': mergedTokens.colors.badgeBg,
     '--theme-badge-text': mergedTokens.colors.badgeText,
 
-  
     '--theme-font-heading': mergedTokens.typography.fontFamilyHeading,
     '--theme-font-body': mergedTokens.typography.fontFamilyBody,
     '--theme-heading-spacing': mergedTokens.typography.headingLetterSpacing,
     '--theme-heading-weight': mergedTokens.typography.headingFontWeight,
     '--theme-heading-transform': mergedTokens.typography.headingTransform,
 
-
     '--theme-radius-btn': mergedTokens.radii.button,
     '--theme-radius-card': mergedTokens.radii.card,
     '--theme-radius-input': mergedTokens.radii.input,
     '--theme-radius-badge': mergedTokens.radii.badge,
-
 
     '--theme-shadow-card': mergedTokens.shadows.card,
     '--theme-shadow-card-hover': mergedTokens.shadows.cardHover,
@@ -93,5 +89,7 @@ export function resolveShopTheme(
     tokens: mergedTokens,
     layout: mergedLayout,
     cssVariables,
+    mode: colorMode,
   };
 }
+

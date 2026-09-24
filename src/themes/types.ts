@@ -1,6 +1,5 @@
 import type { SellerPlanTier } from '../lib/sellerPlanLimits';
 
-
 export type ThemeId =
   | 'classic-clean'
   | 'modern-minimal'
@@ -20,53 +19,52 @@ export type FontFamilyPreset =
 export type RadiusPreset = 'none' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
 
 export type HeroLayoutVariant =
-  | 'split-image'       
-  | 'full-banner'      
-  | 'minimal-clean'     
-  | 'card-showcase';  
+  | 'split-image'
+  | 'full-banner'
+  | 'minimal-clean'
+  | 'card-showcase';
 
 export type ProductCardVariant =
-  | 'bordered'          
-  | 'flat'            
-  | 'elevated'        
-  | 'compact'           
-  | 'editorial';        
+  | 'bordered'
+  | 'flat'
+  | 'elevated'
+  | 'compact'
+  | 'editorial';
 
 export type HeaderNavigationVariant =
-  | 'classic-bar'      
-  | 'centered-logo'    
-  | 'minimal-floating'  
-  | 'inline-compact';  
+  | 'classic-bar'
+  | 'centered-logo'
+  | 'minimal-floating'
+  | 'inline-compact';
 
 export type FooterLayoutVariant =
-  | 'multi-column'      
-  | 'centered-minimal' 
-  | 'bold-newsletter'   
-  | 'compact-inline';   
-
+  | 'multi-column'
+  | 'centered-minimal'
+  | 'bold-newsletter'
+  | 'compact-inline';
 
 export interface ThemeColorTokens {
-  primary: string;           
-  primaryHover: string;     
-  primaryLight: string;     
-  secondary: string;       
-  background: string;      
-  surface: string;          
-  surfaceSecondary: string; 
-  textPrimary: string;      
-  textSecondary: string;   
-  textMuted: string;        
-  border: string;          
-  borderFocus: string;      
-  badgeBg: string;          
-  badgeText: string;        
+  primary: string;
+  primaryHover: string;
+  primaryLight: string;
+  secondary: string;
+  background: string;
+  surface: string;
+  surfaceSecondary: string;
+  textPrimary: string;
+  textSecondary: string;
+  textMuted: string;
+  border: string;
+  borderFocus: string;
+  badgeBg: string;
+  badgeText: string;
 }
 
 export interface ThemeTypographyTokens {
   fontFamilyHeading: string;
   fontFamilyBody: string;
   headingLetterSpacing: string;
-  headingFontWeight: '600' | '700' | '800';
+  headingFontWeight: '400' | '500' | '600' | '700' | '800';
   headingTransform: 'none' | 'uppercase' | 'capitalize';
 }
 
@@ -89,7 +87,6 @@ export interface ThemeTokens {
   radii: ThemeRadiusTokens;
   shadows: ThemeShadowTokens;
 }
-
 
 export interface ThemeLayoutSettings {
   heroVariant: HeroLayoutVariant;
@@ -122,10 +119,12 @@ export interface ThemeDefinition {
   tagline: string;
   description: string;
   category: 'Modern' | 'Minimalist' | 'Luxury' | 'Editorial' | 'High-Volume';
-  tier: SellerPlanTier; // 'basic' | 'business'
+  tier: SellerPlanTier;
   previewImage: string;
   demoUrl?: string;
   features: string[];
   defaultTokens: ThemeTokens;
+  defaultDarkTokens?: ThemeTokens;
   defaultLayout: ThemeLayoutSettings;
 }
+

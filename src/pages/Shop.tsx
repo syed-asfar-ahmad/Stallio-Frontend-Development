@@ -9,7 +9,9 @@ import {
 import type { Shop, Product } from '../types';
 import { formatPrice, formatQuantity } from '../lib/countryCurrencyOptions';
 import { getSocialBrandColor, SocialIcon } from '../components/SocialIcons';
-import ShopHomePage, { ShopProductCard } from '../components/shop/ShopHomePage';
+import Header from '../components/shop/theme-parts/Header';
+import Footer from '../components/shop/theme-parts/Footer';
+import ThemedHome from '../components/shop/theme-parts/Home';
 import ShopProductsPage from '../components/shop/ShopProductsPage';
 import ShopCategoriesPage from '../components/shop/ShopCategoriesPage';
 import ShopCategoryPage from '../components/shop/ShopCategoryPage';
@@ -44,7 +46,7 @@ import type { ShopProductLinkState } from '../lib/shopProductNav';
 
 const API_BASE = import.meta.env.VITE_API_URL ?? '';
 const containerClass = 'w-full max-w-7xl mx-auto px-3 sm:px-4 lg:px-5';
-const shopPageClass = 'shop-storefront min-h-screen bg-stone-50 dark:bg-zinc-950 flex flex-col text-stone-900 dark:text-zinc-100';
+const shopPageClass = 'shop-storefront min-h-screen flex flex-col transition-colors duration-200';
 const DEFAULT_ABOUT_TEXT_COLOR = '#ffffff';
 const ADD_TO_CART_ANIM_MS = 750;
 const ADD_TO_CART_SUCCESS_MS = 400;
@@ -199,13 +201,26 @@ export default function Shop() {
       .then((res) => res.json())
       .then((data) => {
         if (data.shop) {
-          setShop(data.shop);
+          const localThemeId = localStorage.getItem(`stallio_theme_${username}`);
+          const localThemeConfig = localStorage.getItem(`stallio_theme_config_${username}`);
+          let parsedConfig = undefined;
+          if (localThemeConfig) {
+            try {
+              parsedConfig = JSON.parse(localThemeConfig);
+            } catch {}
+          }
+          const effectiveShop = {
+            ...data.shop,
+            themeConfig: data.shop.themeConfig || parsedConfig || (localThemeId ? { version: 1, themeId: localThemeId } : undefined),
+          };
+          setShop(effectiveShop);
           setProducts(data.products || []);
         }
       })
       .catch(() => {})
       .finally(() => setLoading(false));
   }, [username]);
+
 
   useEffect(() => {
     document.title = shop?.shopName ?? 'Stallio';
@@ -401,207 +416,26 @@ export default function Shop() {
   }
 
   function Navbar() {
-    const { t, isRtl } = useShopLanguage();
     const navLinks = useShopNavLinks(username!, shop!);
     return (
-    <header className="sticky top-0 z-50 border-b border-stone-200/90 bg-white/95 shadow-sm shadow-stone-200/30 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/95 dark:shadow-zinc-950/50">
-      {showAnnouncementBar && (() => {
-          const copies = announcements.length === 1 ? (compactAnnouncement ? 12 : 16) : compactAnnouncement ? 3 : 4;
-          const translatePercent = 100 / copies;
-          const scrollSeconds =
-            announcements.length === 1
-              ? compactAnnouncement
-                ? 22
-                : 25
-              : compactAnnouncement
-                ? 16
-                : 20;
-          return (
-        <>
-          <style>{`
-            @keyframes shop-announcement-scroll {
-              0% { transform: translateX(0); }
-              100% { transform: translateX(${isRtl ? '' : '-'}${translatePercent}%); }
-            }
-            @media (prefers-reduced-motion: reduce) {
-              .shop-announcement-track {
-                animation: none !important;
-                transform: none !important;
-              }
-            }
-          `}</style>
-          <div
-            className="h-7 max-lg:h-7 border-b border-brand-800/30 bg-gradient-to-r from-brand-700 to-brand-700 text-white overflow-hidden lg:h-8"
-            role="region"
-            aria-label={t('navAnnouncementAria')}
-          >
-            <div
-              className="shop-announcement-track h-full flex items-center whitespace-nowrap text-[11px] max-lg:text-[11px] font-medium leading-none shrink-0 lg:text-sm"
-              style={{
-                width: 'max-content',
-                animation: `shop-announcement-scroll ${scrollSeconds}s linear infinite`,
-              }}
-            >
-              {Array.from({ length: copies }, () => announcements).flat().map((text, i) => (
-                <span key={i} className="shrink-0">
-                  <span className="inline-block px-3 max-lg:px-3 lg:px-5">{text}</span>
-                  <span className="text-brand-200/80" aria-hidden>{'\u2022'}</span>
-                </span>
-              ))}
-            </div>
-          </div>
-        </>
-          );
-        })()}
-      <div className={`${containerClass} flex min-h-[3.25rem] max-lg:min-h-[3.25rem] items-center justify-between gap-1.5 max-lg:gap-1.5 py-2 max-lg:py-2 lg:min-h-[4rem] lg:gap-3 lg:py-2.5`}>
-        <Link
-          to={`/${username}`}
-          className="group flex shrink-0 items-center no-underline"
-          aria-label={shop!.shopName}
-        >
-          {shop!.logo ? (
-            <img
-              src={shop!.logo}
-              alt=""
-              className="h-9 w-9 max-lg:h-9 max-lg:w-9 shrink-0 object-contain lg:h-11 lg:w-11"
-            />
-          ) : (
-            <span className="flex h-9 w-9 max-lg:h-9 max-lg:w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500 to-brand-600 shadow-md shadow-brand-500/20 lg:h-11 lg:w-11 lg:rounded-2xl">
-              <ShoppingBag className="h-[1.15rem] w-[1.15rem] text-white lg:h-[1.35rem] lg:w-[1.35rem]" />
-            </span>
-          )}
-        </Link>
-
-        <nav
-          className="hidden max-w-full items-center gap-1 overflow-x-auto rounded-full border border-stone-200/90 bg-stone-50/90 p-1 shadow-inner shadow-white/60 [scrollbar-width:none] lg:flex dark:border-zinc-700 dark:bg-zinc-900/90 dark:shadow-zinc-950/40 [&::-webkit-scrollbar]:hidden"
-          aria-label={t('navStoreNav')}
-        >
-          {navLinks.map(({ to, label, icon: Icon }) => (
-            <Link
-              key={to}
-              to={to}
-              className={`inline-flex shrink-0 items-center gap-1.5 rounded-full px-3 py-2 text-sm font-semibold no-underline transition-all ${
-                isNavActive(to)
-                  ? 'bg-white text-brand-800 shadow-sm ring-1 ring-brand-200/80 dark:bg-zinc-800 dark:text-brand-300 dark:ring-brand-500/30'
-                  : 'text-stone-600 hover:bg-white/70 hover:text-stone-900 dark:text-zinc-400 dark:hover:bg-zinc-800/70 dark:hover:text-zinc-100'
-              }`}
-            >
-              <Icon className="h-4 w-4" aria-hidden />
-              {label}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="flex shrink-0 items-center gap-1 max-lg:gap-1 lg:gap-2">
-          <ShopLanguageToggle />
-          <ThemeToggle className="h-9 w-9 max-lg:h-9 max-lg:w-9 lg:h-10 lg:w-10" />
-          <button
-            type="button"
-            onClick={() => setShowCheckout(true)}
-            className={`inline-flex items-center gap-1 max-lg:gap-1 rounded-full border px-2.5 py-2 max-lg:px-2.5 max-lg:py-2 text-sm font-semibold transition-all lg:gap-2 lg:px-3.5 lg:py-2.5 ${
-              cartCount > 0
-                ? 'border-transparent bg-gradient-to-r from-brand-600 to-brand-600 text-white shadow-md shadow-brand-500/20 hover:from-brand-500 hover:to-brand-500'
-                : 'border-stone-200 bg-white text-stone-700 hover:border-brand-200 hover:bg-brand-50/60 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:border-brand-500/40 dark:hover:bg-zinc-700'
-            }`}
-          >
-            <ShoppingBag className="h-4 w-4 shrink-0" />
-            <span className="hidden lg:inline">{t('navCart')}</span>
-            <span
-              className={`inline-flex h-5 min-w-5 items-center justify-center rounded-full px-1 text-[11px] font-bold ${cartCount > 0 ? 'bg-white/25 text-white' : 'bg-stone-100 text-stone-700 dark:bg-zinc-700 dark:text-zinc-200'}`}
-            >
-              {cartCount}
-            </span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen((o) => !o)}
-            className={`inline-flex h-9 w-9 max-lg:h-9 max-lg:w-9 items-center justify-center rounded-xl border bg-white transition-colors lg:hidden dark:bg-zinc-800 ${
-              mobileMenuOpen
-                ? 'border-red-200 text-red-600 hover:bg-red-50 dark:border-red-900/50 dark:text-red-400 dark:hover:bg-red-950/40'
-                : 'border-stone-200 text-stone-800 hover:border-brand-200 hover:bg-brand-50/50 dark:border-zinc-600 dark:text-zinc-200 dark:hover:border-brand-500/40 dark:hover:bg-zinc-700'
-            }`}
-            aria-label={mobileMenuOpen ? t('navCloseMenu') : t('navOpenMenu')}
-            aria-expanded={mobileMenuOpen}
-          >
-            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
-        </div>
-      </div>
-
-      <div
-        className={`lg:hidden overflow-hidden transition-[max-height,opacity] duration-300 ease-out ${
-          mobileMenuOpen ? 'max-h-[min(88vh,480px)] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
-        }`}
-        aria-hidden={!mobileMenuOpen}
-      >
-        <div className={`${containerClass} pb-3`}>
-          <nav className="flex flex-col gap-1 rounded-2xl border border-stone-200/90 bg-white p-2 shadow-lg shadow-stone-300/15 dark:border-zinc-700 dark:bg-zinc-900 dark:shadow-zinc-950/50">
-            {navLinks.map(({ to, label, icon: Icon }) => (
-              <Link
-                key={to}
-                to={to}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`flex items-center justify-between rounded-xl px-3 py-2.5 text-sm font-medium no-underline transition-colors ${
-                  isNavActive(to)
-                    ? 'bg-brand-50 text-brand-900 ring-1 ring-brand-100 dark:bg-brand-950/50 dark:text-brand-200 dark:ring-brand-800/50'
-                    : 'text-stone-700 hover:bg-stone-50 dark:text-zinc-300 dark:hover:bg-zinc-800'
-                }`}
-              >
-                <span className="flex items-center gap-3">
-                  <Icon className="h-4 w-4" />
-                  {label}
-                </span>
-                <ChevronRight className="h-4 w-4 opacity-50 rtl:rotate-180" />
-              </Link>
-            ))}
-          </nav>
-          <button
-            type="button"
-            onClick={() => {
-              setShowCheckout(true);
-              setMobileMenuOpen(false);
-            }}
-            className={`mt-2 flex w-full items-center gap-3 rounded-xl border px-3 py-3 text-start transition-colors ${
-              cartCount > 0
-                ? 'border-transparent bg-gradient-to-r from-brand-600 to-brand-600 text-white shadow-md shadow-brand-500/20 hover:from-brand-500 hover:to-brand-500'
-                : 'border-stone-200 bg-stone-50 text-stone-700 hover:border-brand-200 hover:bg-brand-50/70 dark:border-zinc-600 dark:bg-zinc-800/90 dark:text-zinc-200 dark:hover:border-brand-500/40 dark:hover:bg-zinc-700'
-            }`}
-          >
-            <span
-              className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${
-                cartCount > 0
-                  ? 'bg-white/20 text-white'
-                  : 'bg-white text-brand-700 ring-1 ring-stone-200/90 dark:bg-zinc-900 dark:text-brand-400 dark:ring-zinc-600'
-              }`}
-            >
-              <ShoppingBag className="h-5 w-5" aria-hidden />
-            </span>
-            <span className="min-w-0 flex-1">
-              <span className="block text-sm font-bold leading-tight">{t('navCheckout')}</span>
-              {cartCount > 0 ? (
-                <span className="mt-0.5 block text-xs font-medium text-white/90">
-                  {t('navCartItems', { count: cartCount })}
-                </span>
-              ) : null}
-            </span>
-            <span
-              className={`inline-flex h-6 min-w-6 shrink-0 items-center justify-center rounded-full px-1.5 text-[11px] font-bold tabular-nums ${
-                cartCount > 0 ? 'bg-white/25 text-white' : 'bg-stone-200 text-stone-700 dark:bg-zinc-700 dark:text-zinc-200'
-              }`}
-            >
-              {cartCount}
-            </span>
-            <ChevronRight
-              className={`h-5 w-5 shrink-0 opacity-70 rtl:rotate-180 ${cartCount > 0 ? 'text-white' : 'text-stone-400 dark:text-zinc-500'}`}
-              aria-hidden
-            />
-          </button>
-        </div>
-      </div>
-    </header>
+      <Header
+        shop={shop!}
+        username={username!}
+        navLinks={navLinks}
+        isNavActive={isNavActive}
+        cartCount={cartCount}
+        onOpenCheckout={() => setShowCheckout(true)}
+        mobileMenuOpen={mobileMenuOpen}
+        onToggleMobileMenu={() => setMobileMenuOpen((o) => !o)}
+        onCloseMobileMenu={() => setMobileMenuOpen(false)}
+        announcements={announcements}
+        showAnnouncementBar={showAnnouncementBar}
+        compactAnnouncement={compactAnnouncement}
+        containerClass={containerClass}
+      />
     );
   }
+
 
   function ProductDetailView({ product: detailProduct }: { product: Product }) {
     const location = useLocation();
@@ -662,7 +496,7 @@ export default function Shop() {
     }
 
     return (
-      <ShopDirRoot className={shopPageClass}>
+      <ShopDirRoot className={shopPageClass} themeConfig={shop?.themeConfig}>
         <Navbar />
         <main className={`${containerClass} pt-4 max-lg:pt-4 pb-8 max-lg:pb-8 lg:pt-6 lg:pb-12`}>
           <div className="mb-4 max-lg:mb-4 flex flex-col items-start gap-2.5 max-lg:gap-2.5 lg:mb-6 lg:gap-3">
@@ -940,7 +774,7 @@ export default function Shop() {
     const { t, lang } = useShopLanguage();
     const refundContentHtml = getLocalizedRefundContent(shop!, lang);
     return (
-      <ShopDirRoot className={shopPageClass}>
+      <ShopDirRoot className={shopPageClass} themeConfig={shop?.themeConfig}>
         <Navbar />
         <main className="flex-1 pb-8 max-lg:pb-8 lg:pb-14">
           <section className={`${containerClass} pt-4 max-lg:pt-4 lg:pt-8`}>
@@ -985,7 +819,7 @@ export default function Shop() {
     const heroImage = shop!.aboutImages?.[0];
     const aboutHeroTextColor = getSafeHexColor(shop!.aboutTextColor);
     return (
-      <ShopDirRoot className={shopPageClass}>
+      <ShopDirRoot className={shopPageClass} themeConfig={shop?.themeConfig}>
         <Navbar />
         <main className="flex-1 pb-8 max-lg:pb-8 lg:pb-14">
           <section className={`${containerClass} pt-4 max-lg:pt-4 lg:pt-8`}>
@@ -1054,7 +888,7 @@ export default function Shop() {
   function ContactSentView() {
     const { t } = useShopLanguage();
     return (
-      <ShopDirRoot className={shopPageClass}>
+      <ShopDirRoot className={shopPageClass} themeConfig={shop?.themeConfig}>
         <Navbar />
         <main className={`${containerClass} flex-1 pt-6 pb-8 max-lg:pt-6 max-lg:pb-8 max-w-xl mx-auto text-center lg:pt-10 lg:pb-12`}>
           <div className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm dark:border-zinc-700 dark:bg-zinc-900 max-lg:p-6 sm:p-10 lg:rounded-3xl">
@@ -1107,7 +941,7 @@ export default function Shop() {
     }
 
     return (
-      <ShopDirRoot className={shopPageClass}>
+      <ShopDirRoot className={shopPageClass} themeConfig={shop?.themeConfig}>
         <Navbar />
         <main className={`${containerClass} flex-1 pt-4 pb-8 max-lg:pt-4 max-lg:pb-8 lg:pt-8 lg:pb-12`}>
           <section className="relative mb-5 max-lg:mb-5 overflow-hidden rounded-2xl border border-stone-200 bg-gradient-to-br from-white via-brand-50/45 to-brand-50/45 p-4 shadow-sm dark:border-zinc-700 dark:from-zinc-900 dark:via-brand-950/30 dark:to-brand-950/20 max-lg:p-4 lg:mb-8 lg:rounded-3xl lg:p-10">
@@ -1269,7 +1103,7 @@ export default function Shop() {
   if (isProducts) {
     return (
       <ShopLang username={username!} shop={shop}>
-      <ShopDirRoot className={shopPageClass}>
+      <ShopDirRoot className={shopPageClass} themeConfig={shop?.themeConfig}>
         <Navbar />
         <ShopProductsPage shop={shop} products={products} username={username!} containerClass={containerClass} />
         <ShopFooterEl />
@@ -1312,7 +1146,7 @@ export default function Shop() {
   if (isCategories) {
     return (
       <ShopLang username={username!} shop={shop}>
-      <ShopDirRoot className={shopPageClass}>
+      <ShopDirRoot className={shopPageClass} themeConfig={shop?.themeConfig}>
         <Navbar />
         <ShopCategoriesPage shop={shop} products={products} username={username!} containerClass={containerClass} />
         <ShopFooterEl />
@@ -1324,7 +1158,7 @@ export default function Shop() {
   if (isCategory) {
     return (
       <ShopLang username={username!} shop={shop}>
-      <ShopDirRoot className={shopPageClass}>
+      <ShopDirRoot className={shopPageClass} themeConfig={shop?.themeConfig}>
         <Navbar />
         <ShopCategoryPage
           shop={shop}
@@ -1342,164 +1176,14 @@ export default function Shop() {
   }
 
   function ShopFooterEl() {
-    const { t, lang } = useShopLanguage();
     const quickLinks = useShopNavLinks(username!, shop!);
-    if (!shop?.footerEnabled) return null;
-    const links = shop.footerSocialLinks ?? [];
-    const year = new Date().getFullYear();
-    const copyrightText = t('footerCopyright', { year, shopName: shop.shopName });
-    const localizedAddress = getLocalizedFooterAddress(shop, lang);
-    const hasContact =
-      localizedAddress.trim() || (shop.footerPhone && shop.footerPhone.trim()) || (shop.footerEmail && shop.footerEmail.trim());
-    const showAvailability = hasFooterAvailability(shop.availabilityEnabled, shop.availabilityHours);
-    const availabilitySchedule = normalizeAvailabilityHours(shop.availabilityHours);
-    return (
-      <footer className="relative mt-auto border-t border-stone-200/90 bg-[#fafaf9] dark:border-zinc-800 dark:bg-zinc-950">
-        <div
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_55%_45%_at_50%_0%,rgba(20,184,166,0.06),transparent_55%)]"
-          aria-hidden
-        />
-        <div className={`${containerClass} relative py-6 max-lg:py-6 lg:py-10`}>
-          <div className="flex flex-col gap-6 max-lg:gap-6 lg:flex-row lg:items-start lg:justify-between lg:gap-x-6 lg:gap-y-0">
-            <div className="min-w-0 max-lg:w-full lg:max-w-xs">
-              <div className="flex items-center gap-3 max-lg:gap-3 lg:gap-3.5">
-                {shop.footerLogo ? (
-                  <img
-                    src={shop.footerLogo}
-                    alt=""
-                    className="h-12 w-12 max-lg:h-12 max-lg:w-12 shrink-0 object-contain lg:h-16 lg:w-16"
-                  />
-                ) : (
-                  <span className="flex h-12 w-12 max-lg:h-12 max-lg:w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500 to-brand-600 shadow-md shadow-brand-500/20 lg:h-14 lg:w-14">
-                    <ShoppingBag className="h-5 w-5 text-white lg:h-6 lg:w-6" />
-                  </span>
-                )}
-                <div className="min-w-0 flex items-center">
-                  <h3 className="text-base max-lg:text-base font-bold text-stone-900 dark:text-zinc-100 lg:text-lg">{shop.shopName}</h3>
-                </div>
-              </div>
-              {getLocalizedFooterDescription(shop, lang) ? (
-                <p className="mt-1.5 max-w-md text-sm max-lg:text-sm leading-relaxed text-stone-600 dark:text-zinc-400">
-                  {getLocalizedFooterDescription(shop, lang)}
-                </p>
-              ) : null}
-            </div>
-
-            <div className="min-w-0 shrink-0 max-lg:w-full">
-              <h4 className="mb-2.5 max-lg:mb-2.5 text-xs font-bold uppercase tracking-wider text-stone-500 dark:text-zinc-500 lg:mb-3">{t('footerQuickLinks')}</h4>
-              <div className="grid grid-cols-1 gap-0.5 max-lg:grid max-lg:grid-cols-2 max-lg:gap-x-2 max-lg:gap-y-0.5 lg:flex lg:flex-col">
-                {quickLinks.map((item) => (
-                  <Link
-                    key={item.to}
-                    to={item.to}
-                    className="group inline-flex items-center gap-2 rounded-lg px-2 py-2 text-sm font-medium text-stone-600 no-underline transition-colors hover:bg-brand-50/70 hover:text-brand-800 dark:text-zinc-400 dark:hover:bg-brand-950/45 dark:hover:text-brand-300"
-                  >
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white text-brand-600 ring-1 ring-stone-200/80 transition-colors group-hover:bg-brand-100/80 group-hover:text-brand-800 dark:bg-zinc-800 dark:text-brand-400 dark:ring-zinc-600 dark:group-hover:bg-brand-900/50 dark:group-hover:text-brand-300">
-                      <item.icon className="h-4 w-4" aria-hidden />
-                    </span>
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            {showAvailability ? (
-              <div className="min-w-0 shrink-0 max-lg:w-full">
-                <h4 className="mb-2.5 max-lg:mb-2.5 text-xs font-bold uppercase tracking-wider text-stone-500 dark:text-zinc-500 lg:mb-3">{t('footerOpeningHours')}</h4>
-                <ul className="space-y-1.5 max-lg:space-y-1.5 text-sm lg:space-y-2">
-                  {availabilitySchedule.map((slot) => (
-                    <li key={slot.day} className="flex items-start gap-2 max-lg:gap-2 text-stone-600 dark:text-zinc-400 lg:gap-3">
-                      <span className="min-w-0 shrink-0 font-medium text-stone-700 dark:text-zinc-300">{t(shopWeekdayKey(slot.day))}</span>
-                      <span
-                        dir={slot.enabled ? 'ltr' : undefined}
-                        className={`min-w-0 flex-1 ${
-                          slot.enabled
-                            ? 'text-end tabular-nums [unicode-bidi:isolate]'
-                            : shop.availability24Hours
-                              ? 'text-end font-medium text-stone-500 dark:text-zinc-500'
-                              : 'text-center font-medium text-stone-500 dark:text-zinc-500'
-                        }`}
-                      >
-                        {slot.enabled
-                          ? shop.availability24Hours
-                            ? t('footerOpen24Hours')
-                            : formatHoursRange(slot.openTime, slot.closeTime)
-                          : t('footerClosedDay')}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : null}
-
-            <div className="min-w-0 shrink-0 max-lg:w-full lg:max-w-xs">
-              <h4 className="mb-2.5 max-lg:mb-2.5 text-xs font-bold uppercase tracking-wider text-stone-500 dark:text-zinc-500 lg:mb-3">{t('footerContactSocial')}</h4>
-              {hasContact ? (
-                <div className="space-y-2.5 text-sm text-stone-600 dark:text-zinc-400">
-                  {localizedAddress.trim() && (
-                    <p className="flex items-start gap-2 leading-relaxed">
-                      <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-600 dark:text-brand-500" aria-hidden />
-                      <span className="min-w-0 flex-1" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
-                        {localizedAddress}
-                      </span>
-                    </p>
-                  )}
-                  {shop.footerPhone?.trim() && (
-                    <p className="flex items-center gap-2">
-                      <Phone className="h-4 w-4 shrink-0 text-brand-600" aria-hidden />
-                      <a href={`tel:${shop.footerPhone.trim()}`} className="text-stone-600 no-underline hover:text-brand-700 dark:text-zinc-400 dark:hover:text-brand-400">
-                        <ContactLtrText>{shop.footerPhone.trim()}</ContactLtrText>
-                      </a>
-                    </p>
-                  )}
-                  {shop.footerEmail?.trim() && (
-                    <p className="flex items-center gap-2">
-                      <Mail className="h-4 w-4 shrink-0 text-brand-600 dark:text-brand-500" aria-hidden />
-                      <a
-                        href={`mailto:${shop.footerEmail.trim()}`}
-                        className="min-w-0 flex-1 break-all text-stone-600 no-underline hover:text-brand-700 dark:text-zinc-400 dark:hover:text-brand-400"
-                      >
-                        <ContactLtrText>{shop.footerEmail.trim()}</ContactLtrText>
-                      </a>
-                    </p>
-                  )}
-                </div>
-              ) : (
-                <p className="text-sm text-stone-500 dark:text-zinc-500">{t('footerContactEmpty')}</p>
-              )}
-
-              {links.length > 0 && (
-                <div className="mt-3 max-lg:mt-3 flex flex-wrap gap-2 lg:mt-4">
-                  {links.map((link, i) => (
-                    <a
-                      key={i}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex h-9 w-9 max-lg:h-9 max-lg:w-9 items-center justify-center rounded-xl border border-stone-200/90 bg-white shadow-sm transition-colors hover:border-brand-200 hover:bg-brand-50/50 dark:border-zinc-700 dark:bg-zinc-800 dark:hover:border-brand-500/40 dark:hover:bg-brand-950/40 lg:h-10 lg:w-10"
-                      style={{ color: getSocialBrandColor(link.platform) }}
-                      aria-label={link.platform}
-                    >
-                      <SocialIcon platform={link.platform} />
-                    </a>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div className="mt-5 max-lg:mt-5 border-t border-stone-200/90 pt-4 max-lg:pt-4 dark:border-zinc-800 lg:mt-7 lg:pt-5">
-            <p className="text-center text-xs max-lg:text-xs leading-relaxed text-stone-500 dark:text-zinc-500 lg:text-sm">{copyrightText}</p>
-          </div>
-        </div>
-      </footer>
-    );
+    return <Footer shop={shop!} quickLinks={quickLinks} containerClass={containerClass} />;
   }
   return (
     <ShopLang username={username!} shop={shop}>
-    <ShopDirRoot className={shopPageClass}>
+    <ShopDirRoot className={shopPageClass} themeConfig={shop?.themeConfig}>
       <Navbar />
-      <ShopHomePage shop={shop} products={products} username={username!} containerClass={containerClass} />
+      <ThemedHome shop={shop} products={products} username={username!} containerClass={containerClass} />
       <ShopFooterEl />
       {checkoutModalEl}
     </ShopDirRoot>

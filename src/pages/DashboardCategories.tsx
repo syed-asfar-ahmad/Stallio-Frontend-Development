@@ -17,9 +17,7 @@ import {
   DASHBOARD_TOGGLE_ROW_SWITCH,
 } from '../lib/dashboardFormClasses';
 import ConfirmDialog from '../components/ConfirmDialog';
-import { getSellerPlanLimits, canUpgradePlan } from '../lib/sellerPlanLimits';
-import PlanLimitBanner from '../components/plan/PlanLimitBanner';
-import PlanUsageBar from '../components/plan/PlanUsageBar';
+import { getSellerPlanLimits } from '../lib/sellerPlanLimits';
 import { FieldLabelWithHelp, FieldTitleWithHelp } from '../components/FieldLabelWithHelp';
 import DashboardBulkSelectBar from '../components/DashboardBulkSelectBar';
 import BulkItemCheckbox from '../components/BulkItemCheckbox';
@@ -406,12 +404,11 @@ const [categoryModal, setCategoryModal] = useState<null | 'add' | number>(null);
                 <Plus className="h-4 w-4 shrink-0" />
                 {t('dashboard.categories.addCategory')}
               </button>
-              <PlanUsageBar
-                count={categories.length}
-                max={planLimits.maxCategories}
-                label={t('dashboard.categories.planLimitUsage', { count: categories.length, max: planLimits.maxCategories })}
-                limitReached={categoryLimitReached}
-              />
+              <p className={`text-xs ${categoryLimitReached ? 'text-red-500 dark:text-red-400 font-medium' : 'text-stone-500 dark:text-zinc-500'}`}>
+                {categoryLimitReached
+                  ? t('dashboard.categories.planLimitBody', { max: planLimits.maxCategories })
+                  : t('dashboard.categories.planLimitUsage', { count: categories.length, max: planLimits.maxCategories })}
+              </p>
               {categories.length > 0 && (
                 bulk.selectionMode ? (
                   <div className="w-full min-w-0 [&>div]:w-full [&>div]:flex [&>div]:flex-col [&>div]:gap-2 [&_button]:w-full [&_button]:justify-center">
@@ -477,14 +474,11 @@ const [categoryModal, setCategoryModal] = useState<null | 'add' | number>(null);
                   <Plus className="h-5 w-5 shrink-0" />
                   {t('dashboard.categories.addCategory')}
                 </button>
-                <div className="min-w-[140px]">
-                  <PlanUsageBar
-                    count={categories.length}
-                    max={planLimits.maxCategories}
-                    label={t('dashboard.categories.planLimitUsage', { count: categories.length, max: planLimits.maxCategories })}
-                    limitReached={categoryLimitReached}
-                  />
-                </div>
+                <span className={`text-xs ${categoryLimitReached ? 'text-red-500 dark:text-red-400 font-medium' : 'text-stone-500 dark:text-zinc-500'}`}>
+                  {categoryLimitReached
+                    ? t('dashboard.categories.planLimitBody', { max: planLimits.maxCategories })
+                    : t('dashboard.categories.planLimitUsage', { count: categories.length, max: planLimits.maxCategories })}
+                </span>
                 {filteredCategories.length > 0 && (
                   <DashboardBulkSelectBar
                     selectionMode={bulk.selectionMode}

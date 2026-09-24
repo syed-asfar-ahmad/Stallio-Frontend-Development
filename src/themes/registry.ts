@@ -1,16 +1,18 @@
 import type { ThemeId, ThemeDefinition } from './types';
 import {
   classicCleanTokens,
+  classicCleanDarkTokens,
   modernMinimalTokens,
+  modernMinimalDarkTokens,
   boldEditorialTokens,
+  boldEditorialDarkTokens,
   boutiqueArtisanTokens,
+  boutiqueArtisanDarkTokens,
   retailCatalogTokens,
+  retailCatalogDarkTokens,
 } from './tokens';
 import { DEFAULT_THEME_ID } from './constants';
 
-/**
- * Master Registry of all themes in Stallio.
- */
 export const THEME_REGISTRY: Record<ThemeId, ThemeDefinition> = {
   'classic-clean': {
     id: 'classic-clean',
@@ -25,10 +27,11 @@ export const THEME_REGISTRY: Record<ThemeId, ThemeDefinition> = {
     features: [
       'High-converting product cards with instant add-to-cart',
       'Balanced typography with responsive grid columns',
-      'Trust badges & announcement bar integration',
+      'Trust badges and announcement bar integration',
       'Support for category carousels and hero banners',
     ],
     defaultTokens: classicCleanTokens,
+    defaultDarkTokens: classicCleanDarkTokens,
     defaultLayout: {
       heroVariant: 'full-banner',
       productCardVariant: 'bordered',
@@ -48,17 +51,18 @@ export const THEME_REGISTRY: Record<ThemeId, ThemeDefinition> = {
     displayName: 'Modern Minimal',
     tagline: 'Architectural minimalism with maximum visual breathing room',
     description:
-      'Understated elegance focusing on photography and typography. Sharp angles, borderless product showcases, and distraction-free shopping.',
+      'Understated elegance focusing on photography and typography. Sharp angles, borderless product showcases, and distraction free shopping.',
     category: 'Minimalist',
     tier: 'basic',
     previewImage: '/themes/previews/modern-minimal.webp',
     features: [
-      'Edge-to-edge product imagery with minimal UI clutter',
+      'Edge to edge product imagery with minimal UI clutter',
       'Monochrome styling with customizable accent strokes',
       'Sticky minimalist header with subtle navigation',
-      'Curated lookbook & collection spotlights',
+      'Curated lookbook and collection spotlights',
     ],
     defaultTokens: modernMinimalTokens,
+    defaultDarkTokens: modernMinimalDarkTokens,
     defaultLayout: {
       heroVariant: 'minimal-clean',
       productCardVariant: 'flat',
@@ -76,19 +80,20 @@ export const THEME_REGISTRY: Record<ThemeId, ThemeDefinition> = {
     id: 'bold-editorial',
     name: 'bold-editorial',
     displayName: 'Bold Editorial',
-    tagline: 'High-impact streetwear & lifestyle magazine aesthetic',
+    tagline: 'High-impact streetwear and lifestyle magazine aesthetic',
     description:
       'High contrast, oversized typography, and neo-brutalist shadows. Built for trendsetting brands that want to make an aggressive statement.',
     category: 'Editorial',
     tier: 'business',
     previewImage: '/themes/previews/bold-editorial.webp',
     features: [
-      'High-contrast solid borders with drop-shadow effects',
+      'High contrast solid borders with drop-shadow effects',
       'Oversized display typography with uppercase badges',
-      'Split-screen dynamic hero section with bold CTA buttons',
-      'Editorial style story & testimonial blocks',
+      'Split screen dynamic hero section with bold CTA buttons',
+      'Editorial style story and testimonial blocks',
     ],
     defaultTokens: boldEditorialTokens,
+    defaultDarkTokens: boldEditorialDarkTokens,
     defaultLayout: {
       heroVariant: 'split-image',
       productCardVariant: 'editorial',
@@ -115,10 +120,11 @@ export const THEME_REGISTRY: Record<ThemeId, ThemeDefinition> = {
     features: [
       'Serif display typography for elevated luxury appeal',
       'Soft organic border radiuses and warm cream backgrounds',
-      'Story-first layout with rich about-brand integration',
+      'Story first layout with rich about brand integration',
       'Floating card showcases and artisan trust badges',
     ],
     defaultTokens: boutiqueArtisanTokens,
+    defaultDarkTokens: boutiqueArtisanDarkTokens,
     defaultLayout: {
       heroVariant: 'card-showcase',
       productCardVariant: 'elevated',
@@ -138,17 +144,18 @@ export const THEME_REGISTRY: Record<ThemeId, ThemeDefinition> = {
     displayName: 'Retail Catalog',
     tagline: 'High-density catalog optimized for multi-SKU retail and fast shopping',
     description:
-      'Optimized for large inventories, supermarkets, and electronics. High-density grids, fast quantity selectors, and instant search filter integration.',
+      'Optimized for large inventories, supermarkets, and electronics. High density grids, fast quantity selectors, and instant search filter integration.',
     category: 'High-Volume',
     tier: 'business',
     previewImage: '/themes/previews/retail-catalog.webp',
     features: [
-      'Dense 4-column product grid with quick-view and fast add',
+      'Dense 4 column product grid with quick view and fast add',
       'Prominent discount pills, stock indicators, and price comparisons',
       'Horizontal category scrollbar with sticky header navigation',
-      'Comprehensive footer with store delivery & support specs',
+      'Comprehensive footer with store delivery and support specs',
     ],
     defaultTokens: retailCatalogTokens,
+    defaultDarkTokens: retailCatalogDarkTokens,
     defaultLayout: {
       heroVariant: 'full-banner',
       productCardVariant: 'compact',
@@ -165,9 +172,6 @@ export const THEME_REGISTRY: Record<ThemeId, ThemeDefinition> = {
 
 export const THEME_LIST: ThemeDefinition[] = Object.values(THEME_REGISTRY);
 
-/**
- * Retrieve definition for a given theme ID, falling back to default if invalid
- */
 export function getThemeDefinition(themeId?: string | null): ThemeDefinition {
   if (themeId && themeId in THEME_REGISTRY) {
     return THEME_REGISTRY[themeId as ThemeId];

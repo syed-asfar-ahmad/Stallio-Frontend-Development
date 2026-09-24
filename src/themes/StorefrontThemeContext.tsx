@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useMemo } from 'react';
 import type { ThemeId, ThemeTokens, ThemeLayoutSettings, ShopThemeConfig } from './types';
 import { resolveShopTheme, type ResolvedTheme } from './resolver';
+import { useTheme } from '../context/ThemeContext';
 
 interface StorefrontThemeContextValue {
   themeId: ThemeId;
@@ -12,23 +13,34 @@ interface StorefrontThemeContextValue {
 const StorefrontThemeContext = createContext<StorefrontThemeContextValue | null>(null);
 
 export interface StorefrontThemeProviderProps {
-  themeId?: string | null;
   config?: ShopThemeConfig | null;
+  colorMode?: 'light' | 'dark';
   children: React.ReactNode;
   className?: string;
   as?: keyof JSX.IntrinsicElements;
 }
 
 export const StorefrontThemeProvider: React.FC<StorefrontThemeProviderProps> = ({
-  themeId,
   config,
+  colorMode,
   children,
   className = '',
   as: Component = 'div',
 }) => {
+  let appThemeMode: 'light' | 'dark' = 'light';
+  try {
+    const themeCtx = useTheme();
+    if (themeCtx?.resolved) {
+      appThemeMode = themeCtx.resolved;
+    }
+  } catch {}
+
+  const activeMode = colorMode || appThemeMode;
+
   const resolved = useMemo(() => {
-    return resolveShopTheme(themeId, config);
-  }, [themeId, config]);
+    return resolveShopTheme(config, activeMode);
+  }, [config, activeMode]);
+
 
   const contextValue = useMemo<StorefrontThemeContextValue>(() => {
     return {
@@ -42,8 +54,11 @@ export const StorefrontThemeProvider: React.FC<StorefrontThemeProviderProps> = (
   return (
     <StorefrontThemeContext.Provider value={contextValue}>
       <Component
-        className={`storefront-theme-root theme-${resolved.themeId} ${className}`}
-        style={resolved.cssVariables as React.CSSProperties}
+        className={`storefront-theme-root theme-${resolved.themeId} theme-mode-${resolved.mode} ${className}`}
+        style={{
+          ...resolved.cssVariables,
+          colorScheme: resolved.mode,
+        } as React.CSSProperties}
       >
         {children}
       </Component>
