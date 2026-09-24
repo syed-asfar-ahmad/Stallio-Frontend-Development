@@ -274,7 +274,7 @@ export default function DashboardThemes() {
               Live Storefront
             </Link>
 
-            {isBusinessPlan ? (
+            {isBusinessPlan && (
               <>
                 <button
                   type="button"
@@ -296,14 +296,6 @@ export default function DashboardThemes() {
                   {saving ? 'Publishing...' : 'Save & Publish'}
                 </button>
               </>
-            ) : (
-              <Link
-                to="/pricing"
-                className="px-4 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-amber-500 to-orange-500 text-white flex items-center gap-1.5 shadow-sm shadow-amber-500/20 hover:brightness-105 transition-all"
-              >
-                <Lock className="w-3.5 h-3.5" />
-                Upgrade to Customize Tokens
-              </Link>
             )}
           </div>
         </div>
@@ -542,36 +534,7 @@ export default function DashboardThemes() {
         {/* TAB 2: DESIGN TOKENS CUSTOMIZER & LIVE PREVIEW */}
         {activeTab === 'customize' && (
           <div className="space-y-6">
-            {/* Business Plan Gating Hero Callout */}
-            {!isBusinessPlan && (
-              <div className="rounded-2xl border-2 border-amber-300 dark:border-amber-700/60 bg-gradient-to-r from-amber-500/10 via-orange-500/10 to-amber-500/10 p-5 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 shadow-sm">
-                <div className="flex items-start sm:items-center gap-4">
-                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 text-white shadow-md shadow-amber-500/30">
-                    <Lock className="w-6 h-6" />
-                  </span>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <h3 className="text-base sm:text-lg font-bold text-stone-900 dark:text-zinc-100">
-                        Design Token Customizer is a Business Plan Feature
-                      </h3>
-                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-500 text-white uppercase tracking-wide">
-                        Business Tier
-                      </span>
-                    </div>
-                    <p className="text-xs sm:text-sm text-stone-600 dark:text-zinc-400 mt-1 max-w-2xl leading-relaxed">
-                      You are in <strong>Sandbox Preview Mode</strong>. Upgrade to the Business Plan to unlock full customization over your brand colors, serif & display typography, corner geometries, and section layout settings.
-                    </p>
-                  </div>
-                </div>
-                <Link
-                  to="/pricing"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white text-xs font-bold shadow-md shadow-amber-500/25 hover:brightness-105 transition-all shrink-0"
-                >
-                  <Sparkles className="w-4 h-4" />
-                  Upgrade to Business Plan
-                </Link>
-              </div>
-            )}
+            
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
               {/* LEFT CONTROLS: 6 COLUMNS */}

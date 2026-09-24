@@ -35,12 +35,12 @@ function ProductPrice({
   if (compare) {
     return (
       <div className={`flex items-center gap-2 flex-wrap ${className}`}>
-        <span className="font-extrabold text-brand-700 text-base sm:text-lg">{formatPrice(sale, currency)}</span>
-        <span className="text-sm text-stone-400 line-through">{formatPrice(compare, currency)}</span>
+        <span className="font-extrabold text-theme-primary text-base sm:text-lg">{formatPrice(sale, currency)}</span>
+        <span className="text-sm text-theme-text-muted line-through">{formatPrice(compare, currency)}</span>
       </div>
     );
   }
-  return <p className={`font-extrabold text-brand-700 text-base sm:text-lg ${className}`}>{formatPrice(sale, currency)}</p>;
+  return <p className={`font-extrabold text-theme-primary text-base sm:text-lg ${className}`}>{formatPrice(sale, currency)}</p>;
 }
 
 export default function ShopProductDetailPage() {
@@ -166,18 +166,18 @@ export default function ShopProductDetailPage() {
       <div className="mb-4 max-lg:mb-4 flex flex-col items-start gap-2.5 max-lg:gap-2.5 lg:mb-6 lg:gap-3">
         <Link
           to={productBackTo}
-          className="inline-flex items-center gap-2 rounded-xl border border-stone-300 bg-white px-4 py-2.5 text-sm font-semibold text-stone-700 no-underline shadow-sm transition-colors hover:border-brand-200 hover:bg-brand-50 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:border-brand-600/50 dark:hover:bg-brand-950/40"
+          className="inline-flex items-center gap-2 rounded-theme-btn border border-theme-border bg-theme-surface px-4 py-2.5 text-sm font-semibold text-theme-text no-underline shadow-theme-card transition-colors hover:border-theme-primary hover:bg-theme-primary-light"
         >
           <ArrowLeft className="h-4 w-4 rtl:rotate-180" aria-hidden />
           {backLabel}
         </Link>
         <nav
-          className="flex flex-wrap items-center gap-x-1 gap-y-0.5 max-lg:gap-x-1 text-xs max-lg:text-xs text-stone-500 dark:text-zinc-400 lg:gap-x-1.5 lg:text-sm"
+          className="flex flex-wrap items-center gap-x-1 gap-y-0.5 max-lg:gap-x-1 text-xs max-lg:text-xs text-theme-text-muted lg:gap-x-1.5 lg:text-sm"
           aria-label="Breadcrumb"
         >
           <Link
             to={`/${username}`}
-            className="font-medium no-underline transition-colors hover:text-brand-700 dark:hover:text-brand-400"
+            className="font-medium no-underline transition-colors hover:text-theme-primary"
           >
             {t('breadcrumbHome')}
           </Link>
@@ -186,14 +186,14 @@ export default function ShopProductDetailPage() {
               <ChevronRight className="h-4 w-4 shrink-0 opacity-60 rtl:rotate-180" aria-hidden />
               <Link
                 to={`/${username}/categories`}
-                className="font-medium no-underline transition-colors hover:text-brand-700 dark:hover:text-brand-400"
+                className="font-medium no-underline transition-colors hover:text-theme-primary"
               >
                 {t('breadcrumbCategories')}
               </Link>
               <ChevronRight className="h-4 w-4 shrink-0 opacity-60 rtl:rotate-180" aria-hidden />
               <Link
                 to={`/${username}/category/${navCategorySlug}`}
-                className="font-medium break-words no-underline transition-colors hover:text-brand-700 dark:hover:text-brand-400"
+                className="font-medium break-words no-underline transition-colors hover:text-theme-primary"
               >
                 {categoryFromNav ? categoryName(categoryFromNav) : navCategorySlug}
               </Link>
@@ -204,38 +204,38 @@ export default function ShopProductDetailPage() {
               <ChevronRight className="h-4 w-4 shrink-0 opacity-60 rtl:rotate-180" aria-hidden />
               <Link
                 to={`/${username}/products`}
-                className="font-medium no-underline transition-colors hover:text-brand-700 dark:hover:text-brand-400"
+                className="font-medium no-underline transition-colors hover:text-theme-primary"
               >
                 {t('breadcrumbProducts')}
               </Link>
             </>
           ) : null}
           <ChevronRight className="h-4 w-4 shrink-0 opacity-60 rtl:rotate-180" aria-hidden />
-          <span className="font-semibold break-words text-stone-800 dark:text-zinc-200">{displayName}</span>
+          <span className="font-semibold break-words text-theme-text">{displayName}</span>
         </nav>
       </div>
 
       <div className="grid gap-4 max-lg:gap-4 lg:grid-cols-[480px_1fr] lg:gap-8 xl:grid-cols-[560px_1fr] lg:items-start">
-        <div className="relative z-0 mx-auto w-full max-w-[480px] lg:mx-0 lg:max-w-none lg:w-full overflow-hidden rounded-2xl max-lg:rounded-2xl border border-stone-200 bg-white shadow-sm dark:border-zinc-700 dark:bg-zinc-900 lg:rounded-3xl">
+        <div className="relative z-0 mx-auto w-full max-w-[480px] lg:mx-0 lg:max-w-none lg:w-full overflow-hidden rounded-theme-card border border-theme-border bg-theme-surface shadow-theme-card">
           {activeImage ? (
             <ProductImage src={activeImage} alt={displayName} />
           ) : (
-            <div className={`${PRODUCT_CARD_ASPECT_CLASS} ${PRODUCT_IMAGE_FRAME_CLASS} flex items-center justify-center text-stone-400 dark:text-zinc-500`}>
+            <div className={`${PRODUCT_CARD_ASPECT_CLASS} ${PRODUCT_IMAGE_FRAME_CLASS} flex items-center justify-center text-theme-text-muted`}>
               <ShoppingBag className="w-16 h-16" />
             </div>
           )}
           {detailImages.length > 1 && (
-            <div className="border-t border-stone-200 bg-stone-50/70 p-3 max-lg:p-3 dark:border-zinc-700 dark:bg-zinc-800/90 lg:p-4">
+            <div className="border-t border-theme-border bg-theme-surface-secondary p-3 max-lg:p-3 lg:p-4">
               <div className="flex items-center gap-2 max-lg:gap-2 overflow-x-auto pb-1 lg:gap-3">
                 {detailImages.map((img, idx) => (
                   <button
                     key={`${img}-${idx}`}
                     type="button"
                     onClick={() => setActiveDetailImageIndex(idx)}
-                    className={`relative h-16 w-16 max-lg:h-16 max-lg:w-16 shrink-0 overflow-hidden rounded-lg border-2 bg-stone-100 transition-all dark:bg-zinc-800 lg:h-20 lg:w-20 lg:rounded-xl ${
+                    className={`relative h-16 w-16 max-lg:h-16 max-lg:w-16 shrink-0 overflow-hidden rounded-theme-card border-2 bg-theme-surface transition-all lg:h-20 lg:w-20 ${
                       idx === safeImageIndex
-                        ? 'border-brand-500 ring-2 ring-brand-100 dark:ring-brand-900/50'
-                        : 'border-stone-200 hover:border-brand-300 dark:border-zinc-600 dark:hover:border-brand-500/50'
+                        ? 'border-theme-primary ring-2 ring-theme-primary/20'
+                        : 'border-theme-border hover:border-theme-primary'
                     }`}
                     aria-label={t('viewImage', { n: idx + 1 })}
                   >
@@ -248,12 +248,12 @@ export default function ShopProductDetailPage() {
         </div>
 
         <div
-          className={`min-w-0 rounded-2xl max-lg:rounded-2xl border border-stone-200 bg-white p-4 shadow-sm dark:border-zinc-700 dark:bg-zinc-900 max-lg:p-4 lg:sticky lg:top-24 lg:rounded-3xl lg:p-7 ${
+          className={`min-w-0 rounded-theme-card border border-theme-border bg-theme-surface p-4 shadow-theme-card max-lg:p-4 lg:sticky lg:top-24 lg:p-7 ${
             detailOptionDropdownOpen ? 'relative z-40 isolate' : 'relative z-0'
           }`}
         >
-          <p className="mb-1.5 text-xs font-semibold uppercase tracking-wider text-brand-600 max-lg:mb-1.5 lg:mb-2">{t('productDetails')}</p>
-          <h1 className="text-xl max-lg:leading-snug font-bold leading-tight text-stone-900 dark:text-zinc-100 lg:text-3xl">{displayName}</h1>
+          <p className="mb-1.5 text-xs font-semibold uppercase tracking-wider text-theme-primary max-lg:mb-1.5 lg:mb-2">{t('productDetails')}</p>
+          <h1 className="text-xl max-lg:leading-snug font-bold leading-tight text-theme-text lg:text-3xl">{displayName}</h1>
           <div className="mt-2">
             <ProductPrice
               p={product}
@@ -272,11 +272,11 @@ export default function ShopProductDetailPage() {
             <p className="mt-2 text-sm font-semibold text-red-600">{t('outOfStock')}</p>
           )}
           {displayDescription && (
-            <p className="mt-3 max-lg:mt-3 text-sm max-lg:text-sm leading-relaxed text-stone-600 dark:text-zinc-400 lg:mt-4 lg:text-base">{displayDescription}</p>
+            <p className="mt-3 max-lg:mt-3 text-sm max-lg:text-sm leading-relaxed text-theme-text-secondary lg:mt-4 lg:text-base">{displayDescription}</p>
           )}
 
           {(hasOptions || hasMessage) && (
-            <div className="mt-5 max-lg:mt-5 space-y-4 max-lg:space-y-4 border-t border-stone-200 pt-5 max-lg:pt-5 dark:border-zinc-700 lg:mt-6 lg:space-y-5 lg:pt-6">
+            <div className="mt-5 max-lg:mt-5 space-y-4 max-lg:space-y-4 border-t border-theme-border pt-5 max-lg:pt-5 lg:mt-6 lg:space-y-5 lg:pt-6">
               {detailDisplayOptions.map((opt) => {
                 const selectedCanonical = addToCartOptions[opt.canonicalName];
                 const selectedIdx =
@@ -285,9 +285,9 @@ export default function ShopProductDetailPage() {
                   selectedIdx >= 0 ? opt.choices[selectedIdx] : selectedCanonical;
                 return (
                   <div key={opt.canonicalName}>
-                    <label className="mb-1.5 block text-sm font-medium text-stone-800 dark:text-zinc-200 max-lg:mb-1.5 lg:mb-2">
+                    <label className="mb-1.5 block text-sm font-medium text-theme-text max-lg:mb-1.5 lg:mb-2">
                       {opt.name}
-                      {opt.required ? <span className="ms-1 text-red-500">*</span> : <span className="ms-1 text-sm text-stone-400 dark:text-zinc-500">{t('optional')}</span>}
+                      {opt.required ? <span className="ms-1 text-red-500">*</span> : <span className="ms-1 text-sm text-theme-text-muted">{t('optional')}</span>}
                     </label>
                     <div
                       data-shop-product-option
@@ -302,19 +302,19 @@ export default function ShopProductDetailPage() {
                             detailOptionDropdownOpen === opt.canonicalName ? null : opt.canonicalName,
                           )
                         }
-                        className="inline-flex w-full items-center justify-between gap-3 rounded-xl border-2 border-stone-200 bg-stone-50/50 px-3 py-2.5 text-sm font-medium text-stone-900 transition-colors hover:border-brand-200 hover:bg-brand-50/40 dark:border-zinc-600 dark:bg-zinc-800/80 dark:text-zinc-100 max-lg:py-2.5 lg:px-4 lg:py-3"
+                        className="inline-flex w-full items-center justify-between gap-3 rounded-theme-input border-2 border-theme-border bg-theme-surface-secondary px-3 py-2.5 text-sm font-medium text-theme-text transition-colors hover:border-theme-primary hover:bg-theme-primary-light max-lg:py-2.5 lg:px-4 lg:py-3"
                       >
                         <span className="truncate text-start">
                           {selectedLabel
                             ? selectedLabel
                             : t('selectOption', { name: opt.name })}
                         </span>
-                        <ChevronDown className={`w-4 h-4 text-stone-500 transition-transform ${detailOptionDropdownOpen === opt.canonicalName ? 'rotate-180' : ''}`} />
+                        <ChevronDown className={`w-4 h-4 text-theme-text-muted transition-transform ${detailOptionDropdownOpen === opt.canonicalName ? 'rotate-180' : ''}`} />
                       </button>
                       {detailOptionDropdownOpen === opt.canonicalName && (
                         <ul
                           role="listbox"
-                          className="absolute start-0 top-full z-50 mt-1 max-h-[min(18rem,55vh)] w-full touch-pan-y overflow-y-auto overscroll-y-contain rounded-xl border border-stone-200 bg-white py-1 shadow-xl dark:border-zinc-700 dark:bg-zinc-900 dark:shadow-black/40"
+                          className="absolute start-0 top-full z-50 mt-1 max-h-[min(18rem,55vh)] w-full touch-pan-y overflow-y-auto overscroll-y-contain rounded-theme-card border border-theme-border bg-theme-surface py-1 shadow-theme-dropdown"
                         >
                           <li role="option" aria-selected={!selectedCanonical}>
                             <button
@@ -324,7 +324,7 @@ export default function ShopProductDetailPage() {
                                 setDetailOptionError('');
                                 setDetailOptionDropdownOpen(null);
                               }}
-                              className="w-full text-start px-4 py-2.5 text-sm font-medium text-stone-500 hover:bg-stone-50 dark:text-zinc-400 dark:hover:bg-zinc-800"
+                              className="w-full text-start px-4 py-2.5 text-sm font-medium text-theme-text-muted hover:bg-theme-surface-secondary"
                             >
                               {opt.required ? t('selectOptionRequired', { name: opt.name }) : t('selectOption', { name: opt.name })}
                             </button>
@@ -343,8 +343,8 @@ export default function ShopProductDetailPage() {
                                 }}
                                 className={`w-full text-start px-4 py-2.5 text-sm font-medium transition-colors ${
                                   selectedCanonical === opt.canonicalChoices[ci]
-                                    ? 'bg-brand-50 text-brand-700 dark:bg-brand-950/50 dark:text-brand-300'
-                                    : 'text-stone-700 hover:bg-stone-50 dark:text-zinc-200 dark:hover:bg-zinc-800'
+                                    ? 'bg-theme-primary-light text-theme-primary font-semibold'
+                                    : 'text-theme-text hover:bg-theme-surface-secondary'
                                 }`}
                               >
                                 {choice}
@@ -359,7 +359,7 @@ export default function ShopProductDetailPage() {
               })}
               {product.allowCustomerMessage && (
                 <div>
-                  <label className="block text-stone-800 font-medium mb-2">
+                  <label className="block text-theme-text font-medium mb-2">
                     <MessageCircle className="w-4 h-4 inline me-1.5 -mt-0.5" />
                     {getLocalizedCustomerMessageLabel(product, lang, t('messageOptional'))}
                   </label>
@@ -368,7 +368,7 @@ export default function ShopProductDetailPage() {
                     onChange={(e) => setAddToCartMessage(e.target.value)}
                     placeholder={t('messagePlaceholder')}
                     rows={3}
-                    className="w-full resize-y rounded-xl border border-stone-300 bg-white px-3 py-2.5 text-sm text-stone-900 placeholder-stone-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100 max-lg:py-2.5 lg:px-4 lg:py-3"
+                    className="w-full resize-y rounded-theme-input border border-theme-border bg-theme-surface-secondary px-3 py-2.5 text-sm text-theme-text placeholder:text-theme-text-muted focus:border-theme-primary focus:bg-theme-surface focus:outline-none focus:ring-2 focus:ring-theme-primary/20 max-lg:py-2.5 lg:px-4 lg:py-3"
                   />
                 </div>
               )}
@@ -378,22 +378,22 @@ export default function ShopProductDetailPage() {
             </div>
           )}
 
-          <div className="mt-5 max-lg:mt-5 space-y-3 max-lg:space-y-3 border-t border-stone-200 pt-5 max-lg:pt-5 dark:border-zinc-700 lg:mt-6 lg:space-y-4 lg:pt-6">
+          <div className="mt-5 max-lg:mt-5 space-y-3 max-lg:space-y-3 border-t border-theme-border pt-5 max-lg:pt-5 lg:mt-6 lg:space-y-4 lg:pt-6">
             <div className="flex items-center justify-between text-sm">
-              <span className="font-medium text-stone-500 dark:text-zinc-400">{t('subtotal')}</span>
-              <span className="font-bold text-stone-900 dark:text-zinc-100">{formatPrice(getEffectivePrice(product, Object.keys(addToCartOptions).length ? addToCartOptions : null) * detailQty, shop.currency)}</span>
+              <span className="font-medium text-theme-text-muted">{t('subtotal')}</span>
+              <span className="font-bold text-theme-text">{formatPrice(getEffectivePrice(product, Object.keys(addToCartOptions).length ? addToCartOptions : null) * detailQty, shop.currency)}</span>
             </div>
             <div className="flex flex-col gap-3 max-lg:flex-col max-lg:gap-3 lg:flex-row lg:flex-wrap lg:items-center">
-              <div className="flex w-full max-lg:w-full items-center justify-center overflow-hidden rounded-xl border border-stone-300 bg-white dark:border-zinc-600 dark:bg-zinc-900 lg:w-auto">
-                <button type="button" onClick={() => setDetailQty((q) => Math.max(1, q - 1))} className="px-4 py-2.5 text-stone-700 hover:bg-stone-100 dark:text-zinc-200 dark:hover:bg-zinc-800 max-lg:py-2.5 lg:py-3">-</button>
-                <span className="min-w-[2.5rem] text-center font-semibold text-stone-900 dark:text-zinc-100">{detailQty}</span>
-                <button type="button" onClick={() => setDetailQty((q) => q + 1)} className="px-4 py-2.5 text-stone-700 hover:bg-stone-100 dark:text-zinc-200 dark:hover:bg-zinc-800 max-lg:py-2.5 lg:py-3">+</button>
+              <div className="flex w-full max-lg:w-full items-center justify-center overflow-hidden rounded-theme-btn border border-theme-border bg-theme-surface lg:w-auto">
+                <button type="button" onClick={() => setDetailQty((q) => Math.max(1, q - 1))} className="px-4 py-2.5 text-theme-text hover:bg-theme-surface-secondary max-lg:py-2.5 lg:py-3">-</button>
+                <span className="min-w-[2.5rem] text-center font-semibold text-theme-text">{detailQty}</span>
+                <button type="button" onClick={() => setDetailQty((q) => q + 1)} className="px-4 py-2.5 text-theme-text hover:bg-theme-surface-secondary max-lg:py-2.5 lg:py-3">+</button>
               </div>
               <button
                 type="button"
                 onClick={handleAddToCartFromDetail}
                 disabled={product.inStock === false || addToCartAnim !== 'idle'}
-                className={`shop-add-to-cart-btn w-full max-lg:w-full flex-1 min-w-0 rounded-xl px-5 py-2.5 font-semibold text-white bg-gradient-to-r from-brand-600 to-brand-600 shadow-md shadow-brand-500/20 hover:from-brand-500 hover:to-brand-500 disabled:cursor-not-allowed disabled:opacity-50 max-lg:py-2.5 lg:min-w-[180px] lg:px-6 lg:py-3 ${
+                className={`shop-add-to-cart-btn w-full max-lg:w-full flex-1 min-w-0 rounded-theme-btn px-5 py-2.5 font-semibold text-theme-badge-text bg-theme-primary shadow-theme-card hover:bg-theme-primary-hover disabled:cursor-not-allowed disabled:opacity-50 max-lg:py-2.5 lg:min-w-[180px] lg:px-6 lg:py-3 ${
                   addToCartAnim === 'adding' ? 'shop-add-to-cart-btn--adding' : ''
                 }${addToCartAnim === 'success' ? ' shop-add-to-cart-btn--success' : ''}`}
               >
@@ -419,7 +419,7 @@ export default function ShopProductDetailPage() {
             {shop.refundEnabled ? (
               <Link
                 to={`/${username}/refund`}
-                className="inline-block text-start text-xs font-semibold text-brand-700 underline decoration-brand-700/35 underline-offset-2 hover:text-brand-800 dark:text-brand-400 dark:decoration-brand-400/40 dark:hover:text-brand-300 lg:text-sm"
+                className="inline-block text-start text-xs font-semibold text-theme-primary underline decoration-theme-primary/35 underline-offset-2 hover:text-theme-primary-hover lg:text-sm"
               >
                 {t('returnExchangePolicy')}
               </Link>

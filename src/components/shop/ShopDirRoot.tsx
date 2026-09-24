@@ -15,19 +15,8 @@ export default function ShopDirRoot({
   const { dir, lang } = useShopLanguage();
 
   return (
-    <StorefrontThemeProvider config={themeConfig ?? null}>
-      <div
-        dir={dir}
-        lang={lang}
-        className={className}
-        style={{
-          background: 'var(--theme-bg, #f8fafc)',
-          color: 'var(--theme-text-primary, #0f172a)',
-          fontFamily: 'var(--theme-font-body, inherit)',
-        }}
-      >
-        {children}
-      </div>
+    <StorefrontThemeProvider config={themeConfig ?? null} dir={dir} lang={lang} className={className}>
+      {children}
     </StorefrontThemeProvider>
   );
 }

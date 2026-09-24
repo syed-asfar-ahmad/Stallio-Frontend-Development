@@ -70,7 +70,7 @@ export default function HeroSplitImage({ shop, username, containerClass }: Theme
               </Link>
               <Link
                 to={`/${username}/contact`}
-                className="inline-flex items-center justify-center rounded-[var(--theme-radius-btn)] border-2 px-5 py-3 text-sm font-semibold transition-colors hover:bg-stone-50 dark:hover:bg-zinc-800"
+                className="inline-flex items-center justify-center rounded-[var(--theme-radius-btn)] border-2 px-5 py-3 text-sm font-semibold transition-colors hover:bg-theme-bg"
                 style={{
                   borderColor: 'var(--theme-border)',
                   color: 'var(--theme-text-primary)',

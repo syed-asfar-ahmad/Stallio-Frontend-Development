@@ -16,16 +16,16 @@ const containerClass = 'w-full max-w-7xl mx-auto px-3 sm:px-4 lg:px-5';
 function OrderSuccessView({ onContinue }: { onContinue: () => void }) {
   const { t } = useShopLanguage();
   return (
-    <div className="bg-white rounded-3xl p-8 sm:p-10 text-center max-w-md border border-stone-200 shadow-lg">
-      <div className="w-16 h-16 rounded-2xl bg-brand-100 flex items-center justify-center mx-auto mb-6 text-brand-600">
+    <div className="bg-theme-surface rounded-theme-card p-8 sm:p-10 text-center max-w-md border border-theme-border shadow-theme-card">
+      <div className="w-16 h-16 rounded-theme-btn bg-theme-primary/10 flex items-center justify-center mx-auto mb-6 text-theme-primary">
         <ShoppingBag className="w-8 h-8" />
       </div>
-      <h2 className="text-2xl font-bold text-stone-800 mb-2">{t('orderSuccessTitle')}</h2>
-      <p className="text-stone-600 mb-8">{t('orderSuccessBody')}</p>
+      <h2 className="text-2xl font-bold text-theme-primary mb-2">{t('orderSuccessTitle')}</h2>
+      <p className="text-theme-secondary mb-8">{t('orderSuccessBody')}</p>
       <button
         type="button"
         onClick={onContinue}
-        className="w-full sm:w-auto px-6 py-3 rounded-xl font-semibold text-white bg-brand-600 hover:bg-brand-500"
+        className="w-full sm:w-auto px-6 py-3 rounded-theme-btn font-semibold text-theme-primary-contrast bg-theme-primary hover:opacity-90 transition-opacity"
       >
         {t('continueShopping')}
       </button>

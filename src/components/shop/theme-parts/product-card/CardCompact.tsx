@@ -68,7 +68,7 @@ export default function CardCompact({ product: p, shopUsername, currency, linkSt
             </div>
 
             <span
-              className="p-1 rounded text-stone-500 group-hover:text-white group-hover:bg-[var(--theme-primary)] transition-colors"
+              className="p-1 rounded text-theme-muted group-hover:text-theme-primary-contrast group-hover:bg-[var(--theme-primary)] transition-colors"
               title="Add to cart"
             >
               <ShoppingCart className="w-3.5 h-3.5" />
