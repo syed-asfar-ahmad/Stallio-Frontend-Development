@@ -87,11 +87,16 @@
       "title": "Simple, rápido y creíble por defecto.",
       "body": "Tres cosas que todo vendedor debería sentir el primer día, sin plugins, temas ni un fin de semana de configuración.",
       "simple": "Sencillo",
-      "simpleSub": "Sin código, sin laberinto de temas",
+      "simpleDetail": "Un camino claro del registro a un escaparate para compartir. Sin plugins ni laberinto de temas.",
+      "simplePoints": [
+        "Nombra tu tienda",
+        "Añade productos",
+        "Comparte un enlace"
+      ],
       "fast": "Rápido",
-      "fastSub": "Crea el borrador de una tienda en minutos",
+      "fastDetail": "La mayoría de vendedores publica la misma noche que se registra, con un catálogo que se ve bien en el móvil.",
       "credible": "Creíble",
-      "credibleSub": "Un enlace que los compradores reconocen"
+      "credibleDetail": "Un escaparate real en stallio.shop se ve intencional, así que chats e historias dejan de cargar todo el trabajo."
     },
     "cta": {
       "eyebrow": "Empieza esta noche",

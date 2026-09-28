@@ -1,6 +1,7 @@
 import {
   IconBolt,
   IconBuildingStore,
+  IconCheck,
   IconTarget,
 } from '@tabler/icons-react';
 import { motion, useReducedMotion } from 'motion/react';
@@ -19,6 +20,9 @@ const promiseCards = [
 export function AboutPromise() {
   const { t } = useTranslation();
   const reduce = useReducedMotion();
+  const simplePoints = t('about.promise.simplePoints', {
+    returnObjects: true,
+  }) as string[];
 
   return (
     <section className="border-border relative overflow-hidden border-y bg-surface dark:bg-background">
@@ -47,89 +51,96 @@ export function AboutPromise() {
             </p>
           </motion.div>
 
-          <div className="grid gap-4 sm:gap-5 md:grid-cols-2 md:grid-rows-2 lg:col-span-8">
-            {promiseCards.map((card, i) => {
-              const isLead = card.key === 'simple';
-              const Icon = card.icon;
+          <div className="lg:col-span-8">
+            <BezelShell
+              className="rounded-[1.85rem]"
+              innerClassName="overflow-hidden rounded-[calc(1.85rem-0.375rem)] p-0"
+            >
+              <ul className="m-0 divide-y divide-border/60 p-0">
+                {promiseCards.map((card, i) => {
+                  const isLead = card.key === 'simple';
+                  const Icon = card.icon;
 
-              return (
-                <motion.div
-                  key={card.key}
-                  className={cn(
-                    'group relative min-h-[11.5rem]',
-                    isLead && 'md:row-span-2 md:min-h-full',
-                  )}
-                  initial={reduce ? false : { opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.35 }}
-                  transition={{
-                    duration: 0.7,
-                    delay: reduce ? 0 : 0.08 + i * 0.06,
-                    ease: motionEase,
-                  }}
-                >
-                  <BezelShell
-                    className={cn(
-                      'h-full rounded-[1.85rem] transition-[box-shadow,transform] duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]',
-                      isLead
-                        ? 'bg-brand/10 ring-brand/20 shadow-[0_32px_64px_-40px_color-mix(in_srgb,var(--brand)_55%,transparent)]'
-                        : 'hover:-translate-y-0.5 hover:ring-brand/25 hover:shadow-[0_24px_48px_-32px_color-mix(in_srgb,var(--brand)_40%,transparent)]',
-                    )}
-                    innerClassName={cn(
-                      'relative h-full overflow-hidden rounded-[calc(1.85rem-0.375rem)] p-6 sm:p-8',
-                      isLead
-                        ? 'bg-accent dark:bg-brand/15 flex flex-col justify-between'
-                        : 'bg-background/90 dark:bg-card/90',
-                      'before:pointer-events-none before:absolute before:inset-0 before:bg-brand/[0.08] before:opacity-0 before:transition-opacity before:duration-300 before:ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:before:opacity-100 dark:before:bg-brand/[0.14]',
-                    )}
-                  >
-                    <div className="relative z-10 flex items-start justify-between gap-4">
-                      <span
-                        className={cn(
-                          'inline-flex size-11 items-center justify-center rounded-full transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-105',
-                          isLead
-                            ? 'bg-brand text-white shadow-[0_18px_40px_-24px_color-mix(in_srgb,var(--brand)_80%,transparent)]'
-                            : 'bg-muted text-brand',
-                        )}
-                      >
-                        <Icon className="size-5" stroke={1.5} aria-hidden />
-                      </span>
-                      <span className="text-muted-foreground/55 text-sm font-semibold tracking-[0.18em] tabular-nums">
-                        {card.index}
-                      </span>
-                    </div>
-
-                    <div
+                  return (
+                    <motion.li
+                      key={card.key}
                       className={cn(
-                        'relative z-10',
-                        isLead ? 'mt-16 md:mt-auto md:pt-20' : 'mt-8',
+                        'group relative list-none',
+                        isLead
+                          ? 'bg-brand/[0.05] dark:bg-brand/[0.1]'
+                          : 'bg-background/90 dark:bg-card/90',
                       )}
+                      initial={reduce ? false : { opacity: 0, y: 16 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.4 }}
+                      transition={{
+                        duration: 0.65,
+                        delay: reduce ? 0 : 0.08 + i * 0.06,
+                        ease: motionEase,
+                      }}
                     >
-                      <p
-                        className={cn(
-                          'text-foreground font-semibold tracking-tight',
-                          isLead
-                            ? 'text-4xl sm:text-5xl lg:text-[3.25rem]'
-                            : 'text-2xl sm:text-3xl',
-                        )}
-                      >
-                        {t(`about.promise.${card.key}`)}
-                      </p>
-                      <p
-                        className={cn(
-                          'text-muted-foreground mt-2 leading-6',
-                          isLead
-                            ? 'max-w-[22ch] text-base sm:text-lg sm:leading-8'
-                            : 'max-w-[24ch] text-sm',
-                        )}
-                      >
-                        {t(`about.promise.${card.key}Sub`)}
-                      </p>
-                    </div>
-                  </BezelShell>
-                </motion.div>
-              );
-            })}
+                      <div
+                        aria-hidden
+                        className="pointer-events-none absolute inset-0 bg-brand/[0.07] opacity-0 transition-opacity duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:opacity-100 dark:bg-brand/[0.12]"
+                      />
+
+                      <div className="relative z-10 grid grid-cols-[auto_minmax(0,1fr)] items-start gap-5 p-6 sm:gap-6 sm:p-8">
+                        <span
+                          className={cn(
+                            'inline-flex size-11 shrink-0 items-center justify-center rounded-full transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-105',
+                            isLead
+                              ? 'bg-brand text-white shadow-[0_18px_40px_-24px_color-mix(in_srgb,var(--brand)_80%,transparent)]'
+                              : 'bg-muted text-brand',
+                          )}
+                        >
+                          <Icon className="size-5" stroke={1.5} aria-hidden />
+                        </span>
+
+                        <div className="min-w-0 space-y-3">
+                          <div className="flex items-baseline gap-3">
+                            <span className="text-muted-foreground/45 text-xs font-semibold tracking-[0.18em] tabular-nums">
+                              {card.index}
+                            </span>
+                            <p
+                              className={cn(
+                                'text-foreground font-semibold tracking-tight',
+                                isLead
+                                  ? 'text-3xl sm:text-4xl'
+                                  : 'text-xl sm:text-2xl',
+                              )}
+                            >
+                              {t(`about.promise.${card.key}`)}
+                            </p>
+                          </div>
+
+                          <p className="text-foreground/80 max-w-[48ch] text-sm leading-6 sm:text-base sm:leading-7">
+                            {t(`about.promise.${card.key}Detail`)}
+                          </p>
+
+                          {isLead ? (
+                            <ul className="mt-1 flex flex-wrap gap-2">
+                              {simplePoints.map((point) => (
+                                <li
+                                  key={point}
+                                  className="border-border/70 bg-background/80 text-foreground inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium dark:bg-zinc-900/70"
+                                >
+                                  <IconCheck
+                                    className="text-brand size-3.5 shrink-0"
+                                    stroke={1.75}
+                                    aria-hidden
+                                  />
+                                  {point}
+                                </li>
+                              ))}
+                            </ul>
+                          ) : null}
+                        </div>
+                      </div>
+                    </motion.li>
+                  );
+                })}
+              </ul>
+            </BezelShell>
           </div>
         </div>
       </div>
