@@ -4,19 +4,14 @@ import {
   classicCleanDarkTokens,
   modernMinimalTokens,
   modernMinimalDarkTokens,
-  boldEditorialTokens,
-  boldEditorialDarkTokens,
   boutiqueArtisanTokens,
   boutiqueArtisanDarkTokens,
   retailCatalogTokens,
   retailCatalogDarkTokens,
-  // Premium themes
   noirLuxeTokens,
   noirLuxeLightTokens,
   pacificFreshTokens,
   pacificFreshDarkTokens,
-  studioGridTokens,
-  studioGridDarkTokens,
 } from './tokens';
 import { DEFAULT_THEME_ID } from './constants';
 
@@ -85,36 +80,6 @@ export const THEME_REGISTRY: Record<ThemeId, ThemeDefinition> = {
     },
   },
 
-  'bold-editorial': {
-    id: 'bold-editorial',
-    name: 'bold-editorial',
-    displayName: 'Bold Editorial',
-    tagline: 'High-impact streetwear and lifestyle magazine aesthetic',
-    description:
-      'High contrast, oversized typography, and neo-brutalist shadows. Built for trendsetting brands that want to make an aggressive statement.',
-    category: 'Editorial',
-    tier: 'business',
-    previewImage: '/themes/previews/bold-editorial.webp',
-    features: [
-      'High contrast solid borders with drop-shadow effects',
-      'Oversized display typography with uppercase badges',
-      'Split screen dynamic hero section with bold CTA buttons',
-      'Editorial style story and testimonial blocks',
-    ],
-    defaultTokens: boldEditorialTokens,
-    defaultDarkTokens: boldEditorialDarkTokens,
-    defaultLayout: {
-      heroVariant: 'split-image',
-      productCardVariant: 'editorial',
-      headerVariant: 'classic-bar',
-      footerVariant: 'bold-newsletter',
-      productGridColumns: 2,
-      showCategoryPillsOnHome: true,
-      showFeaturedCollection: true,
-      showReviewsSection: true,
-      showTrustBadges: true,
-    },
-  },
 
   'boutique-artisan': {
     id: 'boutique-artisan',
@@ -242,36 +207,6 @@ export const THEME_REGISTRY: Record<ThemeId, ThemeDefinition> = {
     },
   },
 
-  'studio-grid': {
-    id: 'studio-grid',
-    name: 'studio-grid',
-    displayName: 'Studio Grid',
-    tagline: 'Precise, technical layout for electronics and design-led products',
-    description:
-      'A clinical white canvas with saturated cobalt authority and tight geometric grid discipline. Built for brands where spec sheets matter as much as photography.',
-    category: 'Premium',
-    tier: 'business',
-    previewImage: '/themes/previews/studio-grid.webp',
-    features: [
-      'Saturated cobalt primary with cool-slate accent palette',
-      'Syne display headings — geometric authority at every size',
-      'Tight 4–6 px radius geometry with ruled borders',
-      'Dense 4-column product grid with inline compact header',
-    ],
-    defaultTokens: studioGridTokens,
-    defaultDarkTokens: studioGridDarkTokens,
-    defaultLayout: {
-      heroVariant: 'full-banner',
-      productCardVariant: 'compact',
-      headerVariant: 'inline-compact',
-      footerVariant: 'multi-column',
-      productGridColumns: 4,
-      showCategoryPillsOnHome: true,
-      showFeaturedCollection: true,
-      showReviewsSection: false,
-      showTrustBadges: true,
-    },
-  },
 };
 
 export const THEME_LIST: ThemeDefinition[] = Object.values(THEME_REGISTRY);

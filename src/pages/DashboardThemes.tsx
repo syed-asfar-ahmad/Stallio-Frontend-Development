@@ -273,7 +273,7 @@ export default function DashboardThemes() {
           </div>
 
           <div className="flex items-center gap-2.5 shrink-0 flex-wrap sm:flex-nowrap">
-            <Link
+            {/* <Link
               to={storefrontUrl}
               target="_blank"
               rel="noopener noreferrer"
@@ -281,17 +281,17 @@ export default function DashboardThemes() {
             >
               <ExternalLink className="w-4 h-4 shrink-0" />
               <span>Live Storefront</span>
-            </Link>
+            </Link> */}
 
-            <button
-              type="button"
-              onClick={handleResetDefaults}
-              className={`${DASHBOARD_BTN_SECONDARY} whitespace-nowrap`}
-              title="Reset current theme to factory defaults"
-            >
-              <RotateCcw className="w-4 h-4 shrink-0" />
-              <span>Reset Defaults</span>
-            </button>
+          <button
+            type="button"
+            onClick={handleResetDefaults}
+            className={`${DASHBOARD_BTN_SECONDARY} inline-flex items-center gap-2 whitespace-nowrap`}
+            title="Reset current theme to factory defaults"
+          >
+            <RotateCcw className="w-4 h-4 shrink-0" />
+            <span>Reset Defaults</span>
+          </button>
 
             <button
               type="button"
@@ -341,7 +341,7 @@ export default function DashboardThemes() {
             }`}
           >
             <LayoutGrid className="w-4 h-4" />
-            Theme Gallery (5 Available)
+            Theme Gallery 
           </button>
           <button
             type="button"
@@ -1016,3 +1016,4 @@ export default function DashboardThemes() {
     </DashboardLayout>
   );
 }
+// default export DashboardThemes;

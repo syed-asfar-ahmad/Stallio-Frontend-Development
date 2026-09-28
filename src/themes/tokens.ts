@@ -1,9 +1,5 @@
 import type { ThemeTokens } from './types';
 
-// ─────────────────────────────────────────────────────────────────────────────
-// EXISTING THEMES (unchanged)
-// ─────────────────────────────────────────────────────────────────────────────
-
 export const classicCleanTokens: ThemeTokens = {
   colors: {
     primary: '#2563eb',
@@ -165,30 +161,6 @@ export const boldEditorialTokens: ThemeTokens = {
   },
 };
 
-export const boldEditorialDarkTokens: ThemeTokens = {
-  ...boldEditorialTokens,
-  colors: {
-    primary: '#f43f5e',
-    primaryHover: '#e11d48',
-    primaryLight: '#4c0519',
-    secondary: '#fafafa',
-    background: '#09090b',
-    surface: '#141417',
-    surfaceSecondary: '#1f1f23',
-    textPrimary: '#fafafa',
-    textSecondary: '#a1a1aa',
-    textMuted: '#71717a',
-    border: '#3f3f46',
-    borderFocus: '#f43f5e',
-    badgeBg: '#f43f5e',
-    badgeText: '#ffffff',
-  },
-  shadows: {
-    card: '4px 4px 0px 0px #27272a',
-    cardHover: '6px 6px 0px 0px #27272a',
-    dropdown: '6px 6px 0px 0px #27272a',
-  },
-};
 
 export const boutiqueArtisanTokens: ThemeTokens = {
   colors: {
@@ -460,73 +432,6 @@ export const pacificFreshDarkTokens: ThemeTokens = {
 };
 
 
-// ─────────────────────────────────────────────────────────────────────────────
-// PREMIUM THEME 3 — STUDIO GRID
-// Target: electronics, industrial tools, design goods, tech accessories
-// Palette: clinical white · saturated cobalt blue primary · slate accents
-// Typography: Syne headings (geometric, authoritative) · Inter body
-// Geometry: tight 4px radius, hard-ruled borders, precise grid energy
-// ─────────────────────────────────────────────────────────────────────────────
 
-export const studioGridTokens: ThemeTokens = {
-  colors: {
-    primary: '#1e40af',          // Saturated cobalt — authority without aggression
-    primaryHover: '#1730a0',     // Deeper cobalt
-    primaryLight: '#e8edfc',     // Pale cobalt tint
-    secondary: '#0f172a',        // Ink navy
-    background: '#f8f9fb',       // Clinical near-white
-    surface: '#ffffff',
-    surfaceSecondary: '#f0f2f7', // Cool grey step
-    textPrimary: '#0f172a',      // Ink
-    textSecondary: '#3d4f6e',    // Cool slate
-    textMuted: '#8494b4',        // Muted slate
-    border: '#dde2ef',           // Cool grey border
-    borderFocus: '#1e40af',      // Cobalt focus
-    badgeBg: '#1e40af',          // Cobalt badge
-    badgeText: '#ffffff',
-  },
-  typography: {
-    fontFamilyHeading: 'Syne, "Cabinet Grotesk", ui-sans-serif, system-ui, sans-serif',
-    fontFamilyBody: 'Inter, ui-sans-serif, system-ui, sans-serif',
-    headingLetterSpacing: '-0.025em',
-    headingFontWeight: '700',
-    headingTransform: 'none',
-  },
-  radii: {
-    button: '4px',               // Precise — engineered feel
-    card: '6px',
-    input: '4px',
-    badge: '3px',                // Near-square badge — technical spec label feel
-  },
-  shadows: {
-    // Cool blue-tinted shadows — crisp and dimensional
-    card: '0 1px 4px 0 rgb(30 64 175 / 0.06), 0 1px 2px 0 rgb(0 0 0 / 0.04)',
-    cardHover: '0 8px 24px -4px rgb(30 64 175 / 0.12), 0 2px 6px 0 rgb(0 0 0 / 0.06)',
-    dropdown: '0 16px 32px -4px rgb(15 23 42 / 0.14), 0 4px 8px -2px rgb(0 0 0 / 0.06)',
-  },
-};
 
-export const studioGridDarkTokens: ThemeTokens = {
-  ...studioGridTokens,
-  colors: {
-    primary: '#4f80ff',          // Electric cobalt — vivid on dark
-    primaryHover: '#3a6cf7',
-    primaryLight: '#1a2a5e',     // Deep cobalt tint
-    secondary: '#aabbdd',        // Cool lavender secondary
-    background: '#07090f',       // Deep ink blue-black
-    surface: '#0e1220',          // Cobalt-tinted surface
-    surfaceSecondary: '#161d30', // Slightly lighter
-    textPrimary: '#e8ecf8',      // Cool white
-    textSecondary: '#8494b4',    // Slate
-    textMuted: '#3d4f6e',        // Dark slate
-    border: '#1c2540',           // Dark cobalt border
-    borderFocus: '#4f80ff',      // Electric focus
-    badgeBg: '#4f80ff',
-    badgeText: '#07090f',
-  },
-  shadows: {
-    card: '0 1px 4px 0 rgb(0 0 0 / 0.5)',
-    cardHover: '0 8px 24px -4px rgb(0 0 0 / 0.6), 0 0 0 1px rgb(79 128 255 / 0.1)',
-    dropdown: '0 16px 32px -4px rgb(0 0 0 / 0.7)',
-  },
-};
+

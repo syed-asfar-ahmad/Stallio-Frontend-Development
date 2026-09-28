@@ -46,7 +46,7 @@ const AdminShopEdit = lazy(() => import('./pages/admin/AdminShopEdit'));
 const AdminSubscriptions = lazy(() => import('./pages/admin/AdminSubscriptions'));
 const AdminSupportChat = lazy(() => import('./pages/admin/AdminSupportChat'));
 const AdminNotifications = lazy(() => import('./pages/admin/AdminNotifications'));
-const DashboardThemes = lazy(() => import('./pages/DashboardThemes'));
+// const DashboardThemes = lazy(() => import('./pages/DashboardThemes'));
 function LegacyShopRedirect() {
   const { pathname, search, hash } = useLocation();
   const stripped = pathname.replace(/^\/shop\/?/, '');

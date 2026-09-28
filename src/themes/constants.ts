@@ -8,24 +8,19 @@ export const THEMES_BY_PLAN: Record<SellerPlanTier, ThemeId[]> = {
   business: [
     'classic-clean',
     'modern-minimal',
-    'bold-editorial',
     'boutique-artisan',
     'retail-catalog',
-    // Premium themes — business plan
     'noir-luxe',
     'pacific-fresh',
-    'studio-grid',
   ],
 };
 
 export const BASIC_PLAN_THEMES: ThemeId[] = THEMES_BY_PLAN.basic;
 export const BUSINESS_EXCLUSIVE_THEMES: ThemeId[] = [
-  'bold-editorial',
   'boutique-artisan',
   'retail-catalog',
   'noir-luxe',
   'pacific-fresh',
-  'studio-grid',
 ];
 
 export const FONT_PRESETS: { id: FontFamilyPreset; label: string; family: string }[] = [
@@ -56,12 +51,10 @@ export function getAvailableThemesForPlan(_plan?: string | null): ThemeId[] {
   return [
     'classic-clean',
     'modern-minimal',
-    'bold-editorial',
     'boutique-artisan',
     'retail-catalog',
     'noir-luxe',
     'pacific-fresh',
-    'studio-grid',
   ];
 }
 

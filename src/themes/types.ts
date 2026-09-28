@@ -3,13 +3,10 @@ import type { SellerPlanTier } from '../lib/sellerPlanLimits';
 export type ThemeId =
   | 'classic-clean'
   | 'modern-minimal'
-  | 'bold-editorial'
   | 'boutique-artisan'
   | 'retail-catalog'
-  // ── Premium themes added Sept 2026 ──────────────────────────────────────────
-  | 'noir-luxe'        // High-end dark fashion / jewellery / watches
-  | 'pacific-fresh'   // Wellness, beauty, organic food
-  | 'studio-grid';    // Electronics, tools, design goods
+  | 'noir-luxe'        
+  | 'pacific-fresh';   
 
 export type FontFamilyPreset =
   | 'outfit'
@@ -123,7 +120,7 @@ export interface ThemeDefinition {
   displayName: string;
   tagline: string;
   description: string;
-  category: 'Modern' | 'Minimalist' | 'Luxury' | 'Editorial' | 'High-Volume' | 'Premium';
+  category: 'Modern' | 'Minimalist' | 'Luxury'  | 'High-Volume' | 'Premium';
   tier: SellerPlanTier;
   previewImage: string;
   demoUrl?: string;
