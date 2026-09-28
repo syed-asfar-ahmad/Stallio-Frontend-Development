@@ -6,9 +6,10 @@ export type ThemeId =
   | 'bold-editorial'
   | 'boutique-artisan'
   | 'retail-catalog'
-  | 'noir-luxe'
-  | 'pacific-fresh'
-  | 'studio-grid';
+  // ── Premium themes added Sept 2026 ──────────────────────────────────────────
+  | 'noir-luxe'        // High-end dark fashion / jewellery / watches
+  | 'pacific-fresh'   // Wellness, beauty, organic food
+  | 'studio-grid';    // Electronics, tools, design goods
 
 export type FontFamilyPreset =
   | 'outfit'
@@ -18,7 +19,7 @@ export type FontFamilyPreset =
   | 'syne'
   | 'cormorant'
   | 'cabinet-grotesk'
-  | 'dm-serif';
+  | 'dm-serif';       // Added for noir-luxe
 
 export type RadiusPreset = 'none' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
 
@@ -131,4 +132,3 @@ export interface ThemeDefinition {
   defaultDarkTokens?: ThemeTokens;
   defaultLayout: ThemeLayoutSettings;
 }
-
