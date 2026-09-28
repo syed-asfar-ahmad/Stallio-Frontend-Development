@@ -120,4 +120,67 @@ export const SAMPLE_PREVIEWS: Record<ThemeId, SampleThemeData> = {
       },
     ],
   },
+  'noir-luxe': {
+    heroImage: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=800&auto=format&fit=crop',
+    products: [
+      {
+        id: '1',
+        name: 'Monochrome Chronograph Obsidian Watch',
+        price: 480.0,
+        compare: 550.0,
+        image: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=600&auto=format&fit=crop',
+        tag: 'Prestige',
+      },
+      {
+        id: '2',
+        name: 'Solid 18k Champagne Gold Band',
+        price: 320.0,
+        compare: 390.0,
+        image: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=600&auto=format&fit=crop',
+        tag: 'Exclusive',
+      },
+    ],
+  },
+  'pacific-fresh': {
+    heroImage: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=800&auto=format&fit=crop',
+    products: [
+      {
+        id: '1',
+        name: 'Organic Sea Kelp Revitalizing Serum',
+        price: 54.0,
+        compare: 68.0,
+        image: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=600&auto=format&fit=crop',
+        tag: 'Wildcrafted',
+      },
+      {
+        id: '2',
+        name: 'Hydrating Jade Essence Facial Mist',
+        price: 36.0,
+        compare: 45.0,
+        image: 'https://images.unsplash.com/photo-1608248597359-0f0f4a86f91d?q=80&w=600&auto=format&fit=crop',
+        tag: 'Organic',
+      },
+    ],
+  },
+  'studio-grid': {
+    heroImage: 'https://images.unsplash.com/photo-1550009158-9ebf69173e03?q=80&w=800&auto=format&fit=crop',
+    products: [
+      {
+        id: '1',
+        name: 'Studio Reference Precision Mechanical Keyboard',
+        price: 165.0,
+        compare: 210.0,
+        image: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?q=80&w=600&auto=format&fit=crop',
+        tag: 'Spec 01',
+      },
+      {
+        id: '2',
+        name: 'Anodized Aluminum Desk Monitor Arm',
+        price: 110.0,
+        compare: 140.0,
+        image: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?q=80&w=600&auto=format&fit=crop',
+        tag: 'CNC Machined',
+      },
+    ],
+  },
 };

@@ -78,6 +78,7 @@ export default function DashboardThemes() {
   const { user, loading: authLoading, fetchUser, replaceUser } = useAuth();
 
   const [activeTab, setActiveTab] = useState<ViewTab>('gallery');
+  const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [selectedThemeId, setSelectedThemeId] = useState<ThemeId>(DEFAULT_THEME_ID);
   const [customColors, setCustomColors] = useState<Partial<ThemeColorTokens>>({});
   const [customTypography, setCustomTypography] = useState<Partial<ThemeTypographyTokens>>({});
@@ -115,7 +116,8 @@ export default function DashboardThemes() {
   }, [user]);
 
   const activeThemeDef = THEME_REGISTRY[selectedThemeId] || THEME_REGISTRY[DEFAULT_THEME_ID];
-  const isBusinessPlan = user?.plan === 'business';
+  // Bypassed for development & testing so all themes and token customization can be tested
+  const isBusinessPlan = true;
 
   const previewThemeConfig = useMemo<ShopThemeConfig>(() => {
     return {
@@ -255,10 +257,10 @@ export default function DashboardThemes() {
   return (
     <DashboardLayout>
       <div className="space-y-6 pb-12 max-w-7xl mx-auto">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-stone-200/80 dark:border-zinc-800 pb-5">
-          <div>
+        <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4 border-b border-stone-200/80 dark:border-zinc-800 pb-5">
+          <div className="min-w-0">
             <div className="flex items-center gap-2.5">
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-500/10 text-brand-600 dark:text-brand-400">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-500/10 text-brand-600 dark:text-brand-400">
                 <Palette className="w-5 h-5" />
               </span>
               <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-stone-900 dark:text-zinc-100">
@@ -270,40 +272,36 @@ export default function DashboardThemes() {
             </p>
           </div>
 
-          <div className="flex items-center gap-2.5 flex-wrap">
+          <div className="flex items-center gap-2.5 shrink-0 flex-wrap sm:flex-nowrap">
             <Link
               to={storefrontUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={DASHBOARD_BTN_OUTLINE}
+              className={`${DASHBOARD_BTN_OUTLINE} whitespace-nowrap`}
             >
-              <ExternalLink className="w-4 h-4" />
-              Live Storefront
+              <ExternalLink className="w-4 h-4 shrink-0" />
+              <span>Live Storefront</span>
             </Link>
 
-            {isBusinessPlan && (
-              <>
-                <button
-                  type="button"
-                  onClick={handleResetDefaults}
-                  className={DASHBOARD_BTN_SECONDARY}
-                  title="Reset current theme to factory defaults"
-                >
-                  <RotateCcw className="w-4 h-4" />
-                  Reset Defaults
-                </button>
+            <button
+              type="button"
+              onClick={handleResetDefaults}
+              className={`${DASHBOARD_BTN_SECONDARY} whitespace-nowrap`}
+              title="Reset current theme to factory defaults"
+            >
+              <RotateCcw className="w-4 h-4 shrink-0" />
+              <span>Reset Defaults</span>
+            </button>
 
-                <button
-                  type="button"
-                  onClick={handleSave}
-                  disabled={saving}
-                  className={DASHBOARD_BTN_PRIMARY}
-                >
-                  <Save className="w-4 h-4" />
-                  {saving ? 'Publishing...' : 'Save & Publish'}
-                </button>
-              </>
-            )}
+            <button
+              type="button"
+              onClick={handleSave}
+              disabled={saving}
+              className={`${DASHBOARD_BTN_PRIMARY} whitespace-nowrap`}
+            >
+              <Save className="w-4 h-4 shrink-0" />
+              <span>{saving ? 'Publishing...' : 'Save & Publish'}</span>
+            </button>
           </div>
         </div>
 

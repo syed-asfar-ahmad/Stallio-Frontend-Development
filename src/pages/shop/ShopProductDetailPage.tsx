@@ -216,27 +216,48 @@ export default function ShopProductDetailPage() {
       </div>
 
       <div className="grid gap-4 max-lg:gap-4 lg:grid-cols-[480px_1fr] lg:gap-8 xl:grid-cols-[560px_1fr] lg:items-start">
-        <div className="relative z-0 mx-auto w-full max-w-[480px] lg:mx-0 lg:max-w-none lg:w-full overflow-hidden rounded-theme-card border border-theme-border bg-theme-surface shadow-theme-card">
+        <div
+          className="relative z-0 mx-auto w-full max-w-[480px] lg:mx-0 lg:max-w-none lg:w-full overflow-hidden border"
+          style={{
+            borderRadius: 'var(--theme-radius-card)',
+            borderColor: 'var(--theme-border)',
+            background: 'var(--theme-surface)',
+            boxShadow: 'var(--theme-shadow-card)',
+          }}
+        >
           {activeImage ? (
             <ProductImage src={activeImage} alt={displayName} />
           ) : (
-            <div className={`${PRODUCT_CARD_ASPECT_CLASS} ${PRODUCT_IMAGE_FRAME_CLASS} flex items-center justify-center text-theme-text-muted`}>
+            <div
+              className={`${PRODUCT_CARD_ASPECT_CLASS} ${PRODUCT_IMAGE_FRAME_CLASS} flex items-center justify-center`}
+              style={{ color: 'var(--theme-text-muted)' }}
+            >
               <ShoppingBag className="w-16 h-16" />
             </div>
           )}
           {detailImages.length > 1 && (
-            <div className="border-t border-theme-border bg-theme-surface-secondary p-3 max-lg:p-3 lg:p-4">
+            <div
+              className="border-t p-3 max-lg:p-3 lg:p-4"
+              style={{
+                borderColor: 'var(--theme-border)',
+                background: 'var(--theme-surface-secondary)',
+              }}
+            >
               <div className="flex items-center gap-2 max-lg:gap-2 overflow-x-auto pb-1 lg:gap-3">
                 {detailImages.map((img, idx) => (
                   <button
                     key={`${img}-${idx}`}
                     type="button"
                     onClick={() => setActiveDetailImageIndex(idx)}
-                    className={`relative h-16 w-16 max-lg:h-16 max-lg:w-16 shrink-0 overflow-hidden rounded-theme-card border-2 bg-theme-surface transition-all lg:h-20 lg:w-20 ${
+                    className={`relative h-16 w-16 max-lg:h-16 max-lg:w-16 shrink-0 overflow-hidden border-2 transition-all lg:h-20 lg:w-20 ${
                       idx === safeImageIndex
-                        ? 'border-theme-primary ring-2 ring-theme-primary/20'
-                        : 'border-theme-border hover:border-theme-primary'
+                        ? 'border-[var(--theme-primary)] ring-2 ring-[var(--theme-primary)]/20 scale-105'
+                        : 'border-[var(--theme-border)] hover:border-[var(--theme-primary)]'
                     }`}
+                    style={{
+                      borderRadius: 'calc(var(--theme-radius-card) * 0.75)',
+                      background: 'var(--theme-surface)',
+                    }}
                     aria-label={t('viewImage', { n: idx + 1 })}
                   >
                     <img src={getProductImageDisplayUrl(img)} alt="" className={PRODUCT_IMAGE_CLASS} />
@@ -248,12 +269,33 @@ export default function ShopProductDetailPage() {
         </div>
 
         <div
-          className={`min-w-0 rounded-theme-card border border-theme-border bg-theme-surface p-4 shadow-theme-card max-lg:p-4 lg:sticky lg:top-24 lg:p-7 ${
+          className={`min-w-0 border p-5 sm:p-7 lg:sticky lg:top-24 ${
             detailOptionDropdownOpen ? 'relative z-40 isolate' : 'relative z-0'
           }`}
+          style={{
+            borderRadius: 'var(--theme-radius-card)',
+            borderColor: 'var(--theme-border)',
+            background: 'var(--theme-surface)',
+            boxShadow: 'var(--theme-shadow-card)',
+          }}
         >
-          <p className="mb-1.5 text-xs font-semibold uppercase tracking-wider text-theme-primary max-lg:mb-1.5 lg:mb-2">{t('productDetails')}</p>
-          <h1 className="text-xl max-lg:leading-snug font-bold leading-tight text-theme-text lg:text-3xl">{displayName}</h1>
+          <p
+            className="mb-1.5 text-xs font-semibold uppercase tracking-wider"
+            style={{ color: 'var(--theme-primary)' }}
+          >
+            {product.category || t('productDetails')}
+          </p>
+          <h1
+            className="text-xl max-lg:leading-snug font-bold leading-tight lg:text-3xl"
+            style={{
+              color: 'var(--theme-text-primary)',
+              fontFamily: 'var(--theme-font-heading)',
+              letterSpacing: 'var(--theme-heading-spacing)',
+              textTransform: 'var(--theme-heading-transform)' as any,
+            }}
+          >
+            {displayName}
+          </h1>
           <div className="mt-2">
             <ProductPrice
               p={product}
@@ -272,11 +314,19 @@ export default function ShopProductDetailPage() {
             <p className="mt-2 text-sm font-semibold text-red-600">{t('outOfStock')}</p>
           )}
           {displayDescription && (
-            <p className="mt-3 max-lg:mt-3 text-sm max-lg:text-sm leading-relaxed text-theme-text-secondary lg:mt-4 lg:text-base">{displayDescription}</p>
+            <p
+              className="mt-3 max-lg:mt-3 text-sm max-lg:text-sm leading-relaxed lg:mt-4 lg:text-base"
+              style={{ color: 'var(--theme-text-secondary)' }}
+            >
+              {displayDescription}
+            </p>
           )}
 
           {(hasOptions || hasMessage) && (
-            <div className="mt-5 max-lg:mt-5 space-y-4 max-lg:space-y-4 border-t border-theme-border pt-5 max-lg:pt-5 lg:mt-6 lg:space-y-5 lg:pt-6">
+            <div
+              className="mt-5 max-lg:mt-5 space-y-4 max-lg:space-y-4 border-t pt-5 max-lg:pt-5 lg:mt-6 lg:space-y-5 lg:pt-6"
+              style={{ borderColor: 'var(--theme-border)' }}
+            >
               {detailDisplayOptions.map((opt) => {
                 const selectedCanonical = addToCartOptions[opt.canonicalName];
                 const selectedIdx =
@@ -285,7 +335,10 @@ export default function ShopProductDetailPage() {
                   selectedIdx >= 0 ? opt.choices[selectedIdx] : selectedCanonical;
                 return (
                   <div key={opt.canonicalName}>
-                    <label className="mb-1.5 block text-sm font-medium text-theme-text max-lg:mb-1.5 lg:mb-2">
+                    <label
+                      className="mb-1.5 block text-sm font-medium max-lg:mb-1.5 lg:mb-2"
+                      style={{ color: 'var(--theme-text-primary)' }}
+                    >
                       {opt.name}
                       {opt.required ? <span className="ms-1 text-red-500">*</span> : <span className="ms-1 text-sm text-theme-text-muted">{t('optional')}</span>}
                     </label>
@@ -302,19 +355,31 @@ export default function ShopProductDetailPage() {
                             detailOptionDropdownOpen === opt.canonicalName ? null : opt.canonicalName,
                           )
                         }
-                        className="inline-flex w-full items-center justify-between gap-3 rounded-theme-input border-2 border-theme-border bg-theme-surface-secondary px-3 py-2.5 text-sm font-medium text-theme-text transition-colors hover:border-theme-primary hover:bg-theme-primary-light max-lg:py-2.5 lg:px-4 lg:py-3"
+                        className="inline-flex w-full items-center justify-between gap-3 border px-3 py-2.5 text-sm font-medium transition-colors max-lg:py-2.5 lg:px-4 lg:py-3"
+                        style={{
+                          borderRadius: 'var(--theme-radius-input)',
+                          borderColor: 'var(--theme-border)',
+                          background: 'var(--theme-surface-secondary)',
+                          color: 'var(--theme-text-primary)',
+                        }}
                       >
                         <span className="truncate text-start">
                           {selectedLabel
                             ? selectedLabel
                             : t('selectOption', { name: opt.name })}
                         </span>
-                        <ChevronDown className={`w-4 h-4 text-theme-text-muted transition-transform ${detailOptionDropdownOpen === opt.canonicalName ? 'rotate-180' : ''}`} />
+                        <ChevronDown className={`w-4 h-4 transition-transform ${detailOptionDropdownOpen === opt.canonicalName ? 'rotate-180' : ''}`} style={{ color: 'var(--theme-text-muted)' }} />
                       </button>
                       {detailOptionDropdownOpen === opt.canonicalName && (
                         <ul
                           role="listbox"
-                          className="absolute start-0 top-full z-50 mt-1 max-h-[min(18rem,55vh)] w-full touch-pan-y overflow-y-auto overscroll-y-contain rounded-theme-card border border-theme-border bg-theme-surface py-1 shadow-theme-dropdown"
+                          className="absolute start-0 top-full z-50 mt-1 max-h-[min(18rem,55vh)] w-full touch-pan-y overflow-y-auto overscroll-y-contain border py-1"
+                          style={{
+                            borderRadius: 'var(--theme-radius-card)',
+                            borderColor: 'var(--theme-border)',
+                            background: 'var(--theme-surface)',
+                            boxShadow: 'var(--theme-shadow-dropdown)',
+                          }}
                         >
                           <li role="option" aria-selected={!selectedCanonical}>
                             <button
@@ -324,7 +389,8 @@ export default function ShopProductDetailPage() {
                                 setDetailOptionError('');
                                 setDetailOptionDropdownOpen(null);
                               }}
-                              className="w-full text-start px-4 py-2.5 text-sm font-medium text-theme-text-muted hover:bg-theme-surface-secondary"
+                              className="w-full text-start px-4 py-2.5 text-sm font-medium hover:opacity-80"
+                              style={{ color: 'var(--theme-text-muted)' }}
                             >
                               {opt.required ? t('selectOptionRequired', { name: opt.name }) : t('selectOption', { name: opt.name })}
                             </button>
@@ -343,9 +409,19 @@ export default function ShopProductDetailPage() {
                                 }}
                                 className={`w-full text-start px-4 py-2.5 text-sm font-medium transition-colors ${
                                   selectedCanonical === opt.canonicalChoices[ci]
-                                    ? 'bg-theme-primary-light text-theme-primary font-semibold'
-                                    : 'text-theme-text hover:bg-theme-surface-secondary'
+                                    ? 'font-bold'
+                                    : 'hover:opacity-80'
                                 }`}
+                                style={{
+                                  background:
+                                    selectedCanonical === opt.canonicalChoices[ci]
+                                      ? 'var(--theme-primary-light)'
+                                      : 'transparent',
+                                  color:
+                                    selectedCanonical === opt.canonicalChoices[ci]
+                                      ? 'var(--theme-primary)'
+                                      : 'var(--theme-text-primary)',
+                                }}
                               >
                                 {choice}
                               </button>
@@ -359,7 +435,7 @@ export default function ShopProductDetailPage() {
               })}
               {product.allowCustomerMessage && (
                 <div>
-                  <label className="block text-theme-text font-medium mb-2">
+                  <label className="block font-medium mb-2" style={{ color: 'var(--theme-text-primary)' }}>
                     <MessageCircle className="w-4 h-4 inline me-1.5 -mt-0.5" />
                     {getLocalizedCustomerMessageLabel(product, lang, t('messageOptional'))}
                   </label>
@@ -368,7 +444,13 @@ export default function ShopProductDetailPage() {
                     onChange={(e) => setAddToCartMessage(e.target.value)}
                     placeholder={t('messagePlaceholder')}
                     rows={3}
-                    className="w-full resize-y rounded-theme-input border border-theme-border bg-theme-surface-secondary px-3 py-2.5 text-sm text-theme-text placeholder:text-theme-text-muted focus:border-theme-primary focus:bg-theme-surface focus:outline-none focus:ring-2 focus:ring-theme-primary/20 max-lg:py-2.5 lg:px-4 lg:py-3"
+                    className="w-full resize-y border px-3 py-2.5 text-sm max-lg:py-2.5 lg:px-4 lg:py-3 focus:outline-none"
+                    style={{
+                      borderRadius: 'var(--theme-radius-input)',
+                      borderColor: 'var(--theme-border)',
+                      background: 'var(--theme-surface-secondary)',
+                      color: 'var(--theme-text-primary)',
+                    }}
                   />
                 </div>
               )}
@@ -378,24 +460,42 @@ export default function ShopProductDetailPage() {
             </div>
           )}
 
-          <div className="mt-5 max-lg:mt-5 space-y-3 max-lg:space-y-3 border-t border-theme-border pt-5 max-lg:pt-5 lg:mt-6 lg:space-y-4 lg:pt-6">
+          <div
+            className="mt-5 max-lg:mt-5 space-y-3 max-lg:space-y-3 border-t pt-5 max-lg:pt-5 lg:mt-6 lg:space-y-4 lg:pt-6"
+            style={{ borderColor: 'var(--theme-border)' }}
+          >
             <div className="flex items-center justify-between text-sm">
-              <span className="font-medium text-theme-text-muted">{t('subtotal')}</span>
-              <span className="font-bold text-theme-text">{formatPrice(getEffectivePrice(product, Object.keys(addToCartOptions).length ? addToCartOptions : null) * detailQty, shop.currency)}</span>
+              <span className="font-medium" style={{ color: 'var(--theme-text-muted)' }}>{t('subtotal')}</span>
+              <span className="font-bold text-lg" style={{ color: 'var(--theme-text-primary)' }}>
+                {formatPrice(getEffectivePrice(product, Object.keys(addToCartOptions).length ? addToCartOptions : null) * detailQty, shop.currency)}
+              </span>
             </div>
             <div className="flex flex-col gap-3 max-lg:flex-col max-lg:gap-3 lg:flex-row lg:flex-wrap lg:items-center">
-              <div className="flex w-full max-lg:w-full items-center justify-center overflow-hidden rounded-theme-btn border border-theme-border bg-theme-surface lg:w-auto">
-                <button type="button" onClick={() => setDetailQty((q) => Math.max(1, q - 1))} className="px-4 py-2.5 text-theme-text hover:bg-theme-surface-secondary max-lg:py-2.5 lg:py-3">-</button>
-                <span className="min-w-[2.5rem] text-center font-semibold text-theme-text">{detailQty}</span>
-                <button type="button" onClick={() => setDetailQty((q) => q + 1)} className="px-4 py-2.5 text-theme-text hover:bg-theme-surface-secondary max-lg:py-2.5 lg:py-3">+</button>
+              <div
+                className="flex w-full max-lg:w-full items-center justify-center overflow-hidden border lg:w-auto"
+                style={{
+                  borderRadius: 'var(--theme-radius-btn)',
+                  borderColor: 'var(--theme-border)',
+                  background: 'var(--theme-surface)',
+                }}
+              >
+                <button type="button" onClick={() => setDetailQty((q) => Math.max(1, q - 1))} className="px-4 py-2.5 hover:opacity-70 max-lg:py-2.5 lg:py-3" style={{ color: 'var(--theme-text-primary)' }}>-</button>
+                <span className="min-w-[2.5rem] text-center font-semibold" style={{ color: 'var(--theme-text-primary)' }}>{detailQty}</span>
+                <button type="button" onClick={() => setDetailQty((q) => q + 1)} className="px-4 py-2.5 hover:opacity-70 max-lg:py-2.5 lg:py-3" style={{ color: 'var(--theme-text-primary)' }}>+</button>
               </div>
               <button
                 type="button"
                 onClick={handleAddToCartFromDetail}
                 disabled={product.inStock === false || addToCartAnim !== 'idle'}
-                className={`shop-add-to-cart-btn w-full max-lg:w-full flex-1 min-w-0 rounded-theme-btn px-5 py-2.5 font-semibold text-theme-badge-text bg-theme-primary shadow-theme-card hover:bg-theme-primary-hover disabled:cursor-not-allowed disabled:opacity-50 max-lg:py-2.5 lg:min-w-[180px] lg:px-6 lg:py-3 ${
+                className={`shop-add-to-cart-btn w-full max-lg:w-full flex-1 min-w-0 px-5 py-3 font-semibold disabled:cursor-not-allowed disabled:opacity-50 max-lg:py-3 lg:min-w-[180px] lg:px-6 lg:py-3.5 ${
                   addToCartAnim === 'adding' ? 'shop-add-to-cart-btn--adding' : ''
                 }${addToCartAnim === 'success' ? ' shop-add-to-cart-btn--success' : ''}`}
+                style={{
+                  borderRadius: 'var(--theme-radius-btn)',
+                  background: 'var(--theme-primary)',
+                  color: 'var(--theme-badge-text, #ffffff)',
+                  boxShadow: 'var(--theme-shadow-card)',
+                }}
               >
                 <span className="relative z-[1] inline-flex items-center justify-center gap-2">
                   {product.inStock === false ? (
@@ -407,11 +507,14 @@ export default function ShopProductDetailPage() {
                     </>
                   ) : addToCartAnim === 'success' ? (
                     <>
-                      <Check className="h-4 w-4 shrink-0" aria-hidden />
+                      <Check className="h-4 w-4 shrink-0 stroke-[3]" aria-hidden />
                       {t('added')}
                     </>
                   ) : (
-                    t('addToCart')
+                    <>
+                      <ShoppingBag className="h-4 w-4" />
+                      {t('addToCart')}
+                    </>
                   )}
                 </span>
               </button>
@@ -419,7 +522,8 @@ export default function ShopProductDetailPage() {
             {shop.refundEnabled ? (
               <Link
                 to={`/${username}/refund`}
-                className="inline-block text-start text-xs font-semibold text-theme-primary underline decoration-theme-primary/35 underline-offset-2 hover:text-theme-primary-hover lg:text-sm"
+                className="inline-block text-start text-xs font-semibold underline underline-offset-2 hover:opacity-80 lg:text-sm"
+                style={{ color: 'var(--theme-primary)' }}
               >
                 {t('returnExchangePolicy')}
               </Link>

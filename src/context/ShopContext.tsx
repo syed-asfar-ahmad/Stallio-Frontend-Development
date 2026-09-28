@@ -41,7 +41,7 @@ export function ShopDataProvider({ children }: { children: ReactNode }) {
           }
           const effectiveShop = {
             ...data.shop,
-            themeConfig: data.shop.themeConfig || parsedConfig || (localThemeId ? { version: 1, themeId: localThemeId } : undefined),
+            themeConfig: parsedConfig || data.shop.themeConfig || (localThemeId ? { version: 1, themeId: localThemeId } : undefined),
           };
           setShop(effectiveShop);
           setProducts(data.products || []);

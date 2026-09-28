@@ -10,10 +10,19 @@ import {
   boutiqueArtisanDarkTokens,
   retailCatalogTokens,
   retailCatalogDarkTokens,
+  // Premium themes
+  noirLuxeTokens,
+  noirLuxeLightTokens,
+  pacificFreshTokens,
+  pacificFreshDarkTokens,
+  studioGridTokens,
+  studioGridDarkTokens,
 } from './tokens';
 import { DEFAULT_THEME_ID } from './constants';
 
 export const THEME_REGISTRY: Record<ThemeId, ThemeDefinition> = {
+  // ─── Existing themes ──────────────────────────────────────────────────────
+
   'classic-clean': {
     id: 'classic-clean',
     name: 'classic-clean',
@@ -157,7 +166,7 @@ export const THEME_REGISTRY: Record<ThemeId, ThemeDefinition> = {
     defaultTokens: retailCatalogTokens,
     defaultDarkTokens: retailCatalogDarkTokens,
     defaultLayout: {
-      heroVariant: 'full-banner',
+      heroVariant: 'card-showcase',
       productCardVariant: 'compact',
       headerVariant: 'inline-compact',
       footerVariant: 'multi-column',
@@ -165,6 +174,101 @@ export const THEME_REGISTRY: Record<ThemeId, ThemeDefinition> = {
       showCategoryPillsOnHome: true,
       showFeaturedCollection: true,
       showReviewsSection: true,
+      showTrustBadges: true,
+    },
+  },
+
+  // ─── Premium themes ────────────────────────────────────────────────────────
+
+  'noir-luxe': {
+    id: 'noir-luxe',
+    name: 'noir-luxe',
+    displayName: 'Noir Luxe',
+    tagline: 'Dark prestige for jewellery, watches, and high-fashion brands',
+    description:
+      'A deep charcoal canvas with champagne-gold accents and wide-tracked serif headings. Every surface is calibrated for premium positioning — zero visual noise, all atmosphere.',
+    category: 'Premium',
+    tier: 'business',
+    previewImage: '/themes/previews/noir-luxe.webp',
+    features: [
+      'Dark charcoal ground with champagne-gold accent system',
+      'DM Serif Display headings with generous tracking',
+      'Hard-edged square geometry for deliberate luxury severity',
+      'Gold-tinted glow shadows and minimal floating navigation',
+    ],
+    defaultTokens: noirLuxeTokens,
+    defaultDarkTokens: noirLuxeTokens,   // Dark is the canonical look
+    defaultLayout: {
+      heroVariant: 'split-image',
+      productCardVariant: 'flat',
+      headerVariant: 'minimal-floating',
+      footerVariant: 'centered-minimal',
+      productGridColumns: 2,
+      showCategoryPillsOnHome: false,
+      showFeaturedCollection: true,
+      showReviewsSection: true,
+      showTrustBadges: false,
+    },
+  },
+
+  'pacific-fresh': {
+    id: 'pacific-fresh',
+    name: 'pacific-fresh',
+    displayName: 'Pacific Fresh',
+    tagline: 'Organic wellness aesthetic for beauty, food, and lifestyle brands',
+    description:
+      'A photography-forward layout built around jade greens and warm whites. Capsule buttons, generous card rounding, and layered soft shadows create an environment of natural ease.',
+    category: 'Premium',
+    tier: 'business',
+    previewImage: '/themes/previews/pacific-fresh.webp',
+    features: [
+      'Jade-green and sage palette with mint accent tints',
+      'Cormorant Garamond headings for gentle organic elegance',
+      'Full-capsule buttons and softly rounded product cards',
+      'Card-showcase hero with ingredient and story integration',
+    ],
+    defaultTokens: pacificFreshTokens,
+    defaultDarkTokens: pacificFreshDarkTokens,
+    defaultLayout: {
+      heroVariant: 'card-showcase',
+      productCardVariant: 'elevated',
+      headerVariant: 'centered-logo',
+      footerVariant: 'multi-column',
+      productGridColumns: 3,
+      showCategoryPillsOnHome: true,
+      showFeaturedCollection: true,
+      showReviewsSection: true,
+      showTrustBadges: true,
+    },
+  },
+
+  'studio-grid': {
+    id: 'studio-grid',
+    name: 'studio-grid',
+    displayName: 'Studio Grid',
+    tagline: 'Precise, technical layout for electronics and design-led products',
+    description:
+      'A clinical white canvas with saturated cobalt authority and tight geometric grid discipline. Built for brands where spec sheets matter as much as photography.',
+    category: 'Premium',
+    tier: 'business',
+    previewImage: '/themes/previews/studio-grid.webp',
+    features: [
+      'Saturated cobalt primary with cool-slate accent palette',
+      'Syne display headings — geometric authority at every size',
+      'Tight 4–6 px radius geometry with ruled borders',
+      'Dense 4-column product grid with inline compact header',
+    ],
+    defaultTokens: studioGridTokens,
+    defaultDarkTokens: studioGridDarkTokens,
+    defaultLayout: {
+      heroVariant: 'full-banner',
+      productCardVariant: 'compact',
+      headerVariant: 'inline-compact',
+      footerVariant: 'multi-column',
+      productGridColumns: 4,
+      showCategoryPillsOnHome: true,
+      showFeaturedCollection: true,
+      showReviewsSection: false,
       showTrustBadges: true,
     },
   },

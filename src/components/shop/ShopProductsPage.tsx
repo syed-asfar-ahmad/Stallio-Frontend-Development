@@ -145,7 +145,10 @@ export default function ShopProductsPage({ shop, products, username, containerCl
   return (
     <main className={`${containerClass} flex-1 pb-8 pt-4 max-lg:pb-8 max-lg:pt-4 lg:pb-14 lg:pt-7`}>
       <div className="mb-4 max-lg:mb-4 lg:mb-8">
-        <h1 className="text-lg max-lg:leading-snug font-bold tracking-tight text-theme-text lg:text-2xl">
+        <h1
+          style={{ fontFamily: 'var(--theme-font-heading, inherit)' }}
+          className="text-lg max-lg:leading-snug font-bold tracking-tight text-theme-text lg:text-3xl"
+        >
           {t('productsPageTitle')}
         </h1>
         <p className="mt-0.5 max-lg:mt-0.5 text-xs max-lg:text-xs text-theme-text-muted lg:mt-1 lg:text-sm">

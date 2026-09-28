@@ -152,7 +152,11 @@ export default function CheckoutModal({
         <div className="shrink-0 border-b border-theme-border bg-theme-primary-light px-4 py-4 max-lg:px-4 max-lg:py-4 lg:px-8 lg:py-5">
           <div className="flex items-center justify-between gap-3">
             <div className="min-w-0 flex-1">
-              <h2 id="checkout-dialog-title" className="text-lg font-bold text-theme-text max-lg:leading-snug lg:text-2xl">
+              <h2
+                id="checkout-dialog-title"
+                style={{ fontFamily: 'var(--theme-font-heading, inherit)' }}
+                className="text-lg font-bold text-theme-text max-lg:leading-snug lg:text-2xl"
+              >
                 {t('checkoutTitle')}
               </h2>
               {!cartIsEmpty ? (

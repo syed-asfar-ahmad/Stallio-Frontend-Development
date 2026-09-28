@@ -20,7 +20,10 @@ export default function ShopRefundPage() {
           <p className="mb-3 inline-flex items-center gap-2 rounded-theme-badge border border-theme-border bg-theme-primary-light px-3 py-1 text-xs font-semibold text-theme-primary max-lg:mb-3 lg:mb-4">
             {t('returnExchangeBadge')}
           </p>
-          <h1 className="text-2xl max-lg:leading-snug font-bold leading-tight tracking-tight text-theme-text sm:text-4xl lg:text-5xl">
+          <h1
+            style={{ fontFamily: 'var(--theme-font-heading, inherit)' }}
+            className="text-2xl max-lg:leading-snug font-bold leading-tight tracking-tight text-theme-text sm:text-4xl lg:text-5xl"
+          >
             {t('returnExchangePolicy')}
           </h1>
           <p className="mt-2 max-lg:mt-2 max-w-2xl text-sm text-theme-text-muted lg:mt-3 lg:text-base">

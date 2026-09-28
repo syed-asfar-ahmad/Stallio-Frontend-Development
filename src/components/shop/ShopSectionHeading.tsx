@@ -31,11 +31,14 @@ export default function ShopSectionHeading({ title, description, trailing }: Pro
     <div className="mb-4 max-lg:mb-4 lg:mb-5">
       <div className="flex items-start justify-between gap-2 max-lg:gap-2 lg:gap-3">
         <div className="min-w-0 flex-1 pe-2">
-          <h2 className="text-base max-lg:leading-snug font-bold tracking-tight text-theme-primary lg:text-xl">
+          <h2
+            style={{ fontFamily: 'var(--theme-font-heading, inherit)' }}
+            className="text-lg max-lg:leading-snug font-bold tracking-tight text-theme-text lg:text-2xl"
+          >
             {title}
           </h2>
           {description ? (
-            <p className="mt-0.5 max-lg:mt-0.5 text-xs max-lg:text-xs leading-relaxed text-theme-muted lg:mt-1 lg:text-sm">
+            <p className="mt-0.5 max-lg:mt-0.5 text-xs max-lg:text-xs leading-relaxed text-theme-text-muted lg:mt-1 lg:text-sm">
               {description}
             </p>
           ) : null}

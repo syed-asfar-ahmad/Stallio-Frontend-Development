@@ -40,7 +40,10 @@ export default function ShopCategoriesPage({ shop, products, username, container
             <LayoutGrid className="h-3.5 w-3.5 shrink-0" aria-hidden />
             {t('categoriesBadge')}
           </p>
-          <h1 className="mt-3 max-lg:mt-3 text-xl max-lg:leading-snug font-bold tracking-tight text-theme-text lg:mt-4 lg:text-3xl xl:text-4xl">
+          <h1
+            style={{ fontFamily: 'var(--theme-font-heading, inherit)' }}
+            className="mt-3 max-lg:mt-3 text-xl max-lg:leading-snug font-bold tracking-tight text-theme-text lg:mt-4 lg:text-3xl xl:text-4xl"
+          >
             {t('categoriesTitle')}
           </h1>
           <p className="mt-1.5 max-lg:mt-1.5 max-w-3xl text-pretty text-xs max-lg:text-xs leading-relaxed text-theme-text-muted lg:mt-2 lg:text-base">

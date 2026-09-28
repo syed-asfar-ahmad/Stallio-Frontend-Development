@@ -5,7 +5,10 @@ export type ThemeId =
   | 'modern-minimal'
   | 'bold-editorial'
   | 'boutique-artisan'
-  | 'retail-catalog';
+  | 'retail-catalog'
+  | 'noir-luxe'
+  | 'pacific-fresh'
+  | 'studio-grid';
 
 export type FontFamilyPreset =
   | 'outfit'
@@ -14,7 +17,8 @@ export type FontFamilyPreset =
   | 'plus-jakarta'
   | 'syne'
   | 'cormorant'
-  | 'cabinet-grotesk';
+  | 'cabinet-grotesk'
+  | 'dm-serif';
 
 export type RadiusPreset = 'none' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
 
@@ -118,7 +122,7 @@ export interface ThemeDefinition {
   displayName: string;
   tagline: string;
   description: string;
-  category: 'Modern' | 'Minimalist' | 'Luxury' | 'Editorial' | 'High-Volume';
+  category: 'Modern' | 'Minimalist' | 'Luxury' | 'Editorial' | 'High-Volume' | 'Premium';
   tier: SellerPlanTier;
   previewImage: string;
   demoUrl?: string;

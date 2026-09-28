@@ -72,16 +72,19 @@ export default function ShopContactPage() {
 
   return (
     <main className={`${containerClass} flex-1 pt-4 pb-8 max-lg:pt-4 max-lg:pb-8 lg:pt-8 lg:pb-12`}>
-      <section className="relative mb-5 max-lg:mb-5 overflow-hidden rounded-theme-card border border-theme-border bg-theme-surface p-4 shadow-theme-card max-lg:p-4 lg:mb-8 lg:p-10">
+      <section className="relative mb-5 max-lg:mb-5 overflow-hidden rounded-theme-card border border-theme-border bg-theme-surface p-5 shadow-theme-card max-lg:p-5 lg:mb-8 lg:p-10">
         <div className="relative max-w-2xl">
-          <p className="inline-flex items-center gap-2 rounded-theme-badge border border-theme-border bg-theme-primary-light px-2.5 py-0.5 text-[10px] font-semibold text-theme-primary lg:px-3 lg:py-1 lg:text-xs">
+          <p className="inline-flex items-center gap-2 rounded-theme-badge border border-theme-border bg-theme-primary-light px-3 py-1 text-xs font-semibold text-theme-primary">
             <Mail className="h-3.5 w-3.5 shrink-0" />
             {t('contactBadge')}
           </p>
-          <h2 className="mt-3 text-xl font-bold tracking-tight text-theme-text max-lg:leading-snug lg:mt-4 lg:text-3xl xl:text-4xl">
+          <h2
+            style={{ fontFamily: 'var(--theme-font-heading, inherit)' }}
+            className="mt-3 text-2xl font-bold tracking-tight text-theme-text max-lg:leading-snug lg:mt-4 lg:text-3xl xl:text-4xl"
+          >
             {t('contactTitle', { shopName: shop.shopName })}
           </h2>
-          <p className="mt-1.5 text-xs leading-relaxed text-theme-text-muted lg:mt-2 lg:text-base">
+          <p className="mt-2 text-sm leading-relaxed text-theme-text-muted lg:mt-3 lg:text-base">
             {t('contactIntro')}
           </p>
         </div>
@@ -98,7 +101,10 @@ export default function ShopContactPage() {
           <div className="space-y-3 max-lg:space-y-3 lg:space-y-4">
             {hasDirectContactDetails && (
               <div className="rounded-theme-card border border-theme-border bg-theme-surface p-4 shadow-theme-card max-lg:p-4 lg:p-6">
-                <h3 className="mb-3 text-base font-bold text-theme-text max-lg:mb-3 lg:mb-4 lg:text-lg">
+                <h3
+                  style={{ fontFamily: 'var(--theme-font-heading, inherit)' }}
+                  className="mb-3 text-base font-bold text-theme-text max-lg:mb-3 lg:mb-4 lg:text-lg"
+                >
                   {t('storeContactDetails')}
                 </h3>
                 <div className="max-lg:divide-y max-lg:divide-theme-border lg:space-y-3">
@@ -162,7 +168,10 @@ export default function ShopContactPage() {
 
             {contactLinks.length > 0 && (
               <div className="rounded-theme-card border border-theme-border bg-theme-surface p-4 shadow-theme-card max-lg:p-4 lg:p-6">
-                <h3 className="mb-3 text-base font-bold text-theme-text max-lg:mb-3 lg:mb-4 lg:text-lg">
+                <h3
+                  style={{ fontFamily: 'var(--theme-font-heading, inherit)' }}
+                  className="mb-3 text-base font-bold text-theme-text max-lg:mb-3 lg:mb-4 lg:text-lg"
+                >
                   {t('socialLinks')}
                 </h3>
                 <div className="flex flex-wrap gap-2 max-lg:gap-2 lg:gap-2.5">
@@ -188,7 +197,12 @@ export default function ShopContactPage() {
           onSubmit={handleSubmitContact}
           className={`space-y-3.5 rounded-theme-card border border-theme-border bg-theme-surface p-4 shadow-theme-card max-lg:space-y-3.5 max-lg:p-4 lg:space-y-4 lg:p-8 ${hasContactSidebar ? '' : 'mx-auto w-full max-w-3xl'}`}
         >
-          <h3 className="text-base font-bold text-theme-text lg:text-lg">{t('sendMessageTitle')}</h3>
+          <h3
+            style={{ fontFamily: 'var(--theme-font-heading, inherit)' }}
+            className="text-base font-bold text-theme-text lg:text-xl"
+          >
+            {t('sendMessageTitle')}
+          </h3>
           <p className="text-xs text-theme-text-muted lg:text-sm">{t('sendMessageIntro')}</p>
           {contactError && <p className="text-sm font-medium text-red-600 dark:text-red-400">{contactError}</p>}
           <div>
@@ -206,7 +220,7 @@ export default function ShopContactPage() {
           <button
             type="submit"
             disabled={contactSubmitting}
-            className="w-full rounded-theme-btn bg-theme-primary py-3 text-sm font-semibold text-theme-badge-text hover:bg-theme-primary-hover disabled:opacity-60 max-lg:py-3 lg:py-3.5 lg:text-base"
+            className="w-full rounded-theme-btn bg-theme-primary py-3 text-sm font-semibold text-theme-badge-text shadow-theme-card hover:bg-theme-primary-hover disabled:opacity-60 max-lg:py-3 lg:py-3.5 lg:text-base"
           >
             {contactSubmitting ? t('sending') : t('sendMessage')}
           </button>

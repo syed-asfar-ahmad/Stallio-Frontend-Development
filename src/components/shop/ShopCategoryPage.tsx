@@ -117,7 +117,10 @@ export default function ShopCategoryPage({
           {t('categoryBadge')}
         </span>
         <div className="absolute inset-x-0 bottom-0 z-10 p-4">
-          <h1 className="text-xl font-bold leading-snug tracking-tight text-white drop-shadow-sm">
+          <h1
+            style={{ fontFamily: 'var(--theme-font-heading, inherit)' }}
+            className="text-xl font-bold leading-snug tracking-tight text-white drop-shadow-sm"
+          >
             {categoryDisplayName}
           </h1>
           <p className="mt-1 text-xs text-white/85">{productCountLabel}</p>
@@ -140,14 +143,17 @@ export default function ShopCategoryPage({
           </div>
         )}
         <div className="min-w-0 flex-1 text-start">
-          <p className="inline-flex w-fit items-center gap-2 rounded-full border border-theme-primary/20 bg-theme-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-theme-primary">
+          <p className="inline-flex w-fit items-center gap-2 rounded-theme-badge border border-theme-border bg-theme-primary-light px-3 py-1 text-xs font-bold uppercase tracking-wide text-theme-primary">
             <Package className="h-3.5 w-3.5 shrink-0" aria-hidden />
             {t('categoryBadge')}
           </p>
-          <h1 className="mt-3 text-2xl font-bold tracking-tight text-theme-primary xl:text-3xl">
+          <h1
+            style={{ fontFamily: 'var(--theme-font-heading, inherit)' }}
+            className="mt-3 text-2xl font-bold tracking-tight text-theme-text xl:text-3xl"
+          >
             {categoryDisplayName}
           </h1>
-          <p className="mt-2 text-sm text-theme-secondary">{productCountLabel}</p>
+          <p className="mt-2 text-sm text-theme-text-secondary">{productCountLabel}</p>
         </div>
       </header>
 
