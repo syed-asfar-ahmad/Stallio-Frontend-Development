@@ -1078,79 +1078,53 @@ export default function ProductForm({
                 disabled={uploading || (maxImages !== undefined && displayImages.length >= maxImages)}
                 className="hidden"
               />
-
-              {/* Visual Slot Grid Architecture */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-3 mt-3">
-                {/* 1. Uploaded Image Slots */}
-                {displayImages.map((url, i) => (
-                  <div key={i} className="group relative rounded-2xl border-2 border-stone-200 dark:border-zinc-700/80 bg-white dark:bg-zinc-900 overflow-hidden shadow-sm aspect-square flex flex-col items-center justify-center transition-all hover:border-brand-400 dark:hover:border-brand-500">
-                    <img src={getProductImageDisplayUrl(url)} alt="" className="w-full h-full object-cover" />
-                    
-                    <span className="absolute top-2 left-2 z-10 px-2 py-0.5 rounded-md bg-stone-900/85 backdrop-blur-sm text-white text-[10px] font-bold tracking-wide shadow-sm">
-                      {i === 0 ? t('dashboard.productForm.mainCover', 'Cover') : `Slot ${i + 1}`}
-                    </span>
-
-                    <DashboardImageRemoveButton
-                      onClick={() => removeImage(i)}
-                      disabled={sharedLocked}
-                      className="!absolute !top-2 !right-2 !z-20 !bg-white/95 dark:!bg-zinc-900/95 hover:!bg-red-50 dark:hover:!bg-red-950/50 !text-red-600 !w-10 !h-10 !rounded-xl shadow-lg"
-                      aria-label={t('dashboard.categories.ariaRemoveImage')}
-                    />
-                  </div>
-                ))}
-
-                {maxImages !== undefined && displayImages.length < maxImages && (
-                  Array.from({ length: maxImages - displayImages.length }).map((_, idx) => {
-                    const slotNumber = displayImages.length + idx + 1;
-                    return (
-                      <SharedLockedField key={`empty-slot-${slotNumber}`} locked={sharedLocked}>
-                        <button
-                          type="button"
-                          onClick={() => fileInputRef.current?.click()}
-                          disabled={uploading || sharedLocked}
-                          className="group relative w-full aspect-square rounded-2xl border-2 border-dashed border-stone-300 dark:border-zinc-700 bg-stone-50/50 dark:bg-zinc-900/30 hover:border-brand-500 dark:hover:border-brand-400 hover:bg-brand-50/30 dark:hover:bg-brand-950/20 transition-all flex flex-col items-center justify-center gap-2 p-3 text-stone-500 dark:text-zinc-400 hover:text-brand-600 dark:hover:text-brand-300 focus:outline-none"
-                        >
-                          {uploading ? (
-                            <div className="flex flex-col items-center gap-1.5">
-                              <AdminLoadingInline dotsOnly />
-                              <span className="text-[11px] font-medium">{btn('dashboard.common.uploading', 'Uploading...')}</span>
-                            </div>
-                          ) : (
-                            <>
-                              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white dark:bg-zinc-800 border border-stone-200 dark:border-zinc-700 shadow-sm group-hover:scale-110 group-hover:border-brand-300 dark:group-hover:border-brand-700 transition-all">
-                                <ImagePlus className="w-5 h-5 text-brand-600 dark:text-brand-400" />
-                              </span>
-                              <span className="text-xs font-semibold text-stone-700 dark:text-zinc-200 group-hover:text-brand-600 dark:group-hover:text-brand-400">
-                                {slotNumber === 1 ? t('dashboard.productForm.addMainCover', 'Add Cover Photo') : `Add Slot ${slotNumber}`}
-                              </span>
-                            </>
-                          )}
-                        </button>
-                      </SharedLockedField>
-                    );
-                  })
+              <SharedLockedField locked={sharedLocked}>
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                disabled={uploading || sharedLocked}
+                className="w-full flex items-center justify-center gap-2 py-5 rounded-xl border-2 border-dashed border-stone-200 dark:border-zinc-700 bg-stone-50/30 dark:bg-zinc-950/50 text-stone-600 dark:text-zinc-400 hover:border-brand-300 hover:bg-brand-50 dark:hover:bg-brand-950/40 hover:text-brand-600 dark:hover:text-brand-300 transition-all disabled:opacity-60 font-medium"
+              >
+                {uploading ? (
+                  <>
+                    <AdminLoadingInline dotsOnly />
+                    <span className="text-sm">{btn('dashboard.common.uploading', 'Uploading...')}</span>
+                  </>
+                ) : (
+                  <>
+                    <ImagePlus className="w-5 h-5" />
+                    <span>{btn('dashboard.productForm.addImages', 'Add Images')}</span>
+                  </>
                 )}
-
-                {maxImages !== undefined && maxImages < SELLER_PLAN_LIMITS.business.maxImagesPerProduct && (
-                  <Link
-                    to="/pricing"
-                    className="group relative w-full aspect-square rounded-2xl border-2 border-dashed border-amber-300/80 dark:border-amber-700/60 bg-gradient-to-br from-amber-50/40 via-orange-50/20 to-amber-50/30 dark:from-amber-950/20 dark:via-zinc-900/30 dark:to-orange-950/15 p-3.5 flex flex-col items-center justify-center gap-2 text-center transition-all hover:border-amber-500 hover:bg-amber-50/70 dark:hover:bg-amber-950/35 hover:shadow-sm"
-                  >
-                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30 shadow-sm group-hover:scale-110 transition-transform">
-                      <Lock className="w-5 h-5" />
-                    </span>
-                    <div className="min-w-0">
-                      <span className="text-xs font-bold text-stone-800 dark:text-zinc-200 group-hover:text-amber-700 dark:group-hover:text-amber-300 transition-colors flex items-center justify-center gap-1">
-                        <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-                        {t('dashboard.productForm.moreSlotsTitle', 'More Photo Slots')}
-                      </span>
-                      <span className="text-[10px] text-amber-700/90 dark:text-amber-400/90 font-medium block mt-0.5 leading-tight">
-                        {t('dashboard.productForm.upgradeForMoreSlots', 'Upgrade to Business for up to 5 photos')}
-                      </span>
+              </button>
+              </SharedLockedField>
+              {displayImages.length > 0 && (
+                <div className="mt-4 flex flex-wrap gap-3">
+                  {displayImages.map((url, i) => (
+                    <div key={i} className="relative w-24 shrink-0">
+                      <div
+                        className={`${PRODUCT_CARD_ASPECT_CLASS} ${PRODUCT_IMAGE_FRAME_CLASS} rounded-xl border-2 border-stone-200 shadow-sm dark:border-zinc-700`}
+                      >
+                        <img src={getProductImageDisplayUrl(url)} alt="" className={`${PRODUCT_IMAGE_CLASS} rounded-[10px]`} />
+                        {i === 0 && (
+                          <span
+                            className="absolute bottom-1 left-1 z-10 px-2 py-0.5 rounded-md bg-brand-600 text-white text-[10px] font-semibold"
+                            title={t('dashboard.productForm.imagesHint')}
+                          >
+                            1
+                          </span>
+                        )}
+                      </div>
+                      <DashboardImageRemoveButton
+                        onClick={() => removeImage(i)}
+                        disabled={sharedLocked}
+                        className="z-20"
+                        aria-label={t('dashboard.categories.ariaRemoveImage')}
+                      />
                     </div>
-                  </Link>
-                )}
-              </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
 

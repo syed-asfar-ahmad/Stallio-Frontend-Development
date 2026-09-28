@@ -65,7 +65,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       { to: '/dashboard/categories', label: t('dashboard.layout.categories'), icon: LayoutGrid },
       { to: '/dashboard/contact', label: t('dashboard.layout.contact'), icon: Mail },
       { to: '/dashboard/footer', label: t('dashboard.layout.footer'), icon: Footprints },
-      { to: '/dashboard/themes', label: t('dashboard.layout.themes', 'Themes'), icon: Palette },
+      { to: '/dashboard/themes', label: t('dashboard.layout.storefrontTheme'), icon: Palette },
       { to: '/dashboard/coupons', label: t('dashboard.layout.coupons'), icon: BadgePercent },
       { to: '/dashboard/delivery', label: t('dashboard.layout.others'), icon: MoreHorizontal },
     ],

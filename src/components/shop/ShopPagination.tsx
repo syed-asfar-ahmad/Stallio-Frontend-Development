@@ -11,9 +11,9 @@ type Props = {
 };
 
 const btnBase =
-  'inline-flex items-center justify-center gap-1.5 rounded-xl border-2 px-3 py-2 text-sm font-semibold transition-colors disabled:pointer-events-none disabled:opacity-40 max-lg:py-2.5';
+  'inline-flex items-center justify-center gap-1.5 rounded-theme-btn border-2 px-3 py-2 text-sm font-semibold transition-colors disabled:pointer-events-none disabled:opacity-40 max-lg:py-2.5';
 const btnEnabled =
-  'border-stone-200 bg-white text-stone-700 hover:border-brand-300 hover:bg-brand-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:border-brand-600/45 dark:hover:bg-brand-950/40';
+  'border-theme-border bg-theme-surface text-theme-text hover:border-theme-primary hover:bg-theme-primary-light';
 
 function pageItems(current: number, totalPages: number): (number | 'ellipsis')[] {
   if (totalPages <= 7) {
@@ -46,10 +46,10 @@ export default function ShopPagination({ page, total, pageSize, onPage, classNam
 
   return (
     <nav
-      className={`flex flex-col gap-3 rounded-2xl border border-stone-200/90 bg-white px-3 py-3 shadow-sm dark:border-zinc-700 dark:bg-zinc-900 max-lg:gap-3 max-lg:px-3 max-lg:py-3 sm:flex-row sm:items-center sm:justify-between lg:px-4 lg:py-3.5 ${className}`.trim()}
+      className={`flex flex-col gap-3 rounded-theme-card border border-theme-border bg-theme-surface px-3 py-3 shadow-theme-card max-lg:gap-3 max-lg:px-3 max-lg:py-3 sm:flex-row sm:items-center sm:justify-between lg:px-4 lg:py-3.5 ${className}`.trim()}
       aria-label={t('paginationAria')}
     >
-      <p className="text-center text-xs tabular-nums text-stone-600 dark:text-zinc-400 max-lg:text-center sm:text-start lg:text-sm">
+      <p className="text-center text-xs tabular-nums text-theme-text-muted max-lg:text-center sm:text-start lg:text-sm">
         {t('paginationShowing', { start: rangeStart, end: rangeEnd, total })}
       </p>
 
@@ -68,7 +68,7 @@ export default function ShopPagination({ page, total, pageSize, onPage, classNam
         <div className="hidden items-center gap-1 sm:flex">
           {pages.map((item, idx) =>
             item === 'ellipsis' ? (
-              <span key={`ellipsis-${idx}`} className="px-1.5 text-sm font-medium text-stone-400 dark:text-zinc-500">
+              <span key={`ellipsis-${idx}`} className="px-1.5 text-sm font-medium text-theme-text-muted">
                 ...
               </span>
             ) : (
@@ -77,10 +77,10 @@ export default function ShopPagination({ page, total, pageSize, onPage, classNam
                 type="button"
                 onClick={() => changePage(item)}
                 aria-current={item === page ? 'page' : undefined}
-                className={`min-w-[2.25rem] rounded-xl px-2.5 py-2 text-sm font-semibold tabular-nums transition-colors ${
+                className={`min-w-[2.25rem] rounded-theme-btn px-2.5 py-2 text-sm font-semibold tabular-nums transition-colors ${
                   item === page
-                    ? 'bg-gradient-to-r from-brand-600 to-brand-600 text-white shadow-sm'
-                    : 'text-stone-600 hover:bg-stone-100 dark:text-zinc-400 dark:hover:bg-zinc-800'
+                    ? 'bg-theme-primary text-theme-badge-text shadow-sm'
+                    : 'text-theme-text hover:bg-theme-surface-secondary'
                 }`}
               >
                 {item}
@@ -89,7 +89,7 @@ export default function ShopPagination({ page, total, pageSize, onPage, classNam
           )}
         </div>
 
-        <span className="justify-self-center px-2 text-sm font-medium tabular-nums text-stone-500 dark:text-zinc-400 sm:hidden">
+        <span className="justify-self-center px-2 text-sm font-medium tabular-nums text-theme-text-muted sm:hidden">
           {t('paginationPageOf', { page, total: totalPages })}
         </span>
 

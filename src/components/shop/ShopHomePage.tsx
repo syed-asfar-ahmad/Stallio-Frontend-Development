@@ -44,9 +44,9 @@ function ProductPriceInline({
   const sale = Number(p.price) || 0;
   const compare = p.compareAtPrice != null && p.compareAtPrice > sale ? p.compareAtPrice : null;
   const saleClass = onDark
-    ? 'font-extrabold text-brand-300'
-    : 'font-extrabold text-brand-700 dark:text-brand-400';
-  const compareClass = onDark ? 'text-xs text-white/50 line-through' : 'text-xs text-stone-400 line-through';
+    ? 'font-extrabold text-white'
+    : 'font-extrabold text-theme-primary';
+  const compareClass = onDark ? 'text-xs text-white/50 line-through' : 'text-xs text-theme-muted line-through';
   if (compare) {
     return (
       <div className="flex flex-wrap items-baseline gap-2">
@@ -72,19 +72,19 @@ export function ShopCategoryCard({ category: c, shopUsername, productCount }: Ca
   return (
     <Link
       to={`/${shopUsername}/category/${c.slug}`}
-      className={`group relative block ${CATEGORY_CARD_ASPECT_CLASS} overflow-hidden rounded-2xl max-lg:rounded-2xl no-underline shadow-lg shadow-stone-900/10 ring-1 ring-stone-900/[0.06] transition-all duration-500 ease-out hover:-translate-y-1 max-lg:hover:-translate-y-1 hover:shadow-2xl hover:shadow-brand-500/20 hover:ring-brand-500/35 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 dark:shadow-black/50 dark:ring-white/10 dark:hover:shadow-brand-950/50 dark:hover:ring-brand-400/30 lg:rounded-3xl lg:hover:-translate-y-1.5`}
+      className={`group relative block ${CATEGORY_CARD_ASPECT_CLASS} overflow-hidden rounded-theme-card no-underline shadow-theme-card ring-1 ring-theme-border transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-theme-primary`}
     >
-      <div className="absolute inset-0 bg-stone-200 dark:bg-zinc-800">
+      <div className="absolute inset-0 bg-theme-surface">
         {c.image ? (
           <img
             src={c.image}
             alt=""
-            className="h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-110"
+            className="h-full w-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105"
             loading="lazy"
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-brand-100 via-brand-50 to-brand-200/80 dark:from-brand-950/50 dark:via-brand-950/30 dark:to-zinc-900">
-            <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white/90 text-brand-600 shadow-lg ring-1 ring-white/60 backdrop-blur-sm dark:bg-zinc-800/90 dark:text-brand-400 dark:ring-zinc-700/80">
+          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-theme-primary/10 via-theme-primary/5 to-theme-surface">
+            <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-theme-surface/90 text-theme-primary shadow-md ring-1 ring-theme-border backdrop-blur-sm">
               <LayoutGrid className="h-8 w-8" aria-hidden />
             </span>
           </div>
@@ -92,11 +92,7 @@ export function ShopCategoryCard({ category: c, shopUsername, productCount }: Ca
       </div>
 
       <div
-        className="absolute inset-0 bg-gradient-to-t from-stone-950/95 via-stone-950/45 to-stone-950/5 transition-opacity duration-500 group-hover:from-stone-950 group-hover:via-stone-950/55"
-        aria-hidden
-      />
-      <div
-        className="absolute inset-0 bg-gradient-to-br from-brand-500/0 via-transparent to-brand-500/0 opacity-0 transition-opacity duration-500 group-hover:from-brand-500/25 group-hover:to-brand-500/15 group-hover:opacity-100"
+        className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/5 transition-opacity duration-300 group-hover:from-black/90"
         aria-hidden
       />
 
@@ -128,7 +124,7 @@ function ProductCardShell({
     <Link
       to={to}
       state={state}
-      className={`group flex h-full min-w-0 flex-col overflow-hidden rounded-2xl bg-white no-underline shadow-md shadow-stone-900/[0.06] ring-1 ring-stone-200/90 transition-all duration-400 hover:-translate-y-1 hover:shadow-xl hover:shadow-brand-500/12 hover:ring-brand-300/70 dark:bg-zinc-900 dark:shadow-black/40 dark:ring-zinc-700/90 dark:hover:ring-brand-500/45 ${className}`}
+      className={`group flex h-full min-w-0 flex-col overflow-hidden rounded-theme-card bg-theme-surface no-underline shadow-theme-card ring-1 ring-theme-border transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:ring-theme-primary/40 ${className}`}
     >
       {children}
     </Link>
@@ -151,7 +147,7 @@ function ProductCardVisual({
   return (
     <div className="relative p-2 pb-0 max-lg:p-2 max-lg:pb-0 lg:p-3 lg:pb-0">
       <div
-        className={`relative ${PRODUCT_CARD_ASPECT_CLASS} overflow-hidden rounded-xl bg-gradient-to-br from-stone-50 to-stone-100/80 ring-1 ring-stone-200/70 transition-all duration-400 group-hover:ring-brand-200/90 dark:from-zinc-800 dark:to-zinc-800/90 dark:ring-zinc-700/90 dark:group-hover:ring-brand-600/50 ${dimmed ? 'opacity-55 grayscale' : ''}`}
+        className={`relative ${PRODUCT_CARD_ASPECT_CLASS} overflow-hidden rounded-theme-card bg-theme-bg ring-1 ring-theme-border transition-all duration-300 group-hover:ring-theme-primary/30 ${dimmed ? 'opacity-55 grayscale' : ''}`}
       >
         {p.image ? (
           <ProductImage
@@ -159,10 +155,10 @@ function ProductCardVisual({
             alt={displayName}
             loading="lazy"
             className="!bg-transparent"
-            imageClassName="transition-transform duration-500 ease-out group-hover:scale-[1.06]"
+            imageClassName="transition-transform duration-500 ease-out group-hover:scale-[1.04]"
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center text-stone-300 dark:text-zinc-600">
+          <div className="flex h-full w-full items-center justify-center text-theme-muted">
             <ShoppingBag className="h-10 w-10" aria-hidden />
           </div>
         )}
@@ -180,7 +176,7 @@ function ProductCardVisual({
 function SaleBadge() {
   const { t } = useShopLanguage();
   return (
-    <span className="rounded-full bg-gradient-to-r from-brand-600 to-brand-600 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white shadow-sm">
+    <span className="rounded-full bg-theme-primary px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-theme-primary-contrast shadow-sm">
       {t('badgeSale')}
     </span>
   );
@@ -189,7 +185,7 @@ function SaleBadge() {
 function SoldOutBadge() {
   const { t } = useShopLanguage();
   return (
-    <span className="rounded-full bg-stone-900/85 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white backdrop-blur-sm dark:bg-zinc-950/90">
+    <span className="rounded-full bg-black/80 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white backdrop-blur-sm">
       {t('badgeSoldOut')}
     </span>
   );
@@ -209,11 +205,7 @@ export function ShopProductCard({ product: p, shopUsername, currency, linkState 
     <ProductCardShell
       to={productUrl}
       state={linkState}
-      className={
-        isFeatured
-          ? 'bg-gradient-to-b from-amber-50/40 to-white ring-amber-200/60 hover:ring-amber-300/80 dark:from-amber-950/15 dark:to-zinc-900 dark:ring-amber-500/20 dark:hover:ring-amber-400/35'
-          : ''
-      }
+      className={isFeatured ? 'ring-theme-primary/30 hover:ring-theme-primary/60' : ''}
     >
       <ProductCardVisual
         product={p}
@@ -228,7 +220,7 @@ export function ShopProductCard({ product: p, shopUsername, currency, linkState 
         trailingBadge={
           isFeatured ? (
             <span
-              className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white/95 shadow-sm ring-1 ring-amber-200/80 dark:bg-zinc-800/95 dark:ring-amber-500/30"
+              className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-theme-surface shadow-sm ring-1 ring-amber-400/40"
               title={t('badgeFeatured')}
             >
               <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" aria-hidden />
@@ -237,11 +229,11 @@ export function ShopProductCard({ product: p, shopUsername, currency, linkState 
         }
       />
       <div className="flex min-w-0 flex-1 flex-col p-2.5 pt-1.5 max-lg:p-2.5 max-lg:pt-1.5 lg:p-4 lg:pt-2.5">
-        <h3 className="line-clamp-2 text-xs max-lg:text-xs font-bold leading-snug text-stone-900 dark:text-zinc-100 lg:text-sm">
+        <h3 className="line-clamp-2 text-xs max-lg:text-xs font-bold leading-snug text-theme-primary lg:text-sm">
           {localizedName}
         </h3>
         <p
-          className="mt-1 min-h-[1rem] min-w-0 truncate text-xs leading-4 text-stone-500 dark:text-zinc-400"
+          className="mt-1 min-h-[1rem] min-w-0 truncate text-xs leading-4 text-theme-muted"
           title={localizedDescription.trim() || undefined}
         >
           {localizedDescription.trim() || '\u00a0'}
@@ -297,34 +289,34 @@ export default function ShopHomePage({ shop, products, username, containerClass 
     <>
       {showHero ? (
         <section className={`${containerClass} pt-4 max-lg:pt-4 lg:pt-7`}>
-          <div className="overflow-hidden rounded-2xl max-lg:rounded-2xl border border-stone-200/90 bg-white shadow-sm ring-1 ring-stone-200/50 dark:border-zinc-700 dark:bg-zinc-900 dark:ring-zinc-700/80 lg:rounded-3xl">
+          <div className="overflow-hidden rounded-theme-card border border-theme-border bg-theme-surface shadow-theme-card ring-1 ring-theme-border">
             <div className="grid min-w-0 max-lg:grid-cols-1 lg:grid-cols-2 lg:items-stretch">
               <div className="flex min-w-0 flex-col justify-center p-4 max-lg:order-2 max-lg:p-4 max-lg:pt-3 lg:order-none lg:px-7 lg:py-6">
-                <h1 className="text-xl max-lg:leading-snug font-bold tracking-tight text-stone-900 dark:text-zinc-100 lg:text-[1.8125rem]">
+                <h1 className="text-xl max-lg:leading-snug font-bold tracking-tight text-theme-primary lg:text-[1.8125rem]">
                   {heroTitle}
                 </h1>
                 {introText ? (
-                  <p className="mt-2 max-lg:mt-2 max-w-lg text-sm max-lg:text-sm leading-relaxed text-stone-600 dark:text-zinc-400 lg:mt-3 lg:text-base">
+                  <p className="mt-2 max-lg:mt-2 max-w-lg text-sm max-lg:text-sm leading-relaxed text-theme-secondary lg:mt-3 lg:text-base">
                     {introText}
                   </p>
                 ) : null}
                 <div className="mt-4 max-lg:mt-4 flex flex-col gap-2 max-lg:w-full max-lg:gap-2 lg:mt-6 lg:flex-row lg:flex-wrap lg:gap-2.5">
                   <Link
                     to={`/${username}/products`}
-                    className="inline-flex w-full max-lg:w-full items-center justify-center rounded-xl bg-gradient-to-r from-brand-600 to-brand-600 px-4 py-2.5 max-lg:px-4 max-lg:py-2.5 text-sm font-semibold text-white no-underline shadow-md shadow-brand-500/20 transition-all hover:from-brand-500 hover:to-brand-500 lg:w-auto lg:px-5"
+                    className="inline-flex w-full max-lg:w-full items-center justify-center rounded-theme-btn bg-theme-primary px-4 py-2.5 max-lg:px-4 max-lg:py-2.5 text-sm font-semibold text-theme-primary-contrast no-underline shadow-md shadow-theme-primary/20 transition-all hover:opacity-90 lg:w-auto lg:px-5"
                   >
                     {t('heroBrowse')}
                   </Link>
                   <Link
                     to={`/${username}/contact`}
-                    className="inline-flex w-full max-lg:w-full items-center justify-center rounded-xl border-2 border-brand-200 bg-white px-4 py-2.5 max-lg:px-4 max-lg:py-2.5 text-sm font-semibold text-brand-800 no-underline transition-colors hover:border-brand-300 hover:bg-brand-50/60 dark:border-brand-600/50 dark:bg-zinc-800 dark:text-brand-300 dark:hover:bg-zinc-700 lg:w-auto lg:px-5"
+                    className="inline-flex w-full max-lg:w-full items-center justify-center rounded-theme-btn border border-theme-border bg-theme-surface px-4 py-2.5 max-lg:px-4 max-lg:py-2.5 text-sm font-semibold text-theme-primary no-underline transition-colors hover:bg-theme-bg lg:w-auto lg:px-5"
                   >
                     {t('heroContact')}
                   </Link>
                 </div>
               </div>
               <div
-                className={`relative w-full min-w-0 overflow-hidden bg-stone-100 dark:bg-zinc-800 max-lg:order-1 ${STORE_HERO_ASPECT_CLASS}`}
+                className={`relative w-full min-w-0 overflow-hidden bg-theme-bg max-lg:order-1 ${STORE_HERO_ASPECT_CLASS}`}
               >
                 {shop.homeHeroImage ? (
                   <img
@@ -341,7 +333,7 @@ export default function ShopHomePage({ shop, products, username, containerClass 
                     />
                   </div>
                 ) : (
-                  <div className="absolute inset-0 flex items-center justify-center text-brand-200/90">
+                  <div className="absolute inset-0 flex items-center justify-center text-theme-muted">
                     <ShoppingBag className="h-16 w-16 max-lg:h-16 max-lg:w-16 lg:h-24 lg:w-24" strokeWidth={1.25} aria-hidden />
                   </div>
                 )}
@@ -360,13 +352,13 @@ export default function ShopHomePage({ shop, products, username, containerClass 
             {trustBadges.map((badge, i) => (
               <div
                 key={`${badge.label}-${i}`}
-                className="flex min-h-[2.75rem] max-lg:min-h-[2.75rem] items-center justify-center gap-2 rounded-xl max-lg:rounded-xl border border-stone-200/90 bg-white px-3 py-2.5 max-lg:px-3 max-lg:py-2.5 text-center shadow-sm ring-1 ring-stone-200/40 dark:border-zinc-700 dark:bg-zinc-900 dark:ring-zinc-700/50 lg:min-h-[3.25rem] lg:gap-2.5 lg:rounded-2xl lg:px-4 lg:py-3"
+                className="flex min-h-[2.75rem] max-lg:min-h-[2.75rem] items-center justify-center gap-2 rounded-theme-card border border-theme-border bg-theme-surface px-3 py-2.5 max-lg:px-3 max-lg:py-2.5 text-center shadow-theme-card ring-1 ring-theme-border lg:min-h-[3.25rem] lg:gap-2.5 lg:px-4 lg:py-3"
               >
                 <TrustBadgeTypeIcon
                   type={resolveTrustBadgeType(badge.icon)}
-                  className="h-4 w-4 max-lg:h-4 max-lg:w-4 shrink-0 text-brand-600 dark:text-brand-400 lg:h-5 lg:w-5"
+                  className="h-4 w-4 max-lg:h-4 max-lg:w-4 shrink-0 text-theme-primary lg:h-5 lg:w-5"
                 />
-                <span className="text-xs max-lg:text-xs font-semibold text-stone-800 dark:text-zinc-200 lg:text-sm">
+                <span className="text-xs max-lg:text-xs font-semibold text-theme-primary lg:text-sm">
                   {getLocalizedTrustLabel(badge, lang)}
                 </span>
               </div>
@@ -429,15 +421,15 @@ export default function ShopHomePage({ shop, products, username, containerClass 
         </div>
 
         {products.length === 0 ? (
-          <div className="rounded-2xl border border-dashed border-stone-300 bg-white px-4 py-10 max-lg:px-4 max-lg:py-10 text-center shadow-sm lg:px-6 lg:py-14">
-            <span className="mx-auto flex h-12 w-12 max-lg:h-12 max-lg:w-12 items-center justify-center rounded-2xl bg-brand-50 text-brand-600 ring-1 ring-brand-100 lg:h-14 lg:w-14">
+          <div className="rounded-theme-card border border-dashed border-theme-border bg-theme-surface px-4 py-10 max-lg:px-4 max-lg:py-10 text-center shadow-theme-card lg:px-6 lg:py-14">
+            <span className="mx-auto flex h-12 w-12 max-lg:h-12 max-lg:w-12 items-center justify-center rounded-theme-card bg-theme-primary/10 text-theme-primary ring-1 ring-theme-primary/20 lg:h-14 lg:w-14">
               <ShoppingBag className="h-6 w-6 max-lg:h-6 max-lg:w-6 lg:h-7 lg:w-7" aria-hidden />
             </span>
-            <p className="mt-3 max-lg:mt-3 text-sm max-lg:text-sm font-semibold text-stone-800 lg:mt-4">{t('homeNoProducts')}</p>
-            <p className="mt-1 text-xs max-lg:text-xs text-stone-500 lg:text-sm">{t('homeNoProductsBody')}</p>
+            <p className="mt-3 max-lg:mt-3 text-sm max-lg:text-sm font-semibold text-theme-primary lg:mt-4">{t('homeNoProducts')}</p>
+            <p className="mt-1 text-xs max-lg:text-xs text-theme-muted lg:text-sm">{t('homeNoProductsBody')}</p>
           </div>
         ) : regularProducts.length === 0 && featuredProducts.length > 0 ? (
-          <p className="rounded-xl border border-stone-200 bg-white px-3 py-5 max-lg:px-3 max-lg:py-5 text-center text-xs max-lg:text-xs text-stone-500 lg:px-4 lg:py-6 lg:text-sm">
+          <p className="rounded-theme-card border border-theme-border bg-theme-surface px-3 py-5 max-lg:px-3 max-lg:py-5 text-center text-xs max-lg:text-xs text-theme-muted lg:px-4 lg:py-6 lg:text-sm">
             {t('homeAllFeatured')}{' '}
             <ShopViewAllLink to={`/${username}/products`} />
           </p>

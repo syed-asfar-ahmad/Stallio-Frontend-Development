@@ -3,11 +3,6 @@ import type { ThemeId, FontFamilyPreset, RadiusPreset } from './types';
 
 export const DEFAULT_THEME_ID: ThemeId = 'classic-clean';
 
-/**
- * Categorization of themes by subscription plan tier.
- * Basic plan: 2 core themes
- * Business plan: 3 additional themes (5 total)
- */
 export const THEMES_BY_PLAN: Record<SellerPlanTier, ThemeId[]> = {
   basic: ['classic-clean', 'modern-minimal'],
   business: [
@@ -16,6 +11,10 @@ export const THEMES_BY_PLAN: Record<SellerPlanTier, ThemeId[]> = {
     'bold-editorial',
     'boutique-artisan',
     'retail-catalog',
+    // Premium themes — business plan
+    'noir-luxe',
+    'pacific-fresh',
+    'studio-grid',
   ],
 };
 
@@ -24,6 +23,9 @@ export const BUSINESS_EXCLUSIVE_THEMES: ThemeId[] = [
   'bold-editorial',
   'boutique-artisan',
   'retail-catalog',
+  'noir-luxe',
+  'pacific-fresh',
+  'studio-grid',
 ];
 
 export const FONT_PRESETS: { id: FontFamilyPreset; label: string; family: string }[] = [
@@ -32,7 +34,8 @@ export const FONT_PRESETS: { id: FontFamilyPreset; label: string; family: string
   { id: 'plus-jakarta', label: 'Plus Jakarta Sans (Contemporary)', family: '"Plus Jakarta Sans", Outfit, ui-sans-serif, system-ui, sans-serif' },
   { id: 'playfair', label: 'Playfair Display (Luxury Serif)', family: '"Playfair Display", Georgia, serif' },
   { id: 'syne', label: 'Syne (Bold Editorial)', family: 'Syne, Outfit, ui-sans-serif, system-ui, sans-serif' },
-  { id: 'cormorant', label: 'Cormorant (Artisan Classic)', family: '"Cormorant Garamond", Georgia, serif' },
+  { id: 'cormorant', label: 'Cormorant Garamond (Organic Elegance)', family: '"Cormorant Garamond", Georgia, serif' },
+  { id: 'dm-serif', label: 'DM Serif Display (Dark Luxury)', family: '"DM Serif Display", "Playfair Display", Georgia, serif' },
 ];
 
 export const RADIUS_PRESETS: { id: RadiusPreset; label: string; button: string; card: string }[] = [
@@ -44,12 +47,25 @@ export const RADIUS_PRESETS: { id: RadiusPreset; label: string; button: string; 
   { id: 'full', label: 'Pill Round', button: '9999px', card: '1.25rem' },
 ];
 
-export function isThemeAllowedForPlan(themeId: ThemeId, plan?: string | null): boolean {
-  const tier: SellerPlanTier = plan === 'business' ? 'business' : 'basic';
-  return THEMES_BY_PLAN[tier].includes(themeId);
+export function isThemeAllowedForPlan(_themeId: ThemeId, _plan?: string | null): boolean {
+  // Plan check bypassed so all themes can be tested and selected
+  return true;
 }
 
-export function getAvailableThemesForPlan(plan?: string | null): ThemeId[] {
-  const tier: SellerPlanTier = plan === 'business' ? 'business' : 'basic';
-  return THEMES_BY_PLAN[tier];
+export function getAvailableThemesForPlan(_plan?: string | null): ThemeId[] {
+  return [
+    'classic-clean',
+    'modern-minimal',
+    'bold-editorial',
+    'boutique-artisan',
+    'retail-catalog',
+    'noir-luxe',
+    'pacific-fresh',
+    'studio-grid',
+  ];
+}
+
+export function canCustomizeTokens(_plan?: string | null): boolean {
+  // Plan check bypassed to allow full design token customization
+  return true;
 }
