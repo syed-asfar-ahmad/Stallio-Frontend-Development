@@ -45,7 +45,7 @@ export function AboutHero() {
 
       <div className="pointer-events-none relative z-10 mx-auto grid min-h-[calc(100dvh-5rem)] w-full max-w-7xl items-center gap-10 px-6 pt-8 pb-14 md:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] md:gap-12 md:pt-10 md:pb-16 lg:gap-16">
         <motion.div
-          className="pointer-events-auto flex max-w-xl flex-col gap-5 max-lg:order-2 md:gap-6 lg:order-none"
+          className="pointer-events-auto flex max-w-xl flex-col gap-5 md:gap-6"
           initial={reduce ? false : 'hidden'}
           animate="show"
           variants={{
@@ -125,7 +125,7 @@ export function AboutHero() {
         </motion.div>
 
         <motion.div
-          className="pointer-events-auto min-w-0 max-lg:order-1 lg:order-none"
+          className="pointer-events-auto min-w-0"
           initial={reduce ? false : { opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
