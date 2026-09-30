@@ -1,74 +1,135 @@
 {
   "howItWorks": {
     "hero": {
-      "titleLine1": "Tres movimientos.",
-      "titleLine2": "Un enlace claro.",
-      "subtitle": "Abre tu tienda, carga tu catálogo y luego pega la misma URL dondequiera que los compradores ya te encuentren. Hecho para el pulgar, no para tickets de TI.",
-      "noteDraft": "~5 min primer borrador",
-      "noteMobile": "Primero móvil",
-      "startFree": "Empieza gratis",
-      "viewDemoStore": "Ver tienda de demostración",
-      "previewCards": [
-        { "n": "01", "t": "Nombre + URL", "d": "stallio.shop/you" },
-        { "n": "02", "t": "Añadir productos", "d": "Fotos y precios" },
-        { "n": "03", "t": "Compartir enlace", "d": "Biografía, Historias, Chat" }
+      "eyebrow": "Cómo funciona",
+      "titleBefore": "Tres pasos.",
+      "titleAccent": "Un enlace nítido.",
+      "body": "Abre tu tienda, carga tu catálogo y pega la misma URL donde tus compradores ya te encuentran. Hecho para el pulgar, no para tickets de IT.",
+      "metaFast": "~5 min primer borrador",
+      "metaMobile": "Mobile first",
+      "journey": [
+        {
+          "n": "01",
+          "label": "Nombre + URL",
+          "detail": "Reclama tu ruta",
+          "alt": "Pantalla del catálogo de Stallio en un teléfono"
+        },
+        {
+          "n": "02",
+          "label": "Agrega productos",
+          "detail": "Fotos y precios",
+          "alt": "Fotografía de producto lista para un listado del catálogo"
+        },
+        {
+          "n": "03",
+          "label": "Comparte el enlace",
+          "detail": "Bio, Stories, Chat",
+          "alt": "Pantalla de checkout móvil en Stallio"
+        }
       ]
     },
     "flow": {
       "eyebrow": "El flujo",
-      "title": "Abre. Cataloga. Comparte.",
-      "subtitle": "Tres pasos deliberados para publicar un escaparate que se sienta intencionado, no improvisado.",
+      "title": "Abre. Publica. Comparte.",
+      "body": "Tres tiempos deliberados para publicar un escaparate que se sienta intencional, no improvisado.",
+      "pathLabel": "Ruta",
       "steps": [
         {
+          "n": "01",
           "title": "Crea tu tienda",
-          "description": "Regístrate, pon nombre a tu tienda y elige tu URL. Obtienes un enlace activo que puedes pegar en cualquier parte. Sin DNS, sin despliegue, sin drama.",
-          "items": [
-            "Crea tu cuenta",
-            "Añade el nombre de la tienda y los datos",
-            "Obtén tu enlace (stallio.shop/you)"
-          ]
+          "body": "Regístrate, nombra tu tienda, elige tu URL. Obtienes un enlace en vivo que puedes pegar donde sea.",
+          "note": "Sin DNS. Sin deploy."
         },
         {
-          "title": "Añade tus productos",
-          "description": "Fotos, precios, descripciones breves. Un catálogo que puedes refinar en cualquier momento. Los compradores ven claridad, no caos.",
-          "items": [
-            "Añade fotos de producto",
-            "Establece precios y descripciones",
-            "Mantén un catálogo organizado"
-          ]
+          "n": "02",
+          "title": "Agrega tus productos",
+          "body": "Fotos, precios, descripciones cortas. Un catálogo que puedes refinar cuando quieras.",
+          "note": "Claridad, no caos"
         },
         {
-          "title": "Comparte y recibe pedidos",
-          "description": "El mismo enlace en la biografía, historias y chats. Ellos navegan en el teléfono. Tú sigues todo en tu panel.",
-          "items": [
-            "Pon el enlace en tu perfil o biografía",
-            "Comparte en el chat o en publicaciones sociales",
-            "Haz un seguimiento de los pedidos en un solo lugar"
-          ]
+          "n": "03",
+          "title": "Comparte y toma pedidos",
+          "body": "El mismo enlace en bio, stories y chats. Los compradores navegan en el teléfono. Tú haces seguimiento en un solo panel.",
+          "note": "Los pedidos llegan aquí"
         }
       ]
     },
-    "strip": "Mismo enlace, Cada canal, Escaparate de verdad",
+    "steps": {
+      "eyebrow": "Paso a paso",
+      "title": "De una ruta vacía a un estante en vivo.",
+      "details": [
+        {
+          "n": "01",
+          "title": "Crea tu tienda",
+          "body": "Regístrate, nombra tu tienda, elige tu URL. Obtienes un enlace en vivo que puedes pegar donde sea. Sin DNS, sin deploy, sin drama.",
+          "checks": [
+            "Crea tu cuenta",
+            "Agrega el nombre y los detalles de la tienda",
+            "Obtén tu enlace (stallio.shop/you)"
+          ],
+          "alt": "Repostero empacando pedidos junto a un escaparate en el teléfono"
+        },
+        {
+          "n": "02",
+          "title": "Agrega tus productos",
+          "body": "Fotos, precios, descripciones cortas. Un catálogo que puedes refinar cuando quieras. Los compradores ven claridad, no caos.",
+          "checks": [
+            "Agrega fotos de producto",
+            "Define precios y descripciones",
+            "Mantén un catálogo organizado"
+          ],
+          "alt": "Estudio de maker con piezas hechas a mano listas para enviar"
+        },
+        {
+          "n": "03",
+          "title": "Comparte y toma pedidos",
+          "body": "El mismo enlace en bio, stories y chats. Ellos navegan en el teléfono. Tú haces seguimiento de todo en tu panel.",
+          "checks": [
+            "Pon el enlace en tu perfil o bio",
+            "Comparte en chat o publicaciones",
+            "Sigue los pedidos en un solo lugar"
+          ],
+          "alt": "Espacio de ropa con un teléfono abierto en el catálogo de la tienda"
+        }
+      ]
+    },
+    "channels": {
+      "titleBefore": "El mismo enlace",
+      "titleMid": "Cada canal",
+      "titleAfter": "Escaparate real",
+      "items": [
+        "Bio",
+        "Stories",
+        "WhatsApp",
+        "Chat"
+      ]
+    },
     "live": {
-      "eyebrow": "Cuando estás en línea",
+      "eyebrow": "Cuando estás en vivo",
       "title": "Los compradores ven pulido. Tú ves control.",
-      "subtitle": "Un escaparate rápido por fuera. Un panel sereno por dentro.",
-      "commandTitle": "Centro de mando",
-      "commandBody": "Pedidos, productos y solicitudes en una sola vista. Actualiza existencias entre entregas sin abrir diez aplicaciones.",
-      "commandBullets": [
-        "Los pedidos nuevos aparecen primero",
-        "Edita productos con unos pocos toques",
-        "Menos momentos de «¿recibiste mi mensaje directo?»"
+      "body": "Un escaparate rápido por fuera. Un panel tranquilo por dentro.",
+      "dashboardTitle": "Centro de mando",
+      "dashboardBody": "Pedidos, productos y solicitudes en una sola vista. Actualiza stock entre entregas sin abrir diez apps.",
+      "dashboardPoints": [
+        "Marca pagado, envía y descarga facturas PDF",
+        "Cupones, envío y stock en un solo lugar",
+        "Exporta pedidos o agrega un pedido manual por teléfono"
       ],
-      "thumbTitle": "Amigable para el pulgar",
-      "thumbBody": "Objetivos de toque grandes, precios claros y un flujo de pedido que no se siente como deberes en el teléfono.",
-      "thumbTags": ["Rápido", "Claro", "Compartible"]
+      "phoneTitle": "Amigable al pulgar",
+      "phoneBody": "Categorías, carrito, cupones y checkout en el teléfono. Los compradores pueden cambiar entre inglés, español o árabe en tu tienda.",
+      "phoneChips": [
+        "Cupones",
+        "Facturas",
+        "EN / ES / AR"
+      ],
+      "altDashboard": "Vista del catálogo de vendedor en Stallio",
+      "altPhone": "Detalle de producto móvil en un escaparate de Stallio"
     },
     "cta": {
+      "eyebrow": "Listo",
       "title": "Publica el enlace esta noche.",
-      "subtitle": "Gratis para empezar. Sin tarjeta registrada. Si encaja, sigue vendiendo desde la misma URL mañana.",
-      "createYourShop": "Empieza gratis",
-      "exploreFeatures": "Explorar características"
+      "body": "Gratis para empezar. Sin tarjeta en archivo. Si te encaja, sigue vendiendo desde la misma URL mañana.",
+      "secondary": "Explorar funciones"
     }
   }
 }

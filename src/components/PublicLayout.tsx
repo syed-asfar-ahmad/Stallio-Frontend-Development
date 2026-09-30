@@ -514,12 +514,10 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Mail, ArrowRight } from 'lucide-react';
-import { SocialIcon } from './SocialIcons';
-import ContactLtrText from './ContactLtrText';
+
+import { MarketingFooter } from '@/components/marketing/MarketingFooter';
 import ThemeToggle from './ThemeToggle';
 import LanguageSwitcher from './LanguageSwitcher';
-import { marketingSocialLinks } from '../lib/marketingSocialLinks';
 import {
   MobileNav,
   MobileNavHeader,
@@ -531,38 +529,6 @@ import {
   NavBody,
   NavItems,
 } from './ui/resizable-navbar';
-
-function FooterTextLink({ to, label }: { to: string; label: string }) {
-  return (
-    <Link
-      to={to}
-      onClick={() => window.scrollTo(0, 0)}
-      className="group/link relative inline-flex w-fit items-center whitespace-nowrap py-0.5 text-xs font-medium text-stone-600 no-underline transition-colors duration-200 hover:!text-brand-600 focus-visible:!text-brand-600 dark:text-zinc-400 dark:hover:!text-brand-400 dark:focus-visible:!text-brand-400 sm:text-[12.5px] lg:text-[12px] xl:text-sm"
-    >
-      <span className="relative">
-        {label}
-        <span
-          className="absolute -bottom-0.5 left-0 h-px w-0 bg-brand-600 transition-all duration-300 ease-out group-hover/link:w-full group-focus-visible/link:w-full dark:bg-brand-400"
-          aria-hidden
-        />
-      </span>
-    </Link>
-  );
-}
-
-function FooterSocialIcon({ url, platform }: { url: string; platform: string }) {
-  return (
-    <a
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-brand-200 bg-brand-50 text-brand-600 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:scale-110 hover:border-brand-600 hover:bg-brand-600 hover:text-white hover:shadow-lg hover:shadow-brand-600/30 focus-visible:-translate-y-0.5 focus-visible:scale-110 focus-visible:border-brand-600 focus-visible:bg-brand-600 focus-visible:text-white focus-visible:shadow-lg focus-visible:shadow-brand-600/30 dark:border-brand-800/60 dark:bg-brand-950/40 dark:text-brand-400 dark:hover:bg-brand-500 dark:hover:text-white dark:focus-visible:bg-brand-500 dark:focus-visible:text-white sm:h-8 sm:w-8"
-      aria-label={platform}
-    >
-      <SocialIcon platform={platform} size={13} />
-    </a>
-  );
-}
 
 export default function PublicLayout({ children, hideFooter }: { children: React.ReactNode; hideFooter?: boolean }) {
   const { t } = useTranslation();
@@ -579,31 +545,6 @@ export default function PublicLayout({ children, hideFooter }: { children: React
         { link: '/pricing', labelKey: 'layout.nav.pricing' as const },
         { link: '/contact', labelKey: 'layout.nav.contact' as const },
       ].map((item) => ({ name: t(item.labelKey), link: item.link })),
-    [t],
-  );
-
-  const footerLinks = useMemo(
-    () =>
-      [
-        { to: '/', labelKey: 'layout.nav.home' as const },
-        { to: '/about', labelKey: 'layout.nav.about' as const },
-        { to: '/features', labelKey: 'layout.nav.features' as const },
-        { to: '/pricing', labelKey: 'layout.nav.pricing' as const },
-        { to: '/how-it-works', labelKey: 'layout.footer.howItWorks' as const },
-        { to: '/contact', labelKey: 'layout.nav.contact' as const },
-        { to: '/careers', labelKey: 'layout.nav.careers' as const },
-        { to: '/ambassador', labelKey: 'layout.nav.ambassador' as const },
-      ].map((item) => ({ ...item, label: t(item.labelKey) })),
-    [t],
-  );
-
-  const footerLegal = useMemo(
-    () =>
-      [
-        { to: '/privacy', labelKey: 'layout.footer.privacy' as const },
-        { to: '/terms', labelKey: 'layout.footer.terms' as const },
-        { to: '/refund-policy', labelKey: 'layout.footer.refund' as const },
-      ].map((item) => ({ ...item, label: t(item.labelKey) })),
     [t],
   );
 
@@ -773,135 +714,7 @@ export default function PublicLayout({ children, hideFooter }: { children: React
         {children}
       </main>
 
-      {!hideFooter && (
-        <footer className="relative mt-auto overflow-x-clip bg-[#fafaf9] dark:bg-zinc-950">
-          <div className="relative w-full pt-5 sm:pt-6 lg:pt-10">
-            <div className="flex items-center">
-              <span
-                className="h-px flex-1 bg-stone-300 dark:bg-zinc-700"
-                aria-hidden
-              />
-              <div className="relative mx-auto w-[92%] shrink-0 overflow-hidden rounded-lg bg-gradient-to-br from-brand-500 via-brand-600 to-brand-700 px-3 py-3 shadow-lg shadow-brand-600/20 sm:rounded-xl sm:px-5 sm:py-4 md:w-[70%] lg:w-full lg:max-w-3xl lg:rounded-2xl lg:px-6 lg:py-5 dark:shadow-brand-950/40">
-                <div
-                  className="pointer-events-none absolute -right-10 -top-16 h-36 w-36 rounded-full bg-white/10 blur-2xl sm:h-44 sm:w-44"
-                  aria-hidden
-                />
-                <div
-                  className="pointer-events-none absolute -bottom-16 left-1/4 h-40 w-40 rounded-full bg-brand-300/20 blur-3xl sm:h-52 sm:w-52"
-                  aria-hidden
-                />
-                <div className="relative flex flex-col items-start gap-3 lg:flex-row lg:items-center lg:justify-between lg:gap-6">
-                  <p className="max-w-full text-[11px] font-semibold leading-snug text-white sm:text-sm lg:max-w-lg lg:text-sm">
-                    {t('layout.footer.tagline')}
-                  </p>
-                  <Link
-                    to="/signup"
-                    onClick={() => window.scrollTo(0, 0)}
-                    className="group/cta flex w-full shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-full !bg-white px-4 py-2 text-[11px] font-bold !text-brand-700 shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:!bg-stone-50 hover:shadow-lg no-underline sm:text-xs lg:w-auto lg:px-4 lg:py-2 lg:text-sm"
-                  >
-                    {t('layout.footer.getStartedFree')}
-                    <ArrowRight
-                      className="h-3 w-3 shrink-0 transition-transform duration-200 group-hover/cta:translate-x-0.5 rtl:rotate-180 rtl:group-hover/cta:-translate-x-0.5 sm:h-3.5 sm:w-3.5"
-                      aria-hidden
-                    />
-                  </Link>
-                </div>
-              </div>
-              <span
-                className="h-px flex-1 bg-stone-300 dark:bg-zinc-700"
-                aria-hidden
-              />
-            </div>
-          </div>
-
-          <div className="relative mx-auto w-full max-w-7xl px-4 pt-6 sm:px-5 sm:pt-8 lg:pt-12">
-            <div className="grid grid-cols-2 gap-x-6 gap-y-5 md:grid-cols-[1fr_1.3fr_0.7fr_1fr] md:gap-6 lg:gap-8">
-              <div className="col-span-2 min-w-0 md:col-span-1">
-                <Link
-                  to="/"
-                  onClick={() => window.scrollTo(0, 0)}
-                  className="group inline-flex items-end gap-1.5 no-underline sm:gap-2"
-                  aria-label={t('layout.aria.homeLogo')}
-                >
-                  <img
-                    src="/assets/logo.png"
-                    alt=""
-                    width={200}
-                    height={48}
-                    decoding="async"
-                    className="block h-8 w-auto max-h-8 object-contain object-start transition-opacity group-hover:opacity-90 sm:h-9 sm:max-h-9"
-                    aria-hidden
-                  />
-                  <span
-                    className="nav-brand-wordmark shrink-0 text-[1.5rem] text-brand-950 transition-opacity duration-300 group-hover:opacity-80 sm:text-[1.65rem] dark:text-brand-50"
-                    aria-hidden
-                  >
-                    Stallio
-                  </span>
-                </Link>
-              </div>
-
-              <div className="min-w-0">
-                <p className="text-[0.625rem] font-bold uppercase tracking-[0.16em] text-brand-700 sm:text-[0.6875rem] dark:text-brand-400">
-                  {t('layout.footer.linksHeading')}
-                </p>
-                <nav className="mt-2.5 grid grid-cols-2 gap-x-10 gap-y-1">
-                  {footerLinks.map((item) => (
-                    <FooterTextLink key={item.to} to={item.to} label={item.label} />
-                  ))}
-                </nav>
-              </div>
-
-              <div className="min-w-0 pl-8 sm:pl-0">
-                <p className="text-[0.625rem] font-bold uppercase tracking-[0.16em] text-brand-700 sm:text-[0.6875rem] dark:text-brand-400">
-                  {t('layout.footer.legalHeading')}
-                </p>
-                <nav className="mt-2.5 flex flex-col items-start" aria-label={t('layout.footer.legalNavAria')}>
-                  {footerLegal.map((item) => (
-                    <FooterTextLink key={item.to} to={item.to} label={item.label} />
-                  ))}
-                </nav>
-              </div>
-
-              <div className="contents md:col-start-4 md:flex md:flex-col md:gap-3">
-                <div className="min-w-0">
-                  <p className="text-[0.625rem] font-bold uppercase tracking-[0.16em] text-brand-700 sm:text-[0.6875rem] dark:text-brand-400">
-                    {t('layout.footer.contactHeading')}
-                  </p>
-                  <a
-                    href="mailto:contact@stallio.shop"
-                    className="mt-2.5 inline-flex min-w-0 max-w-full items-center gap-1.5 rounded-lg border border-stone-200/80 bg-white p-1.5 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-md no-underline sm:gap-2 sm:p-2 dark:border-zinc-600 dark:bg-zinc-800 dark:hover:border-brand-600/40"
-                  >
-                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-brand-50 text-brand-700 ring-1 ring-brand-100/80 sm:h-7 sm:w-7 dark:bg-zinc-800 dark:text-brand-300 dark:ring-zinc-600/80">
-                      <Mail className="h-3 w-3" aria-hidden />
-                    </span>
-                    <span className="min-w-0 break-words text-[10.5px] font-semibold leading-snug text-stone-800 sm:text-xs lg:text-[12px] xl:text-sm dark:text-zinc-100">
-                      <ContactLtrText>contact@stallio.shop</ContactLtrText>
-                    </span>
-                  </a>
-                </div>
-
-                <div className="min-w-0 pl-8 sm:pl-0">
-                  <p className="text-[0.625rem] font-bold uppercase tracking-[0.16em] text-brand-700 sm:text-[0.6875rem] dark:text-brand-400">
-                    {t('layout.footer.socialHeading', 'Social')}
-                  </p>
-                  <div className="mt-2.5 flex items-center gap-1.5 md:mt-1.5">
-                    {marketingSocialLinks.map((link, i) => (
-                      <FooterSocialIcon key={i} url={link.url} platform={link.platform} />
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="relative mt-6 w-full border-t border-stone-200/90 pb-6 pt-3 dark:border-zinc-700 sm:mt-8 sm:pb-8 lg:pb-12">
-            <p className="text-center text-[10px] text-stone-500 sm:text-[11px] dark:text-zinc-500">
-              {t('layout.footer.copyright', { year: new Date().getFullYear() })}
-            </p>
-          </div>
-        </footer>
-      )}
+      {!hideFooter && <MarketingFooter />}
     </div>
   );
 }
