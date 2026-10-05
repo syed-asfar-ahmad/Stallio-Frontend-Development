@@ -11,9 +11,7 @@ type Props = {
 };
 
 const btnBase =
-  'inline-flex items-center justify-center gap-1.5 rounded-xl border-2 px-3 py-2 text-sm font-semibold transition-colors disabled:pointer-events-none disabled:opacity-40 max-lg:py-2.5';
-const btnEnabled =
-  'border-stone-200 bg-white text-stone-700 hover:border-brand-300 hover:bg-brand-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:border-brand-600/45 dark:hover:bg-brand-950/40';
+  'inline-flex items-center justify-center gap-1.5 rounded-[var(--theme-radius-btn)] border-2 px-3 py-2 text-sm font-semibold transition-colors disabled:pointer-events-none disabled:opacity-40 max-lg:py-2.5';
 
 function pageItems(current: number, totalPages: number): (number | 'ellipsis')[] {
   if (totalPages <= 7) {
@@ -45,20 +43,25 @@ export default function ShopPagination({ page, total, pageSize, onPage, classNam
   }
 
   return (
-    <nav
-      className={`flex flex-col gap-3 rounded-2xl border border-stone-200/90 bg-white px-3 py-3 shadow-sm dark:border-zinc-700 dark:bg-zinc-900 max-lg:gap-3 max-lg:px-3 max-lg:py-3 sm:flex-row sm:items-center sm:justify-between lg:px-4 lg:py-3.5 ${className}`.trim()}
+       <nav
+      className={`flex flex-col gap-3 rounded-[var(--theme-radius-card)] border px-3 py-3 shadow-[var(--theme-shadow-card)] max-lg:gap-3 max-lg:px-3 max-lg:py-3 sm:flex-row sm:items-center sm:justify-between lg:px-4 lg:py-3.5 ${className}`.trim()}
+      style={{ borderColor: 'var(--theme-border)', background: 'var(--theme-surface)' }}
       aria-label={t('paginationAria')}
     >
-      <p className="text-center text-xs tabular-nums text-stone-600 dark:text-zinc-400 max-lg:text-center sm:text-start lg:text-sm">
+      <p
+        className="text-center text-xs tabular-nums max-lg:text-center sm:text-start lg:text-sm"
+        style={{ color: 'var(--theme-text-secondary)' }}
+      >
         {t('paginationShowing', { start: rangeStart, end: rangeEnd, total })}
       </p>
 
       <div className="flex flex-wrap items-center justify-center gap-1.5 max-lg:grid max-lg:w-full max-lg:grid-cols-[1fr_auto_1fr] max-lg:gap-2 sm:justify-end">
-        <button
+         <button
           type="button"
           disabled={page <= 1}
           onClick={() => changePage(page - 1)}
-          className={`${btnBase} max-lg:justify-center ${btnEnabled}`}
+          className={`${btnBase} max-lg:justify-center transition-colors`}
+          style={{ borderColor: 'var(--theme-border)', background: 'var(--theme-surface)', color: 'var(--theme-text-primary)' }}
           aria-label={t('paginationPrevAria')}
         >
           <ChevronLeft className="h-4 w-4 shrink-0 rtl:rotate-180" aria-hidden />
@@ -68,7 +71,7 @@ export default function ShopPagination({ page, total, pageSize, onPage, classNam
         <div className="hidden items-center gap-1 sm:flex">
           {pages.map((item, idx) =>
             item === 'ellipsis' ? (
-              <span key={`ellipsis-${idx}`} className="px-1.5 text-sm font-medium text-stone-400 dark:text-zinc-500">
+                           <span key={`ellipsis-${idx}`} className="px-1.5 text-sm font-medium" style={{ color: 'var(--theme-text-muted)' }}>
                 ...
               </span>
             ) : (
@@ -77,19 +80,22 @@ export default function ShopPagination({ page, total, pageSize, onPage, classNam
                 type="button"
                 onClick={() => changePage(item)}
                 aria-current={item === page ? 'page' : undefined}
-                className={`min-w-[2.25rem] rounded-xl px-2.5 py-2 text-sm font-semibold tabular-nums transition-colors ${
+                className="min-w-[2.25rem] rounded-[var(--theme-radius-btn)] px-2.5 py-2 text-sm font-semibold tabular-nums transition-colors"
+                style={
                   item === page
-                    ? 'bg-gradient-to-r from-brand-600 to-brand-600 text-white shadow-sm'
-                    : 'text-stone-600 hover:bg-stone-100 dark:text-zinc-400 dark:hover:bg-zinc-800'
-                }`}
+                    ? { background: 'var(--theme-primary)', color: 'var(--theme-badge-text)' }
+                    : { color: 'var(--theme-text-secondary)' }
+                }
               >
                 {item}
               </button>
             ),
           )}
         </div>
-
-        <span className="justify-self-center px-2 text-sm font-medium tabular-nums text-stone-500 dark:text-zinc-400 sm:hidden">
+        <span
+          className="justify-self-center px-2 text-sm font-medium tabular-nums sm:hidden"
+          style={{ color: 'var(--theme-text-secondary)' }}
+        >
           {t('paginationPageOf', { page, total: totalPages })}
         </span>
 
@@ -97,7 +103,8 @@ export default function ShopPagination({ page, total, pageSize, onPage, classNam
           type="button"
           disabled={page >= totalPages}
           onClick={() => changePage(page + 1)}
-          className={`${btnBase} max-lg:justify-self-end max-lg:justify-center ${btnEnabled}`}
+          className={`${btnBase} max-lg:justify-self-end max-lg:justify-center transition-colors`}
+          style={{ borderColor: 'var(--theme-border)', background: 'var(--theme-surface)', color: 'var(--theme-text-primary)' }}
           aria-label={t('paginationNextAria')}
         >
           {t('paginationNext')}

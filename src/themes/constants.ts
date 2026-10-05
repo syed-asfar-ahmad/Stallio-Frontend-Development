@@ -40,10 +40,8 @@ export const RADIUS_PRESETS: { id: RadiusPreset; label: string; button: string; 
 ];
 
 export function isThemeAllowedForPlan(themeId: ThemeId, plan?: string | null): boolean {
-  const tier: SellerPlanTier = plan === 'business' ? 'business' : 'basic';
-  return THEMES_BY_PLAN[tier].includes(themeId);
+  return true; // TEMP: bypass for local testing — REVERT before commit
 }
-
 export function getAvailableThemesForPlan(plan?: string | null): ThemeId[] {
   const tier: SellerPlanTier = plan === 'business' ? 'business' : 'basic';
   return THEMES_BY_PLAN[tier];

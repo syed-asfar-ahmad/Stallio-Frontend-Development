@@ -24,6 +24,15 @@ export type HeroLayoutVariant =
   | 'minimal-clean'
   | 'card-showcase';
 
+export type HomeSectionId =
+  | 'hero'
+  | 'trust-badges'
+  | 'brand-story'
+  | 'categories'
+  | 'featured-products'
+  | 'product-grid'
+  | 'reviews';
+
 export type ProductCardVariant =
   | 'bordered'
   | 'flat'
@@ -94,6 +103,7 @@ export interface ThemeLayoutSettings {
   headerVariant: HeaderNavigationVariant;
   footerVariant: FooterLayoutVariant;
   productGridColumns: 2 | 3 | 4;
+  homeSections: HomeSectionId[];
   showCategoryPillsOnHome: boolean;
   showFeaturedCollection: boolean;
   showReviewsSection: boolean;
