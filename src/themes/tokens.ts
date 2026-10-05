@@ -5,6 +5,7 @@ export const classicCleanTokens: ThemeTokens = {
     primary: '#2563eb',
     primaryHover: '#1d4ed8',
     primaryLight: '#eff6ff',
+    primaryContrast: '#ffffff',
     secondary: '#0f172a',
     background: '#f8fafc',
     surface: '#ffffff',
@@ -35,6 +36,15 @@ export const classicCleanTokens: ThemeTokens = {
     cardHover: '0 12px 24px -4px rgb(0 0 0 / 0.08), 0 4px 8px -2px rgb(0 0 0 / 0.03)',
     dropdown: '0 16px 32px -4px rgb(0 0 0 / 0.12), 0 6px 12px -2px rgb(0 0 0 / 0.05)',
   },
+  personality: {
+    imageAspectRatio: '1/1',
+    containerMaxWidth: 'max-w-7xl',
+    sectionDensity: 'normal',
+    cardPadding: '1.25rem',
+    accentGlow: 'none',
+    motionDuration: '200ms',
+    motionEasing: 'ease-out',
+  },
 };
 
 export const classicCleanDarkTokens: ThemeTokens = {
@@ -43,6 +53,7 @@ export const classicCleanDarkTokens: ThemeTokens = {
     primary: '#3b82f6',
     primaryHover: '#2563eb',
     primaryLight: '#1e3a8a',
+    primaryContrast: '#ffffff',
     secondary: '#94a3b8',
     background: '#090d16',
     surface: '#111827',
@@ -67,6 +78,7 @@ export const modernMinimalTokens: ThemeTokens = {
     primary: '#171717',
     primaryHover: '#000000',
     primaryLight: '#f4f4f5',
+    primaryContrast: '#ffffff',
     secondary: '#737373',
     background: '#fbfaf8',
     surface: '#ffffff',
@@ -97,6 +109,15 @@ export const modernMinimalTokens: ThemeTokens = {
     cardHover: 'none',
     dropdown: '0 4px 24px 0 rgb(0 0 0 / 0.08)',
   },
+  personality: {
+    imageAspectRatio: '4/5',
+    containerMaxWidth: 'max-w-screen-xl',
+    sectionDensity: 'airy',
+    cardPadding: '1rem',
+    accentGlow: 'none',
+    motionDuration: '300ms',
+    motionEasing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+  },
 };
 
 export const modernMinimalDarkTokens: ThemeTokens = {
@@ -105,6 +126,7 @@ export const modernMinimalDarkTokens: ThemeTokens = {
     primary: '#fafafa',
     primaryHover: '#ffffff',
     primaryLight: '#262626',
+    primaryContrast: '#0a0a0a',
     secondary: '#a3a3a3',
     background: '#0a0a0a',
     surface: '#121212',
@@ -129,6 +151,7 @@ export const boldEditorialTokens: ThemeTokens = {
     primary: '#e11d48',
     primaryHover: '#be123c',
     primaryLight: '#ffe4e6',
+    primaryContrast: '#ffffff',
     secondary: '#09090b',
     background: '#f4f4f5',
     surface: '#ffffff',
@@ -159,68 +182,87 @@ export const boldEditorialTokens: ThemeTokens = {
     cardHover: '6px 6px 0px 0px #09090b',
     dropdown: '6px 6px 0px 0px #09090b',
   },
+  personality: {
+    imageAspectRatio: '4/5',
+    containerMaxWidth: 'max-w-7xl',
+    sectionDensity: 'normal',
+    cardPadding: '1.25rem',
+    accentGlow: '4px 4px 0px 0px #09090b',
+    motionDuration: '150ms',
+    motionEasing: 'ease-in-out',
+  },
 };
 
 
 export const boutiqueArtisanTokens: ThemeTokens = {
   colors: {
-    primary: '#9a3412',
-    primaryHover: '#7c2d12',
-    primaryLight: '#ffedd5',
-    secondary: '#431407',
-    background: '#fcf8f2',
+    primary: '#7d5430',          // cocoa — "Buy Now" buttons, prices, active states
+    primaryHover: '#674325',
+    primaryLight: '#efe6d8',     // oat — "Add to Cart" buttons, chips
+    primaryContrast: '#fbf4e6',  // cream text on cocoa
+    secondary: '#2b1b10',        // espresso — headings, dark CTAs
+    background: '#ffffff',
     surface: '#ffffff',
-    surfaceSecondary: '#f5eee3',
-    textPrimary: '#292524',
-    textSecondary: '#78716c',
-    textMuted: '#a8a29e',
-    border: '#e8decb',
-    borderFocus: '#9a3412',
-    badgeBg: '#ffedd5',
-    badgeText: '#9a3412',
+    surfaceSecondary: '#f5f3f0', // stone — product tiles
+    textPrimary: '#2b1b10',
+    textSecondary: '#6a5b4e',
+    textMuted: '#9a8e82',
+    border: '#e9e2d8',
+    borderFocus: '#7d5430',
+    badgeBg: '#efe6d8',
+    badgeText: '#5b3d22',
   },
   typography: {
-    fontFamilyHeading: '"Playfair Display", "Cormorant Garamond", Georgia, serif',
-    fontFamilyBody: '"Plus Jakarta Sans", Outfit, ui-sans-serif, system-ui, sans-serif',
-    headingLetterSpacing: '0.01em',
+    fontFamilyHeading: '"Fraunces", "Playfair Display", Georgia, serif',
+    fontFamilyBody: '"Instrument Sans", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif',
+    headingLetterSpacing: '-0.025em',
     headingFontWeight: '600',
     headingTransform: 'none',
   },
   radii: {
-    button: '9999px',
+    button: '0.625rem',
     card: '1.25rem',
     input: '0.75rem',
     badge: '9999px',
   },
   shadows: {
-    card: '0 6px 24px -4px rgb(154 52 18 / 0.07)',
-    cardHover: '0 16px 36px -6px rgb(154 52 18 / 0.14)',
-    dropdown: '0 20px 40px -8px rgb(154 52 18 / 0.16)',
+    card: '0 1px 2px rgb(43 27 16 / 0.04), 0 8px 24px -12px rgb(43 27 16 / 0.12)',
+    cardHover: '0 2px 4px rgb(43 27 16 / 0.05), 0 22px 40px -16px rgb(43 27 16 / 0.26)',
+    dropdown: '0 24px 48px -12px rgb(43 27 16 / 0.28)',
+  },
+  personality: {
+    imageAspectRatio: '1/1',
+    containerMaxWidth: 'max-w-7xl',
+    sectionDensity: 'airy',
+    cardPadding: '1.25rem',
+    accentGlow: '0 10px 32px -10px rgba(125, 84, 48, 0.22)',
+    motionDuration: '260ms',
+    motionEasing: 'cubic-bezier(0.22, 1, 0.36, 1)',
   },
 };
-
 export const boutiqueArtisanDarkTokens: ThemeTokens = {
   ...boutiqueArtisanTokens,
   colors: {
-    primary: '#f59e0b',
-    primaryHover: '#d97706',
-    primaryLight: '#451a03',
-    secondary: '#fef3c7',
-    background: '#120e0b',
-    surface: '#1c1612',
-    surfaceSecondary: '#292019',
-    textPrimary: '#faf6f0',
-    textSecondary: '#d6cfc7',
-    textMuted: '#a89f91',
-    border: '#3b2e24',
-    borderFocus: '#f59e0b',
-    badgeBg: '#451a03',
-    badgeText: '#fef3c7',
+    primary: '#c79a63',
+    primaryHover: '#d8ad78',
+    primaryLight: '#2f2318',
+    primaryContrast: '#1a110a',
+    secondary: '#f3e7d3',
+    background: '#150e09',
+    surface: '#1d140d',
+    surfaceSecondary: '#271b12',
+    textPrimary: '#f6ecdc',
+    textSecondary: '#d2c3ae',
+    textMuted: '#9f917f',
+    border: '#3a2a1c',
+    borderFocus: '#c79a63',
+    badgeBg: '#2f2318',
+    badgeText: '#f0d9b5',
   },
   shadows: {
-    card: '0 6px 24px -4px rgb(0 0 0 / 0.4)',
-    cardHover: '0 16px 36px -6px rgb(0 0 0 / 0.55)',
-    dropdown: '0 20px 40px -8px rgb(0 0 0 / 0.65)',
+    card: '0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -12px rgb(0 0 0 / 0.5)',
+    cardHover: '0 2px 4px rgb(0 0 0 / 0.5), 0 22px 40px -16px rgb(0 0 0 / 0.7)',
+    dropdown: '0 24px 48px -12px rgb(0 0 0 / 0.7)',
   },
 };
 
@@ -229,6 +271,7 @@ export const retailCatalogTokens: ThemeTokens = {
     primary: '#059669',
     primaryHover: '#047857',
     primaryLight: '#ecfdf5',
+    primaryContrast: '#ffffff',
     secondary: '#0284c7',
     background: '#f8fafc',
     surface: '#ffffff',
@@ -259,6 +302,15 @@ export const retailCatalogTokens: ThemeTokens = {
     cardHover: '0 6px 12px -2px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.06)',
     dropdown: '0 12px 20px -4px rgb(0 0 0 / 0.12)',
   },
+  personality: {
+    imageAspectRatio: '1/1',
+    containerMaxWidth: 'max-w-screen-xl',
+    sectionDensity: 'compact',
+    cardPadding: '0.875rem',
+    accentGlow: 'none',
+    motionDuration: '150ms',
+    motionEasing: 'ease-out',
+  },
 };
 
 export const retailCatalogDarkTokens: ThemeTokens = {
@@ -267,6 +319,7 @@ export const retailCatalogDarkTokens: ThemeTokens = {
     primary: '#10b981',
     primaryHover: '#059669',
     primaryLight: '#064e3b',
+    primaryContrast: '#080d1a',
     secondary: '#38bdf8',
     background: '#080d1a',
     surface: '#0f172a',
@@ -300,6 +353,7 @@ export const noirLuxeTokens: ThemeTokens = {
     primary: '#c9a84c',          // Champagne gold
     primaryHover: '#b08d38',     // Burnished gold
     primaryLight: '#2e2516',     // Deep amber tint for highlights
+    primaryContrast: '#0e0e0e',  // Deep dark text on champagne gold
     secondary: '#f0ece4',        // Warm white
     background: '#0e0e0e',       // Near-true black
     surface: '#161616',          // Lifted charcoal
@@ -331,6 +385,15 @@ export const noirLuxeTokens: ThemeTokens = {
     cardHover: '0 12px 32px -4px rgb(201 168 76 / 0.18), 0 2px 8px 0 rgb(0 0 0 / 0.4)',
     dropdown: '0 20px 40px -8px rgb(0 0 0 / 0.7), 0 0 0 1px rgb(201 168 76 / 0.12)',
   },
+  personality: {
+    imageAspectRatio: '3/4',
+    containerMaxWidth: 'max-w-6xl',
+    sectionDensity: 'airy',
+    cardPadding: '1.5rem',
+    accentGlow: '0 0 28px -4px rgba(201, 168, 76, 0.22)',
+    motionDuration: '350ms',
+    motionEasing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+  },
 };
 
 export const noirLuxeLightTokens: ThemeTokens = {
@@ -338,6 +401,7 @@ export const noirLuxeLightTokens: ThemeTokens = {
     primary: '#8b6914',          // Deep antique gold
     primaryHover: '#6e5210',     // Darker gold
     primaryLight: '#fdf6e3',     // Parchment
+    primaryContrast: '#ffffff',  // Crisp white on antique gold
     secondary: '#1a1207',        // Ink black
     background: '#fdfaf4',       // Warm parchment
     surface: '#ffffff',
@@ -357,6 +421,7 @@ export const noirLuxeLightTokens: ThemeTokens = {
     cardHover: '0 12px 32px -4px rgb(26 18 7 / 0.12)',
     dropdown: '0 16px 32px -4px rgb(26 18 7 / 0.18)',
   },
+  personality: noirLuxeTokens.personality,
 };
 
 
@@ -370,20 +435,21 @@ export const noirLuxeLightTokens: ThemeTokens = {
 
 export const pacificFreshTokens: ThemeTokens = {
   colors: {
-    primary: '#1a6b4a',          // Deep jade green
-    primaryHover: '#155a3d',     // Forest
-    primaryLight: '#e8f5ee',     // Mint tint
-    secondary: '#0d3d2a',        // Deep forest secondary
-    background: '#f7fbf8',       // Barely-green white
+    primary: '#14532d',          // Rich deep botanical jade
+    primaryHover: '#0d3d20',     // Forest depth
+    primaryLight: '#ecfdf5',     // Mint seafoam wash
+    primaryContrast: '#ffffff',  // Crisp white on deep jade
+    secondary: '#0f766e',        // Coastal ocean teal
+    background: '#f7faf8',       // Warm organic coastal mist
     surface: '#ffffff',
-    surfaceSecondary: '#eef7f2', // Soft sage
-    textPrimary: '#0d2b1e',      // Near-black green-tinted
-    textSecondary: '#3d6654',    // Mid green-grey
-    textMuted: '#7da890',        // Sage muted
-    border: '#c8e4d4',           // Pale sage border
-    borderFocus: '#1a6b4a',      // Jade focus
-    badgeBg: '#1a6b4a',          // Jade badge
-    badgeText: '#ffffff',
+    surfaceSecondary: '#edf5f0', // Soft soothing sage surface
+    textPrimary: '#0f291e',      // Deepest botanical pine black
+    textSecondary: '#2d5a44',    // Sophisticated deep jade-sage
+    textMuted: '#6b907e',        // Soft coastal moss
+    border: '#cfe4d6',           // Refined soft jade border
+    borderFocus: '#14532d',      // Jade focus ring
+    badgeBg: '#dcfce7',          // Soft mint pill badge
+    badgeText: '#14532d',        // Crisp botanical label
   },
   typography: {
     fontFamilyHeading: '"Cormorant Garamond", "Playfair Display", Georgia, serif',
@@ -393,43 +459,58 @@ export const pacificFreshTokens: ThemeTokens = {
     headingTransform: 'none',
   },
   radii: {
-    button: '9999px',            // Full capsule — fresh, approachable
-    card: '1.5rem',              // Generous softness
-    input: '9999px',             // Capsule inputs
-    badge: '9999px',
+    button: '9999px',            // Full capsule — organic luxury
+    card: '1.5rem',              // Generous softness (24px)
+    input: '9999px',             // Pill inputs
+    badge: '9999px',             // Pill badges
   },
   shadows: {
     // Soft jade-tinted layered shadows
-    card: '0 2px 12px 0 rgb(26 107 74 / 0.06), 0 1px 3px 0 rgb(0 0 0 / 0.04)',
-    cardHover: '0 16px 40px -6px rgb(26 107 74 / 0.14), 0 4px 12px -2px rgb(0 0 0 / 0.06)',
-    dropdown: '0 24px 48px -8px rgb(13 43 30 / 0.18)',
+    card: '0 2px 12px 0 rgb(20 83 45 / 0.06), 0 1px 3px 0 rgb(0 0 0 / 0.04)',
+    cardHover: '0 16px 40px -6px rgb(20 83 45 / 0.16), 0 4px 12px -2px rgb(0 0 0 / 0.06)',
+    dropdown: '0 24px 48px -8px rgb(15 41 30 / 0.18)',
+  },
+  personality: {
+    imageAspectRatio: '1/1',
+    containerMaxWidth: 'max-w-7xl',
+    sectionDensity: 'airy',
+    cardPadding: '1.5rem',
+    accentGlow: '0 12px 32px -8px rgba(20, 83, 45, 0.18)',
+    motionDuration: '250ms',
+    motionEasing: 'cubic-bezier(0.16, 1, 0.3, 1)',
   },
 };
 
 export const pacificFreshDarkTokens: ThemeTokens = {
   ...pacificFreshTokens,
   colors: {
-    primary: '#2dd4a0',          // Bright teal-mint on dark
-    primaryHover: '#22c98e',
-    primaryLight: '#052e1e',     // Deep forest tint
-    secondary: '#a3e8cb',        // Pale mint secondary
-    background: '#060f0a',       // Deep forest black
-    surface: '#0c1a11',          // Forest surface
-    surfaceSecondary: '#132419', // Slightly lighter
-    textPrimary: '#e8f5ee',      // Mint-white
-    textSecondary: '#7bc4a0',    // Soft mint
-    textMuted: '#3e6b52',        // Muted forest
-    border: '#1a3328',           // Dark jade border
-    borderFocus: '#2dd4a0',      // Bright teal focus
-    badgeBg: '#2dd4a0',
-    badgeText: '#060f0a',
+    primary: '#34d399',          // Luminous crystalline sea-mint
+    primaryHover: '#10b981',     // Vivid emerald
+    primaryLight: '#064e3b',     // Deep emerald night wash
+    primaryContrast: '#022c1b',  // Ultra-deep forest black (High WCAG AAA contrast on #34d399)
+    secondary: '#6ee7b7',        // Bright mint secondary
+    background: '#040d08',       // Deep obsidian ocean forest
+    surface: '#0a1c12',          // Polished night jade
+    surfaceSecondary: '#102b1c', // Layered botanical night
+    textPrimary: '#f0fdf4',      // Luminescent pearl white
+    textSecondary: '#a7f3d0',    // Soft glowing mint
+    textMuted: '#4e8267',        // Subtle botanical moss
+    border: '#17422b',           // Deep jade contour border
+    borderFocus: '#34d399',      // Bright mint glow
+    badgeBg: '#0d3522',          // Deep jade night pill
+    badgeText: '#6ee7b7',        // Luminescent mint text
   },
   shadows: {
-    card: '0 2px 12px 0 rgb(0 0 0 / 0.4)',
-    cardHover: '0 16px 40px -6px rgb(0 0 0 / 0.55), 0 0 0 1px rgb(45 212 160 / 0.08)',
-    dropdown: '0 24px 48px -8px rgb(0 0 0 / 0.7)',
+    card: '0 2px 14px 0 rgb(0 0 0 / 0.45)',
+    cardHover: '0 16px 40px -6px rgb(0 0 0 / 0.6), 0 0 0 1px rgb(52 211 153 / 0.15)',
+    dropdown: '0 24px 48px -8px rgb(0 0 0 / 0.75)',
+  },
+  personality: {
+    ...pacificFreshTokens.personality,
+    accentGlow: '0 12px 32px -8px rgba(52, 211, 153, 0.25)',
   },
 };
+
 
 
 

@@ -2,7 +2,6 @@ import { ShoppingBag, ShieldCheck, ArrowRight, ArrowUpRight } from 'lucide-react
 import {
   type ResolvedTheme,
   type SampleThemeData,
-  type SampleThemeProduct,
   SAMPLE_PREVIEWS,
   DEFAULT_THEME_ID,
 } from '../themes';
@@ -27,7 +26,8 @@ export default function StorefrontThemeSimulator({
   const { tokens, layout, themeId } = resolvedTheme;
   const activeSampleData: SampleThemeData =
     sampleData || SAMPLE_PREVIEWS[themeId] || SAMPLE_PREVIEWS[DEFAULT_THEME_ID];
-
+  const primaryContrast = tokens.colors.primaryContrast ?? '#ffffff';
+  const aspectRatioStyle = tokens.personality?.imageAspectRatio?.replace(':', '/') ?? '1/1';
 
   return (
     <div
@@ -41,7 +41,38 @@ export default function StorefrontThemeSimulator({
       }}
     >
       {/* 1. DYNAMIC HEADER VARIANT */}
-      {layout.headerVariant === 'minimal-floating' ? (
+      {layout.headerVariant === 'floating-capsule' ? (
+        <div className="p-2.5">
+          <div
+            className="p-2 sm:p-2.5 rounded-full border flex items-center justify-between shadow-sm"
+            style={{
+              backgroundColor: tokens.colors.surface,
+              borderColor: tokens.colors.border,
+            }}
+          >
+            <span
+              className="text-xs font-bold tracking-tight px-2"
+              style={{
+                fontFamily: tokens.typography.fontFamilyHeading,
+                color: tokens.colors.textPrimary,
+              }}
+            >
+              🌿 {shopName}
+            </span>
+            <div className="flex items-center gap-2">
+              <span
+                className="px-3 py-1 text-[10px] font-bold rounded-full shadow-sm"
+                style={{
+                  backgroundColor: tokens.colors.primary,
+                  color: primaryContrast,
+                }}
+              >
+                Bag (2)
+              </span>
+            </div>
+          </div>
+        </div>
+      ) : layout.headerVariant === 'minimal-floating' ? (
         <div
           className="p-3 sm:p-4 border-b flex items-center justify-between backdrop-blur-md"
           style={{
@@ -76,8 +107,8 @@ export default function StorefrontThemeSimulator({
       ) : layout.headerVariant === 'centered-logo' ? (
         <div>
           <div
-            className="py-1 px-3 text-center text-[10px] font-semibold text-white tracking-wide"
-            style={{ backgroundColor: tokens.colors.primary }}
+            className="py-1 px-3 text-center text-[10px] font-semibold tracking-wide"
+            style={{ backgroundColor: tokens.colors.primary, color: primaryContrast }}
           >
             ✨ Complimentary Worldwide Shipping
           </div>
@@ -104,7 +135,7 @@ export default function StorefrontThemeSimulator({
               className="px-2 py-0.5 text-[10px] font-bold rounded-full"
               style={{
                 backgroundColor: tokens.colors.primary,
-                color: '#ffffff',
+                color: primaryContrast,
               }}
             >
               Cart 2
@@ -121,8 +152,8 @@ export default function StorefrontThemeSimulator({
         >
           <div className="flex items-center gap-2">
             <span
-              className="w-5 h-5 rounded flex items-center justify-center text-[10px] font-bold text-white"
-              style={{ backgroundColor: tokens.colors.primary }}
+              className="w-5 h-5 rounded flex items-center justify-center text-[10px] font-bold"
+              style={{ backgroundColor: tokens.colors.primary, color: primaryContrast }}
             >
               {shopName.charAt(0)}
             </span>
@@ -130,9 +161,10 @@ export default function StorefrontThemeSimulator({
           </div>
           <div className="flex items-center gap-1.5">
             <span
-              className="px-2 py-0.5 rounded text-[10px] font-bold text-white"
+              className="px-2 py-0.5 rounded text-[10px] font-bold"
               style={{
                 backgroundColor: tokens.colors.primary,
+                color: primaryContrast,
                 borderRadius: tokens.radii.button,
               }}
             >
@@ -144,8 +176,8 @@ export default function StorefrontThemeSimulator({
         /* classic-bar default */
         <div>
           <div
-            className="py-1 px-3 text-center text-[10px] font-bold text-white"
-            style={{ backgroundColor: tokens.colors.primary }}
+            className="py-1 px-3 text-center text-[10px] font-bold"
+            style={{ backgroundColor: tokens.colors.primary, color: primaryContrast }}
           >
             ✨ Free Shipping on Orders Over $50 • Fast Delivery
           </div>
@@ -170,7 +202,7 @@ export default function StorefrontThemeSimulator({
                 className="px-2.5 py-1 text-[11px] font-semibold"
                 style={{
                   backgroundColor: tokens.colors.primary,
-                  color: '#ffffff',
+                  color: primaryContrast,
                   borderRadius: tokens.radii.button,
                 }}
               >
@@ -182,7 +214,155 @@ export default function StorefrontThemeSimulator({
       )}
 
       {/* 2. DYNAMIC HERO VARIANT */}
-      {layout.heroVariant === 'split-image' ? (
+      {layout.heroVariant === 'botanical-arch' ? (
+        <div
+          className="p-4 sm:p-5 border-b"
+          style={{
+            borderColor: tokens.colors.border,
+            background: `linear-gradient(135deg, ${tokens.colors.surface} 0%, ${tokens.colors.surfaceSecondary} 100%)`,
+          }}
+        >
+          <div className={`grid ${device === 'mobile' ? 'grid-cols-1' : 'grid-cols-2'} gap-4 items-center`}>
+            <div className="space-y-2">
+              <span
+                className="px-3 py-0.5 text-[9px] font-bold uppercase rounded-full inline-flex items-center gap-1"
+                style={{ backgroundColor: tokens.colors.primaryLight, color: tokens.colors.primary }}
+              >
+                🌿 Botanical Atelier
+              </span>
+              <h2
+                className="text-base sm:text-xl font-normal leading-tight"
+                style={{ fontFamily: tokens.typography.fontFamilyHeading }}
+              >
+                {shopName}
+              </h2>
+              <p className="text-[11px] leading-relaxed line-clamp-2" style={{ color: tokens.colors.textSecondary }}>
+                Thoughtful botanical essentials for everyday rituals.
+              </p>
+              <span
+                className="inline-flex px-4 py-1.5 text-[10px] font-bold rounded-full"
+                style={{ backgroundColor: tokens.colors.primary, color: primaryContrast }}
+              >
+                Explore the collection <ArrowRight className="ms-1 h-3 w-3" />
+              </span>
+            </div>
+            <div
+              className="relative h-36 w-full overflow-hidden border"
+              style={{ borderColor: tokens.colors.border, borderRadius: '50% 50% 1rem 1rem' }}
+            >
+              <img src={activeSampleData.heroImage} alt="" className="h-full w-full object-cover" />
+            </div>
+          </div>
+        </div>
+      ) : layout.heroVariant === 'sanctuary-panorama' ? (
+        <div className="relative h-44 sm:h-52 overflow-hidden border-b" style={{ borderColor: tokens.colors.border }}>
+          <img src={activeSampleData.heroImage} alt="" className="absolute inset-0 h-full w-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent flex flex-col justify-end p-4">
+            <span className="mb-1.5 w-fit rounded-full bg-white/15 px-2.5 py-1 text-[9px] font-bold uppercase text-white">
+              Sanctuary Collection
+            </span>
+            <h2
+              className="text-lg sm:text-xl font-normal leading-tight text-white"
+              style={{ fontFamily: tokens.typography.fontFamilyHeading }}
+            >
+              {shopName}
+            </h2>
+            <p className="mt-1 line-clamp-1 text-[11px] text-white/85">
+              A slower, more considered approach to daily wellness.
+            </p>
+          </div>
+        </div>
+      ) : layout.heroVariant === 'apothecary-duo' ? (
+        <div className={`grid ${device === 'mobile' ? 'grid-cols-1' : 'grid-cols-5'} gap-2.5 p-3 border-b`} style={{ borderColor: tokens.colors.border }}>
+          <div
+            className={`${device === 'mobile' ? '' : 'col-span-3'} flex flex-col justify-between rounded-2xl border p-3`}
+            style={{ backgroundColor: tokens.colors.surface, borderColor: tokens.colors.border }}
+          >
+            <div>
+              <span
+                className="rounded-full px-2.5 py-1 text-[9px] font-bold uppercase"
+                style={{ backgroundColor: tokens.colors.primaryLight, color: tokens.colors.primary }}
+              >
+                Apothecary Release
+              </span>
+              <h2
+                className="mt-2 text-base sm:text-xl font-normal leading-tight"
+                style={{ fontFamily: tokens.typography.fontFamilyHeading }}
+              >
+                {shopName}
+              </h2>
+              <p className="mt-1 text-[11px] leading-relaxed" style={{ color: tokens.colors.textSecondary }}>
+                Clean, considered formulas made for mindful living.
+              </p>
+            </div>
+            <span
+              className="mt-3 inline-flex w-fit rounded-full px-4 py-1.5 text-[10px] font-bold"
+              style={{ backgroundColor: tokens.colors.primary, color: primaryContrast }}
+            >
+              Shop now <ArrowRight className="ms-1 h-3 w-3" />
+            </span>
+          </div>
+          <div
+            className={`${device === 'mobile' ? '' : 'col-span-2'} relative h-28 overflow-hidden rounded-2xl border`}
+            style={{ borderColor: tokens.colors.border }}
+          >
+            <img src={activeSampleData.heroImage} alt="" className="h-full w-full object-cover" />
+          </div>
+        </div>
+      ) : layout.heroVariant === 'organic-pill' ? (
+        <div
+          className="p-4 sm:p-5 border-b"
+          style={{
+            borderColor: tokens.colors.border,
+            background: `linear-gradient(135deg, ${tokens.colors.surface} 0%, ${tokens.colors.surfaceSecondary} 100%)`,
+          }}
+        >
+          <div className={`grid ${device === 'mobile' ? 'grid-cols-1' : 'grid-cols-2'} gap-4 items-center`}>
+            <div className="space-y-2">
+              <span
+                className="px-3 py-0.5 text-[9px] font-bold uppercase rounded-full inline-flex items-center gap-1 shadow-sm"
+                style={{
+                  backgroundColor: tokens.colors.primaryLight,
+                  color: tokens.colors.primary,
+                }}
+              >
+                🌿 Botanical Living
+              </span>
+              <h2
+                className="text-base sm:text-xl font-normal leading-tight tracking-tight"
+                style={{
+                  fontFamily: tokens.typography.fontFamilyHeading,
+                }}
+              >
+                {shopName}
+              </h2>
+              <p className="text-[11px] leading-relaxed line-clamp-2" style={{ color: tokens.colors.textSecondary }}>
+                Artisanal clean botanical formulas crafted for mindful living.
+              </p>
+              <div className="flex items-center gap-2 pt-1">
+                <span
+                  className="px-4 py-1.5 text-[10px] font-bold shadow-md rounded-full inline-flex items-center gap-1"
+                  style={{
+                    backgroundColor: tokens.colors.primary,
+                    color: primaryContrast,
+                  }}
+                >
+                  Explore <ArrowRight className="w-3 h-3" />
+                </span>
+              </div>
+            </div>
+            <div
+              className="relative h-32 w-full rounded-2xl overflow-hidden border shadow-md"
+              style={{ borderColor: tokens.colors.border }}
+            >
+              <img src={activeSampleData.heroImage} alt="" className="h-full w-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent flex items-end p-2">
+                <span className="text-white text-[9px] font-bold">🌿 Pure & Wildcrafted</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : layout.heroVariant === 'split-image' ? (
         <div
           className="p-4 sm:p-5 border-b"
           style={{ borderColor: tokens.colors.border, backgroundColor: tokens.colors.surface }}
@@ -215,9 +395,10 @@ export default function StorefrontThemeSimulator({
               </p>
               <div className="flex items-center gap-2 pt-1">
                 <span
-                  className="px-3 py-1 text-[10px] font-bold text-white shadow-sm inline-flex items-center gap-1"
+                  className="px-3 py-1 text-[10px] font-bold shadow-sm inline-flex items-center gap-1"
                   style={{
                     backgroundColor: tokens.colors.primary,
+                    color: primaryContrast,
                     borderRadius: tokens.radii.button,
                   }}
                 >
@@ -241,9 +422,10 @@ export default function StorefrontThemeSimulator({
           <div className={`grid ${device === 'mobile' ? 'grid-cols-1' : 'grid-cols-2'} gap-4 items-center`}>
             <div className="space-y-2">
               <span
-                className="px-2 py-0.5 text-[9px] font-bold uppercase rounded text-white"
+                className="px-2 py-0.5 text-[9px] font-bold uppercase rounded"
                 style={{
                   backgroundColor: tokens.colors.primary,
+                  color: primaryContrast,
                   borderRadius: tokens.radii.badge,
                 }}
               >
@@ -307,6 +489,7 @@ export default function StorefrontThemeSimulator({
                 className="px-2 py-0.5 text-[9px] font-bold uppercase inline-block w-fit mb-1.5"
                 style={{
                   backgroundColor: tokens.colors.primary,
+                  color: primaryContrast,
                   borderRadius: tokens.radii.badge,
                 }}
               >
@@ -344,12 +527,76 @@ export default function StorefrontThemeSimulator({
 
         <div className={`grid ${device === 'mobile' ? 'grid-cols-1' : 'grid-cols-2'} gap-3`}>
           {activeSampleData.products.map((item) => {
+            if (layout.productCardVariant === 'organic-pill') {
+              return (
+                <div
+                  key={item.id}
+                  className="rounded-2xl border overflow-hidden transition-all shadow-md flex flex-col"
+                  style={{
+                    backgroundColor: tokens.colors.surface,
+                    borderColor: tokens.colors.border,
+                    borderRadius: tokens.radii.card,
+                    boxShadow: tokens.shadows.card,
+                  }}
+                >
+                  <div
+                    className="relative w-full overflow-hidden"
+                    style={{
+                      backgroundColor: tokens.colors.surfaceSecondary,
+                      aspectRatio: aspectRatioStyle,
+                    }}
+                  >
+                    <img src={item.image} alt={item.name} className="h-full w-full object-cover" />
+                    <span
+                      className="absolute top-2 start-2 px-2.5 py-0.5 text-[9px] font-bold rounded-full shadow-sm"
+                      style={{
+                        backgroundColor: tokens.colors.primaryLight,
+                        color: tokens.colors.primary,
+                      }}
+                    >
+                      🌿 {item.tag}
+                    </span>
+                  </div>
+
+                  <div className="p-3 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h4 className="font-medium text-xs truncate" style={{ fontFamily: tokens.typography.fontFamilyHeading }}>
+                        {item.name}
+                      </h4>
+                      <div className="flex items-center gap-1 mt-1">
+                        <span className="font-bold text-xs" style={{ color: tokens.colors.primary }}>
+                          ${item.price.toFixed(2)}
+                        </span>
+                        <span className="line-through opacity-50 text-[10px]" style={{ color: tokens.colors.textMuted }}>
+                          ${item.compare.toFixed(2)}
+                        </span>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      className="w-full mt-2.5 py-1.5 text-[11px] font-bold flex items-center justify-center gap-1 rounded-full shadow-sm"
+                      style={{
+                        backgroundColor: tokens.colors.primary,
+                        color: primaryContrast,
+                      }}
+                    >
+                      <ShoppingBag className="w-3 h-3" />
+                      Add to Cart
+                    </button>
+                  </div>
+                </div>
+              );
+            }
+
             if (layout.productCardVariant === 'flat') {
               return (
                 <div key={item.id} className="space-y-2">
                   <div
-                    className="relative h-32 w-full overflow-hidden"
-                    style={{ backgroundColor: tokens.colors.surfaceSecondary }}
+                    className="relative w-full overflow-hidden"
+                    style={{
+                      backgroundColor: tokens.colors.surfaceSecondary,
+                      aspectRatio: aspectRatioStyle,
+                    }}
                   >
                     <img src={item.image} alt={item.name} className="h-full w-full object-cover" />
                     <span
@@ -384,13 +631,20 @@ export default function StorefrontThemeSimulator({
                   }}
                 >
                   <div
-                    className="relative h-32 w-full overflow-hidden"
-                    style={{ backgroundColor: tokens.colors.surfaceSecondary }}
+                    className="relative w-full overflow-hidden"
+                    style={{
+                      backgroundColor: tokens.colors.surfaceSecondary,
+                      aspectRatio: aspectRatioStyle,
+                    }}
                   >
                     <img src={item.image} alt={item.name} className="h-full w-full object-cover" />
                     <span
-                      className="absolute top-2 start-2 px-2 py-0.5 text-[9px] font-bold text-white shadow-sm"
-                      style={{ backgroundColor: tokens.colors.primary, borderRadius: tokens.radii.badge }}
+                      className="absolute top-2 start-2 px-2 py-0.5 text-[9px] font-bold shadow-sm"
+                      style={{
+                        backgroundColor: tokens.colors.primary,
+                        color: primaryContrast,
+                        borderRadius: tokens.radii.badge,
+                      }}
                     >
                       {item.tag}
                     </span>
@@ -405,8 +659,8 @@ export default function StorefrontThemeSimulator({
                         ${item.price.toFixed(2)}
                       </span>
                       <span
-                        className="w-6 h-6 rounded-full flex items-center justify-center text-white"
-                        style={{ backgroundColor: tokens.colors.primary }}
+                        className="w-6 h-6 rounded-full flex items-center justify-center"
+                        style={{ backgroundColor: tokens.colors.primary, color: primaryContrast }}
                       >
                         <ShoppingBag className="w-3 h-3" />
                       </span>
@@ -448,16 +702,17 @@ export default function StorefrontThemeSimulator({
               return (
                 <div key={item.id} className="space-y-1.5">
                   <div
-                    className="relative h-36 w-full overflow-hidden border"
+                    className="relative w-full overflow-hidden border"
                     style={{
                       borderColor: tokens.colors.border,
                       borderRadius: tokens.radii.card,
+                      aspectRatio: aspectRatioStyle,
                     }}
                   >
                     <img src={item.image} alt={item.name} className="h-full w-full object-cover" />
                     <span
-                      className="absolute top-2 start-2 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white"
-                      style={{ backgroundColor: tokens.colors.primary }}
+                      className="absolute top-2 start-2 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider"
+                      style={{ backgroundColor: tokens.colors.primary, color: primaryContrast }}
                     >
                       Edition
                     </span>
@@ -488,8 +743,11 @@ export default function StorefrontThemeSimulator({
                 }}
               >
                 <div
-                  className="relative h-32 w-full overflow-hidden"
-                  style={{ backgroundColor: tokens.colors.surfaceSecondary }}
+                  className="relative w-full overflow-hidden"
+                  style={{
+                    backgroundColor: tokens.colors.surfaceSecondary,
+                    aspectRatio: aspectRatioStyle,
+                  }}
                 >
                   <img src={item.image} alt={item.name} className="h-full w-full object-cover" />
                   <span
@@ -519,9 +777,10 @@ export default function StorefrontThemeSimulator({
                   </div>
                   <button
                     type="button"
-                    className="w-full mt-2.5 py-1.5 text-[11px] font-bold text-white flex items-center justify-center gap-1"
+                    className="w-full mt-2.5 py-1.5 text-[11px] font-bold flex items-center justify-center gap-1"
                     style={{
                       backgroundColor: tokens.colors.primary,
+                      color: primaryContrast,
                       borderRadius: tokens.radii.button,
                     }}
                   >
@@ -535,7 +794,48 @@ export default function StorefrontThemeSimulator({
         </div>
 
         {/* 4. DYNAMIC FOOTER VARIANT */}
-        {layout.footerVariant === 'bold-newsletter' ? (
+        {layout.footerVariant === 'organic-curated' ? (
+          <div
+            className="mt-4 p-3.5 rounded-2xl border text-center space-y-2"
+            style={{
+              backgroundColor: tokens.colors.surface,
+              borderColor: tokens.colors.border,
+              boxShadow: tokens.shadows.card,
+            }}
+          >
+            <span
+              className="px-2.5 py-0.5 text-[9px] font-bold uppercase rounded-full inline-block"
+              style={{ backgroundColor: tokens.colors.primaryLight, color: tokens.colors.primary }}
+            >
+              🌿 Organic Journal
+            </span>
+            <p className="text-xs font-normal" style={{ color: tokens.colors.textPrimary, fontFamily: tokens.typography.fontFamilyHeading }}>
+              Mindful rituals & pure botanical essences
+            </p>
+            <div className="flex gap-1 pt-1">
+              <input
+                type="text"
+                disabled
+                placeholder="email@domain.com"
+                className="flex-1 px-3 py-1 text-[10px] rounded-full border"
+                style={{
+                  backgroundColor: tokens.colors.surfaceSecondary,
+                  borderColor: tokens.colors.border,
+                  color: tokens.colors.textPrimary,
+                }}
+              />
+              <span
+                className="px-3 py-1 text-[10px] font-bold rounded-full"
+                style={{
+                  backgroundColor: tokens.colors.primary,
+                  color: primaryContrast,
+                }}
+              >
+                Join
+              </span>
+            </div>
+          </div>
+        ) : layout.footerVariant === 'bold-newsletter' ? (
           <div
             className="mt-4 p-3.5 rounded-xl border text-center space-y-2"
             style={{
@@ -545,8 +845,8 @@ export default function StorefrontThemeSimulator({
             }}
           >
             <span
-              className="px-2 py-0.5 text-[9px] font-bold uppercase rounded text-white inline-block"
-              style={{ backgroundColor: tokens.colors.primary }}
+              className="px-2 py-0.5 text-[9px] font-bold uppercase rounded inline-block"
+              style={{ backgroundColor: tokens.colors.primary, color: primaryContrast }}
             >
               VIP Club
             </span>
@@ -566,8 +866,12 @@ export default function StorefrontThemeSimulator({
                 }}
               />
               <span
-                className="px-2.5 py-1 text-[10px] font-bold text-white rounded"
-                style={{ backgroundColor: tokens.colors.primary, borderRadius: tokens.radii.button }}
+                className="px-2.5 py-1 text-[10px] font-bold rounded"
+                style={{
+                  backgroundColor: tokens.colors.primary,
+                  color: primaryContrast,
+                  borderRadius: tokens.radii.button,
+                }}
               >
                 Join
               </span>

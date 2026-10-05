@@ -1,5 +1,5 @@
+import { Heart, ShoppingBag, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { ShoppingBag, Eye } from 'lucide-react';
 import { useShopLanguage } from '../../../../context/ShopLanguageContext';
 import { formatPrice } from '../../../../lib/countryCurrencyOptions';
 import { PRODUCT_CARD_ASPECT_CLASS } from '../../../../lib/imageCropViewports';
@@ -12,86 +12,119 @@ export default function CardElevated({ product: p, shopUsername, currency, linkS
   const sale = Number(p.price) || 0;
   const compare = p.compareAtPrice != null && p.compareAtPrice > sale ? p.compareAtPrice : null;
   const outOfStock = p.inStock === false;
+  const discountPct = compare ? Math.round(((compare - sale) / compare) * 100) : null;
 
   return (
     <div
-      className="group relative flex flex-col justify-between overflow-hidden rounded-[var(--theme-radius-card)] border bg-[var(--theme-surface)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl"
+      className="group relative flex flex-col overflow-hidden rounded-[var(--theme-radius-card)] border bg-[var(--theme-surface)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--theme-shadow-card-hover)]"
       style={{
         borderColor: 'var(--theme-border)',
         boxShadow: 'var(--theme-shadow-card)',
       }}
     >
+      {/* Image */}
       <Link
         to={`/${shopUsername}/product/${p.id}`}
         state={linkState}
-        className="block min-w-0 no-underline"
+        className="relative block overflow-hidden no-underline"
+        style={{ background: 'var(--theme-surface-secondary)' }}
+        tabIndex={-1}
+        aria-hidden
       >
-        <div className="relative overflow-hidden bg-[var(--theme-surface-secondary)]">
-          {p.image ? (
-            <ProductImage
-              src={p.image}
-              alt={localizedName}
-              aspectClass={PRODUCT_CARD_ASPECT_CLASS}
-              loading="lazy"
-              imageClassName={`transition-transform duration-500 ease-out group-hover:scale-108 ${outOfStock ? 'opacity-50 grayscale' : ''}`}
-            />
-          ) : null}
-
-          {outOfStock ? (
-            <span
-              className="absolute top-2.5 start-2.5 rounded-[var(--theme-radius-badge)] px-2 py-1 text-[10px] font-bold uppercase tracking-wider shadow-sm"
-              style={{ background: 'var(--theme-badge-bg)', color: 'var(--theme-badge-text)' }}
-            >
-              {t('badgeSoldOut')}
-            </span>
-          ) : compare ? (
-            <span
-              className="absolute top-2.5 start-2.5 rounded-[var(--theme-radius-badge)] px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wide text-white shadow-sm"
-              style={{ background: 'var(--theme-primary)' }}
-            >
-              Sale
-            </span>
-          ) : null}
-
-          {/* Quick Hover Overlay */}
-          <div className="absolute inset-0 bg-black/20 opacity-0 transition-opacity duration-200 group-hover:opacity-100 flex items-center justify-center">
-            <span
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold text-white shadow-lg backdrop-blur-md transition-transform scale-95 group-hover:scale-100"
-              style={{ background: 'var(--theme-primary)' }}
-            >
-              <Eye className="w-3.5 h-3.5" />
-              View Details
-            </span>
+        {p.image ? (
+          <ProductImage
+            src={p.image}
+            alt={localizedName}
+            aspectClass={PRODUCT_CARD_ASPECT_CLASS}
+            loading="lazy"
+            imageClassName={`transition-transform duration-500 ease-out group-hover:scale-[1.06] ${outOfStock ? 'opacity-40 grayscale' : ''}`}
+          />
+        ) : (
+          <div className={`${PRODUCT_CARD_ASPECT_CLASS} flex items-center justify-center`} style={{ color: 'var(--theme-text-muted)' }}>
+            <ShoppingBag className="h-10 w-10" strokeWidth={1} />
           </div>
+        )}
+
+        {/* Badges */}
+        {outOfStock ? (
+          <span
+            className="absolute top-3 start-3 rounded-[var(--theme-radius-badge)] px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider shadow-sm"
+            style={{ background: 'var(--theme-badge-bg)', color: 'var(--theme-badge-text)' }}
+          >
+            {t('badgeSoldOut')}
+          </span>
+        ) : discountPct ? (
+          <span className="absolute top-3 start-3 rounded-[var(--theme-radius-badge)] bg-red-500 px-2.5 py-1 text-[10px] font-bold text-white shadow-sm">
+            -{discountPct}%
+          </span>
+        ) : null}
+
+        {/* Wishlist */}
+        <button
+          type="button"
+          onClick={(e) => e.preventDefault()}
+          className="absolute top-3 end-3 flex h-8 w-8 items-center justify-center rounded-full border border-[var(--theme-border)] bg-[var(--theme-surface)]/90 text-[var(--theme-text-muted)] opacity-0 shadow-sm backdrop-blur-sm transition-all group-hover:opacity-100 hover:border-red-300 hover:text-red-500"
+          tabIndex={-1}
+          aria-label="Wishlist"
+        >
+          <Heart className="h-4 w-4" />
+        </button>
+
+        {/* Add to cart overlay */}
+        {!outOfStock && (
+          <div className="absolute inset-x-0 bottom-0 translate-y-full transition-transform duration-200 ease-out group-hover:translate-y-0">
+            <div
+              className="flex items-center justify-center gap-2 py-3 text-sm font-semibold"
+              style={{ background: 'var(--theme-primary)', color: 'var(--theme-primary-contrast)' }}
+            >
+              <ShoppingBag className="h-4 w-4" />
+              {t('addToCart')}
+            </div>
+          </div>
+        )}
+      </Link>
+
+      {/* Card body */}
+      <Link
+        to={`/${shopUsername}/product/${p.id}`}
+        state={linkState}
+        className="flex flex-1 flex-col gap-2 p-4 no-underline"
+      >
+        {p.category && (
+          <span className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: 'var(--theme-primary)' }}>
+            {p.category}
+          </span>
+        )}
+
+        <h3
+          className="line-clamp-2 text-sm font-bold leading-snug tracking-tight"
+          style={{ color: 'var(--theme-text-primary)', fontFamily: 'var(--theme-font-heading)' }}
+        >
+          {localizedName}
+        </h3>
+
+        {/* Stars */}
+        <div className="flex items-center gap-1">
+          {[1, 2, 3, 4, 5].map((s) => (
+            <Star
+              key={s}
+              className="h-3 w-3"
+              style={{ color: s <= 4 ? '#f59e0b' : 'var(--theme-border)', fill: s <= 4 ? '#f59e0b' : 'var(--theme-border)' }}
+            />
+          ))}
+          <span className="text-[10px] font-medium" style={{ color: 'var(--theme-text-muted)' }}>(4.0)</span>
         </div>
 
-        <div className="p-3.5 sm:p-4">
-          <h3
-            className="truncate text-sm font-bold tracking-tight transition-colors"
-            style={{ color: 'var(--theme-text-primary)' }}
-          >
-            {localizedName}
-          </h3>
-
-          <div className="mt-2 flex items-center justify-between">
-            <div className="flex items-baseline gap-2">
-              <span className="text-base font-extrabold" style={{ color: 'var(--theme-primary)' }}>
-                {formatPrice(sale, currency)}
-              </span>
-              {compare ? (
-                <span className="text-xs line-through" style={{ color: 'var(--theme-text-muted)' }}>
-                  {formatPrice(compare, currency)}
-                </span>
-              ) : null}
-            </div>
-
-            <span
-              className="inline-flex h-8 w-8 items-center justify-center rounded-full text-white shadow-sm transition-transform active:scale-95 group-hover:rotate-6"
-              style={{ background: 'var(--theme-primary)' }}
-              aria-hidden
-            >
-              <ShoppingBag className="w-4 h-4" />
+        <div className="mt-auto flex items-center justify-between gap-2">
+          <div className="flex items-baseline gap-2">
+            <span className="text-base font-extrabold" style={{ color: 'var(--theme-primary)' }}>
+              {formatPrice(sale, currency)}
             </span>
+            {compare ? (
+              <span className="text-xs line-through" style={{ color: 'var(--theme-text-muted)' }}>
+                {formatPrice(compare, currency)}
+              </span>
+            ) : null}
           </div>
         </div>
       </Link>

@@ -47,8 +47,8 @@ export default function HeaderClassicBar({
             }
           `}</style>
           <div
-            className="h-7 overflow-hidden text-white lg:h-8"
-            style={{ background: 'var(--theme-primary)' }}
+            className="h-7 overflow-hidden lg:h-8"
+            style={{ background: 'var(--theme-primary)', color: 'var(--theme-primary-contrast)' }}
             role="region"
             aria-label={t('navAnnouncementAria')}
           >
@@ -73,8 +73,8 @@ export default function HeaderClassicBar({
             <img src={shop.logo} alt="" className="h-9 w-9 shrink-0 object-contain lg:h-11 lg:w-11" />
           ) : (
             <span
-              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[var(--theme-radius-card)] text-white shadow-[var(--theme-shadow-card)] lg:h-11 lg:w-11"
-              style={{ background: 'var(--theme-primary)' }}
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[var(--theme-radius-card)] shadow-[var(--theme-shadow-card)] lg:h-11 lg:w-11"
+              style={{ background: 'var(--theme-primary)', color: 'var(--theme-primary-contrast)' }}
             >
               <ShoppingBag className="h-[1.15rem] w-[1.15rem] lg:h-[1.35rem] lg:w-[1.35rem]" />
             </span>
@@ -82,7 +82,7 @@ export default function HeaderClassicBar({
         </Link>
 
         <nav
-          className="hidden max-w-full items-center gap-1 overflow-x-auto rounded-[var(--theme-radius-btn)] border p-1 [scrollbar-width:none] lg:flex [&::-webkit-scrollbar]:hidden"
+          className="hidden max-w-full items-center gap-1 overflow-x-auto rounded-full border p-1 [scrollbar-width:none] lg:flex [&::-webkit-scrollbar]:hidden"
           style={{ borderColor: 'var(--theme-border)', background: 'var(--theme-surface-secondary)' }}
           aria-label={t('navStoreNav')}
         >
@@ -90,14 +90,14 @@ export default function HeaderClassicBar({
             <Link
               key={to}
               to={to}
-              className="inline-flex shrink-0 items-center gap-1.5 rounded-[var(--theme-radius-btn)] px-3 py-2 text-sm font-semibold no-underline transition-all"
+              className="inline-flex shrink-0 items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold no-underline transition-all"
               style={
                 isNavActive(to)
-                  ? { background: 'var(--theme-surface)', color: 'var(--theme-primary)' }
+                  ? { background: 'var(--theme-surface)', color: 'var(--theme-primary)', boxShadow: '0 1px 3px rgba(0,0,0,0.08)' }
                   : { color: 'var(--theme-text-secondary)' }
               }
             >
-              <Icon className="h-4 w-4" aria-hidden />
+              <Icon className="h-3.5 w-3.5" aria-hidden />
               {label}
             </Link>
           ))}
@@ -112,7 +112,7 @@ export default function HeaderClassicBar({
             className="inline-flex items-center gap-1 rounded-[var(--theme-radius-btn)] border px-2.5 py-2 text-sm font-semibold transition-all lg:gap-2 lg:px-3.5 lg:py-2.5"
             style={
               cartCount > 0
-                ? { borderColor: 'transparent', background: 'var(--theme-primary)', color: '#ffffff' }
+                ? { borderColor: 'transparent', background: 'var(--theme-primary)', color: 'var(--theme-primary-contrast)' }
                 : { borderColor: 'var(--theme-border)', background: 'var(--theme-surface)', color: 'var(--theme-text-primary)' }
             }
           >
@@ -122,7 +122,7 @@ export default function HeaderClassicBar({
               className="inline-flex h-5 min-w-5 items-center justify-center rounded-[var(--theme-radius-badge)] px-1 text-[11px] font-bold"
               style={
                 cartCount > 0
-                  ? { background: 'rgba(255,255,255,0.25)', color: '#ffffff' }
+                  ? { background: 'rgba(255,255,255,0.25)', color: 'var(--theme-primary-contrast)' }
                   : { background: 'var(--theme-badge-bg)', color: 'var(--theme-badge-text)' }
               }
             >
@@ -183,7 +183,7 @@ export default function HeaderClassicBar({
             className="mt-2 flex w-full items-center gap-3 rounded-[var(--theme-radius-btn)] border px-3 py-3 text-start transition-colors"
             style={
               cartCount > 0
-                ? { borderColor: 'transparent', background: 'var(--theme-primary)', color: '#ffffff' }
+                ? { borderColor: 'transparent', background: 'var(--theme-primary)', color: 'var(--theme-primary-contrast)' }
                 : { borderColor: 'var(--theme-border)', background: 'var(--theme-surface-secondary)', color: 'var(--theme-text-primary)' }
             }
           >
@@ -201,7 +201,7 @@ export default function HeaderClassicBar({
             </span>
             <span
               className="inline-flex h-6 min-w-6 shrink-0 items-center justify-center rounded-[var(--theme-radius-badge)] px-1.5 text-[11px] font-bold tabular-nums"
-              style={cartCount > 0 ? { background: 'rgba(255,255,255,0.25)' } : { background: 'var(--theme-badge-bg)', color: 'var(--theme-badge-text)' }}
+              style={cartCount > 0 ? { background: 'rgba(255,255,255,0.25)', color: 'var(--theme-primary-contrast)' } : { background: 'var(--theme-badge-bg)', color: 'var(--theme-badge-text)' }}
             >
               {cartCount}
             </span>

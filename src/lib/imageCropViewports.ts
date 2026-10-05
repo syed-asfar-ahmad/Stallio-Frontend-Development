@@ -5,7 +5,7 @@ export type ImageCropViewport = {
   frameLabelKey: string;
 };
 
-export const PRODUCT_CARD_ASPECT_CLASS = 'aspect-square';
+export const PRODUCT_CARD_ASPECT_CLASS = 'aspect-theme-product';
 
 export const PRODUCT_IMAGE_FRAME_CLASS =
   'relative overflow-hidden bg-stone-50 dark:bg-zinc-950 border-b border-stone-100 dark:border-zinc-800';

@@ -1,8 +1,8 @@
+import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import type { CSSProperties } from 'react';
 import { useShopLanguage } from '../../../../context/ShopLanguageContext';
 import { getLocalizedHomeHeroTitle, getLocalizedHomeIntro } from '../../../../lib/shopContentLanguages';
-import { STORE_HERO_ASPECT_CLASS } from '../../../../lib/imageCropViewports';
 import type { ThemeHeroProps } from '../types';
 
 export default function HeroMinimalClean({ shop, username, containerClass }: ThemeHeroProps) {
@@ -14,19 +14,36 @@ export default function HeroMinimalClean({ shop, username, containerClass }: The
   if (!showHero) return null;
 
   return (
-    <section className="w-full">
-      <div
-        className={`relative w-full ${STORE_HERO_ASPECT_CLASS} overflow-hidden`}
-        style={{ background: 'var(--theme-surface-secondary)' }}
-      >
-        {shop.homeHeroImage ? (
-          <img src={shop.homeHeroImage} alt="" className="absolute inset-0 h-full w-full object-cover object-center" />
-        ) : null}
-        <div className={`${containerClass} absolute inset-0 flex flex-col items-center justify-center gap-4 px-6 text-center`}>
+    <section className={`${containerClass} pt-6 lg:pt-10`}>
+      <div className="relative overflow-hidden rounded-[var(--theme-radius-card)]" style={{ background: 'var(--theme-surface-secondary)' }}>
+        {/* Background image with overlay */}
+        {shop.homeHeroImage && (
+          <>
+            <img
+              src={shop.homeHeroImage}
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover object-center"
+            />
+            <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.65) 100%)' }} />
+          </>
+        )}
+
+        {/* Content — centered */}
+        <div className={`relative flex min-h-[260px] flex-col items-center justify-center gap-5 px-6 py-14 text-center lg:min-h-[380px] lg:py-20`}>
+          {/* Decorative lines */}
+          <div className="flex w-full max-w-xs items-center gap-3" aria-hidden>
+            <div className="h-px flex-1 opacity-30" style={{ background: shop.homeHeroImage ? '#fff' : 'var(--theme-text-muted)' }} />
+            <div
+              className="h-1.5 w-1.5 rotate-45"
+              style={{ background: shop.homeHeroImage ? 'rgba(255,255,255,0.5)' : 'var(--theme-primary)' }}
+            />
+            <div className="h-px flex-1 opacity-30" style={{ background: shop.homeHeroImage ? '#fff' : 'var(--theme-text-muted)' }} />
+          </div>
+
           <h1
-            className="max-w-2xl text-2xl lg:text-5xl"
+            className="max-w-2xl text-2xl leading-tight sm:text-3xl lg:text-5xl"
             style={{
-              color: 'var(--theme-text-primary)',
+              color: shop.homeHeroImage ? '#ffffff' : 'var(--theme-text-primary)',
               fontFamily: 'var(--theme-font-heading)',
               fontWeight: 'var(--theme-heading-weight)' as unknown as number,
               letterSpacing: 'var(--theme-heading-spacing)',
@@ -35,18 +52,38 @@ export default function HeroMinimalClean({ shop, username, containerClass }: The
           >
             {heroTitle}
           </h1>
-          {introText ? (
-            <p className="max-w-md text-sm leading-relaxed lg:text-base" style={{ color: 'var(--theme-text-secondary)' }}>
+
+          {introText && (
+            <p
+              className="max-w-lg text-sm leading-relaxed lg:text-base"
+              style={{ color: shop.homeHeroImage ? 'rgba(255,255,255,0.8)' : 'var(--theme-text-secondary)' }}
+            >
               {introText}
             </p>
-          ) : null}
+          )}
+
           <Link
             to={`/${username}/products`}
-            className="mt-2 border-b pb-0.5 text-xs font-light uppercase tracking-[0.25em] no-underline"
-            style={{ borderColor: 'var(--theme-text-primary)', color: 'var(--theme-text-primary)' }}
+            className="inline-flex items-center gap-2 rounded-[var(--theme-radius-btn)] px-7 py-3 text-sm font-semibold no-underline transition-opacity hover:opacity-85"
+            style={
+              shop.homeHeroImage
+                ? { background: '#ffffff', color: '#0a0a0a' }
+                : { background: 'var(--theme-primary)', color: 'var(--theme-primary-contrast)' }
+            }
           >
             {t('heroBrowse')}
+            <ArrowRight className="h-4 w-4" />
           </Link>
+
+          {/* Decorative lines again */}
+          <div className="flex w-full max-w-xs items-center gap-3" aria-hidden>
+            <div className="h-px flex-1 opacity-30" style={{ background: shop.homeHeroImage ? '#fff' : 'var(--theme-text-muted)' }} />
+            <div
+              className="h-1.5 w-1.5 rotate-45"
+              style={{ background: shop.homeHeroImage ? 'rgba(255,255,255,0.5)' : 'var(--theme-primary)' }}
+            />
+            <div className="h-px flex-1 opacity-30" style={{ background: shop.homeHeroImage ? '#fff' : 'var(--theme-text-muted)' }} />
+          </div>
         </div>
       </div>
     </section>

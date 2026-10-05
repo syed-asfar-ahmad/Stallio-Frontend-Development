@@ -72,14 +72,15 @@ export function ShopCategoryCard({ category: c, shopUsername, productCount }: Ca
   return (
     <Link
       to={`/${shopUsername}/category/${c.slug}`}
-      className={`group relative block ${CATEGORY_CARD_ASPECT_CLASS} overflow-hidden rounded-theme-card no-underline shadow-theme-card ring-1 ring-theme-border transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-theme-primary`}
+      className={`group relative block ${CATEGORY_CARD_ASPECT_CLASS} overflow-hidden rounded-theme-card no-underline transition-all duration-300 ease-out hover:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-theme-primary`}
+      style={{ boxShadow: 'var(--theme-shadow-card)' }}
     >
       <div className="absolute inset-0 bg-theme-surface">
         {c.image ? (
           <img
             src={c.image}
             alt=""
-            className="h-full w-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105"
+            className="h-full w-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.05]"
             loading="lazy"
           />
         ) : (
@@ -100,10 +101,18 @@ export function ShopCategoryCard({ category: c, shopUsername, productCount }: Ca
         {productCount} {productLabel}
       </span>
 
-      <div className="absolute inset-x-0 bottom-0 z-10 p-3 max-lg:p-3 lg:p-5">
-        <h3 className="line-clamp-2 text-base font-bold leading-tight tracking-tight text-white drop-shadow-sm max-lg:text-base lg:text-xl">
+      <div className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-between p-3 lg:p-4">
+        <h3 className="line-clamp-2 text-base font-bold leading-tight tracking-tight text-white drop-shadow-sm lg:text-xl">
           {displayName}
         </h3>
+        <span
+          className="ms-2 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white/20 text-white opacity-0 backdrop-blur-sm transition-all duration-200 group-hover:translate-x-0.5 group-hover:opacity-100"
+          aria-hidden
+        >
+          <svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </span>
       </div>
     </Link>
   );

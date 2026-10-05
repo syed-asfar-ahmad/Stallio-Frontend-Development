@@ -398,7 +398,7 @@ export default function CheckoutModal({
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full flex-1 rounded-theme-btn bg-theme-primary py-3 text-sm font-semibold text-theme-badge-text shadow-theme-card hover:bg-theme-primary-hover disabled:opacity-60 max-lg:py-3 lg:py-3.5 lg:text-base"
+                  className="w-full flex-1 rounded-theme-btn bg-theme-primary py-3 text-sm font-semibold text-theme-primary-contrast shadow-theme-card hover:bg-theme-primary-hover disabled:opacity-60 max-lg:py-3 lg:py-3.5 lg:text-base"
                 >
                   {submitting ? t('checkoutPlacing') : t('checkoutPlaceOrder')}
                 </button>

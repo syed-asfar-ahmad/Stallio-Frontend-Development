@@ -3,6 +3,7 @@ import { useParams, useLocation, Link } from 'react-router-dom';
 import { ArrowLeft, ChevronRight, ChevronDown, ShoppingBag, MessageCircle, Loader2, Check } from 'lucide-react';
 import type { Product } from '../../types';
 import { useShop } from '../../context/ShopContext';
+import { useStorefrontTheme } from '../../themes';
 import { useCart, getEffectivePrice } from '../../context/CartContext';
 import { useShopLanguage } from '../../context/ShopLanguageContext';
 import { formatPrice } from '../../lib/countryCurrencyOptions';
@@ -14,6 +15,7 @@ import {
   getShopDisplayProductOptions,
 } from '../../lib/shopContentLanguages';
 import type { ShopProductLinkState } from '../../lib/shopProductNav';
+import DetailCocoaGallery from '../../components/shop/theme-parts/detail/DetailCocoaGallery';
 
 const containerClass = 'w-full max-w-7xl mx-auto px-3 sm:px-4 lg:px-5';
 const ADD_TO_CART_ANIM_MS = 750;
@@ -46,6 +48,8 @@ function ProductPrice({
 export default function ShopProductDetailPage() {
   const { productId } = useParams<{ productId: string }>();
   const { shop, products, username } = useShop();
+  const { layout } = useStorefrontTheme();
+  const detailVariant = layout.productDetailVariant ?? 'gallery-split';
   const { addToCart, openCheckout } = useCart();
   const location = useLocation();
   const { t, categoryName, productName, productDescription, lang } = useShopLanguage();
@@ -59,6 +63,7 @@ export default function ShopProductDetailPage() {
   const [detailOptionDropdownOpen, setDetailOptionDropdownOpen] = useState<string | null>(null);
   const [detailOptionError, setDetailOptionError] = useState('');
   const [addToCartAnim, setAddToCartAnim] = useState<'idle' | 'adding' | 'success'>('idle');
+  const [addToCartMode, setAddToCartMode] = useState<'cart' | 'buy' | null>(null);
   const addToCartTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -66,6 +71,7 @@ export default function ShopProductDetailPage() {
     setDetailOptionDropdownOpen(null);
     setDetailOptionError('');
     setAddToCartAnim('idle');
+    setAddToCartMode(null);
     setAddToCartOptions({});
     setAddToCartMessage('');
     setDetailQty(1);
@@ -125,7 +131,7 @@ export default function ShopProductDetailPage() {
     backLabel = t('backToProducts');
   }
 
-  function handleAddToCartFromDetail() {
+  function handleAddToCartFromDetail(mode: 'cart' | 'buy' = 'buy') {
     if (!product || addToCartAnim !== 'idle') return;
     if (product.inStock === false) {
       setDetailOptionError(t('errorOutOfStock'));
@@ -149,16 +155,61 @@ export default function ShopProductDetailPage() {
 
     if (addToCartTimerRef.current) clearTimeout(addToCartTimerRef.current);
 
+    setAddToCartMode(mode);
     setAddToCartAnim('adding');
     addToCartTimerRef.current = setTimeout(() => {
       addToCart(product, detailQty, Object.keys(opts).length > 0 ? opts : null, addToCartMessage.trim() || null);
       setAddToCartAnim('success');
-      addToCartTimerRef.current = setTimeout(() => {
-        openCheckout();
-        setAddToCartAnim('idle');
-        addToCartTimerRef.current = null;
-      }, ADD_TO_CART_SUCCESS_MS);
+      addToCartTimerRef.current = setTimeout(
+        () => {
+          if (mode === 'buy') openCheckout();
+          setAddToCartAnim('idle');
+          setAddToCartMode(null);
+          addToCartTimerRef.current = null;
+        },
+        mode === 'buy' ? ADD_TO_CART_SUCCESS_MS : 1200,
+      );
     }, ADD_TO_CART_ANIM_MS);
+  }
+
+  if (detailVariant === 'cocoa-gallery') {
+    const pool = products.filter((x) => x.id !== product.id && x.isVisible !== false);
+    const related = [
+      ...pool.filter((x) => product.category && x.category === product.category),
+      ...pool.filter((x) => !(product.category && x.category === product.category)),
+    ].slice(0, 4);
+
+    return (
+      <DetailCocoaGallery
+        shop={shop}
+        username={username}
+        product={product}
+        related={related}
+        displayName={displayName}
+        displayDescription={displayDescription}
+        images={detailImages}
+        activeIndex={safeImageIndex}
+        setActiveIndex={setActiveDetailImageIndex}
+        options={detailDisplayOptions}
+        selected={addToCartOptions}
+        setSelected={setAddToCartOptions}
+        message={addToCartMessage}
+        setMessage={setAddToCartMessage}
+        qty={detailQty}
+        setQty={setDetailQty}
+        error={detailOptionError}
+        clearError={() => setDetailOptionError('')}
+        anim={addToCartAnim}
+        animMode={addToCartMode}
+        onAddToCart={() => handleAddToCartFromDetail('cart')}
+        onBuyNow={() => handleAddToCartFromDetail('buy')}
+        backTo={productBackTo}
+        backLabel={backLabel}
+        navFrom={navFrom}
+        navCategorySlug={navCategorySlug}
+        navCategory={categoryFromNav}
+      />
+    );
   }
 
   return (
@@ -216,57 +267,133 @@ export default function ShopProductDetailPage() {
       </div>
 
       <div className="grid gap-4 max-lg:gap-4 lg:grid-cols-[480px_1fr] lg:gap-8 xl:grid-cols-[560px_1fr] lg:items-start">
-        <div
-          className="relative z-0 mx-auto w-full max-w-[480px] lg:mx-0 lg:max-w-none lg:w-full overflow-hidden border"
-          style={{
-            borderRadius: 'var(--theme-radius-card)',
-            borderColor: 'var(--theme-border)',
-            background: 'var(--theme-surface)',
-            boxShadow: 'var(--theme-shadow-card)',
-          }}
-        >
-          {activeImage ? (
-            <ProductImage src={activeImage} alt={displayName} />
-          ) : (
-            <div
-              className={`${PRODUCT_CARD_ASPECT_CLASS} ${PRODUCT_IMAGE_FRAME_CLASS} flex items-center justify-center`}
-              style={{ color: 'var(--theme-text-muted)' }}
-            >
-              <ShoppingBag className="w-16 h-16" />
-            </div>
-          )}
-          {detailImages.length > 1 && (
-            <div
-              className="border-t p-3 max-lg:p-3 lg:p-4"
-              style={{
-                borderColor: 'var(--theme-border)',
-                background: 'var(--theme-surface-secondary)',
-              }}
-            >
-              <div className="flex items-center gap-2 max-lg:gap-2 overflow-x-auto pb-1 lg:gap-3">
+        {/* Gallery Variants Dispatcher */}
+        {detailVariant === 'gallery-stacked' ? (
+          <div className="space-y-4">
+            {detailImages.length > 0 ? (
+              detailImages.map((img, idx) => (
+                <div
+                  key={`${img}-${idx}`}
+                  className="relative overflow-hidden border shadow-theme-card transition-all"
+                  style={{
+                    borderRadius: 'var(--theme-radius-card)',
+                    borderColor: 'var(--theme-border)',
+                    background: 'var(--theme-surface)',
+                  }}
+                >
+                  <ProductImage
+                    src={img}
+                    alt={`${displayName} - ${idx + 1}`}
+                    aspectClass={PRODUCT_CARD_ASPECT_CLASS}
+                    loading={idx === 0 ? 'eager' : 'lazy'}
+                  />
+                </div>
+              ))
+            ) : (
+              <div
+                className={`relative overflow-hidden border ${PRODUCT_CARD_ASPECT_CLASS} ${PRODUCT_IMAGE_FRAME_CLASS} flex items-center justify-center`}
+                style={{
+                  borderRadius: 'var(--theme-radius-card)',
+                  borderColor: 'var(--theme-border)',
+                  color: 'var(--theme-text-muted)',
+                }}
+              >
+                <ShoppingBag className="w-16 h-16" />
+              </div>
+            )}
+          </div>
+        ) : detailVariant === 'gallery-carousel' ? (
+          <div
+            className="relative overflow-hidden border glow-theme-accent transition-all"
+            style={{
+              borderRadius: 'var(--theme-radius-card)',
+              borderColor: 'var(--theme-border)',
+              background: 'var(--theme-surface)',
+              boxShadow: 'var(--theme-shadow-card)',
+            }}
+          >
+            {activeImage ? (
+              <ProductImage src={activeImage} alt={displayName} aspectClass={PRODUCT_CARD_ASPECT_CLASS} />
+            ) : (
+              <div
+                className={`${PRODUCT_CARD_ASPECT_CLASS} ${PRODUCT_IMAGE_FRAME_CLASS} flex items-center justify-center`}
+                style={{ color: 'var(--theme-text-muted)' }}
+              >
+                <ShoppingBag className="w-16 h-16" />
+              </div>
+            )}
+            {detailImages.length > 1 && (
+              <div className="flex items-center justify-center gap-2 p-3.5 bg-[var(--theme-surface-secondary)] border-t border-[var(--theme-border)]">
                 {detailImages.map((img, idx) => (
                   <button
                     key={`${img}-${idx}`}
                     type="button"
                     onClick={() => setActiveDetailImageIndex(idx)}
-                    className={`relative h-16 w-16 max-lg:h-16 max-lg:w-16 shrink-0 overflow-hidden border-2 transition-all lg:h-20 lg:w-20 ${
+                    className={`h-2.5 rounded-full transition-all ${
                       idx === safeImageIndex
-                        ? 'border-[var(--theme-primary)] ring-2 ring-[var(--theme-primary)]/20 scale-105'
-                        : 'border-[var(--theme-border)] hover:border-[var(--theme-primary)]'
+                        ? 'w-8 bg-theme-primary'
+                        : 'w-2.5 bg-theme-border hover:bg-theme-muted'
                     }`}
-                    style={{
-                      borderRadius: 'calc(var(--theme-radius-card) * 0.75)',
-                      background: 'var(--theme-surface)',
-                    }}
                     aria-label={t('viewImage', { n: idx + 1 })}
-                  >
-                    <img src={getProductImageDisplayUrl(img)} alt="" className={PRODUCT_IMAGE_CLASS} />
-                  </button>
+                  />
                 ))}
               </div>
-            </div>
-          )}
-        </div>
+            )}
+          </div>
+        ) : (
+          /* gallery-split (Default Classic & Retail) */
+          <div
+            className="relative z-0 mx-auto w-full max-w-[480px] lg:mx-0 lg:max-w-none lg:w-full overflow-hidden border"
+            style={{
+              borderRadius: 'var(--theme-radius-card)',
+              borderColor: 'var(--theme-border)',
+              background: 'var(--theme-surface)',
+              boxShadow: 'var(--theme-shadow-card)',
+            }}
+          >
+            {activeImage ? (
+              <ProductImage src={activeImage} alt={displayName} />
+            ) : (
+              <div
+                className={`${PRODUCT_CARD_ASPECT_CLASS} ${PRODUCT_IMAGE_FRAME_CLASS} flex items-center justify-center`}
+                style={{ color: 'var(--theme-text-muted)' }}
+              >
+                <ShoppingBag className="w-16 h-16" />
+              </div>
+            )}
+            {detailImages.length > 1 && (
+              <div
+                className="border-t p-3 max-lg:p-3 lg:p-4"
+                style={{
+                  borderColor: 'var(--theme-border)',
+                  background: 'var(--theme-surface-secondary)',
+                }}
+              >
+                <div className="flex items-center gap-2 max-lg:gap-2 overflow-x-auto pb-1 lg:gap-3">
+                  {detailImages.map((img, idx) => (
+                    <button
+                      key={`${img}-${idx}`}
+                      type="button"
+                      onClick={() => setActiveDetailImageIndex(idx)}
+                      className={`relative h-16 w-16 max-lg:h-16 max-lg:w-16 shrink-0 overflow-hidden border-2 transition-all lg:h-20 lg:w-20 ${
+                        idx === safeImageIndex
+                          ? 'border-[var(--theme-primary)] ring-2 ring-[var(--theme-primary)]/20 scale-105'
+                          : 'border-[var(--theme-border)] hover:border-[var(--theme-primary)]'
+                      }`}
+                      style={{
+                        borderRadius: 'calc(var(--theme-radius-card) * 0.75)',
+                        background: 'var(--theme-surface)',
+                      }}
+                      aria-label={t('viewImage', { n: idx + 1 })}
+                    >
+                      <img src={getProductImageDisplayUrl(img)} alt="" className={PRODUCT_IMAGE_CLASS} />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
 
         <div
           className={`min-w-0 border p-5 sm:p-7 lg:sticky lg:top-24 ${
@@ -485,19 +612,18 @@ export default function ShopProductDetailPage() {
               </div>
               <button
                 type="button"
-                onClick={handleAddToCartFromDetail}
+                onClick={() => handleAddToCartFromDetail()}
                 disabled={product.inStock === false || addToCartAnim !== 'idle'}
-                className={`shop-add-to-cart-btn w-full max-lg:w-full flex-1 min-w-0 px-5 py-3 font-semibold disabled:cursor-not-allowed disabled:opacity-50 max-lg:py-3 lg:min-w-[180px] lg:px-6 lg:py-3.5 ${
+                className={`shop-add-to-cart-btn w-full max-lg:w-full flex-1 min-w-0 px-5 py-3.5 font-bold rounded-full disabled:cursor-not-allowed disabled:opacity-50 max-lg:py-3.5 lg:min-w-[180px] lg:px-6 lg:py-4 transition-all active:scale-[0.99] ${
                   addToCartAnim === 'adding' ? 'shop-add-to-cart-btn--adding' : ''
                 }${addToCartAnim === 'success' ? ' shop-add-to-cart-btn--success' : ''}`}
                 style={{
-                  borderRadius: 'var(--theme-radius-btn)',
                   background: 'var(--theme-primary)',
-                  color: 'var(--theme-badge-text, #ffffff)',
+                  color: 'var(--theme-primary-contrast)',
                   boxShadow: 'var(--theme-shadow-card)',
                 }}
               >
-                <span className="relative z-[1] inline-flex items-center justify-center gap-2">
+                <span className="relative z-[1] inline-flex items-center justify-center gap-2 text-sm sm:text-base">
                   {product.inStock === false ? (
                     t('outOfStock')
                   ) : addToCartAnim === 'adding' ? (
@@ -519,10 +645,26 @@ export default function ShopProductDetailPage() {
                 </span>
               </button>
             </div>
+
+            {/* Botanical Trust & Policy micro-row */}
+            <div
+              className="mt-4 pt-4 border-t grid grid-cols-2 gap-2 text-xs"
+              style={{ borderColor: 'var(--theme-border)', color: 'var(--theme-text-muted)' }}
+            >
+              <div className="flex items-center gap-1.5">
+                <span className="h-1.5 w-1.5 rounded-full" style={{ background: 'var(--theme-primary)' }} />
+                <span>100% Authentic & Pure</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span className="h-1.5 w-1.5 rounded-full" style={{ background: 'var(--theme-primary)' }} />
+                <span>Eco-Conscious Packaging</span>
+              </div>
+            </div>
+
             {shop.refundEnabled ? (
               <Link
                 to={`/${username}/refund`}
-                className="inline-block text-start text-xs font-semibold underline underline-offset-2 hover:opacity-80 lg:text-sm"
+                className="inline-block text-start text-xs font-semibold underline underline-offset-2 hover:opacity-80 lg:text-sm mt-2"
                 style={{ color: 'var(--theme-primary)' }}
               >
                 {t('returnExchangePolicy')}

@@ -31,6 +31,8 @@ export const FONT_PRESETS: { id: FontFamilyPreset; label: string; family: string
   { id: 'syne', label: 'Syne (Bold Editorial)', family: 'Syne, Outfit, ui-sans-serif, system-ui, sans-serif' },
   { id: 'cormorant', label: 'Cormorant Garamond (Organic Elegance)', family: '"Cormorant Garamond", Georgia, serif' },
   { id: 'dm-serif', label: 'DM Serif Display (Dark Luxury)', family: '"DM Serif Display", "Playfair Display", Georgia, serif' },
+  { id: 'cinzel', label: 'Cinzel (Classical Minimal)', family: '"Cinzel", "Playfair Display", Georgia, serif' },
+  { id: 'fraunces', label: 'Fraunces (Soft Boutique Serif)', family: '"Fraunces", "Playfair Display", Georgia, serif' },
 ];
 
 export const RADIUS_PRESETS: { id: RadiusPreset; label: string; button: string; card: string }[] = [

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ChevronRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useShopLanguage } from '../../context/ShopLanguageContext';
 
@@ -13,10 +13,11 @@ export function ShopActionLink({ to, children }: { to: string; children: ReactNo
   return (
     <Link
       to={to}
-      className="inline-flex items-center gap-1 text-sm font-semibold text-theme-primary no-underline transition-opacity hover:opacity-80"
+      className="inline-flex items-center gap-1 text-sm font-semibold no-underline transition-opacity hover:opacity-75"
+      style={{ color: 'var(--theme-primary)' }}
     >
       {children}
-      <ChevronRight className="h-4 w-4 shrink-0 rtl:rotate-180" aria-hidden />
+      <ArrowRight className="h-3.5 w-3.5 shrink-0 rtl:rotate-180" aria-hidden />
     </Link>
   );
 }
@@ -28,22 +29,26 @@ export function ShopViewAllLink({ to }: { to: string }) {
 
 export default function ShopSectionHeading({ title, description, trailing }: Props) {
   return (
-    <div className="mb-4 max-lg:mb-4 lg:mb-5">
-      <div className="flex items-start justify-between gap-2 max-lg:gap-2 lg:gap-3">
-        <div className="min-w-0 flex-1 pe-2">
+    <div className="mb-4 lg:mb-6">
+      <div className="flex items-center justify-between gap-2 border-b pb-3" style={{ borderColor: 'var(--theme-border)' }}>
+        <div className="min-w-0 flex-1">
           <h2
-            style={{ fontFamily: 'var(--theme-font-heading, inherit)' }}
-            className="text-lg max-lg:leading-snug font-bold tracking-tight text-theme-text lg:text-2xl"
+            className="text-lg font-bold leading-tight tracking-tight lg:text-xl"
+            style={{
+              color: 'var(--theme-text-primary)',
+              fontFamily: 'var(--theme-font-heading, inherit)',
+              letterSpacing: 'var(--theme-heading-spacing)',
+            }}
           >
             {title}
           </h2>
           {description ? (
-            <p className="mt-0.5 max-lg:mt-0.5 text-xs max-lg:text-xs leading-relaxed text-theme-text-muted lg:mt-1 lg:text-sm">
+            <p className="mt-0.5 text-xs leading-relaxed lg:text-sm" style={{ color: 'var(--theme-text-muted)' }}>
               {description}
             </p>
           ) : null}
         </div>
-        {trailing ? <div className="flex shrink-0 items-center gap-2 pt-0.5">{trailing}</div> : null}
+        {trailing ? <div className="flex shrink-0 items-center gap-2">{trailing}</div> : null}
       </div>
     </div>
   );

@@ -25,6 +25,7 @@ import { api } from '../lib/api';
 import DashboardLayout from '../components/DashboardLayout';
 import DashboardLoading from '../components/DashboardLoading';
 import DashboardSwitch from '../components/DashboardSwitch';
+import AdminSelect from '../components/admin/AdminSelect';
 import ThemePreviewModal from '../components/ThemePreviewModal';
 import StorefrontThemeSimulator, { type PreviewDevice } from '../components/StorefrontThemeSimulator';
 import {
@@ -58,6 +59,7 @@ import {
   DASHBOARD_TOGGLE_ROW_LABEL,
   DASHBOARD_TOGGLE_ROW_SWITCH,
 } from '../lib/dashboardFormClasses';
+import { getContrastColor } from '../lib/colorUtils';
 
 type ViewTab = 'gallery' | 'customize';
 
@@ -563,25 +565,32 @@ export default function DashboardThemes() {
                       <input
                         type="color"
                         value={resolvedTheme.tokens.colors.primary}
-                        onChange={(e) =>
+                        onChange={(e) => {
+                          const hex = e.target.value;
                           setCustomColors((prev) => ({
                             ...prev,
-                            primary: e.target.value,
-                            primaryHover: e.target.value,
-                          }))
-                        }
+                            primary: hex,
+                            primaryHover: hex,
+                            primaryContrast: getContrastColor(hex),
+                          }));
+                        }}
                         className="h-11 w-14 rounded-xl border border-stone-300 dark:border-zinc-700 cursor-pointer p-1 bg-white dark:bg-zinc-800"
                       />
                       <input
                         type="text"
                         value={resolvedTheme.tokens.colors.primary}
-                        onChange={(e) =>
+                        onChange={(e) => {
+                          const hex = e.target.value;
                           setCustomColors((prev) => ({
                             ...prev,
-                            primary: e.target.value,
-                            primaryHover: e.target.value,
-                          }))
-                        }
+                            primary: hex,
+                            primaryHover: hex,
+                            // Only auto-derive contrast for valid hex values
+                            ...((/^#[0-9A-Fa-f]{6}$/.test(hex) || /^#[0-9A-Fa-f]{3}$/.test(hex))
+                              ? { primaryContrast: getContrastColor(hex) }
+                              : {}),
+                          }));
+                        }}
                         className={DASHBOARD_INPUT}
                         placeholder="#4f46e5"
                       />
@@ -598,6 +607,7 @@ export default function DashboardThemes() {
                               ...prev,
                               primary: swatch,
                               primaryHover: swatch,
+                              primaryContrast: getContrastColor(swatch),
                             }))
                           }
                           className="w-5 h-5 rounded-full border border-black/10 dark:border-white/20 transition-transform hover:scale-110"
@@ -780,7 +790,7 @@ export default function DashboardThemes() {
                       <label className="text-xs font-bold uppercase tracking-wider text-stone-600 dark:text-zinc-400">
                         Hero Section Style
                       </label>
-                      <select
+                      <AdminSelect
                         value={resolvedTheme.layout.heroVariant}
                         onChange={(e) =>
                           setCustomLayout((prev) => ({
@@ -788,20 +798,24 @@ export default function DashboardThemes() {
                             heroVariant: e.target.value as HeroLayoutVariant,
                           }))
                         }
-                        className={DASHBOARD_INPUT}
                       >
+                          <option value="cocoa-banner">Cocoa Banner (Boutique Artisan)</option>
+                          <option value="botanical-arch">Botanical Arch (Pacific Fresh)</option>
+                          <option value="sanctuary-panorama">Sanctuary Panorama (Pacific Fresh)</option>
+                          <option value="apothecary-duo">Apothecary Duo (Pacific Fresh)</option>
+                          <option value="organic-pill">Organic Botanical Pill (Pacific Fresh)</option>
                         <option value="full-banner">Full Width Banner with Overlay</option>
                         <option value="split-image">Split Screen (Image + Headline)</option>
                         <option value="minimal-clean">Minimalist Clean Typography</option>
                         <option value="card-showcase">Showcase Floating Cards</option>
-                      </select>
+                      </AdminSelect>
                     </div>
 
                     <div className="space-y-2">
                       <label className="text-xs font-bold uppercase tracking-wider text-stone-600 dark:text-zinc-400">
                         Product Card Style
                       </label>
-                      <select
+                      <AdminSelect
                         value={resolvedTheme.layout.productCardVariant}
                         onChange={(e) =>
                           setCustomLayout((prev) => ({
@@ -809,21 +823,22 @@ export default function DashboardThemes() {
                             productCardVariant: e.target.value as ProductCardVariant,
                           }))
                         }
-                        className={DASHBOARD_INPUT}
                       >
+                        <option value="cocoa-tile">Cocoa Tile with Buy Now (Boutique Artisan)</option>
+                        <option value="organic-pill">Organic Pill & Badge (Pacific Fresh)</option>
                         <option value="bordered">Bordered Clean Card</option>
                         <option value="flat">Flat Borderless Minimal</option>
                         <option value="elevated">Elevated Shadow Lift</option>
                         <option value="compact">Compact Retail Dense</option>
                         <option value="editorial">Editorial Magazine Aspect</option>
-                      </select>
+                      </AdminSelect>
                     </div>
 
                     <div className="space-y-2">
                       <label className="text-xs font-bold uppercase tracking-wider text-stone-600 dark:text-zinc-400">
                         Header Style
                       </label>
-                      <select
+                      <AdminSelect
                         value={resolvedTheme.layout.headerVariant}
                         onChange={(e) =>
                           setCustomLayout((prev) => ({
@@ -831,20 +846,21 @@ export default function DashboardThemes() {
                             headerVariant: e.target.value as HeaderNavigationVariant,
                           }))
                         }
-                        className={DASHBOARD_INPUT}
                       >
+                        <option value="cocoa-overlay">Cocoa Overlay (Boutique Artisan)</option>
+                        <option value="floating-capsule">Floating Capsule Bar (Pacific Fresh)</option>
                         <option value="classic-bar">Classic Bar (Logo left, nav center)</option>
                         <option value="centered-logo">Centered Logo</option>
                         <option value="minimal-floating">Minimal Floating Island</option>
                         <option value="inline-compact">Inline Compact</option>
-                      </select>
+                      </AdminSelect>
                     </div>
 
                     <div className="space-y-2">
                       <label className="text-xs font-bold uppercase tracking-wider text-stone-600 dark:text-zinc-400">
                         Footer Style
                       </label>
-                      <select
+                      <AdminSelect
                         value={resolvedTheme.layout.footerVariant}
                         onChange={(e) =>
                           setCustomLayout((prev) => ({
@@ -852,13 +868,14 @@ export default function DashboardThemes() {
                             footerVariant: e.target.value as FooterLayoutVariant,
                           }))
                         }
-                        className={DASHBOARD_INPUT}
                       >
+                        <option value="cocoa-atelier">Cocoa Atelier (Boutique Artisan)</option>
+                        <option value="organic-curated">Curated Botanical Journal (Pacific Fresh)</option>
                         <option value="multi-column">Multi Column</option>
                         <option value="centered-minimal">Centered Minimal</option>
                         <option value="bold-newsletter">Bold Newsletter</option>
                         <option value="compact-inline">Compact Inline</option>
-                      </select>
+                      </AdminSelect>
                     </div>
 
                     <div className="space-y-2">

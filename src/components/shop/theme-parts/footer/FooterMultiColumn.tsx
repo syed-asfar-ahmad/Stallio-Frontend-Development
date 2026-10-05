@@ -34,8 +34,8 @@ export default function FooterMultiColumn({ shop, quickLinks, containerClass }: 
                 <img src={shop.footerLogo} alt="" className="h-12 w-12 shrink-0 object-contain lg:h-16 lg:w-16" />
               ) : (
                 <span
-                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[var(--theme-radius-card)] text-white lg:h-14 lg:w-14"
-                  style={{ background: 'var(--theme-primary)' }}
+                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[var(--theme-radius-card)] lg:h-14 lg:w-14"
+                  style={{ background: 'var(--theme-primary)', color: 'var(--theme-primary-contrast)' }}
                 >
                   <MapPin className="h-5 w-5 lg:h-6 lg:w-6" />
                 </span>

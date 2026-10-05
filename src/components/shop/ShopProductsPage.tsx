@@ -8,6 +8,8 @@ import ProductCard from './theme-parts/ProductCard';
 import ShopSelect from './ShopSelect';
 import ShopPagination from './ShopPagination';
 import { SHOP_LIST_PAGE_SIZE } from '../../lib/shopPagination';
+import { useStorefrontTheme } from '../../themes';
+import { CocoaHeading } from './theme-parts/cocoa/CocoaParts';
 
 type SortKey =
   | 'name-asc'
@@ -109,32 +111,38 @@ type Props = {
 };
 
 export default function ShopProductsPage({ shop, products, username, containerClass }: Props) {
-  const { t, lang } = useShopLanguage();
+  const { t, lang, categoryName } = useShopLanguage();
+  const { layout } = useStorefrontTheme();
   const sortOptions = useMemo(
     () => SORT_KEYS.map((value) => ({ value, label: t(SORT_LABEL_KEYS[value]) })),
     [t],
   );
   const visibleAll = useMemo(() => products.filter((p) => p.isVisible !== false), [products]);
+
+  // Unique categories from products
+  const categories = useMemo(() => {
+    const cats = new Set<string>();
+    visibleAll.forEach((p) => { if (p.category) cats.add(p.category); });
+    return Array.from(cats);
+  }, [visibleAll]);
+
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState<SortKey>('newest');
   const [sortOpen, setSortOpen] = useState(false);
   const [page, setPage] = useState(1);
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   const filteredSorted = useMemo(() => {
-    const filtered = visibleAll.filter((p) => matchesSearch(p, search));
+    let filtered = visibleAll.filter((p) => matchesSearch(p, search));
+    if (activeCategory) filtered = filtered.filter((p) => p.category === activeCategory);
     return sortProducts(filtered, sort, lang);
-  }, [visibleAll, search, sort, lang]);
+  }, [visibleAll, search, sort, lang, activeCategory]);
 
   const totalPages = Math.max(1, Math.ceil(filteredSorted.length / SHOP_LIST_PAGE_SIZE));
   const safePage = Math.min(page, totalPages);
 
-  useEffect(() => {
-    setPage(1);
-  }, [search, sort]);
-
-  useEffect(() => {
-    if (page > totalPages) setPage(totalPages);
-  }, [page, totalPages]);
+  useEffect(() => { setPage(1); }, [search, sort, activeCategory]);
+  useEffect(() => { if (page > totalPages) setPage(totalPages); }, [page, totalPages]);
 
   const displayed = filteredSorted.slice(
     (safePage - 1) * SHOP_LIST_PAGE_SIZE,
@@ -142,71 +150,125 @@ export default function ShopProductsPage({ shop, products, username, containerCl
   );
   const trimmedSearch = search.trim();
 
-  return (
-    <main className={`${containerClass} flex-1 pb-8 pt-4 max-lg:pb-8 max-lg:pt-4 lg:pb-14 lg:pt-7`}>
-      <div className="mb-4 max-lg:mb-4 lg:mb-8">
-        <h1
-          style={{ fontFamily: 'var(--theme-font-heading, inherit)' }}
-          className="text-lg max-lg:leading-snug font-bold tracking-tight text-theme-text lg:text-3xl"
-        >
-          {t('productsPageTitle')}
-        </h1>
-        <p className="mt-0.5 max-lg:mt-0.5 text-xs max-lg:text-xs text-theme-text-muted lg:mt-1 lg:text-sm">
-          {t('productsPageBody')}
-        </p>
-      </div>
+  // Determine grid columns from layout (default 4 for modern-minimal feel)
+  const gridClass = 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4';
 
-      {visibleAll.length === 0 ? (
-        <div className="rounded-theme-card border border-dashed border-theme-border bg-theme-surface px-4 py-10 max-lg:px-4 max-lg:py-10 text-center shadow-theme-card lg:px-6 lg:py-14">
-          <span className="mx-auto flex h-12 w-12 max-lg:h-12 max-lg:w-12 items-center justify-center rounded-theme-card bg-theme-primary-light text-theme-primary">
-            <ShoppingBag className="h-6 w-6 max-lg:h-6 max-lg:w-6 lg:h-7 lg:w-7" aria-hidden />
-          </span>
-          <p className="mt-3 max-lg:mt-3 text-sm max-lg:text-sm font-semibold text-theme-text lg:mt-4">
-            {t('productsEmpty')}
-          </p>
-          <p className="mt-1 text-xs max-lg:text-xs text-theme-text-muted lg:text-sm">{t('productsEmptyBody')}</p>
-          <Link
-            to={`/${username}`}
-            className="mt-5 max-lg:mt-5 inline-flex w-full max-lg:w-full items-center justify-center rounded-theme-btn border-2 border-theme-border bg-theme-surface px-5 py-2.5 text-sm font-semibold text-theme-primary no-underline hover:bg-theme-primary-light lg:mt-6 lg:w-auto"
-          >
-            {t('productsBackHome')}
-          </Link>
-        </div>
-      ) : (
-        <>
-          <div
-            className={`relative mb-4 max-lg:mb-4 overflow-visible rounded-theme-card border border-theme-border bg-theme-surface p-3 shadow-theme-card lg:mb-6 lg:p-4 ${
-              sortOpen ? 'z-40 isolate' : 'z-0'
-            }`}
-          >
-            <div className="flex flex-col gap-3 max-lg:gap-3 lg:flex-row lg:items-center lg:gap-4">
-              <div className="relative min-w-0 flex-1">
-                <Search
-                  className="pointer-events-none absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-theme-text-muted max-lg:start-3 lg:start-3.5"
-                  aria-hidden
-                />
-                <input
-                  type="search"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  placeholder={t('productsSearchPh')}
-                  aria-label={t('productsSearchAria')}
-                  className="w-full rounded-theme-input border-2 border-theme-border bg-theme-surface-secondary py-2.5 ps-9 pe-9 text-sm font-medium text-theme-text placeholder:text-theme-text-muted transition-colors focus:border-theme-primary focus:bg-theme-surface focus:outline-none focus:ring-2 focus:ring-theme-primary/20 max-lg:py-2.5 lg:ps-10 lg:pe-10 lg:py-3"
-                />
-                {trimmedSearch ? (
+  if (layout.productsPageVariant === 'cocoa-catalog') {
+    const catLabel = (slug: string) => {
+      const c = shop.categories?.find((x) => x.slug === slug);
+      return c ? categoryName(c) : slug;
+    };
+    const cocoaGrid =
+      layout.productGridColumns === 4
+        ? 'grid-cols-2 md:grid-cols-3 xl:grid-cols-4'
+        : layout.productGridColumns === 2
+        ? 'grid-cols-2'
+        : 'grid-cols-2 lg:grid-cols-3';
+    const chip = (on: boolean): React.CSSProperties =>
+      on
+        ? { background: 'var(--theme-secondary)', color: 'var(--theme-bg)', borderColor: 'var(--theme-secondary)' }
+        : { background: 'var(--theme-surface)', color: 'var(--theme-text-secondary)', borderColor: 'var(--theme-border)' };
+
+    return (
+      <main className={`${containerClass} flex-1 pb-16 pt-10 lg:pb-28 lg:pt-16`}>
+        <CocoaHeading as="h1" title={t('productsPageTitle')} body={t('productsPageBody')} className="!mb-7 lg:!mb-9" />
+
+        {visibleAll.length === 0 ? (
+          <div className="mx-auto flex max-w-md flex-col items-center gap-4 py-16 text-center">
+            <span
+              className="flex h-14 w-14 items-center justify-center rounded-full"
+              style={{ background: 'var(--theme-primary-light)', color: 'var(--theme-primary)' }}
+            >
+              <ShoppingBag className="h-6 w-6" strokeWidth={1.5} aria-hidden />
+            </span>
+            <div>
+              <p className="text-base font-semibold" style={{ color: 'var(--theme-text-primary)' }}>{t('productsEmpty')}</p>
+              <p className="mt-1 text-sm" style={{ color: 'var(--theme-text-muted)' }}>{t('productsEmptyBody')}</p>
+            </div>
+            <Link
+              to={`/${username}`}
+              className="rounded-[var(--theme-radius-btn)] px-6 py-2.5 text-sm font-semibold no-underline"
+              style={{ background: 'var(--theme-primary)', color: 'var(--theme-primary-contrast)' }}
+            >
+              {t('productsBackHome')}
+            </Link>
+          </div>
+        ) : (
+          <>
+            {/* Search */}
+            <div className="relative mx-auto max-w-2xl">
+              <Search
+                className="pointer-events-none absolute start-5 top-1/2 h-[18px] w-[18px] -translate-y-1/2"
+                style={{ color: 'var(--theme-text-muted)' }}
+                aria-hidden
+              />
+              <input
+                type="search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder={t('productsSearchPh')}
+                aria-label={t('productsSearchAria')}
+                className="h-14 w-full rounded-2xl border ps-13 pe-12 text-[15px] shadow-[var(--theme-shadow-card)] transition-shadow placeholder:opacity-60 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--theme-primary)]"
+                style={{
+                  paddingInlineStart: '3.25rem',
+                  borderColor: 'var(--theme-border)',
+                  background: 'var(--theme-surface)',
+                  color: 'var(--theme-text-primary)',
+                }}
+              />
+              {trimmedSearch && (
+                <button
+                  type="button"
+                  onClick={() => setSearch('')}
+                  aria-label={t('productsClearSearch')}
+                  className="absolute end-3 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full transition-colors hover:bg-[var(--theme-surface-secondary)]"
+                  style={{ color: 'var(--theme-text-muted)' }}
+                >
+                  <X className="h-4 w-4" aria-hidden />
+                </button>
+              )}
+            </div>
+
+            {/* Category chips */}
+            {categories.length > 0 && (
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setActiveCategory(null)}
+                  aria-pressed={activeCategory === null}
+                  className="rounded-full border px-4 py-2 text-xs font-semibold transition-colors"
+                  style={chip(activeCategory === null)}
+                >
+                  {t('categoryAll')}
+                </button>
+                {categories.map((cat) => (
                   <button
+                    key={cat}
                     type="button"
-                    onClick={() => setSearch('')}
-                    className="absolute end-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-lg text-theme-text-muted transition-colors hover:bg-theme-surface-secondary hover:text-theme-text"
-                    aria-label={t('productsClearSearch')}
+                    onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
+                    aria-pressed={activeCategory === cat}
+                    className="rounded-full border px-4 py-2 text-xs font-semibold capitalize transition-colors"
+                    style={chip(activeCategory === cat)}
                   >
-                    <X className="h-4 w-4" aria-hidden />
+                    {catLabel(cat)}
                   </button>
-                ) : null}
+                ))}
               </div>
-              <div className="flex w-full min-w-0 shrink-0 flex-col gap-1.5 max-lg:w-full lg:w-auto lg:flex-row lg:items-center lg:gap-3">
-                <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-theme-text-muted lg:text-xs">
-                  <SlidersHorizontal className="h-3.5 w-3.5 shrink-0" aria-hidden />
+            )}
+
+            {/* Toolbar */}
+            <div
+              className={`relative mb-8 mt-10 flex flex-col gap-3 border-b pb-4 sm:flex-row sm:items-center sm:justify-between ${sortOpen ? 'z-40 isolate' : 'z-0'}`}
+              style={{ borderColor: 'var(--theme-border)' }}
+            >
+              <p className="text-sm" style={{ color: 'var(--theme-text-muted)' }} aria-live="polite">
+                {trimmedSearch && filteredSorted.length === 0
+                  ? t('productsNoResults', { query: trimmedSearch })
+                  : t('showingCount', { shown: displayed.length, total: filteredSorted.length })}
+              </p>
+              <div className="flex items-center gap-2.5">
+                <span className="hidden items-center gap-1.5 text-xs font-medium sm:inline-flex" style={{ color: 'var(--theme-text-muted)' }}>
+                  <SlidersHorizontal className="h-3.5 w-3.5" aria-hidden />
                   {t('productsSort')}
                 </span>
                 <ShopSelect
@@ -215,49 +277,231 @@ export default function ShopProductsPage({ shop, products, username, containerCl
                   onOpenChange={setSortOpen}
                   options={sortOptions}
                   aria-label={t('productsSortAria')}
-                  className="w-full min-w-0 lg:w-auto"
+                  className="w-full sm:w-auto"
                 />
               </div>
             </div>
-            {trimmedSearch ? (
-              <p className="mt-2.5 max-lg:mt-2.5 border-t border-theme-border pt-2.5 text-[11px] max-lg:text-[11px] font-medium leading-relaxed text-theme-text-muted lg:mt-3 lg:pt-3 lg:text-xs">
-                {filteredSorted.length === 0 ? (
-                  t('productsNoResults', { query: trimmedSearch })
-                ) : filteredSorted.length === 1 ? (
-                  t('productsMatchOne', {
-                    shown: 1,
-                    total: filteredSorted.length,
-                  })
-                ) : (
-                  t('productsMatchMany', {
-                    shown: filteredSorted.length,
-                    total: filteredSorted.length,
-                  })
+
+            {filteredSorted.length === 0 ? (
+              <div className="mx-auto flex max-w-md flex-col items-center gap-3 py-14 text-center">
+                <p className="text-lg font-semibold" style={{ color: 'var(--theme-text-primary)', fontFamily: 'var(--theme-font-heading)' }}>
+                  {t('productsNoMatchTitle')}
+                </p>
+                <p className="text-sm" style={{ color: 'var(--theme-text-muted)' }}>{t('productsNoMatchBody')}</p>
+                <button
+                  type="button"
+                  onClick={() => { setSearch(''); setSort('newest'); setActiveCategory(null); }}
+                  className="mt-2 rounded-[var(--theme-radius-btn)] px-6 py-2.5 text-sm font-semibold"
+                  style={{ background: 'var(--theme-primary)', color: 'var(--theme-primary-contrast)' }}
+                >
+                  {t('productsReset')}
+                </button>
+              </div>
+            ) : (
+              <>
+                <div className={`relative z-0 grid ${cocoaGrid} gap-x-4 gap-y-10 lg:gap-x-5 lg:gap-y-14`}>
+                  {displayed.map((p) => (
+                    <ProductCard key={p.id} product={p} shopUsername={username} currency={shop.currency} linkState={{ from: 'products' }} />
+                  ))}
+                </div>
+                <ShopPagination
+                  className="mt-14 lg:mt-20"
+                  page={safePage}
+                  total={filteredSorted.length}
+                  pageSize={SHOP_LIST_PAGE_SIZE}
+                  onPage={setPage}
+                />
+              </>
+            )}
+          </>
+        )}
+      </main>
+    );
+  }
+
+  return (
+    <main className={`${containerClass} flex-1 pb-10 pt-5 lg:pb-16 lg:pt-8`}>
+
+      {/* ── Page header ── */}
+      <div className="mb-6 flex flex-col gap-1 lg:mb-8">
+        <div className="flex items-center gap-3">
+          <h1
+            className="text-xl font-bold tracking-tight lg:text-3xl"
+            style={{ color: 'var(--theme-text-primary)', fontFamily: 'var(--theme-font-heading, inherit)' }}
+          >
+            {t('productsPageTitle')}
+          </h1>
+          {visibleAll.length > 0 && (
+            <span
+              className="rounded-full px-2.5 py-0.5 text-xs font-semibold"
+              style={{ background: 'var(--theme-primary-light)', color: 'var(--theme-primary)' }}
+            >
+              {visibleAll.length}
+            </span>
+          )}
+        </div>
+        <p className="text-sm" style={{ color: 'var(--theme-text-muted)' }}>{t('productsPageBody')}</p>
+      </div>
+
+      {visibleAll.length === 0 ? (
+        /* ── Empty state ── */
+        <div
+          className="flex flex-col items-center gap-4 rounded-[var(--theme-radius-card)] border border-dashed px-6 py-16 text-center"
+          style={{ borderColor: 'var(--theme-border)', background: 'var(--theme-surface)' }}
+        >
+          <span
+            className="flex h-14 w-14 items-center justify-center rounded-[var(--theme-radius-card)]"
+            style={{ background: 'var(--theme-primary-light)', color: 'var(--theme-primary)' }}
+          >
+            <ShoppingBag className="h-7 w-7" strokeWidth={1.5} aria-hidden />
+          </span>
+          <div>
+            <p className="text-base font-semibold" style={{ color: 'var(--theme-text-primary)' }}>{t('productsEmpty')}</p>
+            <p className="mt-1 text-sm" style={{ color: 'var(--theme-text-muted)' }}>{t('productsEmptyBody')}</p>
+          </div>
+          <Link
+            to={`/${username}`}
+            className="mt-1 inline-flex items-center gap-2 rounded-[var(--theme-radius-btn)] border px-5 py-2.5 text-sm font-semibold no-underline transition-colors hover:bg-[var(--theme-primary-light)]"
+            style={{ borderColor: 'var(--theme-border)', color: 'var(--theme-text-primary)' }}
+          >
+            {t('productsBackHome')}
+          </Link>
+        </div>
+      ) : (
+        <>
+          {/* ── Filter & Search bar ── */}
+          <div
+            className={`relative mb-5 rounded-[var(--theme-radius-card)] border bg-[var(--theme-surface)] p-3.5 shadow-[var(--theme-shadow-card)] lg:mb-7 lg:p-4 ${sortOpen ? 'z-40 isolate' : 'z-0'}`}
+            style={{ borderColor: 'var(--theme-border)' }}
+          >
+            {/* Category pills row */}
+            {categories.length > 0 && (
+              <div className="mb-3 flex flex-wrap items-center gap-2 border-b pb-3" style={{ borderColor: 'var(--theme-border)' }}>
+                <button
+                  type="button"
+                  onClick={() => setActiveCategory(null)}
+                  className="rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all"
+                  style={
+                    activeCategory === null
+                      ? { background: 'var(--theme-primary)', color: 'var(--theme-primary-contrast)' }
+                      : { background: 'var(--theme-surface-secondary)', color: 'var(--theme-text-secondary)', border: '1px solid var(--theme-border)' }
+                  }
+                >
+                  All
+                </button>
+                {categories.map((cat) => (
+                  <button
+                    key={cat}
+                    type="button"
+                    onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
+                    className="rounded-full px-3.5 py-1.5 text-xs font-semibold capitalize transition-all"
+                    style={
+                      activeCategory === cat
+                        ? { background: 'var(--theme-primary)', color: 'var(--theme-primary-contrast)' }
+                        : { background: 'var(--theme-surface-secondary)', color: 'var(--theme-text-secondary)', border: '1px solid var(--theme-border)' }
+                    }
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {/* Search + Sort row */}
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+              {/* Search */}
+              <div className="relative min-w-0 flex-1">
+                <Search
+                  className="pointer-events-none absolute start-3.5 top-1/2 h-4 w-4 -translate-y-1/2"
+                  style={{ color: 'var(--theme-text-muted)' }}
+                  aria-hidden
+                />
+                <input
+                  type="search"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder={t('productsSearchPh')}
+                  aria-label={t('productsSearchAria')}
+                  className="w-full rounded-[var(--theme-radius-input)] border-2 py-2.5 ps-10 pe-10 text-sm font-medium placeholder:opacity-60 focus:outline-none focus:ring-2 lg:py-3"
+                  style={{
+                    borderColor: 'var(--theme-border)',
+                    background: 'var(--theme-surface-secondary)',
+                    color: 'var(--theme-text-primary)',
+                    '--tw-ring-color': 'var(--theme-primary)',
+                  } as React.CSSProperties}
+                />
+                {trimmedSearch && (
+                  <button
+                    type="button"
+                    onClick={() => setSearch('')}
+                    className="absolute end-2.5 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full transition-colors hover:bg-[var(--theme-surface)]"
+                    aria-label={t('productsClearSearch')}
+                    style={{ color: 'var(--theme-text-muted)' }}
+                  >
+                    <X className="h-3.5 w-3.5" aria-hidden />
+                  </button>
                 )}
+              </div>
+
+              {/* Sort */}
+              <div className="flex shrink-0 items-center gap-2">
+                <span
+                  className="hidden items-center gap-1.5 text-xs font-semibold uppercase tracking-wide sm:inline-flex"
+                  style={{ color: 'var(--theme-text-muted)' }}
+                >
+                  <SlidersHorizontal className="h-3.5 w-3.5" aria-hidden />
+                  {t('productsSort')}
+                </span>
+                <ShopSelect
+                  value={sort}
+                  onChange={(v) => setSort(v as SortKey)}
+                  onOpenChange={setSortOpen}
+                  options={sortOptions}
+                  aria-label={t('productsSortAria')}
+                  className="w-full sm:w-auto"
+                />
+              </div>
+            </div>
+
+            {/* Results count */}
+            {trimmedSearch && (
+              <p className="mt-3 border-t pt-2.5 text-xs font-medium" style={{ borderColor: 'var(--theme-border)', color: 'var(--theme-text-muted)' }}>
+                {filteredSorted.length === 0
+                  ? t('productsNoResults', { query: trimmedSearch })
+                  : filteredSorted.length === 1
+                  ? t('productsMatchOne', { shown: 1, total: filteredSorted.length })
+                  : t('productsMatchMany', { shown: filteredSorted.length, total: filteredSorted.length })}
               </p>
-            ) : null}
+            )}
           </div>
 
+          {/* Results count bar */}
+          {!trimmedSearch && filteredSorted.length > 0 && (
+            <p className="mb-3 text-xs font-medium" style={{ color: 'var(--theme-text-muted)' }}>
+              Showing {displayed.length} of {filteredSorted.length} products
+            </p>
+          )}
+
+          {/* ── Products grid or no-match state ── */}
           {filteredSorted.length === 0 ? (
-            <div className="rounded-theme-card border border-dashed border-theme-border bg-theme-surface px-4 py-10 max-lg:px-4 max-lg:py-10 text-center shadow-theme-card lg:px-6 lg:py-12">
-              <p className="text-sm max-lg:text-sm font-semibold text-theme-text lg:text-base">
-                {t('productsNoMatchTitle')}
-              </p>
-              <p className="mt-1 text-xs max-lg:text-xs text-theme-text-muted lg:text-sm">{t('productsNoMatchBody')}</p>
+            <div
+              className="flex flex-col items-center gap-3 rounded-[var(--theme-radius-card)] border border-dashed px-4 py-12 text-center"
+              style={{ borderColor: 'var(--theme-border)', background: 'var(--theme-surface)' }}
+            >
+              <p className="text-sm font-semibold" style={{ color: 'var(--theme-text-primary)' }}>{t('productsNoMatchTitle')}</p>
+              <p className="text-xs" style={{ color: 'var(--theme-text-muted)' }}>{t('productsNoMatchBody')}</p>
               <button
                 type="button"
-                onClick={() => {
-                  setSearch('');
-                  setSort('newest');
-                }}
-                className="mt-4 max-lg:mt-4 inline-flex w-full max-lg:w-full items-center justify-center rounded-theme-btn border-2 border-theme-border bg-theme-surface px-5 py-2.5 text-sm font-semibold text-theme-primary transition-colors hover:bg-theme-primary-light lg:mt-5 lg:w-auto"
+                onClick={() => { setSearch(''); setSort('newest'); setActiveCategory(null); }}
+                className="mt-1 rounded-[var(--theme-radius-btn)] border px-5 py-2.5 text-sm font-semibold transition-colors hover:bg-[var(--theme-primary-light)]"
+                style={{ borderColor: 'var(--theme-border)', color: 'var(--theme-text-primary)' }}
               >
                 {t('productsReset')}
               </button>
             </div>
           ) : (
             <>
-              <div className="relative z-0 grid grid-cols-2 gap-2.5 max-lg:gap-2.5 lg:gap-5 xl:grid-cols-4">
+              <div className={`relative z-0 grid ${gridClass} gap-3 lg:gap-5`}>
                 {displayed.map((p) => (
                   <ProductCard
                     key={p.id}
@@ -268,9 +512,8 @@ export default function ShopProductsPage({ shop, products, username, containerCl
                   />
                 ))}
               </div>
-
               <ShopPagination
-                className="mt-6 max-lg:mt-6 lg:mt-10"
+                className="mt-8 lg:mt-12"
                 page={safePage}
                 total={filteredSorted.length}
                 pageSize={SHOP_LIST_PAGE_SIZE}

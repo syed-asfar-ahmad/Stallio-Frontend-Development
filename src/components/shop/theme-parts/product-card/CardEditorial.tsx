@@ -48,7 +48,7 @@ export default function CardEditorial({ product: p, shopUsername, currency, link
         ) : compare ? (
           <span
             className="absolute top-3 start-3 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider"
-            style={{ background: 'var(--theme-primary)', color: '#ffffff' }}
+            style={{ background: 'var(--theme-primary)', color: 'var(--theme-primary-contrast)' }}
           >
             Edition
           </span>

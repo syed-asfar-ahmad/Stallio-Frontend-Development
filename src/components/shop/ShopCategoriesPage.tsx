@@ -5,6 +5,8 @@ import { useShopLanguage } from '../../context/ShopLanguageContext';
 import { ShopCategoryCard } from './ShopHomePage';
 import ShopPagination from './ShopPagination';
 import { SHOP_LIST_PAGE_SIZE } from '../../lib/shopPagination';
+import { useStorefrontTheme } from '../../themes';
+import { CocoaCategoryTile, CocoaHeading, CocoaMosaic } from './theme-parts/cocoa/CocoaParts';
 
 type Props = {
   shop: Shop;
@@ -15,6 +17,7 @@ type Props = {
 
 export default function ShopCategoriesPage({ shop, products, username, containerClass }: Props) {
   const { t } = useShopLanguage();
+  const { layout } = useStorefrontTheme();
   const [page, setPage] = useState(1);
   const visibleCategories = useMemo(
     () => (shop.categories ?? []).filter((c) => c.visible !== false),
@@ -31,6 +34,50 @@ export default function ShopCategoriesPage({ shop, products, username, container
     (safePage - 1) * SHOP_LIST_PAGE_SIZE,
     safePage * SHOP_LIST_PAGE_SIZE,
   );
+
+  if (layout.categoryVariant === 'cocoa-collections') {
+    const countOf = (slug: string) =>
+      products.filter((p) => (p.category ?? '') === slug && p.isVisible !== false).length;
+    const featuredSet = safePage === 1 ? displayed.slice(0, 4) : [];
+    const restSet = safePage === 1 ? displayed.slice(4) : displayed;
+
+    return (
+      <main className={`${containerClass} flex-1 pb-16 pt-10 lg:pb-28 lg:pt-16`}>
+        <CocoaHeading as="h1" title={t('categoriesTitle')} body={t('categoriesBody', { shopName: shop.shopName })} />
+
+        {visibleCategories.length === 0 ? (
+          <div className="mx-auto flex max-w-md flex-col items-center gap-3 py-16 text-center">
+            <span
+              className="flex h-14 w-14 items-center justify-center rounded-full"
+              style={{ background: 'var(--theme-primary-light)', color: 'var(--theme-primary)' }}
+            >
+              <LayoutGrid className="h-6 w-6" aria-hidden />
+            </span>
+            <p className="text-base font-semibold" style={{ color: 'var(--theme-text-primary)' }}>{t('categoriesEmpty')}</p>
+            <p className="text-sm" style={{ color: 'var(--theme-text-muted)' }}>{t('categoriesEmptyBody')}</p>
+          </div>
+        ) : (
+          <>
+            {featuredSet.length > 0 && <CocoaMosaic categories={featuredSet} username={username} />}
+            {restSet.length > 0 && (
+              <div className={`grid grid-cols-2 gap-4 lg:grid-cols-3 lg:gap-5 xl:grid-cols-4 ${featuredSet.length > 0 ? 'mt-4 lg:mt-5' : ''}`}>
+                {restSet.map((c) => (
+                  <CocoaCategoryTile key={c.slug} category={c} username={username} count={countOf(c.slug)} />
+                ))}
+              </div>
+            )}
+            <ShopPagination
+              className="mt-12 lg:mt-16"
+              page={safePage}
+              total={visibleCategories.length}
+              pageSize={SHOP_LIST_PAGE_SIZE}
+              onPage={setPage}
+            />
+          </>
+        )}
+      </main>
+    );
+  }
 
   return (
     <main className={`${containerClass} flex-1 pb-8 pt-4 max-lg:pb-8 max-lg:pt-4 lg:pb-14 lg:pt-8`}>

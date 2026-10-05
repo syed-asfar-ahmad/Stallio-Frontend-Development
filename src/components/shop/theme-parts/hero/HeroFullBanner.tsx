@@ -1,9 +1,8 @@
+import { ArrowRight, ShoppingBag, Tag } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { ShoppingBag } from 'lucide-react';
 import type { CSSProperties } from 'react';
 import { useShopLanguage } from '../../../../context/ShopLanguageContext';
 import { getLocalizedHomeHeroTitle, getLocalizedHomeIntro } from '../../../../lib/shopContentLanguages';
-import { STORE_HERO_ASPECT_CLASS } from '../../../../lib/imageCropViewports';
 import type { ThemeHeroProps } from '../types';
 
 export default function HeroFullBanner({ shop, username, containerClass }: ThemeHeroProps) {
@@ -15,15 +14,41 @@ export default function HeroFullBanner({ shop, username, containerClass }: Theme
   if (!showHero) return null;
 
   return (
-    <section className={`${containerClass} pt-4 lg:pt-7`}>
+    <section className={`${containerClass} pt-4 lg:pt-6`}>
       <div
-        className="overflow-hidden rounded-[var(--theme-radius-card)] border shadow-[var(--theme-shadow-card)]"
+        className="relative overflow-hidden rounded-[var(--theme-radius-card)] border"
         style={{ borderColor: 'var(--theme-border)', background: 'var(--theme-surface)' }}
       >
-        <div className="grid min-w-0 max-lg:grid-cols-1 lg:grid-cols-2 lg:items-stretch">
-          <div className="flex min-w-0 flex-col justify-center p-4 max-lg:order-2 max-lg:pt-3 lg:order-none lg:px-7 lg:py-6">
+        {/* Decorative background gradient */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'linear-gradient(135deg, var(--theme-primary-light) 0%, var(--theme-surface) 60%)',
+          }}
+          aria-hidden
+        />
+
+        <div className="relative grid min-w-0 grid-cols-1 lg:grid-cols-2 lg:items-stretch">
+          {/* Left — Text Content */}
+          <div className="flex min-w-0 flex-col justify-center gap-4 p-5 lg:px-10 lg:py-12">
+            {/* Badge */}
+            {shop.category && (
+              <span
+                className="inline-flex w-fit items-center gap-1.5 rounded-[var(--theme-radius-badge)] border px-3 py-1 text-xs font-semibold"
+                style={{
+                  borderColor: 'var(--theme-primary)',
+                  color: 'var(--theme-primary)',
+                  background: 'var(--theme-primary-light)',
+                }}
+              >
+                <Tag className="h-3 w-3" />
+                {shop.category}
+              </span>
+            )}
+
+            {/* Headline */}
             <h1
-              className="text-xl leading-snug lg:text-[1.8125rem]"
+              className="text-2xl font-bold leading-tight sm:text-3xl lg:text-[2.25rem] xl:text-[2.75rem]"
               style={{
                 color: 'var(--theme-text-primary)',
                 fontFamily: 'var(--theme-font-heading)',
@@ -34,45 +59,84 @@ export default function HeroFullBanner({ shop, username, containerClass }: Theme
             >
               {heroTitle}
             </h1>
-            {introText ? (
-              <p className="mt-2 max-w-lg text-sm leading-relaxed lg:mt-3 lg:text-base" style={{ color: 'var(--theme-text-secondary)' }}>
+
+            {/* Subtitle */}
+            {introText && (
+              <p
+                className="max-w-md text-sm leading-relaxed lg:text-base"
+                style={{ color: 'var(--theme-text-secondary)' }}
+              >
                 {introText}
               </p>
-            ) : null}
-            <div className="mt-4 flex flex-col gap-2 max-lg:w-full lg:mt-6 lg:flex-row lg:flex-wrap lg:gap-2.5">
+            )}
+
+            {/* CTAs */}
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Link
                 to={`/${username}/products`}
-                className="inline-flex w-full items-center justify-center rounded-[var(--theme-radius-btn)] px-4 py-2.5 text-sm font-semibold text-white no-underline shadow-[var(--theme-shadow-card)] transition-all lg:w-auto lg:px-5"
-                style={{ background: 'var(--theme-primary)' }}
+                className="inline-flex items-center justify-center gap-2 rounded-[var(--theme-radius-btn)] px-6 py-3 text-sm font-semibold no-underline shadow-sm transition-all hover:opacity-90 active:scale-95"
+                style={{ background: 'var(--theme-primary)', color: 'var(--theme-primary-contrast)' }}
               >
                 {t('heroBrowse')}
+                <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 to={`/${username}/contact`}
-                className="inline-flex w-full items-center justify-center rounded-[var(--theme-radius-btn)] border-2 px-4 py-2.5 text-sm font-semibold no-underline transition-colors lg:w-auto lg:px-5"
-                style={{ borderColor: 'var(--theme-primary-light)', color: 'var(--theme-primary)', background: 'var(--theme-surface)' }}
+                className="inline-flex items-center justify-center gap-2 rounded-[var(--theme-radius-btn)] border-2 px-6 py-3 text-sm font-semibold no-underline transition-colors hover:bg-[var(--theme-primary-light)]"
+                style={{ borderColor: 'var(--theme-border)', color: 'var(--theme-text-primary)', background: 'transparent' }}
               >
                 {t('heroContact')}
               </Link>
             </div>
+
+            {/* Trust micro-row */}
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 pt-1">
+              {['Free Shipping', 'Easy Returns', 'Secure Payment'].map((item) => (
+                <span key={item} className="flex items-center gap-1.5 text-xs" style={{ color: 'var(--theme-text-muted)' }}>
+                  <span className="h-1.5 w-1.5 rounded-full" style={{ background: 'var(--theme-primary)' }} />
+                  {item}
+                </span>
+              ))}
+            </div>
           </div>
+
+          {/* Right — Image */}
           <div
-            className={`relative w-full min-w-0 overflow-hidden max-lg:order-1 ${STORE_HERO_ASPECT_CLASS}`}
+            className="relative flex min-h-[200px] min-w-0 items-center justify-center overflow-hidden lg:min-h-[360px]"
             style={{ background: 'var(--theme-surface-secondary)' }}
           >
             {shop.homeHeroImage ? (
               <img
                 src={shop.homeHeroImage}
                 alt=""
-                className="absolute inset-0 h-full w-full object-cover max-lg:object-cover lg:object-contain"
+                className="h-full w-full object-cover object-center lg:object-contain"
+                style={{ maxHeight: '420px' }}
               />
             ) : shop.logo ? (
-              <div className="absolute inset-0 flex items-center justify-center p-6 lg:p-8">
-                <img src={shop.logo} alt="" className="max-h-28 w-auto max-w-full object-contain lg:max-h-40" />
+              <div className="flex items-center justify-center p-8">
+                <img src={shop.logo} alt="" className="max-h-32 w-auto max-w-full object-contain lg:max-h-48" />
               </div>
             ) : (
-              <div className="absolute inset-0 flex items-center justify-center" style={{ color: 'var(--theme-primary-light)' }}>
-                <ShoppingBag className="h-16 w-16 lg:h-24 lg:w-24" strokeWidth={1.25} aria-hidden />
+              <div
+                className="flex h-full w-full items-center justify-center p-12"
+                style={{ color: 'var(--theme-primary)' }}
+              >
+                <ShoppingBag className="h-20 w-20 lg:h-28 lg:w-28 opacity-20" strokeWidth={1} aria-hidden />
+              </div>
+            )}
+
+            {/* Decorative floating price badge */}
+            {shop.homeHeroImage && (
+              <div
+                className="absolute bottom-4 start-4 hidden rounded-[var(--theme-radius-card)] border p-3 shadow-[var(--theme-shadow-card)] backdrop-blur-sm lg:block"
+                style={{ background: 'var(--theme-surface)/90', borderColor: 'var(--theme-border)' }}
+              >
+                <p className="text-[10px] font-medium uppercase tracking-wide" style={{ color: 'var(--theme-text-muted)' }}>
+                  Starting from
+                </p>
+                <p className="text-lg font-extrabold" style={{ color: 'var(--theme-primary)' }}>
+                  {shop.currency ?? 'USD'} 99
+                </p>
               </div>
             )}
           </div>
