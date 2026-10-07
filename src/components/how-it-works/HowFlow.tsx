@@ -42,7 +42,7 @@ export function HowFlow() {
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.8, ease: motionEase }}
           >
-            <span className="border-border/70 bg-surface/80 text-muted-foreground inline-flex rounded-full border px-3 py-1 text-[10px] font-medium tracking-[0.2em] uppercase">
+            <span className="border-border/70 bg-background/80 text-muted-foreground inline-flex rounded-full border px-3 py-1 text-[10px] font-medium tracking-[0.2em] uppercase">
               {t('howItWorks.flow.eyebrow')}
             </span>
             <h2 className="text-foreground text-section-heading mt-5">

@@ -42,7 +42,7 @@ export function AuthShell({
           className={cn(
             'text-foreground font-semibold tracking-tight text-balance',
             compact
-              ? 'text-3xl sm:text-4xl'
+              ? 'text-2xl sm:text-3xl'
               : 'mt-5 max-w-[14ch] text-4xl sm:text-5xl lg:text-[3.1rem] lg:leading-[1.06]',
           )}
         >
@@ -54,7 +54,7 @@ export function AuthShell({
           className={cn(
             'text-muted-foreground',
             compact
-              ? 'mx-auto max-w-[40ch] text-sm leading-6'
+              ? 'mx-auto max-w-[40ch] text-sm leading-5'
               : 'mt-4 max-w-[36ch] text-base leading-7 sm:text-lg sm:leading-8',
           )}
         >
@@ -89,20 +89,20 @@ export function AuthShell({
         className={cn(
           'relative z-10 mx-auto flex w-full max-w-6xl flex-1 px-4 sm:px-6',
           compact
-            ? 'items-start justify-center overflow-y-auto py-3 md:items-center md:py-4'
+            ? 'items-start justify-center overflow-y-auto py-2 sm:py-3 md:items-center md:py-4'
             : 'items-center gap-10 overflow-y-auto py-8 md:grid md:grid-cols-12 md:gap-12 md:py-12',
           className,
         )}
       >
         {compact ? (
           <motion.div
-            className="w-full max-w-xl"
+            className="w-full max-w-md sm:max-w-lg"
             initial={reduce ? false : { opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: motionEase }}
           >
             {(eyebrow || title || description) ? (
-              <div className="mb-4 space-y-2 text-center md:mb-5">{header}</div>
+              <div className="mb-3 space-y-1.5 text-center md:mb-4">{header}</div>
             ) : null}
             {children}
           </motion.div>

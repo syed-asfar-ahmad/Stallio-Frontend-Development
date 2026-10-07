@@ -6,7 +6,7 @@ import { AuthField } from '@/components/auth/AuthField';
 import { cn } from '@/lib/utils';
 
 const authInputClass =
-  'border-border/70 bg-background focus-visible:ring-brand/25 h-12 w-full rounded-2xl border px-4 text-sm shadow-[inset_0_1px_1px_rgba(255,255,255,0.35)] outline-none transition-[border-color,box-shadow,transform] duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] focus-visible:ring-3';
+  'border-border/70 bg-background focus-visible:border-brand/60 focus-visible:ring-brand/25 h-12 w-full min-w-0 rounded-2xl border px-4 text-sm shadow-[inset_0_1px_1px_rgba(255,255,255,0.35)] outline-none transition-[border-color,box-shadow,transform] duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] focus-visible:ring-2 focus-visible:ring-inset';
 
 type AuthPasswordFieldProps = {
   id?: string;

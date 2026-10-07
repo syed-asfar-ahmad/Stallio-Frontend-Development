@@ -5,8 +5,6 @@
       "titleBefore": "Tres pasos.",
       "titleAccent": "Un enlace nítido.",
       "body": "Abre tu tienda, carga tu catálogo y pega la misma URL donde tus compradores ya te encuentran. Hecho para el pulgar, no para tickets de IT.",
-      "metaFast": "~5 min primer borrador",
-      "metaMobile": "Mobile first",
       "journey": [
         {
           "n": "01",

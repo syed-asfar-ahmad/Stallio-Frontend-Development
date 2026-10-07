@@ -15,6 +15,7 @@ import {
   AuthPasswordField,
   authInputClass,
 } from '@/components/auth/AuthPasswordField';
+import { PasswordStrengthMeter } from '@/components/auth/PasswordStrengthMeter';
 import {
   isValidEmail,
   isValidUsername,
@@ -325,12 +326,12 @@ export function SignupForm() {
 
   return (
     <AuthFormCard compact>
-      <div className="mb-4 flex items-center justify-center gap-2" aria-hidden>
+      <div className="mb-3 flex items-center justify-center gap-2" aria-hidden>
         {[0, 1].map((index) => (
           <div key={index} className="flex items-center gap-2">
             <span
               className={cn(
-                'inline-flex h-7 min-w-7 items-center justify-center rounded-full px-2 text-[11px] font-medium tracking-[0.12em] uppercase transition-[background-color,color,transform] duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]',
+                'inline-flex h-6 min-w-6 items-center justify-center rounded-full px-1.5 text-[10px] font-medium tracking-[0.12em] uppercase transition-[background-color,color,transform] duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]',
                 step === index
                   ? 'bg-brand text-brand-foreground scale-105'
                   : step > index
@@ -342,7 +343,7 @@ export function SignupForm() {
             </span>
             <span
               className={cn(
-                'text-[11px] font-medium tracking-[0.14em] uppercase',
+                'text-[10px] font-medium tracking-[0.14em] uppercase',
                 step === index ? 'text-foreground' : 'text-muted-foreground',
               )}
             >
@@ -358,18 +359,18 @@ export function SignupForm() {
       </div>
 
       <form
-        className="space-y-3.5"
+        className="space-y-3"
         onSubmit={(e) => e.preventDefault()}
         noValidate
       >
         {formError ? <AuthAlert>{formError}</AuthAlert> : null}
 
-        <div className="relative min-h-[17.5rem] overflow-hidden">
+        <div className="relative -mx-1.5 overflow-hidden px-1.5 py-1">
           <AnimatePresence mode="wait" initial={false}>
             {step === 0 ? (
               <motion.div
                 key="account"
-                className="space-y-3.5"
+                className="space-y-3"
                 initial={reduce ? false : { opacity: 0, x: -18 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={reduce ? undefined : { opacity: 0, x: 18 }}
@@ -402,23 +403,26 @@ export function SignupForm() {
                   />
                 </AuthField>
 
-                <AuthPasswordField
-                  id="signup-password"
-                  label={t('auth.signup.password')}
-                  name="password"
-                  required
-                  className="space-y-1.5"
-                  inputClassName="h-11"
-                  value={form.password}
-                  placeholder={t('auth.signup.passwordPlaceholder')}
-                  autoComplete="new-password"
-                  error={touched.password ? errors.password : undefined}
-                  onChange={(value) => setField('password', value)}
-                  onBlur={() => {
-                    setTouched((prev) => ({ ...prev, password: true }));
-                    setErrors(validate());
-                  }}
-                />
+                <div className="space-y-1.5">
+                  <AuthPasswordField
+                    id="signup-password"
+                    label={t('auth.signup.password')}
+                    name="password"
+                    required
+                    className="space-y-1.5"
+                    inputClassName="h-11"
+                    value={form.password}
+                    placeholder={t('auth.signup.passwordPlaceholder')}
+                    autoComplete="new-password"
+                    error={touched.password ? errors.password : undefined}
+                    onChange={(value) => setField('password', value)}
+                    onBlur={() => {
+                      setTouched((prev) => ({ ...prev, password: true }));
+                      setErrors(validate());
+                    }}
+                  />
+                  <PasswordStrengthMeter password={form.password} className="mt-0" />
+                </div>
 
                 <AuthPasswordField
                   id="signup-confirm"
@@ -445,7 +449,7 @@ export function SignupForm() {
             ) : (
               <motion.div
                 key="shop"
-                className="space-y-3.5"
+                className="space-y-3"
                 initial={reduce ? false : { opacity: 0, x: 18 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={reduce ? undefined : { opacity: 0, x: -18 }}
@@ -719,7 +723,7 @@ export function SignupForm() {
         )}
       </form>
 
-      <p className="text-muted-foreground mt-4 text-center text-sm leading-6">
+      <p className="text-muted-foreground mt-3 text-center text-sm leading-5">
         {t('auth.signup.haveAccount')}{' '}
         <Link
           to="/login"
@@ -728,7 +732,7 @@ export function SignupForm() {
           {t('auth.signup.signIn')}
         </Link>
       </p>
-      <p className="text-muted-foreground mt-2 text-center text-xs leading-5">
+      <p className="text-muted-foreground mt-1.5 text-center text-[11px] leading-4">
         {t('auth.signup.legalBefore', { name: t('home.actions.brandName') })}{' '}
         <Link
           to="/terms"

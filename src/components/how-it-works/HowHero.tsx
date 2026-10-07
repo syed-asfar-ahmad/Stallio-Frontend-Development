@@ -125,24 +125,6 @@ export function HowHero() {
             </motion.p>
 
             <motion.div
-              className="text-muted-foreground flex flex-wrap items-center gap-x-3 gap-y-1 text-sm"
-              variants={{
-                hidden: { opacity: 0, y: 14 },
-                show: {
-                  opacity: 1,
-                  y: 0,
-                  transition: { duration: 0.65, ease: motionEase },
-                },
-              }}
-            >
-              <span>{t('howItWorks.hero.metaFast')}</span>
-              <span className="text-border" aria-hidden>
-                ·
-              </span>
-              <span>{t('howItWorks.hero.metaMobile')}</span>
-            </motion.div>
-
-            <motion.div
               className="flex flex-wrap items-center gap-3 pt-1"
               variants={{
                 hidden: { opacity: 0, y: 16 },

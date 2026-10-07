@@ -18,8 +18,8 @@ export function AuthFormCard({
     <BezelShell
       className={cn('rounded-[2rem]', className)}
       innerClassName={cn(
-        'rounded-[calc(2rem-0.375rem)]',
-        compact ? 'p-5 sm:p-6' : 'p-6 sm:p-8 md:p-9',
+        'rounded-[calc(2rem-0.375rem)] overflow-visible',
+        compact ? 'p-4 sm:p-5' : 'p-6 sm:p-8 md:p-9',
       )}
     >
       {children}
