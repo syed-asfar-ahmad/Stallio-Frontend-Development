@@ -1241,6 +1241,12 @@ html.dark {
   --scrollbar-thumb-active: #5b45e5;
 }
 
+.storefront-theme-root {
+  --scrollbar-thumb: var(--theme-primary);
+  --scrollbar-thumb-hover: var(--theme-primary-hover);
+  --scrollbar-thumb-active: var(--theme-primary-hover);
+}
+
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--scrollbar-thumb) transparent;
@@ -1477,4 +1483,14 @@ input[type='number'].dashboard-no-spin::-webkit-inner-spin-button {
 @keyframes cocoaFade {
   from { opacity: 0; }
   to   { opacity: 1; }
+}
+
+/* ── Retail Catalog / Mart ───────────────────────────────────────────────── */
+@keyframes martRise {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes martPulse {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50%      { opacity: 0.9;  transform: scale(1.06); }
 }

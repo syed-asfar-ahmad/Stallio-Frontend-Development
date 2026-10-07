@@ -312,7 +312,7 @@ export default function ShopHomePage({ shop, products, username, containerClass 
                 <div className="mt-4 max-lg:mt-4 flex flex-col gap-2 max-lg:w-full max-lg:gap-2 lg:mt-6 lg:flex-row lg:flex-wrap lg:gap-2.5">
                   <Link
                     to={`/${username}/products`}
-                    className="inline-flex w-full max-lg:w-full items-center justify-center rounded-theme-btn bg-theme-primary px-4 py-2.5 max-lg:px-4 max-lg:py-2.5 text-sm font-semibold text-theme-primary-contrast no-underline shadow-md shadow-theme-primary/20 transition-all hover:opacity-90 lg:w-auto lg:px-5"
+                    className="inline-flex w-full max-lg:w-full items-center justify-center rounded-theme-btn bg-theme-primary px-4 py-2.5 max-lg:px-4 max-lg:py-2.5 text-sm font-semibold text-theme-primary-contrast no-underline shadow-md shadow-theme-primary/20 transition-colors hover:bg-theme-primary-hover lg:w-auto lg:px-5"
                   >
                     {t('heroBrowse')}
                   </Link>

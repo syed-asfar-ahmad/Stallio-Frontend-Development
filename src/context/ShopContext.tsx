@@ -1,6 +1,17 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
+import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { useParams } from 'react-router-dom';
 import type { Product, Shop } from '../types';
+import {
+  THEME_PREVIEW_USERNAME,
+  installThemePreviewFetchStub,
+  installThemePreviewListener,
+  useThemePreviewPayload,
+} from '../lib/themePreviewBridge';
+import { buildPreviewStore } from '../lib/themePreviewData';
+
+// No-ops everywhere except inside the dashboard's theme-preview iframe.
+installThemePreviewListener();
+installThemePreviewFetchStub();
 
 const API_BASE = import.meta.env.VITE_API_URL ?? '';
 
@@ -18,8 +29,15 @@ export function ShopDataProvider({ children }: { children: ReactNode }) {
   const [shop, setShop] = useState<Shop | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const isPreview = username === THEME_PREVIEW_USERNAME;
+  const previewPayload = useThemePreviewPayload();
+  const previewStore = useMemo(
+    () => (isPreview && previewPayload ? buildPreviewStore(previewPayload.shopName, previewPayload.themeConfig) : null),
+    [isPreview, previewPayload],
+  );
 
   useEffect(() => {
+    if (isPreview) return;
     if (!username) {
       setShop(null);
       setProducts([]);
@@ -65,7 +83,13 @@ export function ShopDataProvider({ children }: { children: ReactNode }) {
   }, [shop?.shopName]);
 
   return (
-    <ShopContext.Provider value={{ shop, products, loading, username }}>
+    <ShopContext.Provider
+      value={
+        isPreview
+          ? { shop: previewStore?.shop ?? null, products: previewStore?.products ?? [], loading: !previewStore, username }
+          : { shop, products, loading, username }
+      }
+    >
       {children}
     </ShopContext.Provider>
   );

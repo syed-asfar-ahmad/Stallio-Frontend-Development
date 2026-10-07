@@ -5,12 +5,18 @@ import FooterBoldNewsletter from './footer/FooterBoldNewsletter';
 import FooterCompactInline from './footer/FooterCompactInline';
 import FooterOrganicCurated from './footer/FooterOrganicCurated';
 import FooterCocoaAtelier from './footer/FooterCocoaAtelier';
+import FooterMartTeal from './footer/FooterMartTeal';
+import FooterFreshSage from './footer/FooterFreshSage';
 import type { ThemeFooterProps } from './types';
 
 export default function Footer(props: ThemeFooterProps) {
   const { layout } = useStorefrontTheme();
 
   switch (layout.footerVariant) {
+    case 'fresh-sage':
+      return <FooterFreshSage {...props} />;
+    case 'mart-teal':
+      return <FooterMartTeal {...props} />;
     case 'cocoa-atelier':
       return <FooterCocoaAtelier {...props} />;
     case 'organic-curated':

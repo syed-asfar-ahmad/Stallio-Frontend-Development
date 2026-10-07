@@ -5,12 +5,18 @@ import HeaderCenteredLogo from './header/HeaderCenteredLogo';
 import HeaderInlineCompact from './header/HeaderInlineCompact';
 import HeaderFloatingCapsule from './header/HeaderFloatingCapsule';
 import HeaderCocoaOverlay from './header/HeaderCocoaOverlay';
+import HeaderMartMarket from './header/HeaderMartMarket';
+import HeaderFreshNav from './header/HeaderFreshNav';
 import type { ThemeHeaderProps } from './types';
 
 export default function Header(props: ThemeHeaderProps) {
   const { layout } = useStorefrontTheme();
 
   switch (layout.headerVariant) {
+    case 'fresh-nav':
+      return <HeaderFreshNav {...props} />;
+    case 'mart-market':
+      return <HeaderMartMarket {...props} />;
     case 'cocoa-overlay':
       return <HeaderCocoaOverlay {...props} />;
     case 'floating-capsule':

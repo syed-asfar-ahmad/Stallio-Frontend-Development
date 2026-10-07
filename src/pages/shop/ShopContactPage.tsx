@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { MART_GRID_BG, MART_INK, MART_TEXT, MartEyebrow } from '../../components/shop/theme-parts/mart/MartParts';
 import { useShop } from '../../context/ShopContext';
 import { useStorefrontTheme } from '../../themes';
 import { useShopLanguage } from '../../context/ShopLanguageContext';
 import { getLocalizedFooterAddress } from '../../lib/shopContentLanguages';
 import { getSocialBrandColor, SocialIcon } from '../../components/SocialIcons';
 import ContactLtrText from '../../components/ContactLtrText';
+import { formatHoursRange, hasFooterAvailability, normalizeAvailabilityHours } from '../../lib/shopAvailability';
+import { shopWeekdayKey } from '../../lib/shopUiTranslations';
 
 const API_BASE = import.meta.env.VITE_API_URL ?? '';
 const containerClass = 'w-full max-w-7xl mx-auto px-3 sm:px-4 lg:px-5';
@@ -25,6 +28,42 @@ export default function ShopContactPage() {
   const [contactError, setContactError] = useState('');
 
   if (!shop) return null;
+
+  if (contactSent && (contactVariant === 'fresh-contact' || contactVariant === 'mart-support')) {
+    const fresh = contactVariant === 'fresh-contact';
+    return (
+      <main className={`${containerClass} flex flex-1 items-center justify-center py-16 lg:py-28`}>
+        <div className="w-full max-w-lg rounded-[var(--theme-radius-card)] border p-8 text-center sm:p-12" style={{ background: 'var(--theme-surface)', borderColor: 'var(--theme-border)', boxShadow: 'var(--theme-shadow-card)' }}>
+          <span
+            className="mx-auto flex h-16 w-16 items-center justify-center rounded-full"
+            style={fresh ? { background: '#a0d422', color: '#1e1611' } : { background: 'var(--theme-primary)', color: 'var(--theme-primary-contrast)' }}
+          >
+            <Send className="h-7 w-7" aria-hidden />
+          </span>
+          <h2
+            className="mt-6 text-2xl font-medium sm:text-3xl"
+            style={{ color: 'var(--theme-text-primary)', fontFamily: 'var(--theme-font-heading)', letterSpacing: '-0.03em' }}
+          >
+            {t('contactSuccessTitle')}
+          </h2>
+          <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed" style={{ color: 'var(--theme-text-muted)' }}>
+            {t('contactSuccessBody', { shopName: shop.shopName })}
+          </p>
+          <Link
+            to={`/${username}`}
+            className="mt-7 inline-flex h-11 items-center justify-center px-7 text-sm font-semibold no-underline transition-all hover:brightness-95"
+            style={
+              fresh
+                ? { background: '#a0d422', color: '#1e1611', borderRadius: '0.5rem' }
+                : { background: 'var(--theme-primary)', color: 'var(--theme-primary-contrast)', borderRadius: '9999px' }
+            }
+          >
+            {t('backToStore')}
+          </Link>
+        </div>
+      </main>
+    );
+  }
 
   if (contactSent) {
     return (
@@ -71,6 +110,232 @@ export default function ShopContactPage() {
     } finally {
       setContactSubmitting(false);
     }
+  }
+
+  // ── FRESH-CONTACT (Pacific Fresh) ─────────────────────────────────────────
+  if (contactVariant === 'fresh-contact') {
+    const showHours = hasFooterAvailability(shop.availabilityEnabled, shop.availabilityHours);
+    const schedule = normalizeAvailabilityHours(shop.availabilityHours);
+    const hasAside = hasContactSidebar || showHours;
+    const field =
+      'w-full rounded-[var(--theme-radius-input)] border px-4 py-3.5 text-[15px] transition-colors placeholder:opacity-60 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7aa012]';
+    const fieldStyle = { borderColor: 'var(--theme-border)', background: 'var(--theme-surface)', color: 'var(--theme-text-primary)' } as const;
+    const label = 'mb-2 block text-sm font-semibold';
+    const icon = 'flex h-10 w-10 shrink-0 items-center justify-center rounded-full';
+    const limeBg = { background: '#a0d422', color: '#1e1611' } as const;
+    return (
+      <main className={`${containerClass} flex-1 pb-16 pt-10 lg:pb-28 lg:pt-16`}>
+        <header className="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
+          <h1 className="text-[2.4rem] font-medium leading-[1.05] sm:text-6xl" style={{ color: 'var(--theme-text-primary)', fontFamily: 'var(--theme-font-heading)', letterSpacing: '-0.04em', textWrap: 'balance' as never }}>
+            {t('contactTitle', { shopName: shop.shopName })}
+          </h1>
+          <p className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed" style={{ color: 'var(--theme-text-muted)' }}>{t('contactIntro')}</p>
+        </header>
+        <div className={`mx-auto grid gap-5 lg:gap-6 ${hasAside ? 'max-w-5xl lg:grid-cols-[3fr_2fr]' : 'max-w-2xl'}`}>
+          <section className="rounded-[var(--theme-radius-card)] border p-6 sm:p-9" style={{ background: 'var(--theme-surface)', borderColor: 'var(--theme-border)', boxShadow: 'var(--theme-shadow-card)' }}>
+            <h2 className="text-2xl font-medium" style={{ color: 'var(--theme-text-primary)', fontFamily: 'var(--theme-font-heading)', letterSpacing: '-0.025em' }}>{t('sendMessageTitle')}</h2>
+            <p className="mt-1.5 text-sm" style={{ color: 'var(--theme-text-muted)' }}>{t('sendMessageIntro')}</p>
+            <form onSubmit={handleSubmitContact} className="mt-7 space-y-5">
+              {contactError && <p role="alert" className="rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-700">{contactError}</p>}
+              <div className="grid gap-5 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="fresh-contact-name" className={label} style={{ color: 'var(--theme-text-primary)' }}>{t('yourName')} <span className="text-red-600" aria-hidden>*</span></label>
+                  <input id="fresh-contact-name" value={contactName} onChange={(e) => setContactName(e.target.value)} required placeholder={t('contactNamePh')} className={field} style={fieldStyle} />
+                </div>
+                <div>
+                  <label htmlFor="fresh-contact-email" className={label} style={{ color: 'var(--theme-text-primary)' }}>{t('email')} <span className="text-red-600" aria-hidden>*</span></label>
+                  <input id="fresh-contact-email" type="email" value={contactEmail} onChange={(e) => setContactEmail(e.target.value)} required placeholder={t('contactEmailPh')} className={field} style={fieldStyle} />
+                </div>
+              </div>
+              <div>
+                <label htmlFor="fresh-contact-message" className={label} style={{ color: 'var(--theme-text-primary)' }}>{t('message')} <span className="text-red-600" aria-hidden>*</span></label>
+                <textarea id="fresh-contact-message" value={contactMessage} onChange={(e) => setContactMessage(e.target.value)} required rows={6} placeholder={t('contactMessagePh')} className={`${field} min-h-[9rem] resize-y`} style={fieldStyle} />
+              </div>
+              <button type="submit" disabled={contactSubmitting} className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg px-8 text-sm font-semibold transition-all hover:brightness-95 disabled:opacity-60 sm:w-auto" style={limeBg}>
+                <Send className="h-4 w-4" aria-hidden />
+                {contactSubmitting ? t('sending') : t('sendMessage')}
+              </button>
+            </form>
+          </section>
+          {hasAside && (
+            <aside className="flex flex-col justify-between gap-8 rounded-[var(--theme-radius-card)] p-6 sm:p-9" style={{ background: 'var(--theme-surface-secondary)' }}>
+              {hasDirectContactDetails && (
+                <ul className="space-y-6">
+                  {shop.footerEmail?.trim() && (
+                    <li className="flex items-start gap-4">
+                      <span className={icon} style={limeBg}><Mail className="h-[18px] w-[18px]" aria-hidden /></span>
+                      <div className="min-w-0 pt-1">
+                        <p className="text-xs" style={{ color: 'var(--theme-text-muted)' }}>{t('email')}</p>
+                        <a href={`mailto:${shop.footerEmail.trim()}`} className="mt-0.5 block break-all text-sm font-semibold no-underline hover:underline" style={{ color: 'var(--theme-text-primary)' }}><ContactLtrText>{shop.footerEmail.trim()}</ContactLtrText></a>
+                      </div>
+                    </li>
+                  )}
+                  {shop.footerPhone?.trim() && (
+                    <li className="flex items-start gap-4">
+                      <span className={icon} style={limeBg}><Phone className="h-[18px] w-[18px]" aria-hidden /></span>
+                      <div className="min-w-0 pt-1">
+                        <p className="text-xs" style={{ color: 'var(--theme-text-muted)' }}>Tel</p>
+                        <a href={`tel:${shop.footerPhone.trim()}`} className="mt-0.5 block text-sm font-semibold no-underline hover:underline" style={{ color: 'var(--theme-text-primary)' }}><ContactLtrText>{shop.footerPhone.trim()}</ContactLtrText></a>
+                      </div>
+                    </li>
+                  )}
+                  {localizedAddress.trim() && (
+                    <li className="flex items-start gap-4">
+                      <span className={icon} style={limeBg}><MapPin className="h-[18px] w-[18px]" aria-hidden /></span>
+                      <p className="min-w-0 pt-2 text-sm leading-relaxed" style={{ color: 'var(--theme-text-secondary)' }}>{localizedAddress.trim()}</p>
+                    </li>
+                  )}
+                </ul>
+              )}
+              {showHours && (
+                <div className="border-t pt-6 first:border-t-0 first:pt-0" style={{ borderColor: 'var(--theme-border)' }}>
+                  <p className="mb-3 text-sm font-semibold" style={{ color: 'var(--theme-text-primary)' }}>{t('footerOpeningHours')}</p>
+                  <ul className="space-y-2 text-[13px]">
+                    {schedule.map((slot) => (
+                      <li key={slot.day} className="flex justify-between gap-3" style={{ color: 'var(--theme-text-secondary)' }}>
+                        <span style={{ color: 'var(--theme-text-primary)' }}>{t(shopWeekdayKey(slot.day))}</span>
+                        <span dir={slot.enabled ? 'ltr' : undefined} className="tabular-nums [unicode-bidi:isolate]">
+                          {slot.enabled ? (shop.availability24Hours ? t('footerOpen24Hours') : formatHoursRange(slot.openTime, slot.closeTime)) : t('footerClosedDay')}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {contactLinks.length > 0 && (
+                <div className="flex flex-wrap gap-2">
+                  {contactLinks.map((link, index) => (
+                    <a key={`${link.platform}-${index}`} href={link.url} target="_blank" rel="noopener noreferrer" aria-label={link.platform} className="flex h-11 w-11 items-center justify-center rounded-full border transition-colors hover:bg-[#a0d422] hover:text-[#1e1611]" style={{ borderColor: 'var(--theme-border)', color: 'var(--theme-text-primary)', background: 'var(--theme-surface)' }}>
+                      <SocialIcon platform={link.platform} />
+                    </a>
+                  ))}
+                </div>
+              )}
+            </aside>
+          )}
+        </div>
+      </main>
+    );
+  }
+
+  // ── VOLT-SUPPORT (Retail Catalog) ────────────────────────────────────────
+  if (contactVariant === 'mart-support') {
+    const showHours = hasFooterAvailability(shop.availabilityEnabled, shop.availabilityHours);
+    const schedule = normalizeAvailabilityHours(shop.availabilityHours);
+    const hasAside = hasContactSidebar || showHours;
+    const field =
+      'w-full rounded-[var(--theme-radius-input)] border px-4 py-3.5 text-[15px] transition-colors placeholder:opacity-60 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--theme-primary)]';
+    const fieldStyle = { borderColor: 'var(--theme-border)', background: 'var(--theme-surface-secondary)', color: 'var(--theme-text-primary)' } as const;
+    const label = 'mb-2 block text-sm font-semibold';
+    const infoCard = 'flex items-start gap-4 rounded-[var(--theme-radius-card)] border p-5';
+    const infoIcon = 'flex h-11 w-11 shrink-0 items-center justify-center rounded-xl';
+
+    return (
+      <main className={`${containerClass} flex-1 pb-16 pt-6 lg:pb-28 lg:pt-10`}>
+        <header className="mb-8 lg:mb-12">
+          <MartEyebrow>{t('getInTouch')}</MartEyebrow>
+          <h1 className="mt-2 text-[2.1rem] font-bold leading-[1.04] sm:text-5xl" style={{ color: 'var(--theme-text-primary)', fontFamily: 'var(--theme-font-heading)', letterSpacing: '-0.045em' }}>
+            {t('contactTitle', { shopName: shop.shopName })}
+          </h1>
+          <p className="mt-3 max-w-xl text-sm leading-relaxed sm:text-base" style={{ color: 'var(--theme-text-muted)' }}>{t('contactIntro')}</p>
+        </header>
+
+        <div className={`mx-auto grid gap-5 lg:gap-8 ${hasAside ? 'lg:grid-cols-[7fr_5fr]' : 'max-w-2xl'}`}>
+          <section className="rounded-2xl border p-6 sm:p-9" style={{ background: 'var(--theme-surface)', borderColor: 'var(--theme-border)', boxShadow: 'var(--theme-shadow-card)' }}>
+            <h2 className="text-xl font-bold sm:text-2xl" style={{ color: 'var(--theme-text-primary)', fontFamily: 'var(--theme-font-heading)', letterSpacing: '-0.03em' }}>{t('sendMessageTitle')}</h2>
+            <p className="mt-1.5 text-sm" style={{ color: 'var(--theme-text-muted)' }}>{t('sendMessageIntro')}</p>
+            <form onSubmit={handleSubmitContact} className="mt-7 space-y-5">
+              {contactError && <p role="alert" className="rounded-xl bg-red-500/10 px-4 py-3 text-sm font-medium text-red-500">{contactError}</p>}
+              <div className="grid gap-5 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="mart-contact-name" className={label} style={{ color: 'var(--theme-text-primary)' }}>{t('yourName')} <span className="text-red-500" aria-hidden>*</span></label>
+                  <input id="mart-contact-name" value={contactName} onChange={(e) => setContactName(e.target.value)} required placeholder={t('contactNamePh')} className={field} style={fieldStyle} />
+                </div>
+                <div>
+                  <label htmlFor="mart-contact-email" className={label} style={{ color: 'var(--theme-text-primary)' }}>{t('email')} <span className="text-red-500" aria-hidden>*</span></label>
+                  <input id="mart-contact-email" type="email" value={contactEmail} onChange={(e) => setContactEmail(e.target.value)} required placeholder={t('contactEmailPh')} className={field} style={fieldStyle} />
+                </div>
+              </div>
+              <div>
+                <label htmlFor="mart-contact-message" className={label} style={{ color: 'var(--theme-text-primary)' }}>{t('message')} <span className="text-red-500" aria-hidden>*</span></label>
+                <textarea id="mart-contact-message" value={contactMessage} onChange={(e) => setContactMessage(e.target.value)} required rows={6} placeholder={t('contactMessagePh')} className={`${field} min-h-[9rem] resize-y`} style={fieldStyle} />
+              </div>
+              <button
+                type="submit"
+                disabled={contactSubmitting}
+                className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-[var(--theme-radius-btn)] px-8 text-sm font-semibold transition-all hover:-translate-y-0.5 disabled:opacity-60 sm:w-auto"
+                style={{ background: 'var(--theme-primary)', color: 'var(--theme-primary-contrast)', boxShadow: '0 12px 32px -12px rgb(15 79 71 / 0.6)' }}
+              >
+                <Send className="h-4 w-4" aria-hidden />
+                {contactSubmitting ? t('sending') : t('sendMessage')}
+              </button>
+            </form>
+          </section>
+
+          <aside className={`space-y-4 ${hasAside ? '' : 'hidden'}`} aria-label={t('getInTouch')}>
+            {hasDirectContactDetails && (
+              <>
+                {shop.footerEmail?.trim() && (
+                  <div className={infoCard} style={{ background: 'var(--theme-surface)', borderColor: 'var(--theme-border)' }}>
+                    <span className={infoIcon} style={{ background: 'var(--theme-primary-light)', color: 'var(--theme-primary)' }}><Mail className="h-5 w-5" aria-hidden /></span>
+                    <div className="min-w-0">
+                      <p className="text-[10px]" style={{ color: 'var(--theme-text-muted)' }}>{t('email')}</p>
+                      <a href={`mailto:${shop.footerEmail.trim()}`} className="mt-1 block break-all text-sm font-semibold no-underline hover:underline" style={{ color: 'var(--theme-text-primary)' }}>
+                        <ContactLtrText>{shop.footerEmail.trim()}</ContactLtrText>
+                      </a>
+                    </div>
+                  </div>
+                )}
+                {shop.footerPhone?.trim() && (
+                  <div className={infoCard} style={{ background: 'var(--theme-surface)', borderColor: 'var(--theme-border)' }}>
+                    <span className={infoIcon} style={{ background: 'var(--theme-primary-light)', color: 'var(--theme-primary)' }}><Phone className="h-5 w-5" aria-hidden /></span>
+                    <div className="min-w-0">
+                      <p className="text-[10px]" style={{ color: 'var(--theme-text-muted)' }}>Tel</p>
+                      <a href={`tel:${shop.footerPhone.trim()}`} className="mt-1 block text-sm font-semibold no-underline hover:underline" style={{ color: 'var(--theme-text-primary)' }}>
+                        <ContactLtrText>{shop.footerPhone.trim()}</ContactLtrText>
+                      </a>
+                    </div>
+                  </div>
+                )}
+                {localizedAddress.trim() && (
+                  <div className={infoCard} style={{ background: 'var(--theme-surface)', borderColor: 'var(--theme-border)' }}>
+                    <span className={infoIcon} style={{ background: 'var(--theme-primary-light)', color: 'var(--theme-primary)' }}><MapPin className="h-5 w-5" aria-hidden /></span>
+                    <p className="min-w-0 text-sm leading-relaxed" style={{ color: 'var(--theme-text-secondary)' }}>{localizedAddress.trim()}</p>
+                  </div>
+                )}
+              </>
+            )}
+            {showHours && (
+                <div className="rounded-[var(--theme-radius-card)] border p-5" style={{ background: 'var(--theme-surface)', borderColor: 'var(--theme-border)' }}>
+                  <p className="mb-3 text-sm font-semibold" style={{ color: 'var(--theme-text-primary)' }}>{t('footerOpeningHours')}</p>
+                  <ul className="space-y-2 text-[13px]">
+                    {schedule.map((slot) => (
+                      <li key={slot.day} className="flex justify-between gap-3" style={{ color: 'var(--theme-text-secondary)' }}>
+                        <span style={{ color: 'var(--theme-text-primary)' }}>{t(shopWeekdayKey(slot.day))}</span>
+                        <span dir={slot.enabled ? 'ltr' : undefined} className="tabular-nums [unicode-bidi:isolate]">
+                          {slot.enabled ? (shop.availability24Hours ? t('footerOpen24Hours') : formatHoursRange(slot.openTime, slot.closeTime)) : t('footerClosedDay')}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+            )}
+            {contactLinks.length > 0 && (
+              <div className="relative isolate overflow-hidden rounded-[var(--theme-radius-card)] p-5" style={{ background: MART_INK, color: MART_TEXT }}>
+                <div aria-hidden className="absolute inset-0" style={MART_GRID_BG} />
+                <div className="relative flex flex-wrap gap-2">
+                  {contactLinks.map((link, index) => (
+                    <a key={`${link.platform}-${index}`} href={link.url} target="_blank" rel="noopener noreferrer" aria-label={link.platform} className="flex h-11 w-11 items-center justify-center rounded-[var(--theme-radius-btn)] border transition-colors hover:border-[#f5a623] hover:text-[#f5a623]" style={{ borderColor: 'rgb(255 255 255 / 0.16)', color: MART_TEXT }}>
+                      <SocialIcon platform={link.platform} />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+          </aside>
+        </div>
+      </main>
+    );
   }
 
   // ── COCOA-STUDIO (Boutique Artisan) ──────────────────────────────────────

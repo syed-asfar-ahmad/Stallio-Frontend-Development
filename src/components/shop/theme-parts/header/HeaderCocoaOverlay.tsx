@@ -9,11 +9,7 @@ import type { ThemeHeaderProps } from '../types';
 
 const CREAM = '#fbf3e4';
 
-/**
- * Cocoa Overlay header.
- * - On the home page (with the hero enabled) the bar is transparent and floats over the photograph.
- * - Everywhere else it becomes a solid, sticky deep-cocoa bar so pages stay legible.
- */
+
 export default function HeaderCocoaOverlay({
   shop,
   username,

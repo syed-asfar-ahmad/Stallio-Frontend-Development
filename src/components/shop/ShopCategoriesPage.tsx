@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { LayoutGrid } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import type { Product, Shop } from '../../types';
 import { useShopLanguage } from '../../context/ShopLanguageContext';
 import { ShopCategoryCard } from './ShopHomePage';
@@ -7,6 +8,8 @@ import ShopPagination from './ShopPagination';
 import { SHOP_LIST_PAGE_SIZE } from '../../lib/shopPagination';
 import { useStorefrontTheme } from '../../themes';
 import { CocoaCategoryTile, CocoaHeading, CocoaMosaic } from './theme-parts/cocoa/CocoaParts';
+import { MartCategoryTile, MartSectionHeader } from './theme-parts/mart/MartParts';
+import { FreshHeading, shapeFor } from './theme-parts/fresh/FreshParts';
 
 type Props = {
   shop: Shop;
@@ -16,7 +19,7 @@ type Props = {
 };
 
 export default function ShopCategoriesPage({ shop, products, username, containerClass }: Props) {
-  const { t } = useShopLanguage();
+  const { t, categoryName } = useShopLanguage();
   const { layout } = useStorefrontTheme();
   const [page, setPage] = useState(1);
   const visibleCategories = useMemo(
@@ -34,6 +37,87 @@ export default function ShopCategoriesPage({ shop, products, username, container
     (safePage - 1) * SHOP_LIST_PAGE_SIZE,
     safePage * SHOP_LIST_PAGE_SIZE,
   );
+
+  if (layout.categoryVariant === 'fresh-collections') {
+    const countOfF = (slug: string) => products.filter((p) => (p.category ?? '') === slug && p.isVisible !== false).length;
+    return (
+      <main className={`${containerClass} flex-1 pb-16 pt-10 lg:pb-28 lg:pt-16`}>
+        <FreshHeading as="h1" center title={t('categoriesTitle')} body={t('categoriesBody', { shopName: shop.shopName })} />
+        {visibleCategories.length === 0 ? (
+          <div className="mx-auto flex max-w-md flex-col items-center gap-3 py-16 text-center">
+            <span className="flex h-14 w-14 items-center justify-center rounded-full" style={{ background: 'var(--theme-primary-light)', color: 'var(--theme-text-primary)' }}>
+              <LayoutGrid className="h-6 w-6" aria-hidden />
+            </span>
+            <p className="text-base font-semibold" style={{ color: 'var(--theme-text-primary)' }}>{t('categoriesEmpty')}</p>
+            <p className="text-sm" style={{ color: 'var(--theme-text-muted)' }}>{t('categoriesEmptyBody')}</p>
+          </div>
+        ) : (
+          <>
+            <div className="grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-3 lg:grid-cols-4 lg:gap-x-8">
+              {displayed.map((c, i) => (
+                <Link key={c.slug} to={`/${username}/category/${c.slug}`} className="group flex flex-col items-center gap-4 no-underline">
+                  <span
+                    className="relative flex aspect-square w-full max-w-[13rem] items-center justify-center overflow-hidden rounded-full transition-transform duration-500 group-hover:-translate-y-1.5"
+                    style={{ background: shapeFor(c.slug, i) }}
+                  >
+                    {c.image ? (
+                      <img src={c.image} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+                    ) : (
+                      <span className="text-5xl font-medium" style={{ fontFamily: 'var(--theme-font-heading)', color: '#1e1611' }}>{categoryName(c).slice(0, 1).toUpperCase()}</span>
+                    )}
+                  </span>
+                  <span className="text-center">
+                    <span className="block text-base font-medium" style={{ color: 'var(--theme-text-primary)', fontFamily: 'var(--theme-font-heading)' }}>{categoryName(c)}</span>
+                    <span className="mt-0.5 block text-xs" style={{ color: 'var(--theme-text-muted)' }}>
+                      {countOfF(c.slug)} {countOfF(c.slug) === 1 ? t('categoryProduct') : t('categoryProducts')}
+                    </span>
+                  </span>
+                </Link>
+              ))}
+            </div>
+            <ShopPagination className="mt-14 lg:mt-20" page={safePage} total={visibleCategories.length} pageSize={SHOP_LIST_PAGE_SIZE} onPage={setPage} />
+          </>
+        )}
+      </main>
+    );
+  }
+
+  if (layout.categoryVariant === 'mart-collections') {
+    const countOfV = (slug: string) => products.filter((p) => (p.category ?? '') === slug && p.isVisible !== false).length;
+    return (
+      <main className={`${containerClass} flex-1 pb-16 pt-6 lg:pb-28 lg:pt-10`}>
+        <MartSectionHeader as="h1" eyebrow={t('shopByCategory')} title={t('categoriesTitle')} />
+        {visibleCategories.length === 0 ? (
+          <div className="mx-auto flex max-w-md flex-col items-center gap-3 py-16 text-center">
+            <span className="flex h-14 w-14 items-center justify-center rounded-xl" style={{ background: 'var(--theme-primary-light)', color: 'var(--theme-primary)' }}>
+              <LayoutGrid className="h-6 w-6" aria-hidden />
+            </span>
+            <p className="text-base font-semibold" style={{ color: 'var(--theme-text-primary)' }}>{t('categoriesEmpty')}</p>
+            <p className="text-sm" style={{ color: 'var(--theme-text-muted)' }}>{t('categoriesEmptyBody')}</p>
+          </div>
+        ) : (
+          <>
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:gap-5">
+              {displayed.map((c, i) => {
+                const big = safePage === 1 && i === 0 && displayed.length > 2;
+                return (
+                  <MartCategoryTile
+                    key={c.slug}
+                    category={c}
+                    username={username}
+                    count={countOfV(c.slug)}
+                    large={big}
+                    className={big ? 'col-span-2 min-h-[18rem] lg:row-span-2 lg:min-h-[28rem]' : 'min-h-[13rem] lg:min-h-[13.5rem]'}
+                  />
+                );
+              })}
+            </div>
+            <ShopPagination className="mt-12 lg:mt-16" page={safePage} total={visibleCategories.length} pageSize={SHOP_LIST_PAGE_SIZE} onPage={setPage} />
+          </>
+        )}
+      </main>
+    );
+  }
 
   if (layout.categoryVariant === 'cocoa-collections') {
     const countOf = (slug: string) =>

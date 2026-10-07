@@ -136,8 +136,8 @@ export default function CardBordered({ product: p, shopUsername, currency, linkS
             <Link
               to={`/${shopUsername}/product/${p.id}`}
               state={linkState}
-              className="flex w-full items-center justify-center gap-1.5 rounded-[var(--theme-radius-btn)] border-2 px-3 py-2 text-xs font-semibold no-underline transition-all hover:bg-[var(--theme-primary)] hover:text-[var(--theme-primary-contrast)] hover:border-[var(--theme-primary)]"
-              style={{ borderColor: 'var(--theme-primary)', color: 'var(--theme-primary)' }}
+              className="flex w-full items-center justify-center gap-1.5 rounded-[var(--theme-radius-btn)] border-2 px-3 py-2 text-xs font-semibold text-theme-primary no-underline transition-colors hover:border-theme-primary hover:bg-theme-primary hover:text-theme-primary-contrast"
+              style={{ borderColor: 'var(--theme-primary)' }}
             >
               <ShoppingCart className="h-3.5 w-3.5" />
               {t('addToCart')}

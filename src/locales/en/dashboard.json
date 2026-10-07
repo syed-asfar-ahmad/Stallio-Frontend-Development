@@ -228,6 +228,227 @@
       "planLimitBody": "Basic Plan allows up to {{max}} products.",
       "planLimitUsage": "{{count}} / {{max}} products used"
     },
+    "themes": {
+      "confirmApplyTitle": "Apply this theme?",
+      "confirmApplyMessage": "Apply {{name}} to your storefront? This will replace the currently applied theme and its customizations.",
+      "confirmApply": "Apply Theme",
+      "confirmSaveTitle": "Save theme changes?",
+      "confirmSaveMessage": "Publish your current theme and custom design settings to your storefront?",
+      "confirmSave": "Save & Publish",
+      "upgradeForTheme": "Upgrade to the Business Plan to unlock this premium theme.",
+      "selectedThemeRequiresBusiness": "The selected theme requires a Business Plan.",
+      "customizerRequiresBusiness": "Design token customization is exclusive to the Business Plan. Upgrade to publish custom styling.",
+      "toastApplied": "\"{{name}}\" applied to your storefront!",
+      "applyFailed": "Failed to apply theme.",
+      "toastReset": "Reset \"{{name}}\" to default design tokens.",
+      "toastSaved": "Theme settings published successfully!",
+      "saveFailed": "Failed to save theme settings.",
+      "page": {
+        "title": "Storefront Themes",
+        "subtitle": "Select a storefront theme and fine-tune your brand design tokens, colors, and layout.",
+        "liveStorefront": "Live Storefront",
+        "resetTitle": "Reset current theme to factory defaults",
+        "resetDefaults": "Reset Defaults",
+        "savePublish": "Save & Publish",
+        "publishing": "Publishing...",
+        "basicPlanBannerTitle": "Basic Plan: 2 Themes Included • Standard Tokens",
+        "basicPlanBannerBody": "Upgrade to the Business Plan to unlock 3 additional high-conversion themes and the full Design Token Customizer (colors, typography, geometry & layout).",
+        "upgradeBusiness": "Upgrade to Business",
+        "gallery": "Theme Gallery",
+        "customizer": "Design Tokens & Customizer",
+        "businessPlan": "Business Plan",
+        "basicPlan": "Basic Plan",
+        "clickLivePreview": "Click to Live Preview",
+        "openPreviewTitle": "Open interactive full sample preview",
+        "preview": "Preview",
+        "applying": "Applying...",
+        "applyTheme": "Apply Theme",
+        "customizeThemeTitle": "Customize design tokens for this theme",
+        "switchTheme": "Switch Theme",
+        "colorPalette": "Color Palette Tokens",
+        "primaryColor": "Primary Brand Color (Buttons & Highlights)",
+        "secondaryColor": "Secondary Accent Color",
+        "pageBackground": "Page Background",
+        "cardSurface": "Card Surface",
+        "chooseBackgroundColor": "Choose page background color",
+        "chooseCardColor": "Choose card surface color",
+        "typography": "Typography Presets",
+        "headingFont": "Heading Font Family",
+        "bodyFont": "Body Font Family",
+        "headingFontSample": "The quick brown fox",
+        "bodyFontSample": "The quick brown fox jumps",
+        "layoutOptions": "Layout & Section Options",
+        "heroStyle": "Hero Section Style",
+        "productCardStyle": "Product Card Style",
+        "headerStyle": "Header Style",
+        "footerStyle": "Footer Style",
+        "desktopPreview": "Desktop Preview",
+        "mobilePreview": "Mobile Preview",
+        "liveTokenPreview": "Live Design Token Preview",
+        "closePreview": "Close Preview",
+        "customizeTokens": "Customize Tokens",
+        "upgradeToApply": "Upgrade to Apply",
+        "presets": "Presets",
+        "sampleStorefront": "Sample Storefront"
+      },
+      "fonts": {
+        "outfit": "Outfit (Modern & Clean)",
+        "inter": "Inter (Neutral & Crisp)",
+        "playfair": "Playfair Display (Luxury Serif)",
+        "plus-jakarta": "Plus Jakarta Sans (Contemporary)",
+        "syne": "Syne (Bold Editorial)",
+        "cormorant": "Cormorant Garamond (Organic Elegance)",
+        "cabinet-grotesk": "Cabinet Grotesk",
+        "dm-serif": "DM Serif Display (Dark Luxury)",
+        "cinzel": "Cinzel (Classical Minimal)",
+        "fraunces": "Fraunces (Soft Boutique Serif)"
+      },
+      "preview": {
+        "page": "Preview page",
+        "pages": {
+          "home": "Home",
+          "products": "Products",
+          "categories": "Categories",
+          "category": "Category",
+          "product": "Product",
+          "about": "About",
+          "contact": "Contact"
+        },
+        "openFailed": "Could not open the preview. Please allow pop-ups and try again.",
+        "openNewTab": "Open preview in a new tab",
+        "lightMode": "Preview in light mode",
+        "darkMode": "Preview in dark mode",
+        "light": "Light",
+        "dark": "Dark",
+        "storefrontTitle": "{{name}} storefront preview",
+        "loading": "Loading preview"
+      },
+      "options": {
+        "hero": {
+          "cocoaBanner": "Cocoa Banner (Boutique Artisan)",
+          "freshBloom": "Fresh Bloom (Pacific Fresh)",
+          "martBento": "Mart Bento (Retail Catalog)",
+          "botanicalArch": "Botanical Arch (Pacific Fresh)",
+          "sanctuaryPanorama": "Sanctuary Panorama (Pacific Fresh)",
+          "apothecaryDuo": "Apothecary Duo (Pacific Fresh)",
+          "organicPill": "Organic Botanical Pill (Pacific Fresh)",
+          "fullBanner": "Full Width Banner with Overlay",
+          "splitImage": "Split Screen (Image + Headline)",
+          "minimalClean": "Minimalist Clean Typography",
+          "cardShowcase": "Showcase Floating Cards"
+        },
+        "card": {
+          "cocoaTile": "Cocoa Tile with Buy Now (Boutique Artisan)",
+          "freshBloom": "Fresh Bloom Tile (Pacific Fresh)",
+          "martDeal": "Mart Deal Card (Retail Catalog)",
+          "organicPill": "Organic Pill & Badge (Pacific Fresh)",
+          "bordered": "Bordered Clean Card",
+          "flat": "Flat Borderless Minimal",
+          "elevated": "Elevated Shadow Lift",
+          "compact": "Compact Retail Dense",
+          "editorial": "Editorial Magazine Aspect"
+        },
+        "header": {
+          "cocoaOverlay": "Cocoa Overlay (Boutique Artisan)",
+          "freshNav": "Fresh Nav (Pacific Fresh)",
+          "martMarket": "Mart Market Header (Retail Catalog)",
+          "floatingCapsule": "Floating Capsule Bar (Pacific Fresh)",
+          "classicBar": "Classic Bar (Logo left, nav center)",
+          "centeredLogo": "Centered Logo",
+          "minimalFloating": "Minimal Floating Island",
+          "inlineCompact": "Inline Compact"
+        },
+        "footer": {
+          "cocoaAtelier": "Cocoa Atelier (Boutique Artisan)",
+          "freshSage": "Fresh Espresso Footer (Pacific Fresh)",
+          "martTeal": "Mart Teal Footer (Retail Catalog)",
+          "organicCurated": "Curated Botanical Journal (Pacific Fresh)",
+          "multiColumn": "Multi Column",
+          "centeredMinimal": "Centered Minimal",
+          "boldNewsletter": "Bold Newsletter",
+          "compactInline": "Compact Inline"
+        }
+      },
+      "items": {
+        "classic-clean": {
+          "name": "Classic Clean",
+          "category": "Modern",
+          "tagline": "Balanced, timeless, and conversion-focused for any storefront",
+          "features": [
+            "High-converting product cards with instant add-to-cart",
+            "Balanced typography with responsive grid columns",
+            "Trust badges and announcement bar integration",
+            "Support for category carousels and hero banners"
+          ],
+          "description": "A versatile layout designed for maximum conversion, with prominent product grids, clear navigation, and adaptive color accents."
+        },
+        "modern-minimal": {
+          "name": "Modern Minimal",
+          "category": "Minimalist",
+          "tagline": "Architectural minimalism with maximum visual breathing room",
+          "features": [
+            "Edge-to-edge product imagery with minimal UI clutter",
+            "Monochrome styling with customizable accent strokes",
+            "Sticky minimalist header with subtle navigation",
+            "Curated lookbook and collection spotlights"
+          ],
+          "description": "An understated design focused on photography and typography, with sharp angles, borderless product showcases, and distraction-free shopping."
+        },
+        "boutique-artisan": {
+          "name": "Boutique Artisan",
+          "category": "Luxury",
+          "tagline": "Cocoa, cream, and soft serif styling for a photo-led boutique",
+          "features": [
+            "Full-bleed cocoa hero with navigation floating over the photograph",
+            "Soft serif headlines paired with clean sans-serif body text",
+            "Stone product tiles with Add to Cart and Buy Now actions",
+            "Tall promotional cards and mosaic collection grids",
+            "Dedicated catalog, collection, gallery, story, and studio layouts"
+          ],
+          "description": "A cocoa-and-cream storefront built around photography, with a full-bleed hero, floating navigation, soft stone product tiles, and mosaic collections."
+        },
+        "retail-catalog": {
+          "name": "Retail Catalog",
+          "category": "High-Volume",
+          "tagline": "A deep-teal and orange marketplace for multi-category retail",
+          "features": [
+            "Marketplace header with announcement bar, pill search, and category menu",
+            "Bento hero built from your hero and category photography",
+            "Weekly deals band with live filters and promotional banners",
+            "Product cards with sale badges, price comparisons, and quick add",
+            "Round category shortcuts and tabbed product showcases",
+            "Matching catalog, category, product, about, and contact pages"
+          ],
+          "description": "Designed for large inventories and everyday retail, with marketplace navigation, a bento hero, live deal filters, quick-add cards, and category shortcuts."
+        },
+        "noir-luxe": {
+          "name": "Noir Luxe",
+          "category": "Premium",
+          "tagline": "Dark prestige for jewelry, watches, and high-fashion brands",
+          "features": [
+            "Dark charcoal background with champagne-gold accents",
+            "DM Serif Display headings with generous letter spacing",
+            "Sharp geometry for a deliberate luxury look",
+            "Gold-tinted glow shadows and minimal floating navigation"
+          ],
+          "description": "A deep charcoal canvas with champagne-gold accents and wide-tracked serif headings, crafted for a premium, low-noise storefront."
+        },
+        "pacific-fresh": {
+          "name": "Pacific Fresh",
+          "category": "Premium",
+          "tagline": "Sage, lime, and expressive serif styling for skincare and wellness",
+          "features": [
+            "Centered Playfair hero with floating product tiles and lime CTA",
+            "Lime announcement bar and sage header with active-link accents",
+            "Peach product tiles with pastel arches, new tags, and quick add",
+            "Round category shortcuts and a numbered benefits section",
+            "Full-bleed photo banner, everyday feature pair, and testimonials",
+            "Matching catalog, category, product, about, and contact pages"
+          ],
+          "description": "A bright editorial beauty storefront with a sage hero, floating product tiles, pastel arches, round category shortcuts, benefits, and testimonials."
+        }
+      }
+    },
     "home": {
       "section": "Your storefront",
       "title": "Home",

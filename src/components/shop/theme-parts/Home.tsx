@@ -15,6 +15,8 @@ import { ShopCategoryCard } from '../ShopHomePage';
 import Hero from './Hero';
 import ProductCard from './ProductCard';
 import BoutiqueHome from './BoutiqueHome';
+import MartHome from './MartHome';
+import FreshHome from './FreshHome';
 import type { Product, Shop, ShopCategory } from '../../../types';
 import type { HomeSectionId } from '../../../themes/types';
 
@@ -495,7 +497,19 @@ export default function Home({
   // Route pacific-fresh to its own distinctive botanical layout
   if (themeId === 'pacific-fresh') {
     return (
-      <PacificHome
+      <FreshHome
+        shop={shop}
+        products={products}
+        username={username}
+        containerClass={containerClass}
+      />
+    );
+  }
+
+  // Route retail-catalog to its Mart electronics layout
+  if (themeId === 'retail-catalog') {
+    return (
+      <MartHome
         shop={shop}
         products={products}
         username={username}

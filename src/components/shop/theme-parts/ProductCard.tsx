@@ -6,12 +6,18 @@ import CardCompact from './product-card/CardCompact';
 import CardEditorial from './product-card/CardEditorial';
 import CardOrganicPill from './product-card/CardOrganicPill';
 import CardCocoaTile from './product-card/CardCocoaTile';
+import CardMartDeal from './product-card/CardMartDeal';
+import CardFreshBloom from './product-card/CardFreshBloom';
 import type { ThemeProductCardProps } from './types';
 
 export default function ProductCard(props: ThemeProductCardProps) {
   const { layout } = useStorefrontTheme();
 
   switch (layout.productCardVariant) {
+    case 'fresh-bloom':
+      return <CardFreshBloom {...props} />;
+    case 'mart-deal':
+      return <CardMartDeal {...props} />;
     case 'cocoa-tile':
       return <CardCocoaTile {...props} />;
     case 'organic-pill':

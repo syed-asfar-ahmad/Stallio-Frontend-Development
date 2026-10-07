@@ -8,6 +8,8 @@ import {
 import { prepareShopAboutHtml, SHOP_RICH_TEXT_BODY_CLASS } from '../../lib/prepareShopAboutHtml';
 import { Sparkles, BookOpen, HeartHandshake, Leaf, ShieldCheck, Heart, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { FreshButton } from '../../components/shop/theme-parts/fresh/FreshParts';
+import { MART_GRID_BG, MART_HAIR, MART_INK, MART_SOFT, MART_TEXT, MartEyebrow } from '../../components/shop/theme-parts/mart/MartParts';
 import { getLocalizedTrustLabel } from '../../lib/shopContentLanguages';
 import { resolveTrustBadgeType, TrustBadgeTypeIcon } from '../../lib/trustBadgeIcons';
 
@@ -32,6 +34,164 @@ export default function ShopAboutPage() {
   const aboutContentHtml = getLocalizedAboutContent(shop, lang);
   const heroImage = shop.aboutImages?.[0];
   const aboutHeroTextColor = getSafeHexColor(shop.aboutTextColor);
+
+  // ── FRESH-STORY (Pacific Fresh) ───────────────────────────────────────────
+  if (aboutVariant === 'fresh-story') {
+    const gallery = (shop.aboutImages ?? []).slice(1, 4);
+    const values = shop.homeTrustEnabled ? (shop.homeTrustBadges ?? []).filter((b) => b.label?.trim()).slice(0, 6) : [];
+    return (
+      <main className="flex-1 pb-16 lg:pb-28">
+        <section className="px-4 pb-10 pt-14 text-center lg:pb-16 lg:pt-24" style={{ background: 'var(--theme-surface-secondary)' }}>
+          <div className={containerClass}>
+            <h1 className="mx-auto max-w-3xl text-[2.6rem] font-medium leading-[1.04] sm:text-6xl lg:text-7xl" style={{ color: 'var(--theme-text-primary)', fontFamily: 'var(--theme-font-heading)', letterSpacing: '-0.04em', textWrap: 'balance' as never }}>
+              {aboutTitleText}
+            </h1>
+            <p className="mx-auto mt-5 max-w-md text-[15px] leading-relaxed" style={{ color: 'var(--theme-text-secondary)' }}>
+              {heroImage ? t('aboutSubtitleImage', { shopName: shop.shopName }) : t('aboutSubtitlePlain', { shopName: shop.shopName })}
+            </p>
+          </div>
+        </section>
+        {heroImage ? (
+          <section className={`${containerClass} -mt-4 lg:-mt-8`}>
+            <div className="mx-auto max-w-5xl overflow-hidden rounded-[var(--theme-radius-card)] shadow-[var(--theme-shadow-card)]">
+              <img src={heroImage} alt="" loading="eager" className="aspect-[16/9] w-full object-cover" />
+            </div>
+          </section>
+        ) : null}
+        <section className={`${containerClass} mt-14 lg:mt-24`}>
+          <article className="mx-auto max-w-2xl">
+            {aboutContentHtml ? (
+              <div
+                dir={lang === 'ar' ? 'rtl' : 'ltr'}
+                className={`text-base leading-8 sm:text-[17px] sm:leading-9 ${SHOP_RICH_TEXT_BODY_CLASS}`}
+                style={{ color: 'var(--theme-text-secondary)' }}
+                dangerouslySetInnerHTML={{ __html: prepareShopAboutHtml(aboutContentHtml) }}
+              />
+            ) : (
+              <p className="text-sm" style={{ color: 'var(--theme-text-muted)' }}>{t('aboutEmpty')}</p>
+            )}
+          </article>
+        </section>
+        {gallery.length > 0 && (
+          <section className={`${containerClass} mt-14 lg:mt-24`}>
+            <div className={`grid gap-3 lg:gap-5 ${gallery.length === 1 ? 'grid-cols-1' : gallery.length === 2 ? 'grid-cols-2' : 'grid-cols-2 lg:grid-cols-3'}`}>
+              {gallery.map((img, i) => (
+                <div key={`${img}-${i}`} className={`overflow-hidden rounded-[var(--theme-radius-card)] ${i === 1 ? 'lg:mt-10' : ''}`} style={{ background: 'var(--theme-surface-secondary)' }}>
+                  <img src={img} alt="" loading="lazy" className={`w-full object-cover ${gallery.length === 1 ? 'aspect-[16/9]' : 'aspect-[4/5]'}`} />
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+        {values.length > 0 && (
+          <section className={`${containerClass} mt-16 lg:mt-28`}>
+            <div className="mx-auto max-w-2xl">
+              <h2 className="text-center text-[1.75rem] font-medium sm:text-4xl" style={{ color: 'var(--theme-text-primary)', fontFamily: 'var(--theme-font-heading)', letterSpacing: '-0.03em' }}>{t('freshWhyTitle')}</h2>
+              <ol className="mt-8">
+                {values.map((b, i) => (
+                  <li key={`${b.label}-${i}`} className="flex items-baseline gap-5 border-b py-4" style={{ borderColor: 'var(--theme-border)' }}>
+                    <span className="w-7 shrink-0 text-xs font-semibold tabular-nums" style={{ color: 'var(--theme-text-muted)' }}>{String(i + 1).padStart(2, '0')}.</span>
+                    <span className="text-[15px] font-medium" style={{ color: 'var(--theme-text-primary)' }}>{getLocalizedTrustLabel(b, lang)}</span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </section>
+        )}
+        <section className={`${containerClass} mt-16 lg:mt-28`}>
+          <div className="flex flex-col items-center gap-5 rounded-[var(--theme-radius-card)] px-6 py-12 text-center sm:py-16" style={{ background: '#d3e8a3', color: '#1e1611' }}>
+            <p className="max-w-lg text-3xl font-medium leading-tight sm:text-4xl" style={{ fontFamily: 'var(--theme-font-heading)', letterSpacing: '-0.03em' }}>{t('freshPopularTitle')}</p>
+            <FreshButton to={`/${username}/products`} variant="ink" arrow>{t('heroBrowse')}</FreshButton>
+          </div>
+        </section>
+      </main>
+    );
+  }
+
+  // ── VOLT-STORY (Retail Catalog) ──────────────────────────────────────────
+  if (aboutVariant === 'mart-story') {
+    const gallery = (shop.aboutImages ?? []).slice(1, 5);
+    const stats = shop.homeTrustEnabled ? (shop.homeTrustBadges ?? []).filter((b) => b.label?.trim()).slice(0, 4) : [];
+
+    return (
+      <main className="flex-1 pb-16 lg:pb-28">
+        <section className={`${containerClass} pt-4 lg:pt-6`}>
+          <header className="relative isolate overflow-hidden rounded-2xl" style={{ background: MART_INK, color: MART_TEXT }}>
+            <div aria-hidden className="absolute inset-0" style={MART_GRID_BG} />
+            <div aria-hidden className="absolute -start-20 -top-24 h-96 w-96 rounded-full blur-3xl" style={{ background: 'radial-gradient(circle, rgb(245 166 35 / 0.45), transparent 65%)' }} />
+            <div className="relative grid items-center gap-10 px-6 py-14 sm:px-10 lg:grid-cols-2 lg:px-16 lg:py-20">
+              <div>
+                <MartEyebrow dark>{shop.shopName}</MartEyebrow>
+                <h1 className="mt-5 text-[2.4rem] font-bold leading-[1.02] sm:text-6xl" style={{ fontFamily: 'var(--theme-font-heading)', letterSpacing: '-0.045em', textWrap: 'balance' as never }}>
+                  {aboutTitleText}
+                </h1>
+                <p className="mt-5 max-w-md text-[15px] leading-relaxed" style={{ color: MART_SOFT }}>
+                  {heroImage ? t('aboutSubtitleImage', { shopName: shop.shopName }) : t('aboutSubtitlePlain', { shopName: shop.shopName })}
+                </p>
+              </div>
+              {heroImage ? (
+                <div className="overflow-hidden rounded-2xl border" style={{ borderColor: MART_HAIR, boxShadow: '0 0 0 8px rgb(255 255 255 / 0.03)' }}>
+                  <img src={heroImage} alt="" loading="eager" className="aspect-[4/3] w-full object-cover" />
+                </div>
+              ) : null}
+            </div>
+          </header>
+        </section>
+
+        {stats.length > 0 && (
+          <section className={`${containerClass} mt-4 lg:mt-5`}>
+            <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
+              {stats.map((b, i) => (
+                <li key={`${b.label}-${i}`} className="flex items-center gap-3.5 rounded-[var(--theme-radius-card)] border px-5 py-4" style={{ background: 'var(--theme-surface)', borderColor: 'var(--theme-border)' }}>
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg" style={{ background: 'var(--theme-primary-light)', color: 'var(--theme-primary)' }}>
+                    <TrustBadgeTypeIcon type={resolveTrustBadgeType(b.icon)} className="h-[18px] w-[18px]" />
+                  </span>
+                  <span className="text-sm font-semibold" style={{ color: 'var(--theme-text-primary)' }}>{getLocalizedTrustLabel(b, lang)}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        <section className={`${containerClass} mt-12 lg:mt-20`}>
+          <article className="mx-auto max-w-3xl rounded-2xl border p-6 sm:p-10 lg:p-14" style={{ background: 'var(--theme-surface)', borderColor: 'var(--theme-border)', boxShadow: 'var(--theme-shadow-card)' }}>
+            {aboutContentHtml ? (
+              <div
+                dir={lang === 'ar' ? 'rtl' : 'ltr'}
+                className={`text-base leading-8 sm:text-[17px] ${SHOP_RICH_TEXT_BODY_CLASS}`}
+                style={{ color: 'var(--theme-text-secondary)' }}
+                dangerouslySetInnerHTML={{ __html: prepareShopAboutHtml(aboutContentHtml) }}
+              />
+            ) : (
+              <p className="text-sm" style={{ color: 'var(--theme-text-muted)' }}>{t('aboutEmpty')}</p>
+            )}
+          </article>
+        </section>
+
+        {gallery.length > 0 && (
+          <section className={`${containerClass} mt-12 lg:mt-20`}>
+            <div className={`grid gap-3 lg:gap-5 ${gallery.length === 1 ? 'grid-cols-1' : 'grid-cols-2 lg:grid-cols-4'}`}>
+              {gallery.map((img, i) => (
+                <div key={`${img}-${i}`} className="overflow-hidden rounded-[var(--theme-radius-card)] border" style={{ borderColor: 'var(--theme-border)', background: 'var(--theme-surface-secondary)' }}>
+                  <img src={img} alt="" loading="lazy" className={`w-full object-cover ${gallery.length === 1 ? 'aspect-[16/9]' : 'aspect-square'}`} />
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <section className={`${containerClass} mt-12 lg:mt-20`}>
+          <div className="relative isolate flex flex-col items-start justify-between gap-6 overflow-hidden rounded-2xl p-8 sm:flex-row sm:items-center sm:p-12" style={{ background: MART_INK, color: MART_TEXT }}>
+            <div aria-hidden className="absolute inset-0" style={MART_GRID_BG} />
+            <p className="relative max-w-md text-3xl font-bold leading-tight sm:text-4xl" style={{ fontFamily: 'var(--theme-font-heading)', letterSpacing: '-0.04em' }}>{t('featuredPicks')}</p>
+            <Link to={`/${username}/products`} className="relative inline-flex h-12 shrink-0 items-center rounded-[var(--theme-radius-btn)] px-7 text-sm font-semibold no-underline transition-transform hover:-translate-y-0.5" style={{ background: 'var(--theme-primary)', color: 'var(--theme-primary-contrast)', boxShadow: '0 12px 40px -12px rgb(245 166 35 / 0.6)' }}>
+              {t('heroBrowse')}
+            </Link>
+          </div>
+        </section>
+      </main>
+    );
+  }
 
   // ── COCOA-STORY (Boutique Artisan) ───────────────────────────────────────
   if (aboutVariant === 'cocoa-story') {

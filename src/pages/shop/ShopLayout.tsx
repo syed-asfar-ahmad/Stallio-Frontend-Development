@@ -25,7 +25,7 @@ function OrderSuccessView({ onContinue }: { onContinue: () => void }) {
       <button
         type="button"
         onClick={onContinue}
-        className="w-full sm:w-auto px-6 py-3 rounded-theme-btn font-semibold text-theme-primary-contrast bg-theme-primary hover:opacity-90 transition-opacity"
+        className="w-full sm:w-auto px-6 py-3 rounded-theme-btn font-semibold text-theme-primary-contrast bg-theme-primary hover:bg-theme-primary-hover transition-colors"
       >
         {t('continueShopping')}
       </button>

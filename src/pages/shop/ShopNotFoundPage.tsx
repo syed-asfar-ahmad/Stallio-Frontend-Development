@@ -14,7 +14,7 @@ export default function ShopNotFoundPage() {
         <p className="text-theme-secondary mb-6">{t('notFoundBody')}</p>
         <Link
           to="/"
-          className="inline-flex items-center gap-2 px-5 py-3 rounded-theme-btn font-semibold text-theme-primary-contrast bg-theme-primary hover:opacity-90 transition-opacity no-underline"
+          className="inline-flex items-center gap-2 px-5 py-3 rounded-theme-btn font-semibold text-theme-primary-contrast bg-theme-primary hover:bg-theme-primary-hover transition-colors no-underline"
         >
           {t('notFoundBack')}
         </Link>

@@ -16,6 +16,8 @@ import {
 } from '../../lib/shopContentLanguages';
 import type { ShopProductLinkState } from '../../lib/shopProductNav';
 import DetailCocoaGallery from '../../components/shop/theme-parts/detail/DetailCocoaGallery';
+import DetailMartShop from '../../components/shop/theme-parts/detail/DetailMartShop';
+import DetailFreshBloom from '../../components/shop/theme-parts/detail/DetailFreshBloom';
 
 const containerClass = 'w-full max-w-7xl mx-auto px-3 sm:px-4 lg:px-5';
 const ADD_TO_CART_ANIM_MS = 750;
@@ -172,7 +174,9 @@ export default function ShopProductDetailPage() {
     }, ADD_TO_CART_ANIM_MS);
   }
 
-  if (detailVariant === 'cocoa-gallery') {
+  if (detailVariant === 'cocoa-gallery' || detailVariant === 'mart-shop' || detailVariant === 'fresh-detail') {
+    const DetailComponent =
+      detailVariant === 'mart-shop' ? DetailMartShop : detailVariant === 'fresh-detail' ? DetailFreshBloom : DetailCocoaGallery;
     const pool = products.filter((x) => x.id !== product.id && x.isVisible !== false);
     const related = [
       ...pool.filter((x) => product.category && x.category === product.category),
@@ -180,7 +184,7 @@ export default function ShopProductDetailPage() {
     ].slice(0, 4);
 
     return (
-      <DetailCocoaGallery
+      <DetailComponent
         shop={shop}
         username={username}
         product={product}

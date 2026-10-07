@@ -226,6 +226,227 @@
       "toastFeatured": "تم تمييز المنتج في الصفحة الرئيسية.",
       "toastUnfeatured": "تمت الإزالة من المميز."
     },
+    "themes": {
+      "confirmApplyTitle": "هل تريد تطبيق هذا المظهر؟",
+      "confirmApplyMessage": "هل تريد تطبيق {{name}} على واجهة متجرك؟ سيحل ذلك محل المظهر والتخصيصات الحالية.",
+      "confirmApply": "تطبيق المظهر",
+      "confirmSaveTitle": "هل تريد حفظ تغييرات المظهر؟",
+      "confirmSaveMessage": "هل تريد نشر المظهر وإعدادات التصميم الحالية على متجرك؟",
+      "confirmSave": "حفظ ونشر",
+      "upgradeForTheme": "قم بالترقية إلى خطة Business لفتح هذا المظهر المميز.",
+      "selectedThemeRequiresBusiness": "المظهر المحدد يتطلب خطة Business.",
+      "customizerRequiresBusiness": "تخصيص رموز التصميم متاح حصريًا لخطة Business. قم بالترقية لنشر التنسيق المخصص.",
+      "toastApplied": "تم تطبيق {{name}} على واجهة متجرك!",
+      "applyFailed": "تعذر تطبيق المظهر.",
+      "toastReset": "تمت استعادة رموز التصميم الافتراضية لـ {{name}}.",
+      "toastSaved": "تم نشر إعدادات المظهر بنجاح!",
+      "saveFailed": "تعذر حفظ إعدادات المظهر.",
+      "page": {
+        "title": "مظاهر واجهة المتجر",
+        "subtitle": "اختر مظهرًا لمتجرك وخصص ألوان العلامة التجارية والتصميم والتخطيط.",
+        "liveStorefront": "عرض المتجر",
+        "resetTitle": "إعادة المظهر الحالي إلى الإعدادات الافتراضية",
+        "resetDefaults": "إعادة الإعدادات",
+        "savePublish": "حفظ ونشر",
+        "publishing": "جارٍ النشر...",
+        "basicPlanBannerTitle": "خطة Basic: مظهران مشمولان • رموز قياسية",
+        "basicPlanBannerBody": "قم بالترقية إلى خطة Business لفتح 3 مظاهر إضافية محسّنة للتحويل وأداة تخصيص التصميم الكاملة (الألوان والخطوط والأشكال والتخطيط).",
+        "upgradeBusiness": "الترقية إلى Business",
+        "gallery": "معرض المظاهر",
+        "customizer": "رموز التصميم وأداة التخصيص",
+        "businessPlan": "خطة Business",
+        "basicPlan": "خطة Basic",
+        "clickLivePreview": "انقر لمعاينة مباشرة",
+        "openPreviewTitle": "فتح معاينة تفاعلية كاملة",
+        "preview": "معاينة",
+        "applying": "جارٍ التطبيق...",
+        "applyTheme": "تطبيق المظهر",
+        "customizeThemeTitle": "تخصيص رموز التصميم لهذا المظهر",
+        "switchTheme": "تبديل المظهر",
+        "colorPalette": "ألوان لوحة التصميم",
+        "primaryColor": "لون العلامة التجارية الأساسي (الأزرار والإبرازات)",
+        "secondaryColor": "لون التمييز الثانوي",
+        "pageBackground": "خلفية الصفحة",
+        "cardSurface": "سطح البطاقات",
+        "chooseBackgroundColor": "اختيار لون خلفية الصفحة",
+        "chooseCardColor": "اختيار لون سطح البطاقات",
+        "typography": "أنماط الخطوط",
+        "headingFont": "خط العناوين",
+        "bodyFont": "خط النص",
+        "headingFontSample": "الثعلب البني السريع",
+        "bodyFontSample": "الثعلب البني السريع يقفز",
+        "layoutOptions": "التخطيط والأقسام",
+        "heroStyle": "نمط القسم الرئيسي",
+        "productCardStyle": "نمط بطاقة المنتج",
+        "headerStyle": "نمط الترويسة",
+        "footerStyle": "نمط التذييل",
+        "desktopPreview": "معاينة سطح المكتب",
+        "mobilePreview": "معاينة الهاتف",
+        "liveTokenPreview": "معاينة التصميم مباشرة",
+        "closePreview": "إغلاق المعاينة",
+        "customizeTokens": "تخصيص الرموز",
+        "upgradeToApply": "الترقية للتطبيق",
+        "presets": "إعدادات مسبقة",
+        "sampleStorefront": "متجر تجريبي"
+      },
+      "fonts": {
+        "outfit": "Outfit (عصري ونظيف)",
+        "inter": "Inter (محايد وواضح)",
+        "playfair": "Playfair Display (serif فاخر)",
+        "plus-jakarta": "Plus Jakarta Sans (معاصر)",
+        "syne": "Syne (تحريري بارز)",
+        "cormorant": "Cormorant Garamond (أناقة طبيعية)",
+        "cabinet-grotesk": "Cabinet Grotesk",
+        "dm-serif": "DM Serif Display (فخامة داكنة)",
+        "cinzel": "Cinzel (بساطة كلاسيكية)",
+        "fraunces": "Fraunces (serif بوتيك ناعم)"
+      },
+      "preview": {
+        "page": "صفحة المعاينة",
+        "pages": {
+          "home": "الرئيسية",
+          "products": "المنتجات",
+          "categories": "التصنيفات",
+          "category": "التصنيف",
+          "product": "المنتج",
+          "about": "من نحن",
+          "contact": "اتصل بنا"
+        },
+        "openFailed": "تعذر فتح المعاينة. اسمح بالنوافذ المنبثقة ثم حاول مجددًا.",
+        "openNewTab": "فتح المعاينة في علامة تبويب جديدة",
+        "lightMode": "معاينة بالوضع الفاتح",
+        "darkMode": "معاينة بالوضع الداكن",
+        "light": "فاتح",
+        "dark": "داكن",
+        "storefrontTitle": "معاينة واجهة متجر {{name}}",
+        "loading": "جارٍ تحميل المعاينة"
+      },
+      "options": {
+        "hero": {
+          "cocoaBanner": "لافتة كاكاو (Boutique Artisan)",
+          "freshBloom": "Fresh Bloom (Pacific Fresh)",
+          "martBento": "Mart Bento (Retail Catalog)",
+          "botanicalArch": "قوس نباتي (Pacific Fresh)",
+          "sanctuaryPanorama": "بانوراما Sanctuary (Pacific Fresh)",
+          "apothecaryDuo": "ثنائي Apothecary (Pacific Fresh)",
+          "organicPill": "شارة نباتية (Pacific Fresh)",
+          "fullBanner": "لافتة كاملة مع تراكب",
+          "splitImage": "شاشة مقسمة (صورة وعنوان)",
+          "minimalClean": "خطوط بسيطة",
+          "cardShowcase": "بطاقات عرض عائمة"
+        },
+        "card": {
+          "cocoaTile": "بطاقة كاكاو مع شراء الآن (Boutique Artisan)",
+          "freshBloom": "بطاقة Fresh Bloom (Pacific Fresh)",
+          "martDeal": "بطاقة Mart Deal (Retail Catalog)",
+          "organicPill": "شارة نباتية (Pacific Fresh)",
+          "bordered": "بطاقة نظيفة بإطار",
+          "flat": "بسيطة بلا إطار",
+          "elevated": "بطاقة بظل مرتفع",
+          "compact": "بطاقة متجر مدمجة",
+          "editorial": "تنسيق تحريري"
+        },
+        "header": {
+          "cocoaOverlay": "تراكب كاكاو (Boutique Artisan)",
+          "freshNav": "تنقل Fresh (Pacific Fresh)",
+          "martMarket": "ترويسة Mart Market (Retail Catalog)",
+          "floatingCapsule": "شريط كبسولة عائم (Pacific Fresh)",
+          "classicBar": "شريط كلاسيكي (الشعار يسارًا)",
+          "centeredLogo": "شعار في المنتصف",
+          "minimalFloating": "جزيرة عائمة بسيطة",
+          "inlineCompact": "مدمج متصل"
+        },
+        "footer": {
+          "cocoaAtelier": "مرسم Cocoa (Boutique Artisan)",
+          "freshSage": "تذييل Fresh Espresso (Pacific Fresh)",
+          "martTeal": "تذييل Mart Teal (Retail Catalog)",
+          "organicCurated": "مجلة نباتية (Pacific Fresh)",
+          "multiColumn": "أعمدة متعددة",
+          "centeredMinimal": "بسيط في المنتصف",
+          "boldNewsletter": "نشرة بارزة",
+          "compactInline": "مدمج متصل"
+        }
+      },
+      "items": {
+        "classic-clean": {
+          "name": "Classic Clean",
+          "category": "عصري",
+          "tagline": "متوازن وخالد ومصمم لزيادة التحويل لأي متجر",
+          "features": [
+            "بطاقات منتجات فعالة مع إضافة فورية إلى السلة",
+            "خطوط متوازنة وشبكة أعمدة متجاوبة",
+            "شارات ثقة وشريط إعلانات مدمجان",
+            "دعم دوارات التصنيفات واللافتات الرئيسية"
+          ],
+          "description": "تصميم متعدد الاستخدامات لزيادة التحويل، مع شبكة منتجات بارزة وتنقل واضح وألوان تمييز قابلة للتكيف."
+        },
+        "modern-minimal": {
+          "name": "Modern Minimal",
+          "category": "بسيط",
+          "tagline": "بساطة معمارية ومساحة بصرية واسعة",
+          "features": [
+            "صور منتجات ممتدة وواجهة قليلة العناصر",
+            "تصميم أحادي اللون مع لمسات قابلة للتخصيص",
+            "ترويسة بسيطة ثابتة وتنقل هادئ",
+            "معرض بصري ومجموعات مختارة"
+          ],
+          "description": "تصميم هادئ يركز على الصور والخطوط، بزوايا واضحة وعرض منتجات بلا إطارات وتجربة تسوق خالية من التشتيت."
+        },
+        "boutique-artisan": {
+          "name": "Boutique Artisan",
+          "category": "فاخر",
+          "tagline": "درجات الكاكاو والكريمة وخطوط serif لبوتيك يركز على الصور",
+          "features": [
+            "واجهة كاكاو كاملة مع تنقل عائم فوق الصورة",
+            "عناوين serif ناعمة مع نص sans-serif واضح",
+            "بطاقات حجرية مع إضافة للسلة وشراء الآن",
+            "بطاقات ترويجية طويلة ومجموعات فسيفسائية",
+            "تصميمات متناسقة للكتالوج والمجموعات والقصة والاستوديو"
+          ],
+          "description": "متجر بدرجات الكاكاو والكريمة يركز على الصور، مع واجهة كاملة وتنقل عائم وبطاقات منتجات ناعمة ومجموعات فسيفسائية."
+        },
+        "retail-catalog": {
+          "name": "Retail Catalog",
+          "category": "كتالوج كبير",
+          "tagline": "سوق بدرجات الأخضر المزرق والبرتقالي لمتاجر متعددة الفئات",
+          "features": [
+            "ترويسة سوق مع إعلانات وبحث وقائمة تصنيفات",
+            "واجهة مقسمة باستخدام صور الواجهة والتصنيفات",
+            "شريط عروض أسبوعية بفلاتر وإعلانات ترويجية",
+            "بطاقات بخصومات ومقارنة أسعار وإضافة سريعة",
+            "اختصارات تصنيفات دائرية وعروض منتجات مبوبة",
+            "صفحات متناسقة للكتالوج والتصنيفات والمنتجات والتواصل"
+          ],
+          "description": "مصمم للمخزون الكبير ومتاجر التجزئة، مع تنقل سوق وواجهة مقسمة وعروض مباشرة وبطاقات إضافة سريعة."
+        },
+        "noir-luxe": {
+          "name": "Noir Luxe",
+          "category": "مميز",
+          "tagline": "فخامة داكنة للمجوهرات والساعات والأزياء الراقية",
+          "features": [
+            "خلفية فحمية داكنة مع لمسات ذهبية شامبانيا",
+            "عناوين DM Serif Display بتباعد واسع",
+            "أشكال حادة لمظهر فاخر ومدروس",
+            "ظلال بتوهج ذهبي وتنقل عائم بسيط"
+          ],
+          "description": "خلفية فحمية عميقة ولمسات ذهبية شامبانيا وعناوين serif واسعة لمتجر راقٍ وأنيق."
+        },
+        "pacific-fresh": {
+          "name": "Pacific Fresh",
+          "category": "مميز",
+          "tagline": "ألوان المريمية والليمون وخطوط serif للعناية بالصحة والجمال",
+          "features": [
+            "واجهة Playfair مركزية مع منتجات عائمة وزر ليموني",
+            "شريط إعلانات ليموني وترويسة مريمية بلمسات نشطة",
+            "بطاقات خوخية بأقواس باستيل وشارات جديد وإضافة سريعة",
+            "اختصارات تصنيفات دائرية وقسم فوائد مرقم",
+            "لافتة صور كاملة ومنتجات يومية وشهادات عملاء",
+            "صفحات متناسقة للكتالوج والتصنيفات والمنتجات والتواصل"
+          ],
+          "description": "متجر جمال تحريري ومشرق مع واجهة مريمية ومنتجات عائمة وأقواس باستيل وتصنيفات دائرية وشهادات عملاء."
+        }
+      }
+    },
     "home": {
       "section": "متجرك",
       "title": "الرئيسية",

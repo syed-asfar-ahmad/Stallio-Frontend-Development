@@ -10,6 +10,8 @@ import ShopPagination from './ShopPagination';
 import { ShopViewAllLink } from './ShopSectionHeading';
 import { useStorefrontTheme } from '../../themes';
 import { CocoaOutlineLink } from './theme-parts/cocoa/CocoaParts';
+import { MART_GRID_BG, MART_INK, MART_TEXT, MartEyebrow } from './theme-parts/mart/MartParts';
+import { shapeFor } from './theme-parts/fresh/FreshParts';
 
 type Props = {
   shop: Shop;
@@ -54,6 +56,99 @@ export default function ShopCategoryPage({
 
   const productCountLabel =
     count === 1 ? t('categoryCountOne', { count }) : t('categoryCountMany', { count });
+
+  if (layout.categoryVariant === 'fresh-collections') {
+    return (
+      <main className={`${containerClass} flex-1 pb-16 pt-5 lg:pb-28 lg:pt-8`}>
+        <nav className="mb-5 flex flex-wrap items-center gap-x-1.5 gap-y-1 text-xs" aria-label="Breadcrumb" style={{ color: 'var(--theme-text-muted)' }}>
+          <Link to={`/${username}`} className="font-medium no-underline hover:text-[var(--theme-text-primary)]">{t('breadcrumbHome')}</Link>
+          <ChevronRight className="h-3.5 w-3.5 opacity-60 rtl:rotate-180" aria-hidden />
+          <Link to={`/${username}/categories`} className="font-medium no-underline hover:text-[var(--theme-text-primary)]">{t('breadcrumbCategories')}</Link>
+          <ChevronRight className="h-3.5 w-3.5 opacity-60 rtl:rotate-180" aria-hidden />
+          <span className="font-semibold" style={{ color: 'var(--theme-text-primary)' }}>{categoryDisplayName}</span>
+        </nav>
+
+        <header className="flex flex-col items-center rounded-[var(--theme-radius-card)] px-6 py-12 text-center lg:py-16" style={{ background: 'var(--theme-surface-secondary)' }}>
+          <span className="relative flex h-28 w-28 items-center justify-center overflow-hidden rounded-full sm:h-32 sm:w-32" style={{ background: shapeFor(category?.slug ?? categoryDisplayName) }}>
+            {categoryImage ? <img src={categoryImage} alt="" loading="eager" className="absolute inset-0 h-full w-full object-cover" /> : <LayoutGrid className="h-8 w-8" style={{ color: '#1e1611' }} aria-hidden />}
+          </span>
+          <h1 className="mt-6 text-[2.4rem] font-medium leading-[1.05] sm:text-6xl" style={{ color: 'var(--theme-text-primary)', fontFamily: 'var(--theme-font-heading)', letterSpacing: '-0.035em' }}>
+            {categoryDisplayName}
+          </h1>
+          <p className="mt-3 text-sm" style={{ color: 'var(--theme-text-muted)' }}>{productCountLabel}</p>
+        </header>
+
+        {count === 0 ? (
+          <div className="mx-auto flex max-w-md flex-col items-center gap-3 py-16 text-center">
+            <span className="flex h-14 w-14 items-center justify-center rounded-full" style={{ background: 'var(--theme-primary-light)', color: 'var(--theme-text-primary)' }}>
+              <ShoppingBag className="h-6 w-6" aria-hidden />
+            </span>
+            <p className="text-base font-semibold" style={{ color: 'var(--theme-text-primary)' }}>{t('categoryEmpty')}</p>
+            <p className="text-sm" style={{ color: 'var(--theme-text-muted)' }}>{t('categoryEmptyBody')}</p>
+          </div>
+        ) : (
+          <section className="mt-12 lg:mt-16" aria-label={t('categoryProductsTitle')}>
+            <div className="relative z-0 grid grid-cols-2 gap-x-3 gap-y-8 sm:gap-x-4 lg:grid-cols-4 lg:gap-x-5 lg:gap-y-12">
+              {displayedProducts.map((p) => (
+                <ProductCard key={p.id} product={p} shopUsername={username} currency={shop.currency} linkState={category ? { from: 'category', categorySlug: category.slug } : { from: 'products' }} />
+              ))}
+            </div>
+            <ShopPagination className="mt-14 lg:mt-20" page={safePage} total={count} pageSize={SHOP_LIST_PAGE_SIZE} onPage={setPage} />
+          </section>
+        )}
+      </main>
+    );
+  }
+
+  if (layout.categoryVariant === 'mart-collections') {
+    return (
+      <main className={`${containerClass} flex-1 pb-16 pt-5 lg:pb-28 lg:pt-8`}>
+        <nav className="mb-5 flex flex-wrap items-center gap-x-1.5 gap-y-1 text-[11px]" aria-label="Breadcrumb" style={{ color: 'var(--theme-text-muted)' }}>
+          <Link to={`/${username}`} className="font-medium no-underline hover:text-[var(--theme-primary)]">{t('breadcrumbHome')}</Link>
+          <ChevronRight className="h-3 w-3 rtl:rotate-180" aria-hidden />
+          <Link to={`/${username}/categories`} className="font-medium no-underline hover:text-[var(--theme-primary)]">{t('breadcrumbCategories')}</Link>
+          <ChevronRight className="h-3 w-3 rtl:rotate-180" aria-hidden />
+          <span style={{ color: 'var(--theme-text-primary)' }}>{categoryDisplayName}</span>
+        </nav>
+
+        <header className="relative isolate overflow-hidden rounded-2xl" style={{ background: MART_INK, color: MART_TEXT }}>
+          <div aria-hidden className="absolute inset-0" style={MART_GRID_BG} />
+          <div aria-hidden className="absolute -end-20 -top-20 h-80 w-80 rounded-full blur-3xl" style={{ background: 'radial-gradient(circle, rgb(245 166 35 / 0.5), transparent 65%)' }} />
+          {categoryImage ? (
+            <>
+              <img src={categoryImage} alt="" loading="eager" className="absolute inset-y-0 end-0 hidden h-full w-1/2 object-cover opacity-80 sm:block" />
+              <div aria-hidden className="absolute inset-y-0 end-0 hidden w-1/2 sm:block" style={{ background: 'linear-gradient(90deg, #0c4a43 0%, rgb(12 74 67 / 0.3) 60%, transparent 100%)' }} />
+            </>
+          ) : null}
+          <div className="relative px-6 py-12 sm:px-10 sm:py-16 lg:px-14 lg:py-20">
+            <MartEyebrow dark>{productCountLabel}</MartEyebrow>
+            <h1 className="mt-4 max-w-xl text-[2.4rem] font-bold leading-[1.02] sm:text-6xl" style={{ fontFamily: 'var(--theme-font-heading)', letterSpacing: '-0.045em', textWrap: 'balance' as never }}>
+              {categoryDisplayName}
+            </h1>
+          </div>
+        </header>
+
+        {count === 0 ? (
+          <div className="mx-auto flex max-w-md flex-col items-center gap-3 py-16 text-center">
+            <span className="flex h-14 w-14 items-center justify-center rounded-xl" style={{ background: 'var(--theme-primary-light)', color: 'var(--theme-primary)' }}>
+              <ShoppingBag className="h-6 w-6" aria-hidden />
+            </span>
+            <p className="text-base font-semibold" style={{ color: 'var(--theme-text-primary)' }}>{t('categoryEmpty')}</p>
+            <p className="text-sm" style={{ color: 'var(--theme-text-muted)' }}>{t('categoryEmptyBody')}</p>
+          </div>
+        ) : (
+          <section className="mt-10 lg:mt-14" aria-label={t('categoryProductsTitle')}>
+            <div className="relative z-0 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-5">
+              {displayedProducts.map((p) => (
+                <ProductCard key={p.id} product={p} shopUsername={username} currency={shop.currency} linkState={category ? { from: 'category', categorySlug: category.slug } : { from: 'products' }} />
+              ))}
+            </div>
+            <ShopPagination className="mt-12 lg:mt-16" page={safePage} total={count} pageSize={SHOP_LIST_PAGE_SIZE} onPage={setPage} />
+          </section>
+        )}
+      </main>
+    );
+  }
 
   if (layout.categoryVariant === 'cocoa-collections') {
     return (

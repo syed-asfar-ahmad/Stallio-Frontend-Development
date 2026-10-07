@@ -268,74 +268,74 @@ export const boutiqueArtisanDarkTokens: ThemeTokens = {
 
 export const retailCatalogTokens: ThemeTokens = {
   colors: {
-    primary: '#059669',
-    primaryHover: '#047857',
-    primaryLight: '#ecfdf5',
+    primary: '#0f4f47',          // deep teal — primary buttons, links, active states
+    primaryHover: '#0a3d37',
+    primaryLight: '#e6f1ef',     // teal wash — chips, icon tiles, "Browse Categories"
     primaryContrast: '#ffffff',
-    secondary: '#0284c7',
-    background: '#f8fafc',
+    secondary: '#f5a623',        // marketplace orange — search button, filters, highlights
+    background: '#ffffff',
     surface: '#ffffff',
-    surfaceSecondary: '#f1f5f9',
-    textPrimary: '#0f172a',
-    textSecondary: '#475569',
-    textMuted: '#94a3b8',
-    border: '#e2e8f0',
-    borderFocus: '#059669',
-    badgeBg: '#fee2e2',
-    badgeText: '#991b1b',
+    surfaceSecondary: '#f4f6f6',
+    textPrimary: '#101c1a',
+    textSecondary: '#4b5b58',
+    textMuted: '#8a9794',
+    border: '#e6ebea',
+    borderFocus: '#0f4f47',
+    badgeBg: '#fde8e7',          // sale / discount
+    badgeText: '#c62828',
   },
   typography: {
-    fontFamilyHeading: 'Outfit, ui-sans-serif, system-ui, sans-serif',
+    fontFamilyHeading: '"Plus Jakarta Sans", Inter, ui-sans-serif, system-ui, sans-serif',
     fontFamilyBody: 'Inter, ui-sans-serif, system-ui, sans-serif',
-    headingLetterSpacing: '-0.02em',
+    headingLetterSpacing: '-0.025em',
     headingFontWeight: '700',
     headingTransform: 'none',
   },
   radii: {
-    button: '0.375rem',
-    card: '0.5rem',
-    input: '0.375rem',
-    badge: '0.25rem',
+    button: '0.5rem',
+    card: '0.75rem',
+    input: '0.5rem',
+    badge: '9999px',
   },
   shadows: {
-    card: '0 1px 3px 0 rgb(0 0 0 / 0.06)',
-    cardHover: '0 6px 12px -2px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.06)',
-    dropdown: '0 12px 20px -4px rgb(0 0 0 / 0.12)',
+    card: '0 1px 2px rgb(16 28 26 / 0.04)',
+    cardHover: '0 2px 4px rgb(16 28 26 / 0.04), 0 18px 36px -16px rgb(15 79 71 / 0.35)',
+    dropdown: '0 20px 40px -12px rgb(16 28 26 / 0.25)',
   },
   personality: {
     imageAspectRatio: '1/1',
     containerMaxWidth: 'max-w-screen-xl',
-    sectionDensity: 'compact',
-    cardPadding: '0.875rem',
+    sectionDensity: 'normal',
+    cardPadding: '0.75rem',
     accentGlow: 'none',
-    motionDuration: '150ms',
-    motionEasing: 'ease-out',
+    motionDuration: '200ms',
+    motionEasing: 'cubic-bezier(0.22, 1, 0.36, 1)',
   },
 };
 
 export const retailCatalogDarkTokens: ThemeTokens = {
   ...retailCatalogTokens,
   colors: {
-    primary: '#10b981',
-    primaryHover: '#059669',
-    primaryLight: '#064e3b',
-    primaryContrast: '#080d1a',
-    secondary: '#38bdf8',
-    background: '#080d1a',
-    surface: '#0f172a',
-    surfaceSecondary: '#1e293b',
-    textPrimary: '#f8fafc',
-    textSecondary: '#94a3b8',
-    textMuted: '#64748b',
-    border: '#1e293b',
-    borderFocus: '#10b981',
-    badgeBg: '#450a0a',
-    badgeText: '#fca5a5',
+    primary: '#27b79b',
+    primaryHover: '#3ccbae',
+    primaryLight: '#0f2f2a',
+    primaryContrast: '#04100d',
+    secondary: '#f5a623',
+    background: '#06100e',
+    surface: '#0c1a17',
+    surfaceSecondary: '#12241f',
+    textPrimary: '#f1f7f5',
+    textSecondary: '#b3c3bf',
+    textMuted: '#7b8e89',
+    border: '#1b2f2a',
+    borderFocus: '#27b79b',
+    badgeBg: '#3a1514',
+    badgeText: '#ff9a95',
   },
   shadows: {
-    card: '0 1px 3px 0 rgb(0 0 0 / 0.4)',
-    cardHover: '0 6px 12px -2px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.4)',
-    dropdown: '0 12px 20px -4px rgb(0 0 0 / 0.6)',
+    card: '0 1px 2px rgb(0 0 0 / 0.4)',
+    cardHover: '0 2px 4px rgb(0 0 0 / 0.5), 0 18px 36px -16px rgb(39 183 155 / 0.35)',
+    dropdown: '0 20px 40px -12px rgb(0 0 0 / 0.7)',
   },
 };
 
@@ -428,86 +428,85 @@ export const noirLuxeLightTokens: ThemeTokens = {
 // ─────────────────────────────────────────────────────────────────────────────
 // PREMIUM THEME 2 — PACIFIC FRESH
 // Target: wellness, organic skincare, supplements, health food, plant-based
-// Palette: pure white surface · deep jade primary · sage tint accents
-// Typography: Cormorant Garamond headings (soft elegance) · Plus Jakarta body
+// Palette: white surface · lime primary · sage tint · espresso ink
+// Typography: Playfair Display headings (high-contrast serif) · Plus Jakarta body
 // Geometry: generous rounding, soft layered shadows, capsule buttons
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const pacificFreshTokens: ThemeTokens = {
   colors: {
-    primary: '#14532d',          // Rich deep botanical jade
-    primaryHover: '#0d3d20',     // Forest depth
-    primaryLight: '#ecfdf5',     // Mint seafoam wash
-    primaryContrast: '#ffffff',  // Crisp white on deep jade
-    secondary: '#0f766e',        // Coastal ocean teal
-    background: '#f7faf8',       // Warm organic coastal mist
+    primary: '#a0d422',          // fresh lime — buttons, quick-add, active underline
+    primaryHover: '#8fc018',
+    primaryLight: '#eef6d6',     // lime wash
+    primaryContrast: '#1e1611',  // espresso ink on lime (AAA)
+    secondary: '#1e1611',        // espresso ink — headings, dark buttons, footer
+    background: '#ffffff',
     surface: '#ffffff',
-    surfaceSecondary: '#edf5f0', // Soft soothing sage surface
-    textPrimary: '#0f291e',      // Deepest botanical pine black
-    textSecondary: '#2d5a44',    // Sophisticated deep jade-sage
-    textMuted: '#6b907e',        // Soft coastal moss
-    border: '#cfe4d6',           // Refined soft jade border
-    borderFocus: '#14532d',      // Jade focus ring
-    badgeBg: '#dcfce7',          // Soft mint pill badge
-    badgeText: '#14532d',        // Crisp botanical label
+    surfaceSecondary: '#f3f5eb', // sage — hero, header, testimonial band
+    textPrimary: '#1e1611',
+    textSecondary: '#5c5247',
+    textMuted: '#968a7c',
+    border: '#e8e6dc',
+    borderFocus: '#7aa012',
+    badgeBg: '#fbf4ed',          // peach
+    badgeText: '#6b4a2f',
   },
   typography: {
-    fontFamilyHeading: '"Cormorant Garamond", "Playfair Display", Georgia, serif',
+    fontFamilyHeading: '"Playfair Display", "DM Serif Display", Georgia, serif',
     fontFamilyBody: '"Plus Jakarta Sans", Inter, ui-sans-serif, system-ui, sans-serif',
-    headingLetterSpacing: '0.02em',
-    headingFontWeight: '600',
+    headingLetterSpacing: '-0.025em',
+    headingFontWeight: '500',
     headingTransform: 'none',
   },
   radii: {
-    button: '9999px',            // Full capsule — organic luxury
-    card: '1.5rem',              // Generous softness (24px)
-    input: '9999px',             // Pill inputs
-    badge: '9999px',             // Pill badges
+    button: '0.5rem',
+    card: '1.25rem',
+    input: '0.75rem',
+    badge: '9999px',
   },
   shadows: {
-    // Soft jade-tinted layered shadows
-    card: '0 2px 12px 0 rgb(20 83 45 / 0.06), 0 1px 3px 0 rgb(0 0 0 / 0.04)',
-    cardHover: '0 16px 40px -6px rgb(20 83 45 / 0.16), 0 4px 12px -2px rgb(0 0 0 / 0.06)',
-    dropdown: '0 24px 48px -8px rgb(15 41 30 / 0.18)',
+    card: '0 1px 2px rgb(30 22 17 / 0.04), 0 8px 24px -14px rgb(30 22 17 / 0.14)',
+    cardHover: '0 2px 4px rgb(30 22 17 / 0.05), 0 22px 40px -18px rgb(30 22 17 / 0.28)',
+    dropdown: '0 24px 48px -12px rgb(30 22 17 / 0.25)',
   },
   personality: {
-    imageAspectRatio: '1/1',
+    imageAspectRatio: '4/5',
     containerMaxWidth: 'max-w-7xl',
     sectionDensity: 'airy',
-    cardPadding: '1.5rem',
-    accentGlow: '0 12px 32px -8px rgba(20, 83, 45, 0.18)',
-    motionDuration: '250ms',
-    motionEasing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+    cardPadding: '1rem',
+    accentGlow: '0 10px 30px -10px rgba(160, 212, 34, 0.45)',
+    motionDuration: '260ms',
+    motionEasing: 'cubic-bezier(0.22, 1, 0.36, 1)',
   },
 };
 
 export const pacificFreshDarkTokens: ThemeTokens = {
   ...pacificFreshTokens,
   colors: {
-    primary: '#34d399',          // Luminous crystalline sea-mint
-    primaryHover: '#10b981',     // Vivid emerald
-    primaryLight: '#064e3b',     // Deep emerald night wash
-    primaryContrast: '#022c1b',  // Ultra-deep forest black (High WCAG AAA contrast on #34d399)
-    secondary: '#6ee7b7',        // Bright mint secondary
-    background: '#040d08',       // Deep obsidian ocean forest
-    surface: '#0a1c12',          // Polished night jade
-    surfaceSecondary: '#102b1c', // Layered botanical night
-    textPrimary: '#f0fdf4',      // Luminescent pearl white
-    textSecondary: '#a7f3d0',    // Soft glowing mint
-    textMuted: '#4e8267',        // Subtle botanical moss
-    border: '#17422b',           // Deep jade contour border
-    borderFocus: '#34d399',      // Bright mint glow
-    badgeBg: '#0d3522',          // Deep jade night pill
-    badgeText: '#6ee7b7',        // Luminescent mint text
+    primary: '#b4e33a',
+    primaryHover: '#c4ee57',
+    primaryLight: '#2a3010',
+    primaryContrast: '#14100c',
+    secondary: '#f6f1e9',
+    background: '#12100d',
+    surface: '#1b1814',
+    surfaceSecondary: '#24211b',
+    textPrimary: '#f6f1e9',
+    textSecondary: '#cfc6b8',
+    textMuted: '#8d8374',
+    border: '#2e2a23',
+    borderFocus: '#b4e33a',
+    badgeBg: '#2a241c',
+    badgeText: '#e9d7bd',
   },
   shadows: {
     card: '0 2px 14px 0 rgb(0 0 0 / 0.45)',
-    cardHover: '0 16px 40px -6px rgb(0 0 0 / 0.6), 0 0 0 1px rgb(52 211 153 / 0.15)',
+    cardHover: '0 16px 40px -6px rgb(0 0 0 / 0.6), 0 0 0 1px rgb(180 227 58 / 0.18)',
     dropdown: '0 24px 48px -8px rgb(0 0 0 / 0.75)',
   },
   personality: {
     ...pacificFreshTokens.personality,
-    accentGlow: '0 12px 32px -8px rgba(52, 211, 153, 0.25)',
+    accentGlow: '0 10px 30px -10px rgba(180, 227, 58, 0.35)',
   },
 };
 

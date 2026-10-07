@@ -157,7 +157,7 @@ export const SAMPLE_PREVIEWS: Record<ThemeId, SampleThemeData> = {
         name: 'Hydrating Jade Essence Facial Mist',
         price: 36.0,
         compare: 45.0,
-        image: 'https://images.unsplash.com/photo-1608248597359-0f0f4a86f91d?q=80&w=600&auto=format&fit=crop',
+        image: 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?q=80&w=600&auto=format&fit=crop',
         tag: 'Organic',
       },
     ],

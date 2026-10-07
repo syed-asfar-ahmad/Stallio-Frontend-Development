@@ -31,7 +31,9 @@ export type HeroLayoutVariant =
   | 'botanical-arch'
   | 'sanctuary-panorama'
   | 'apothecary-duo'
-  | 'cocoa-banner';
+  | 'cocoa-banner'
+  | 'mart-bento'
+  | 'fresh-bloom';
 
 export type ProductCardVariant =
   | 'bordered'
@@ -40,7 +42,9 @@ export type ProductCardVariant =
   | 'compact'
   | 'editorial'
   | 'organic-pill'
-  | 'cocoa-tile';
+  | 'cocoa-tile'
+  | 'mart-deal'
+  | 'fresh-bloom';
 
 export type HeaderNavigationVariant =
   | 'classic-bar'
@@ -48,7 +52,9 @@ export type HeaderNavigationVariant =
   | 'minimal-floating'
   | 'inline-compact'
   | 'floating-capsule'
-  | 'cocoa-overlay';
+  | 'cocoa-overlay'
+  | 'mart-market'
+  | 'fresh-nav';
 
 export type FooterLayoutVariant =
   | 'multi-column'
@@ -56,7 +62,9 @@ export type FooterLayoutVariant =
   | 'bold-newsletter'
   | 'compact-inline'
   | 'organic-curated'
-  | 'cocoa-atelier';
+  | 'cocoa-atelier'
+  | 'mart-teal'
+  | 'fresh-sage';
 
 export interface ThemeColorTokens {
   primary: string;
@@ -120,7 +128,9 @@ export type ProductDetailLayoutVariant =
   | 'gallery-stacked'
   | 'gallery-carousel'
   | 'organic-wellness'
-  | 'cocoa-gallery';
+  | 'cocoa-gallery'
+  | 'mart-shop'
+  | 'fresh-detail';
 
 export type AboutLayoutVariant =
   | 'story-first'
@@ -129,7 +139,9 @@ export type AboutLayoutVariant =
   | 'organic-journal'
   | 'botanical-editorial'
   | 'sanctuary-story'
-  | 'cocoa-story';
+  | 'cocoa-story'
+  | 'mart-story'
+  | 'fresh-story';
 
 export type ContactLayoutVariant =
   | 'split-card'
@@ -137,13 +149,15 @@ export type ContactLayoutVariant =
   | 'organic-concierge'
   | 'botanical-concierge'
   | 'curated-inquiry'
-  | 'cocoa-studio';
+  | 'cocoa-studio'
+  | 'mart-support'
+  | 'fresh-contact';
 
 /** Layout of the all-products / search page. `classic` keeps the shared default. */
-export type ProductsPageLayoutVariant = 'classic' | 'cocoa-catalog';
+export type ProductsPageLayoutVariant = 'classic' | 'cocoa-catalog' | 'mart-catalog' | 'fresh-catalog';
 
 /** Layout of the categories index and the single-category page. */
-export type CategoryLayoutVariant = 'classic' | 'cocoa-collections';
+export type CategoryLayoutVariant = 'classic' | 'cocoa-collections' | 'mart-collections' | 'fresh-collections';
 
 export type HomeSectionId =
   | 'hero'

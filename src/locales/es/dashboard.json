@@ -228,6 +228,227 @@
       "planLimitBody": "Tu plan Basic permite hasta {{max}} productos. Mejora tu plan para agregar más.",
       "planLimitUsage": "{{count}} / {{max}} productos usados"
     },
+    "themes": {
+      "confirmApplyTitle": "¿Aplicar este tema?",
+      "confirmApplyMessage": "¿Aplicar {{name}} a tu tienda? Esto reemplazará el tema y las personalizaciones actuales.",
+      "confirmApply": "Aplicar tema",
+      "confirmSaveTitle": "¿Guardar los cambios del tema?",
+      "confirmSaveMessage": "¿Publicar el tema y la configuración de diseño actuales en tu tienda?",
+      "confirmSave": "Guardar y publicar",
+      "upgradeForTheme": "Mejora al plan Business para desbloquear este tema premium.",
+      "selectedThemeRequiresBusiness": "El tema seleccionado requiere el plan Business.",
+      "customizerRequiresBusiness": "La personalización de tokens de diseño es exclusiva del plan Business. Mejora tu plan para publicar estilos personalizados.",
+      "toastApplied": "¡{{name}} se aplicó a tu tienda!",
+      "applyFailed": "No se pudo aplicar el tema.",
+      "toastReset": "Se restablecieron los tokens de diseño predeterminados de «{{name}}».",
+      "toastSaved": "¡La configuración del tema se publicó correctamente!",
+      "saveFailed": "No se pudo guardar la configuración del tema.",
+      "page": {
+        "title": "Temas de la tienda",
+        "subtitle": "Elige un tema para tu tienda y personaliza sus colores, diseño y elementos visuales.",
+        "liveStorefront": "Ver tienda",
+        "resetTitle": "Restablecer el tema actual a sus valores predeterminados",
+        "resetDefaults": "Restablecer valores",
+        "savePublish": "Guardar y publicar",
+        "publishing": "Publicando...",
+        "basicPlanBannerTitle": "Plan Basic: 2 temas incluidos • Tokens estándar",
+        "basicPlanBannerBody": "Mejora al plan Business para desbloquear 3 temas adicionales optimizados para conversiones y el personalizador completo de diseño (colores, tipografía, geometría y disposición).",
+        "upgradeBusiness": "Mejorar a Business",
+        "gallery": "Galería de temas",
+        "customizer": "Tokens de diseño y personalizador",
+        "businessPlan": "Plan Business",
+        "basicPlan": "Plan Basic",
+        "clickLivePreview": "Haz clic para ver la vista previa",
+        "openPreviewTitle": "Abrir vista previa interactiva completa",
+        "preview": "Vista previa",
+        "applying": "Aplicando...",
+        "applyTheme": "Aplicar tema",
+        "customizeThemeTitle": "Personalizar tokens de diseño para este tema",
+        "switchTheme": "Cambiar tema",
+        "colorPalette": "Colores de la paleta",
+        "primaryColor": "Color principal de marca (botones y destacados)",
+        "secondaryColor": "Color de acento secundario",
+        "pageBackground": "Fondo de página",
+        "cardSurface": "Superficie de tarjetas",
+        "chooseBackgroundColor": "Elegir el color de fondo de la página",
+        "chooseCardColor": "Elegir el color de las tarjetas",
+        "typography": "Estilos tipográficos",
+        "headingFont": "Tipografía de títulos",
+        "bodyFont": "Tipografía del texto",
+        "headingFontSample": "El veloz zorro marrón",
+        "bodyFontSample": "El veloz zorro marrón salta",
+        "layoutOptions": "Diseño y secciones",
+        "heroStyle": "Estilo de portada",
+        "productCardStyle": "Estilo de tarjeta de producto",
+        "headerStyle": "Estilo de encabezado",
+        "footerStyle": "Estilo de pie de página",
+        "desktopPreview": "Vista de escritorio",
+        "mobilePreview": "Vista móvil",
+        "liveTokenPreview": "Vista previa de diseño en vivo",
+        "closePreview": "Cerrar vista previa",
+        "customizeTokens": "Personalizar tokens",
+        "upgradeToApply": "Mejorar para aplicar",
+        "presets": "Preajustes",
+        "sampleStorefront": "Tienda de muestra"
+      },
+      "fonts": {
+        "outfit": "Outfit (Moderna y limpia)",
+        "inter": "Inter (Neutra y nítida)",
+        "playfair": "Playfair Display (Serif de lujo)",
+        "plus-jakarta": "Plus Jakarta Sans (Contemporánea)",
+        "syne": "Syne (Editorial y atrevida)",
+        "cormorant": "Cormorant Garamond (Elegancia orgánica)",
+        "cabinet-grotesk": "Cabinet Grotesk",
+        "dm-serif": "DM Serif Display (Lujo oscuro)",
+        "cinzel": "Cinzel (Minimalismo clásico)",
+        "fraunces": "Fraunces (Serif boutique suave)"
+      },
+      "preview": {
+        "page": "Página de vista previa",
+        "pages": {
+          "home": "Inicio",
+          "products": "Productos",
+          "categories": "Categorías",
+          "category": "Categoría",
+          "product": "Producto",
+          "about": "Acerca de",
+          "contact": "Contacto"
+        },
+        "openFailed": "No se pudo abrir la vista previa. Permite las ventanas emergentes e inténtalo de nuevo.",
+        "openNewTab": "Abrir vista previa en una pestaña nueva",
+        "lightMode": "Vista previa en modo claro",
+        "darkMode": "Vista previa en modo oscuro",
+        "light": "Claro",
+        "dark": "Oscuro",
+        "storefrontTitle": "Vista previa de la tienda {{name}}",
+        "loading": "Cargando vista previa"
+      },
+      "options": {
+        "hero": {
+          "cocoaBanner": "Banner Cocoa (Boutique Artisan)",
+          "freshBloom": "Fresh Bloom (Pacific Fresh)",
+          "martBento": "Mart Bento (Retail Catalog)",
+          "botanicalArch": "Arco botánico (Pacific Fresh)",
+          "sanctuaryPanorama": "Panorama Sanctuary (Pacific Fresh)",
+          "apothecaryDuo": "Dúo Apothecary (Pacific Fresh)",
+          "organicPill": "Píldora botánica (Pacific Fresh)",
+          "fullBanner": "Banner completo con superposición",
+          "splitImage": "Pantalla dividida (imagen y título)",
+          "minimalClean": "Tipografía minimalista",
+          "cardShowcase": "Tarjetas flotantes"
+        },
+        "card": {
+          "cocoaTile": "Mosaico Cocoa con compra inmediata (Boutique Artisan)",
+          "freshBloom": "Mosaico Fresh Bloom (Pacific Fresh)",
+          "martDeal": "Tarjeta Mart Deal (Retail Catalog)",
+          "organicPill": "Píldora y etiqueta botánica (Pacific Fresh)",
+          "bordered": "Tarjeta limpia con borde",
+          "flat": "Minimalista sin bordes",
+          "elevated": "Elevada con sombra",
+          "compact": "Compacta para catálogo",
+          "editorial": "Formato editorial"
+        },
+        "header": {
+          "cocoaOverlay": "Superposición Cocoa (Boutique Artisan)",
+          "freshNav": "Navegación Fresh (Pacific Fresh)",
+          "martMarket": "Encabezado Mart Market (Retail Catalog)",
+          "floatingCapsule": "Barra cápsula flotante (Pacific Fresh)",
+          "classicBar": "Barra clásica (logo a la izquierda)",
+          "centeredLogo": "Logo centrado",
+          "minimalFloating": "Isla minimalista flotante",
+          "inlineCompact": "Compacto en línea"
+        },
+        "footer": {
+          "cocoaAtelier": "Atelier Cocoa (Boutique Artisan)",
+          "freshSage": "Pie Fresh Espresso (Pacific Fresh)",
+          "martTeal": "Pie Mart Teal (Retail Catalog)",
+          "organicCurated": "Diario botánico (Pacific Fresh)",
+          "multiColumn": "Varias columnas",
+          "centeredMinimal": "Minimalista centrado",
+          "boldNewsletter": "Boletín destacado",
+          "compactInline": "Compacto en línea"
+        }
+      },
+      "items": {
+        "classic-clean": {
+          "name": "Classic Clean",
+          "category": "Moderno",
+          "tagline": "Equilibrado, atemporal y pensado para convertir en cualquier tienda",
+          "features": [
+            "Tarjetas de producto optimizadas con compra rápida",
+            "Tipografía equilibrada y cuadrícula adaptable",
+            "Insignias de confianza y barra de anuncios integradas",
+            "Carruseles de categorías y banners principales"
+          ],
+          "description": "Diseño versátil para maximizar las conversiones, con cuadrículas de productos destacadas, navegación clara y colores de acento adaptables."
+        },
+        "modern-minimal": {
+          "name": "Modern Minimal",
+          "category": "Minimalista",
+          "tagline": "Minimalismo arquitectónico con amplitud visual",
+          "features": [
+            "Imágenes de producto a todo el ancho y una interfaz despejada",
+            "Estilo monocromático con acentos personalizables",
+            "Encabezado minimalista fijo y navegación sutil",
+            "Catálogo visual y colecciones destacadas"
+          ],
+          "description": "Diseño sobrio centrado en fotografía y tipografía, con ángulos definidos, productos sin bordes y una experiencia de compra sin distracciones."
+        },
+        "boutique-artisan": {
+          "name": "Boutique Artisan",
+          "category": "Lujo",
+          "tagline": "Tonos cacao, crema y serif suave para una boutique visual",
+          "features": [
+            "Portada cacao a todo el ancho con navegación sobre la imagen",
+            "Títulos serif suaves con texto sans serif limpio",
+            "Mosaicos de piedra con acciones Añadir al carrito y Comprar ahora",
+            "Tarjetas promocionales altas y colecciones en mosaico",
+            "Diseños coordinados para catálogo, historia y tienda"
+          ],
+          "description": "Tienda en tonos cacao y crema centrada en la fotografía, con portada completa, navegación flotante, mosaicos suaves y colecciones."
+        },
+        "retail-catalog": {
+          "name": "Retail Catalog",
+          "category": "Gran catálogo",
+          "tagline": "Mercado en tonos verde azulado y naranja para tiendas variadas",
+          "features": [
+            "Encabezado de mercado con anuncios, búsqueda y menú de categorías",
+            "Portada en mosaico con tus imágenes y categorías",
+            "Franja de ofertas semanales con filtros y promociones",
+            "Tarjetas con descuentos, comparación de precios y compra rápida",
+            "Accesos circulares a categorías y secciones de productos",
+            "Páginas coordinadas de catálogo, producto, información y contacto"
+          ],
+          "description": "Ideal para grandes inventarios y comercios: incluye navegación de mercado, portada en mosaico, ofertas con filtros y tarjetas de compra rápida."
+        },
+        "noir-luxe": {
+          "name": "Noir Luxe",
+          "category": "Premium",
+          "tagline": "Elegancia oscura para joyería, relojes y moda de lujo",
+          "features": [
+            "Fondo carbón oscuro con acentos dorados champán",
+            "Títulos DM Serif Display con espaciado amplio",
+            "Geometría definida para una estética de lujo",
+            "Sombras doradas y navegación flotante minimalista"
+          ],
+          "description": "Fondo carbón profundo, acentos dorados champán y tipografía serif espaciada para una tienda premium y elegante."
+        },
+        "pacific-fresh": {
+          "name": "Pacific Fresh",
+          "category": "Premium",
+          "tagline": "Salvia, lima y serif expresiva para belleza y bienestar",
+          "features": [
+            "Portada Playfair centrada con productos flotantes y botón lima",
+            "Barra lima y encabezado salvia con acentos activos",
+            "Tarjetas melocotón con arcos pastel y compra rápida",
+            "Categorías circulares y sección numerada de beneficios",
+            "Banner fotográfico, productos destacados y testimonios",
+            "Páginas coordinadas de catálogo, producto, información y contacto"
+          ],
+          "description": "Tienda de belleza editorial y luminosa con portada salvia, productos flotantes, arcos pastel, categorías circulares y testimonios."
+        }
+      }
+    },
     "home": {
       "section": "Tu tienda",
       "title": "Inicio",
