@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 
 import {
-  AuthAlert,
   AuthFormCard,
   authPrimaryBtnClass,
 } from '@/components/auth/AuthFormCard';
@@ -102,7 +101,6 @@ export function SignupForm() {
   const [touched, setTouched] = useState<
     Partial<Record<keyof FormState, boolean>>
   >({});
-  const [formError, setFormError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
   const countryOptions = useMemo(() => getCountryOptionsList(), []);
@@ -242,22 +240,14 @@ export function SignupForm() {
   }
 
   async function goNext() {
-    setFormError(null);
     const stepErrors = validateStep(0);
-    if (Object.keys(stepErrors).length) {
-      setFormError(t('auth.signup.formError'));
-      return;
-    }
+    if (Object.keys(stepErrors).length) return;
     setStep(1);
   }
 
   async function createShop() {
-    setFormError(null);
     const stepErrors = validateStep(1);
-    if (Object.keys(stepErrors).length) {
-      setFormError(t('auth.signup.formError'));
-      return;
-    }
+    if (Object.keys(stepErrors).length) return;
 
     setSubmitting(true);
     try {
@@ -271,7 +261,7 @@ export function SignupForm() {
       });
 
       if (result.error) {
-        setFormError(result.error);
+        toast.error(result.error);
         return;
       }
 
@@ -363,8 +353,6 @@ export function SignupForm() {
         onSubmit={(e) => e.preventDefault()}
         noValidate
       >
-        {formError ? <AuthAlert>{formError}</AuthAlert> : null}
-
         <div className="relative -mx-1.5 overflow-hidden px-1.5 py-1">
           <AnimatePresence mode="wait" initial={false}>
             {step === 0 ? (
@@ -703,10 +691,7 @@ export function SignupForm() {
           <div className="grid gap-2.5 sm:grid-cols-[auto_1fr]">
             <button
               type="button"
-              onClick={() => {
-                setFormError(null);
-                setStep(0);
-              }}
+              onClick={() => setStep(0)}
               className="border-border/70 bg-background text-foreground hover:bg-muted/50 inline-flex h-11 items-center justify-center rounded-full border px-5 text-sm font-medium transition-[transform,background-color] duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98]"
             >
               {t('auth.signup.back')}

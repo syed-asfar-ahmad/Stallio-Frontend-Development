@@ -89,8 +89,8 @@ export function AuthShell({
         className={cn(
           'relative z-10 mx-auto flex w-full max-w-6xl flex-1 px-4 sm:px-6',
           compact
-            ? 'items-start justify-center overflow-y-auto py-2 sm:py-3 md:items-center md:py-4'
-            : 'items-center gap-10 overflow-y-auto py-8 md:grid md:grid-cols-12 md:gap-12 md:py-12',
+            ? 'scrollbar-none items-start justify-center overflow-y-auto py-2 sm:py-3 md:items-center md:py-4'
+            : 'scrollbar-none items-center gap-10 overflow-y-auto py-8 md:grid md:grid-cols-12 md:gap-12 md:py-12',
           className,
         )}
       >
