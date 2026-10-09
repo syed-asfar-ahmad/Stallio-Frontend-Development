@@ -7,6 +7,13 @@ import {
   useState,
 } from 'react';
 
+import {
+  isStandaloneThemePreview,
+  isThemePreviewFrame,
+  requestPreviewModeToggle,
+  toggleStandalonePreviewMode,
+} from '../lib/themePreviewBridge';
+
 export type ThemePreference = 'light' | 'dark' | 'system';
 
 type ThemeContextValue = {
@@ -61,6 +68,14 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const toggleLightDark = useCallback(() => {
+    if (isThemePreviewFrame()) {
+      requestPreviewModeToggle();
+      return;
+    }
+    if (isStandaloneThemePreview()) {
+      toggleStandalonePreviewMode();
+      return;
+    }
     setPreferenceState((prev) => {
       const r = prev === 'system' ? (systemDark ? 'dark' : 'light') : prev;
       const next: ThemePreference = r === 'dark' ? 'light' : 'dark';

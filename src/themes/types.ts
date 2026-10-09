@@ -3,9 +3,10 @@ import type { SellerPlanTier } from '../lib/sellerPlanLimits';
 export type ThemeId =
   | 'classic-clean'
   | 'modern-minimal'
-  | 'bold-editorial'
   | 'boutique-artisan'
-  | 'retail-catalog';
+  | 'retail-catalog'
+  | 'noir-luxe'        
+  | 'pacific-fresh';   
 
 export type FontFamilyPreset =
   | 'outfit'
@@ -14,7 +15,10 @@ export type FontFamilyPreset =
   | 'plus-jakarta'
   | 'syne'
   | 'cormorant'
-  | 'cabinet-grotesk';
+  | 'cabinet-grotesk'
+  | 'dm-serif'
+  | 'cinzel'
+  | 'fraunces';
 
 export type RadiusPreset = 'none' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
 
@@ -22,40 +26,51 @@ export type HeroLayoutVariant =
   | 'split-image'
   | 'full-banner'
   | 'minimal-clean'
-  | 'card-showcase';
-
-export type HomeSectionId =
-  | 'hero'
-  | 'trust-badges'
-  | 'brand-story'
-  | 'categories'
-  | 'featured-products'
-  | 'product-grid'
-  | 'reviews';
+  | 'card-showcase'
+  | 'organic-pill'
+  | 'botanical-arch'
+  | 'sanctuary-panorama'
+  | 'apothecary-duo'
+  | 'cocoa-banner'
+  | 'mart-bento'
+  | 'fresh-bloom';
 
 export type ProductCardVariant =
   | 'bordered'
   | 'flat'
   | 'elevated'
   | 'compact'
-  | 'editorial';
+  | 'editorial'
+  | 'organic-pill'
+  | 'cocoa-tile'
+  | 'mart-deal'
+  | 'fresh-bloom';
 
 export type HeaderNavigationVariant =
   | 'classic-bar'
   | 'centered-logo'
   | 'minimal-floating'
-  | 'inline-compact';
+  | 'inline-compact'
+  | 'floating-capsule'
+  | 'cocoa-overlay'
+  | 'mart-market'
+  | 'fresh-nav';
 
 export type FooterLayoutVariant =
   | 'multi-column'
   | 'centered-minimal'
   | 'bold-newsletter'
-  | 'compact-inline';
+  | 'compact-inline'
+  | 'organic-curated'
+  | 'cocoa-atelier'
+  | 'mart-teal'
+  | 'fresh-sage';
 
 export interface ThemeColorTokens {
   primary: string;
   primaryHover: string;
   primaryLight: string;
+  primaryContrast: string;
   secondary: string;
   background: string;
   surface: string;
@@ -90,18 +105,79 @@ export interface ThemeShadowTokens {
   dropdown: string;
 }
 
+export interface ThemePersonalityTokens {
+  imageAspectRatio: '1/1' | '4/5' | '3/4';
+  containerMaxWidth: 'max-w-6xl' | 'max-w-7xl' | 'max-w-screen-xl';
+  sectionDensity: 'compact' | 'normal' | 'airy';
+  cardPadding: string;
+  accentGlow: string;
+  motionDuration: string;
+  motionEasing: string;
+}
+
 export interface ThemeTokens {
   colors: ThemeColorTokens;
   typography: ThemeTypographyTokens;
   radii: ThemeRadiusTokens;
   shadows: ThemeShadowTokens;
+  personality?: ThemePersonalityTokens;
 }
+
+export type ProductDetailLayoutVariant =
+  | 'gallery-split'
+  | 'gallery-stacked'
+  | 'gallery-carousel'
+  | 'organic-wellness'
+  | 'cocoa-gallery'
+  | 'mart-shop'
+  | 'fresh-detail';
+
+export type AboutLayoutVariant =
+  | 'story-first'
+  | 'split-image'
+  | 'minimal-clean'
+  | 'organic-journal'
+  | 'botanical-editorial'
+  | 'sanctuary-story'
+  | 'cocoa-story'
+  | 'mart-story'
+  | 'fresh-story';
+
+export type ContactLayoutVariant =
+  | 'split-card'
+  | 'centered-minimal'
+  | 'organic-concierge'
+  | 'botanical-concierge'
+  | 'curated-inquiry'
+  | 'cocoa-studio'
+  | 'mart-support'
+  | 'fresh-contact';
+
+/** Layout of the all-products / search page. `classic` keeps the shared default. */
+export type ProductsPageLayoutVariant = 'classic' | 'cocoa-catalog' | 'mart-catalog' | 'fresh-catalog';
+
+/** Layout of the categories index and the single-category page. */
+export type CategoryLayoutVariant = 'classic' | 'cocoa-collections' | 'mart-collections' | 'fresh-collections';
+
+export type HomeSectionId =
+  | 'hero'
+  | 'trust'
+  | 'categories'
+  | 'featured'
+  | 'products'
+  | 'collections'
+  | 'reviews';
 
 export interface ThemeLayoutSettings {
   heroVariant: HeroLayoutVariant;
   productCardVariant: ProductCardVariant;
   headerVariant: HeaderNavigationVariant;
   footerVariant: FooterLayoutVariant;
+  productDetailVariant?: ProductDetailLayoutVariant;
+  aboutVariant?: AboutLayoutVariant;
+  contactVariant?: ContactLayoutVariant;
+  productsPageVariant?: ProductsPageLayoutVariant;
+  categoryVariant?: CategoryLayoutVariant;
   productGridColumns: 2 | 3 | 4;
   homeSections: HomeSectionId[];
   showCategoryPillsOnHome: boolean;
@@ -118,6 +194,7 @@ export interface ShopThemeConfig {
     typography?: Partial<ThemeTypographyTokens>;
     radii?: Partial<ThemeRadiusTokens>;
     shadows?: Partial<ThemeShadowTokens>;
+    personality?: Partial<ThemePersonalityTokens>;
   };
   layout?: Partial<ThemeLayoutSettings>;
 }
@@ -128,7 +205,7 @@ export interface ThemeDefinition {
   displayName: string;
   tagline: string;
   description: string;
-  category: 'Modern' | 'Minimalist' | 'Luxury' | 'Editorial' | 'High-Volume';
+  category: 'Modern' | 'Minimalist' | 'Luxury'  | 'High-Volume' | 'Premium';
   tier: SellerPlanTier;
   previewImage: string;
   demoUrl?: string;
@@ -137,4 +214,3 @@ export interface ThemeDefinition {
   defaultDarkTokens?: ThemeTokens;
   defaultLayout: ThemeLayoutSettings;
 }
-

@@ -17,7 +17,7 @@ import { getCountryOptionsList, getCurrencyOptionsList } from '../lib/countryCur
 import type { CountryOption, CurrencyOption } from '../lib/countryCurrencyOptions';
 import { Store, Copy, Check, Globe, Banknote, ExternalLink, Sparkles, Link2, Upload, AlertTriangle, Save } from 'lucide-react';
 import { DASHBOARD_BTN_PRIMARY } from '../lib/dashboardFormClasses';
-
+import PlanSubscriptionCard from '../components/plan/PlanSubscriptionCard';
 const API_BASE = import.meta.env.VITE_API_URL ?? '';
 const DELETE_ACCOUNT_CONFIRM_PHRASE = 'DELETE MY ACCOUNT';
 
@@ -211,7 +211,9 @@ export default function DashboardSettings() {
         <p className="text-stone-500 dark:text-zinc-400 mt-0.5 text-xs max-lg:text-xs lg:text-sm">{t('dashboard.settings.subtitle')}</p>
       </div>
 
-      <div className="w-full max-w-5xl mx-auto min-w-0">
+      <div className="w-full max-w-5xl mx-auto space-y-5 max-lg:space-y-4 min-w-0">
+        <PlanSubscriptionCard plan={user?.plan} />
+
         <div className="rounded-xl max-lg:rounded-xl lg:rounded-2xl border border-stone-200/80 dark:border-zinc-600/80 bg-white dark:bg-zinc-900 shadow-lg shadow-stone-200/20 overflow-hidden">
           <form onSubmit={handleSave} className="p-4 max-lg:p-4 lg:p-8 space-y-4 max-lg:space-y-4 lg:space-y-6 min-w-0">
               {message && (

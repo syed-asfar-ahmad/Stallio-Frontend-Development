@@ -9,7 +9,7 @@ export default function ShopLanguageToggle() {
 
   return (
     <div
-      className="inline-flex items-center rounded-full border border-stone-200/90 bg-stone-50/90 p-0.5 dark:border-zinc-600 dark:bg-zinc-900/90"
+      className="inline-flex items-center rounded-full border border-theme-border bg-theme-surface p-0.5"
       role="group"
       aria-label={t('storeLanguage')}
     >
@@ -20,8 +20,8 @@ export default function ShopLanguageToggle() {
           onClick={() => setLang(item.id)}
           className={`rounded-full px-1.5 py-1 text-[10px] font-bold transition-colors max-lg:px-1.5 max-lg:py-0.5 max-lg:text-[10px] lg:px-2.5 lg:py-1 lg:text-xs ${
             lang === item.id
-              ? 'bg-white text-brand-800 shadow-sm ring-1 ring-brand-200/80 dark:bg-zinc-800 dark:text-brand-300 dark:ring-brand-500/30'
-              : 'text-stone-500 hover:text-stone-800 dark:text-zinc-400 dark:hover:text-zinc-200'
+              ? 'bg-theme-primary text-theme-primary-contrast shadow-sm'
+              : 'text-theme-muted hover:text-theme-primary'
           }`}
           aria-pressed={lang === item.id}
         >

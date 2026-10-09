@@ -28,6 +28,8 @@ export type ThemeHeroProps = {
   shop: Shop;
   username: string;
   containerClass: string;
+  /** Optional: lets product-led heroes show real store products. */
+  products?: Product[];
 };
 
 export type ThemeProductCardProps = {

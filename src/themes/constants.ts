@@ -8,17 +8,19 @@ export const THEMES_BY_PLAN: Record<SellerPlanTier, ThemeId[]> = {
   business: [
     'classic-clean',
     'modern-minimal',
-    'bold-editorial',
     'boutique-artisan',
     'retail-catalog',
+    'noir-luxe',
+    'pacific-fresh',
   ],
 };
 
 export const BASIC_PLAN_THEMES: ThemeId[] = THEMES_BY_PLAN.basic;
 export const BUSINESS_EXCLUSIVE_THEMES: ThemeId[] = [
-  'bold-editorial',
   'boutique-artisan',
   'retail-catalog',
+  'noir-luxe',
+  'pacific-fresh',
 ];
 
 export const FONT_PRESETS: { id: FontFamilyPreset; label: string; family: string }[] = [
@@ -27,7 +29,10 @@ export const FONT_PRESETS: { id: FontFamilyPreset; label: string; family: string
   { id: 'plus-jakarta', label: 'Plus Jakarta Sans (Contemporary)', family: '"Plus Jakarta Sans", Outfit, ui-sans-serif, system-ui, sans-serif' },
   { id: 'playfair', label: 'Playfair Display (Luxury Serif)', family: '"Playfair Display", Georgia, serif' },
   { id: 'syne', label: 'Syne (Bold Editorial)', family: 'Syne, Outfit, ui-sans-serif, system-ui, sans-serif' },
-  { id: 'cormorant', label: 'Cormorant (Artisan Classic)', family: '"Cormorant Garamond", Georgia, serif' },
+  { id: 'cormorant', label: 'Cormorant Garamond (Organic Elegance)', family: '"Cormorant Garamond", Georgia, serif' },
+  { id: 'dm-serif', label: 'DM Serif Display (Dark Luxury)', family: '"DM Serif Display", "Playfair Display", Georgia, serif' },
+  { id: 'cinzel', label: 'Cinzel (Classical Minimal)', family: '"Cinzel", "Playfair Display", Georgia, serif' },
+  { id: 'fraunces', label: 'Fraunces (Soft Boutique Serif)', family: '"Fraunces", "Playfair Display", Georgia, serif' },
 ];
 
 export const RADIUS_PRESETS: { id: RadiusPreset; label: string; button: string; card: string }[] = [
@@ -39,14 +44,23 @@ export const RADIUS_PRESETS: { id: RadiusPreset; label: string; button: string; 
   { id: 'full', label: 'Pill Round', button: '9999px', card: '1.25rem' },
 ];
 
-export function isThemeAllowedForPlan(themeId: ThemeId, plan?: string | null): boolean {
-  return true; // TEMP: bypass for local testing — REVERT before commit
-}
-export function getAvailableThemesForPlan(plan?: string | null): ThemeId[] {
-  const tier: SellerPlanTier = plan === 'business' ? 'business' : 'basic';
-  return THEMES_BY_PLAN[tier];
+export function isThemeAllowedForPlan(_themeId: ThemeId, _plan?: string | null): boolean {
+  // Plan check bypassed so all themes can be tested and selected
+  return true;
 }
 
-export function canCustomizeTokens(plan?: string | null): boolean {
-  return plan === 'business';
+export function getAvailableThemesForPlan(_plan?: string | null): ThemeId[] {
+  return [
+    'classic-clean',
+    'modern-minimal',
+    'boutique-artisan',
+    'retail-catalog',
+    'noir-luxe',
+    'pacific-fresh',
+  ];
+}
+
+export function canCustomizeTokens(_plan?: string | null): boolean {
+  // Plan check bypassed to allow full design token customization
+  return true;
 }

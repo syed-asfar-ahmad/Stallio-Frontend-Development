@@ -10,9 +10,6 @@ type Props = {
   className?: string;
 };
 
-const btnBase =
-  'inline-flex items-center justify-center gap-1.5 rounded-[var(--theme-radius-btn)] border-2 px-3 py-2 text-sm font-semibold transition-colors disabled:pointer-events-none disabled:opacity-40 max-lg:py-2.5';
-
 function pageItems(current: number, totalPages: number): (number | 'ellipsis')[] {
   if (totalPages <= 7) {
     return Array.from({ length: totalPages }, (_, i) => i + 1);
@@ -43,36 +40,36 @@ export default function ShopPagination({ page, total, pageSize, onPage, classNam
   }
 
   return (
-       <nav
-      className={`flex flex-col gap-3 rounded-[var(--theme-radius-card)] border px-3 py-3 shadow-[var(--theme-shadow-card)] max-lg:gap-3 max-lg:px-3 max-lg:py-3 sm:flex-row sm:items-center sm:justify-between lg:px-4 lg:py-3.5 ${className}`.trim()}
-      style={{ borderColor: 'var(--theme-border)', background: 'var(--theme-surface)' }}
+    <nav
+      className={`flex flex-col items-center gap-3 sm:flex-row sm:justify-between ${className}`.trim()}
       aria-label={t('paginationAria')}
     >
-      <p
-        className="text-center text-xs tabular-nums max-lg:text-center sm:text-start lg:text-sm"
-        style={{ color: 'var(--theme-text-secondary)' }}
-      >
+      {/* Count info */}
+      <p className="text-xs tabular-nums" style={{ color: 'var(--theme-text-muted)' }}>
         {t('paginationShowing', { start: rangeStart, end: rangeEnd, total })}
       </p>
 
-      <div className="flex flex-wrap items-center justify-center gap-1.5 max-lg:grid max-lg:w-full max-lg:grid-cols-[1fr_auto_1fr] max-lg:gap-2 sm:justify-end">
-         <button
+      {/* Controls */}
+      <div className="flex items-center gap-1.5">
+        {/* Prev */}
+        <button
           type="button"
           disabled={page <= 1}
           onClick={() => changePage(page - 1)}
-          className={`${btnBase} max-lg:justify-center transition-colors`}
+          className="inline-flex h-9 items-center gap-1.5 rounded-[var(--theme-radius-btn)] border px-3 text-sm font-semibold transition-colors disabled:pointer-events-none disabled:opacity-40"
           style={{ borderColor: 'var(--theme-border)', background: 'var(--theme-surface)', color: 'var(--theme-text-primary)' }}
           aria-label={t('paginationPrevAria')}
         >
           <ChevronLeft className="h-4 w-4 shrink-0 rtl:rotate-180" aria-hidden />
-          {t('paginationPrevious')}
+          <span className="hidden sm:inline">{t('paginationPrevious')}</span>
         </button>
 
-        <div className="hidden items-center gap-1 sm:flex">
+        {/* Page numbers */}
+        <div className="flex items-center gap-1">
           {pages.map((item, idx) =>
             item === 'ellipsis' ? (
-                           <span key={`ellipsis-${idx}`} className="px-1.5 text-sm font-medium" style={{ color: 'var(--theme-text-muted)' }}>
-                ...
+              <span key={`ellipsis-${idx}`} className="px-1 text-sm" style={{ color: 'var(--theme-text-muted)' }}>
+                …
               </span>
             ) : (
               <button
@@ -80,11 +77,11 @@ export default function ShopPagination({ page, total, pageSize, onPage, classNam
                 type="button"
                 onClick={() => changePage(item)}
                 aria-current={item === page ? 'page' : undefined}
-                className="min-w-[2.25rem] rounded-[var(--theme-radius-btn)] px-2.5 py-2 text-sm font-semibold tabular-nums transition-colors"
+                className="min-w-[2.25rem] rounded-full px-2.5 py-1.5 text-sm font-semibold tabular-nums transition-all"
                 style={
                   item === page
-                    ? { background: 'var(--theme-primary)', color: 'var(--theme-badge-text)' }
-                    : { color: 'var(--theme-text-secondary)' }
+                    ? { background: 'var(--theme-primary)', color: 'var(--theme-primary-contrast)' }
+                    : { color: 'var(--theme-text-primary)' }
                 }
               >
                 {item}
@@ -92,22 +89,22 @@ export default function ShopPagination({ page, total, pageSize, onPage, classNam
             ),
           )}
         </div>
-        <span
-          className="justify-self-center px-2 text-sm font-medium tabular-nums sm:hidden"
-          style={{ color: 'var(--theme-text-secondary)' }}
-        >
+
+        {/* Mobile page indicator */}
+        <span className="px-2 text-sm tabular-nums sm:hidden" style={{ color: 'var(--theme-text-muted)' }}>
           {t('paginationPageOf', { page, total: totalPages })}
         </span>
 
+        {/* Next */}
         <button
           type="button"
           disabled={page >= totalPages}
           onClick={() => changePage(page + 1)}
-          className={`${btnBase} max-lg:justify-self-end max-lg:justify-center transition-colors`}
+          className="inline-flex h-9 items-center gap-1.5 rounded-[var(--theme-radius-btn)] border px-3 text-sm font-semibold transition-colors disabled:pointer-events-none disabled:opacity-40"
           style={{ borderColor: 'var(--theme-border)', background: 'var(--theme-surface)', color: 'var(--theme-text-primary)' }}
           aria-label={t('paginationNextAria')}
         >
-          {t('paginationNext')}
+          <span className="hidden sm:inline">{t('paginationNext')}</span>
           <ChevronRight className="h-4 w-4 shrink-0 rtl:rotate-180" aria-hidden />
         </button>
       </div>

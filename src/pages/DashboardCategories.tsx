@@ -17,7 +17,8 @@ import {
   DASHBOARD_TOGGLE_ROW_SWITCH,
 } from '../lib/dashboardFormClasses';
 import ConfirmDialog from '../components/ConfirmDialog';
-import { getSellerPlanLimits } from '../lib/sellerPlanLimits';
+import { getSellerPlanLimits, canUpgradePlan } from '../lib/sellerPlanLimits';
+import PlanLimitBanner from '../components/plan/PlanLimitBanner';
 import { FieldLabelWithHelp, FieldTitleWithHelp } from '../components/FieldLabelWithHelp';
 import DashboardBulkSelectBar from '../components/DashboardBulkSelectBar';
 import BulkItemCheckbox from '../components/BulkItemCheckbox';
@@ -464,7 +465,7 @@ const [categoryModal, setCategoryModal] = useState<null | 'add' | number>(null);
             </div>
 
             <div className="mt-4 hidden min-w-0 flex-wrap items-center justify-between gap-3 lg:flex">
-              <div className="flex flex-wrap items-center gap-2">
+              <div className="flex flex-wrap items-center gap-3">
                 <button
                   type="button"
                   onClick={openAddModal}
@@ -515,6 +516,10 @@ const [categoryModal, setCategoryModal] = useState<null | 'add' | number>(null);
           </>
         )}
       </div>
+
+      {categoriesEnabled && (
+        <PlanLimitBanner show={categoryLimitReached && canUpgradePlan(user?.plan)} />
+      )}
 
       <div className="w-full max-w-6xl mx-auto space-y-4 max-lg:space-y-4 lg:space-y-6 min-w-0">
         {error && (

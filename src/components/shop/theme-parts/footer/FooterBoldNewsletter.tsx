@@ -44,8 +44,8 @@ export default function FooterBoldNewsletter({ shop, quickLinks, containerClass 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
             <div className="lg:col-span-6 space-y-2">
               <span
-                className="px-2.5 py-1 text-[11px] font-bold uppercase rounded-md tracking-wider inline-block text-white"
-                style={{ background: 'var(--theme-primary)' }}
+                className="px-2.5 py-1 text-[11px] font-bold uppercase rounded-md tracking-wider inline-block"
+                style={{ background: 'var(--theme-primary)', color: 'var(--theme-primary-contrast)' }}
               >
                 Join the Community
               </span>
@@ -86,8 +86,11 @@ export default function FooterBoldNewsletter({ shop, quickLinks, containerClass 
                   />
                   <button
                     type="submit"
-                    className="px-5 py-2.5 rounded-[var(--theme-radius-btn)] font-bold text-xs text-white flex items-center gap-1.5 transition-all hover:opacity-90 shrink-0"
-                    style={{ background: 'var(--theme-primary)' }}
+                    className="px-5 py-2.5 rounded-[var(--theme-radius-btn)] font-bold text-xs flex items-center gap-1.5 transition-colors hover:bg-theme-primary-hover shrink-0"
+                    style={{
+                      background: 'var(--theme-primary)',
+                      color: 'var(--theme-primary-contrast)',
+                    }}
                   >
                     <Send className="w-3.5 h-3.5" />
                     Subscribe

@@ -5,6 +5,7 @@ export type SellerPlanLimits = {
   maxProducts: number;
   maxCategories: number;
   maxOrders: number | null;
+  maxThemes: number;
 };
 
 export const SELLER_PLAN_LIMITS: Record<SellerPlanTier, SellerPlanLimits> = {
@@ -13,12 +14,14 @@ export const SELLER_PLAN_LIMITS: Record<SellerPlanTier, SellerPlanLimits> = {
     maxProducts: 25,
     maxCategories: 5,
     maxOrders: 70,
+    maxThemes: 2,
   },
   business: {
     maxImagesPerProduct: 5,
     maxProducts: 70,
     maxCategories: 20,
     maxOrders: null,
+    maxThemes: 5,
   },
 };
 
@@ -38,4 +41,20 @@ export function isAtOrOverLimit(count: number, max: number | null): boolean {
 export function remainingForLimit(count: number, max: number | null): number | null {
   if (max === null) return null;
   return Math.max(0, max - count);
+}
+
+/**
+ * Returns true if the seller is on the Basic plan and can upgrade to Business.
+ * Use this to gate upgrade banners / CTAs — Business plan sellers never see upgrade prompts.
+ */
+export function canUpgradePlan(plan?: string | null): boolean {
+  return getSellerPlanTier(plan) === 'basic';
+}
+
+/**
+ * Returns a 0–1 fraction of the limit used. Returns null when max is null (unlimited).
+ */
+export function limitFraction(count: number, max: number | null): number | null {
+  if (max === null || max === 0) return null;
+  return Math.min(1, count / max);
 }

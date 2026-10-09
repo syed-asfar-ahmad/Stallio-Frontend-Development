@@ -17,6 +17,8 @@ export interface StorefrontThemeProviderProps {
   colorMode?: 'light' | 'dark';
   children: React.ReactNode;
   className?: string;
+  dir?: 'ltr' | 'rtl';
+  lang?: string;
   as?: keyof JSX.IntrinsicElements;
 }
 
@@ -25,6 +27,8 @@ export const StorefrontThemeProvider: React.FC<StorefrontThemeProviderProps> = (
   colorMode,
   children,
   className = '',
+  dir,
+  lang,
   as: Component = 'div',
 }) => {
   let appThemeMode: 'light' | 'dark' = 'light';
@@ -41,7 +45,6 @@ export const StorefrontThemeProvider: React.FC<StorefrontThemeProviderProps> = (
     return resolveShopTheme(config, activeMode);
   }, [config, activeMode]);
 
-
   const contextValue = useMemo<StorefrontThemeContextValue>(() => {
     return {
       themeId: resolved.themeId,
@@ -54,6 +57,8 @@ export const StorefrontThemeProvider: React.FC<StorefrontThemeProviderProps> = (
   return (
     <StorefrontThemeContext.Provider value={contextValue}>
       <Component
+        dir={dir}
+        lang={lang}
         className={`storefront-theme-root theme-${resolved.themeId} theme-mode-${resolved.mode} ${className}`}
         style={{
           ...resolved.cssVariables,

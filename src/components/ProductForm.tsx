@@ -1,11 +1,13 @@
 import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { api } from '../lib/api';
 import { getStoredToken } from '../context/AuthContext';
 import { getCurrencySymbol } from '../lib/countryCurrencyOptions';
 import type { Product, ProductOption } from '../types';
-import { X, ImagePlus, Plus, Trash2, ChevronDown, Eye, Package, Layers } from 'lucide-react';
+import { X, ImagePlus, Plus, Trash2, ChevronDown, Eye, Package, Layers, Lock, Sparkles } from 'lucide-react';
+import { SELLER_PLAN_LIMITS } from '../lib/sellerPlanLimits';
 import DashboardSwitch from './DashboardSwitch';
 import ConfirmDialog from './ConfirmDialog';
 import { FieldLabelWithHelp, FieldTitleWithHelp } from './FieldLabelWithHelp';
@@ -26,6 +28,7 @@ import { AdminLoadingInline } from './DashboardLoading';
 import { PRODUCT_CARD_ASPECT_CLASS, PRODUCT_IMAGE_CLASS, PRODUCT_IMAGE_FRAME_CLASS } from '../lib/imageCropViewports';
 import ProductImage from './ProductImage';
 import { getProductImageDisplayUrl } from '../lib/productImageUrl';
+import PlanUsageBar from './plan/PlanUsageBar';
 import MultilingualTextSection from './MultilingualTextSection';
 import { useCloseOnOutsideClick } from '../hooks/useCloseOnOutsideClick';
 import DashboardImageRemoveButton from './DashboardImageRemoveButton';
@@ -1060,9 +1063,12 @@ export default function ProductForm({
             </SharedLockedField>
 
             <div>
-              <FieldLabelWithHelp required={isSharedFieldRequired(multilingualEnabled, formLang)} help={t('dashboard.productForm.imagesHint')} className="mb-3">
-                {t('dashboard.productForm.imagesTitle')}
-              </FieldLabelWithHelp>
+              <div className="flex items-center justify-between mb-2">
+                <FieldLabelWithHelp required={isSharedFieldRequired(multilingualEnabled, formLang)} help={t('dashboard.productForm.imagesHint')} className="mb-0">
+                  {t('dashboard.productForm.imagesTitle')}
+                </FieldLabelWithHelp>
+              </div>
+
               <input
                 ref={fileInputRef}
                 type="file"
@@ -1076,7 +1082,7 @@ export default function ProductForm({
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                disabled={uploading || sharedLocked || (maxImages !== undefined && displayImages.length >= maxImages)}
+                disabled={uploading || sharedLocked}
                 className="w-full flex items-center justify-center gap-2 py-5 rounded-xl border-2 border-dashed border-stone-200 dark:border-zinc-700 bg-stone-50/30 dark:bg-zinc-950/50 text-stone-600 dark:text-zinc-400 hover:border-brand-300 hover:bg-brand-50 dark:hover:bg-brand-950/40 hover:text-brand-600 dark:hover:text-brand-300 transition-all disabled:opacity-60 font-medium"
               >
                 {uploading ? (
@@ -1092,13 +1098,6 @@ export default function ProductForm({
                 )}
               </button>
               </SharedLockedField>
-              {maxImages !== undefined && (
-                <p className={`mt-2 text-xs ${displayImages.length >= maxImages ? 'text-red-500 dark:text-red-400 font-medium' : 'text-stone-500 dark:text-zinc-500'}`}>
-                  {displayImages.length >= maxImages
-                    ? t('dashboard.productForm.imagesLimitBody', { max: maxImages })
-                    : t('dashboard.productForm.imagesLimitUsage', { count: displayImages.length, max: maxImages })}
-                </p>
-              )}
               {displayImages.length > 0 && (
                 <div className="mt-4 flex flex-wrap gap-3">
                   {displayImages.map((url, i) => (

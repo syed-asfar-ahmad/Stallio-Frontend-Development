@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "thumbs": "node scripts/generate-theme-thumbs.mjs"
   },
   "dependencies": {
     "@mreduar/iso-4217-currencies": "^0.2.6",

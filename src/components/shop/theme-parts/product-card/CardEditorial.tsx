@@ -48,14 +48,17 @@ export default function CardEditorial({ product: p, shopUsername, currency, link
         ) : compare ? (
           <span
             className="absolute top-3 start-3 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider"
-            style={{ background: 'var(--theme-primary)', color: '#ffffff' }}
+            style={{ background: 'var(--theme-primary)', color: 'var(--theme-primary-contrast)' }}
           >
             Edition
           </span>
         ) : null}
 
         {/* Subtle Editorial Action Icon */}
-        <div className="absolute bottom-3 end-3 h-8 w-8 rounded-full bg-white/90 text-stone-900 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-md translate-y-2 group-hover:translate-y-0">
+        <div
+          className="absolute bottom-3 end-3 h-8 w-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-md translate-y-2 group-hover:translate-y-0"
+          style={{ background: 'var(--theme-surface)', color: 'var(--theme-text-primary)' }}
+        >
           <ArrowUpRight className="w-4 h-4 rtl:rotate-90" />
         </div>
       </div>

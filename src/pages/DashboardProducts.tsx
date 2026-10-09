@@ -36,7 +36,8 @@ import { scrollOnPaginationChange } from '../lib/scrollDashboardMainToTop';
 import { PRODUCT_CARD_ASPECT_CLASS, PRODUCT_IMAGE_FRAME_CLASS } from '../lib/imageCropViewports';
 import { DASHBOARD_SEARCH_INPUT, DASHBOARD_FILTER_SELECT } from '../lib/dashboardFormClasses';
 import ProductImage from '../components/ProductImage';
-import { getSellerPlanLimits } from '../lib/sellerPlanLimits';
+import { getSellerPlanLimits, canUpgradePlan } from '../lib/sellerPlanLimits';
+import PlanLimitBanner from '../components/plan/PlanLimitBanner';
 
 const PAGE_SIZE = 15;
 const CATEGORY_UNCATEGORIZED = '__uncategorized__';
@@ -313,7 +314,7 @@ export default function DashboardProducts() {
         </div>
 
         <div className="mt-4 hidden min-w-0 flex-wrap items-center justify-between gap-3 lg:flex">
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center gap-3">
             <button
               type="button"
               onClick={handleAddProductClick}
@@ -366,6 +367,8 @@ export default function DashboardProducts() {
           )}
         </div>
       </div>
+
+      <PlanLimitBanner show={productLimitReached && canUpgradePlan(user?.plan)} />
 
       {showForm && (
         <ProductForm

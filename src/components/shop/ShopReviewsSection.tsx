@@ -51,15 +51,15 @@ function ReviewCard({ review, textDir }: { review: ShopTestimonial; textDir: 'lt
   return (
     <article
       dir={textDir}
-      className="flex w-full flex-col overflow-hidden rounded-2xl border border-stone-200 bg-white dark:border-zinc-700 dark:bg-zinc-900"
+      className="flex w-full flex-col overflow-hidden rounded-theme-card border border-theme-border bg-theme-surface shadow-theme-card"
     >
-      <div className="rounded-t-2xl border-b border-stone-100 bg-brand-50/60 px-4 py-3 dark:border-zinc-800 dark:bg-brand-950/40">
+      <div className="rounded-t-theme-card border-b border-theme-border bg-theme-primary-light px-4 py-3">
         <div className="flex items-center gap-2.5">
-          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-600 text-xs font-bold text-white">
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-theme-primary text-xs font-bold text-theme-badge-text">
             {initialsFromName(review.name)}
           </span>
           <div className="min-w-0 flex-1">
-            <p className="break-words text-sm font-semibold leading-snug text-stone-900 dark:text-zinc-100">{review.name}</p>
+            <p className="break-words text-sm font-semibold leading-snug text-theme-text">{review.name}</p>
             <div className="mt-0.5">
               <StarRating rating={review.rating} />
             </div>
@@ -67,7 +67,7 @@ function ReviewCard({ review, textDir }: { review: ShopTestimonial; textDir: 'lt
         </div>
       </div>
       <div className="px-4 py-3.5">
-        <p className="whitespace-pre-wrap break-words text-sm leading-relaxed text-stone-700 dark:text-zinc-300">{review.text}</p>
+        <p className="whitespace-pre-wrap break-words text-sm leading-relaxed text-theme-text-secondary">{review.text}</p>
       </div>
     </article>
   );
@@ -143,7 +143,7 @@ export default function ShopReviewsSection({ reviews, containerClass }: Props) {
                 onClick={goPrev}
                 disabled={index <= 0}
                 aria-label={t('reviewsPrev')}
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-stone-200 bg-white text-stone-600 shadow-sm hover:border-brand-300 hover:bg-brand-50 disabled:opacity-30 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:border-brand-500/40 dark:hover:bg-zinc-700"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-theme-border bg-theme-surface text-theme-text shadow-theme-card hover:border-theme-primary hover:bg-theme-primary-light disabled:opacity-30"
               >
                 <ChevronLeft className="h-5 w-5 rtl:rotate-180" aria-hidden />
               </button>
@@ -152,7 +152,7 @@ export default function ShopReviewsSection({ reviews, containerClass }: Props) {
                 onClick={goNext}
                 disabled={index >= maxIndex}
                 aria-label={t('reviewsNext')}
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-stone-200 bg-white text-stone-600 shadow-sm hover:border-brand-300 hover:bg-brand-50 disabled:opacity-30 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:border-brand-500/40 dark:hover:bg-zinc-700"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-theme-border bg-theme-surface text-theme-text shadow-theme-card hover:border-theme-primary hover:bg-theme-primary-light disabled:opacity-30"
               >
                 <ChevronRight className="h-5 w-5 rtl:rotate-180" aria-hidden />
               </button>
@@ -161,7 +161,7 @@ export default function ShopReviewsSection({ reviews, containerClass }: Props) {
         }
       />
 
-      <div className="rounded-2xl border border-stone-200/80 bg-stone-50/40 p-3 max-lg:p-3 dark:border-zinc-700 dark:bg-zinc-900/50 lg:p-5">
+      <div className="rounded-theme-card border border-theme-border bg-theme-surface-secondary p-3 max-lg:p-3 lg:p-5">
         {useCarousel ? (
           <div ref={viewportRef} dir="ltr" className="w-full overflow-hidden px-1">
             <div

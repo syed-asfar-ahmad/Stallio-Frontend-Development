@@ -5,7 +5,8 @@ import toast from 'react-hot-toast';
 import { api, fetchAuthorizedBlob } from '../lib/api';
 import { useAuth } from '../context/AuthContext';
 import { formatPrice, formatQuantity } from '../lib/countryCurrencyOptions';
-import { getSellerPlanLimits } from '../lib/sellerPlanLimits';
+import { getSellerPlanLimits, canUpgradePlan } from '../lib/sellerPlanLimits';
+import PlanLimitBanner from '../components/plan/PlanLimitBanner';
 import { getProductImageDisplayUrl } from '../lib/productImageUrl';
 import DashboardLayout from '../components/DashboardLayout';
 import DashboardLoading, { AdminLoadingInline } from '../components/DashboardLoading';
@@ -462,7 +463,7 @@ export default function DashboardOrders() {
             </h1>
             <p className="text-stone-500 dark:text-zinc-400 mt-0.5 text-xs max-lg:text-xs lg:text-sm">{t('dashboard.orders.subtitle')}</p>
           </div>
-          <div className="flex flex-col gap-2 w-full max-lg:w-full lg:flex-row lg:w-auto lg:shrink-0">
+          <div className="flex flex-col gap-2 w-full max-lg:w-full lg:flex-row lg:items-center lg:w-auto lg:shrink-0">
             <button
               type="button"
               onClick={exportCsv}
@@ -489,6 +490,8 @@ export default function DashboardOrders() {
           </p>
         )}
       </div>
+
+      <PlanLimitBanner show={orderLimitReached && canUpgradePlan(user?.plan)} />
 
       {orders.length === 0 ? (
         <div className="rounded-xl max-lg:rounded-xl lg:rounded-2xl border border-stone-200/80 dark:border-zinc-600/80 bg-white dark:bg-zinc-900 p-8 max-lg:p-8 sm:p-12 lg:p-16 text-center shadow-sm overflow-hidden relative min-w-0">
