@@ -1,70 +1,133 @@
 {
   "howItWorks": {
     "hero": {
-      "titleLine1": "Three moves.",
-      "titleLine2": "One sharp link.",
-      "subtitle": "Open your store, load your catalog, then paste the same URL everywhere buyers already find you. Built for thumbs, not for IT tickets.",
-      "noteDraft": "~5 min first draft",
-      "noteMobile": "Mobile first",
-      "startFree": "Start Free",
-      "viewDemoStore": "View Demo Store",
-      "previewCards": [
-        { "n": "01", "t": "Name + URL", "d": "stallio.shop/you" },
-        { "n": "02", "t": "Add products", "d": "Photos & prices" },
-        { "n": "03", "t": "Share link", "d": "Bio, Stories, Chat" }
+      "eyebrow": "How it works",
+      "titleBefore": "Three moves.",
+      "titleAccent": "One sharp link.",
+      "body": "Open your store, load your catalog, then paste the same URL everywhere buyers already find you. Built for thumbs, not for IT tickets.",
+      "journey": [
+        {
+          "n": "01",
+          "label": "Name + URL",
+          "detail": "Claim your path",
+          "alt": "Stallio catalog screen on a phone"
+        },
+        {
+          "n": "02",
+          "label": "Add products",
+          "detail": "Photos & prices",
+          "alt": "Product photography ready for a catalog listing"
+        },
+        {
+          "n": "03",
+          "label": "Share link",
+          "detail": "Bio, Stories, Chat",
+          "alt": "Mobile checkout screen on Stallio"
+        }
       ]
     },
     "flow": {
       "eyebrow": "The flow",
       "title": "Open. List. Share.",
-      "subtitle": "Three deliberate beats so you ship a storefront that feels intentional, not improvised.",
+      "body": "Three deliberate beats so you ship a storefront that feels intentional, not improvised.",
+      "pathLabel": "Path",
       "steps": [
         {
+          "n": "01",
           "title": "Create your shop",
-          "description": "Sign up, name your store, pick your URL. You get a live link you can paste anywhere. No DNS, no deploy, no drama.",
-          "items": [
-            "Create your account",
-            "Add store name and details",
-            "Get your link (stallio.shop/you)"
-          ]
+          "body": "Sign up, name your store, pick your URL. You get a live link you can paste anywhere.",
+          "note": "No DNS. No deploy."
         },
         {
+          "n": "02",
           "title": "Add your products",
-          "description": "Photos, prices, short descriptions. One catalog you can refine anytime. Buyers see clarity, not chaos.",
-          "items": ["Add product photos", "Set prices and descriptions", "Keep one organized catalog"]
+          "body": "Photos, prices, short descriptions. One catalog you can refine anytime.",
+          "note": "Clarity, not chaos"
         },
         {
+          "n": "03",
           "title": "Share and take orders",
-          "description": "Same link in bio, stories, and chats. They browse on the phone. You track everything in your dashboard.",
-          "items": [
-            "Put the link in your profile or bio",
-            "Share in chat or social posts",
-            "Track orders in one place"
-          ]
+          "body": "Same link in bio, stories, and chats. Buyers browse on the phone. You track in one dashboard.",
+          "note": "Orders land here"
         }
       ]
     },
-    "strip": "Same link, Every channel, Real storefront",
+    "steps": {
+      "eyebrow": "Step by step",
+      "title": "From empty path to live shelf.",
+      "details": [
+        {
+          "n": "01",
+          "title": "Create your shop",
+          "body": "Sign up, name your store, pick your URL. You get a live link you can paste anywhere. No DNS, no deploy, no drama.",
+          "checks": [
+            "Create your account",
+            "Add store name and details",
+            "Get your link (stallio.shop/you)"
+          ],
+          "alt": "Baker packaging goods beside a phone storefront"
+        },
+        {
+          "n": "02",
+          "title": "Add your products",
+          "body": "Photos, prices, short descriptions. One catalog you can refine anytime. Buyers see clarity, not chaos.",
+          "checks": [
+            "Add product photos",
+            "Set prices and descriptions",
+            "Keep one organized catalog"
+          ],
+          "alt": "Maker studio with handmade goods ready to ship"
+        },
+        {
+          "n": "03",
+          "title": "Share and take orders",
+          "body": "Same link in bio, stories, and chats. They browse on the phone. You track everything in your dashboard.",
+          "checks": [
+            "Put the link in your profile or bio",
+            "Share in chat or social posts",
+            "Track orders in one place"
+          ],
+          "alt": "Clothing workspace with a phone open to a shop catalog"
+        }
+      ]
+    },
+    "channels": {
+      "titleBefore": "Same link",
+      "titleMid": "Every channel",
+      "titleAfter": "Real storefront",
+      "items": [
+        "Bio",
+        "Stories",
+        "WhatsApp",
+        "Chat"
+      ]
+    },
     "live": {
       "eyebrow": "When you are live",
       "title": "Buyers see polish. You see control.",
-      "subtitle": "A fast storefront on the outside. A calm dashboard on the inside.",
-      "commandTitle": "Command center",
-      "commandBody": "Orders, products, and requests in one view. Update stock between deliveries without opening ten apps.",
-      "commandBullets": [
+      "body": "A fast storefront on the outside. A calm dashboard on the inside.",
+      "dashboardTitle": "Command center",
+      "dashboardBody": "Orders, products, and requests in one view. Update stock between deliveries without opening ten apps.",
+      "dashboardPoints": [
         "Mark paid, ship, and download invoice PDFs",
         "Coupons, delivery, and stock in one place",
         "Export orders or add a manual phone order"
       ],
-      "thumbTitle": "Thumb friendly",
-      "thumbBody": "Categories, cart, coupons, and checkout on the phone. Buyers can switch English, Spanish, or Arabic on your store.",
-      "thumbTags": ["Cart", "Coupons", "Invoices"]
+      "phoneTitle": "Thumb friendly",
+      "phoneBody": "Categories, cart, coupons, and checkout on the phone. Buyers can switch English, Spanish, or Arabic on your store.",
+      "phoneChips": [
+        "Coupons",
+        "Invoices",
+        "EN / ES / AR"
+      ],
+      "altDashboard": "Stallio seller catalog view",
+      "altPhone": "Mobile product detail on a Stallio storefront"
     },
     "cta": {
+      "eyebrow": "Ready",
       "title": "Ship the link tonight.",
-      "subtitle": "Free to start. No card on file. If it feels right, keep selling from the same URL tomorrow.",
-      "createYourShop": "Start Free",
-      "exploreFeatures": "Explore Features"
+      "body": "Free to start. No card on file. If it feels right, keep selling from the same URL tomorrow.",
+      "secondary": "Explore features"
     }
   }
 }
