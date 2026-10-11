@@ -7,12 +7,15 @@ import HeaderFloatingCapsule from './header/HeaderFloatingCapsule';
 import HeaderCocoaOverlay from './header/HeaderCocoaOverlay';
 import HeaderMartMarket from './header/HeaderMartMarket';
 import HeaderFreshNav from './header/HeaderFreshNav';
+import HeaderNoirAtelier from './header/HeaderNoirAtelier';
 import type { ThemeHeaderProps } from './types';
 
 export default function Header(props: ThemeHeaderProps) {
   const { layout } = useStorefrontTheme();
 
   switch (layout.headerVariant) {
+    case 'noir-atelier':
+      return <HeaderNoirAtelier {...props} />;
     case 'fresh-nav':
       return <HeaderFreshNav {...props} />;
     case 'mart-market':
@@ -32,4 +35,3 @@ export default function Header(props: ThemeHeaderProps) {
       return <HeaderClassicBar {...props} />;
   }
 }
-

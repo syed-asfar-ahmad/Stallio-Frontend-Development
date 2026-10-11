@@ -70,7 +70,7 @@ export default function HeaderMinimalFloating({
         {/* Logo / shop name */}
         <Link to={`/${username}`} className="shrink-0 no-underline" aria-label={shop.shopName}>
           {shop.logo ? (
-            <img src={shop.logo} alt="" className="h-8 w-auto max-w-[8rem] object-contain lg:h-9" />
+            <img src={shop.logo} alt="" className="h-10 w-auto max-w-[10rem] object-contain lg:h-12 lg:max-w-[12rem]" />
           ) : (
             <span
               className="text-base font-light uppercase tracking-[0.3em] lg:text-lg"

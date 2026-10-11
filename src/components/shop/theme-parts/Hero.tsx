@@ -10,12 +10,15 @@ import HeroApothecaryDuo from './hero/HeroApothecaryDuo';
 import HeroCocoaBanner from './hero/HeroCocoaBanner';
 import HeroMartBento from './hero/HeroMartBento';
 import HeroFreshBloom from './hero/HeroFreshBloom';
+import HeroNoirAtelier from './hero/HeroNoirAtelier';
 import type { ThemeHeroProps } from './types';
 
 export default function Hero(props: ThemeHeroProps) {
   const { layout } = useStorefrontTheme();
 
   switch (layout.heroVariant) {
+    case 'noir-atelier':
+    return <HeroNoirAtelier {...props} />;
     case 'fresh-bloom':
       return <HeroFreshBloom {...props} />;
     case 'mart-bento':

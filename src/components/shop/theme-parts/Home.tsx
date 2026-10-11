@@ -17,6 +17,7 @@ import ProductCard from './ProductCard';
 import BoutiqueHome from './BoutiqueHome';
 import MartHome from './MartHome';
 import FreshHome from './FreshHome';
+import NoirHome from './NoirHome';
 import type { Product, Shop, ShopCategory } from '../../../types';
 import type { HomeSectionId } from '../../../themes/types';
 
@@ -534,6 +535,17 @@ export default function Home({
   if (themeId === 'modern-minimal') {
     return (
       <MinimalHome
+        shop={shop}
+        products={products}
+        username={username}
+        containerClass={containerClass}
+      />
+    );
+  }
+    // Route noir-luxe to its own dark editorial layout
+  if (themeId === 'noir-luxe') {
+    return (
+      <NoirHome
         shop={shop}
         products={products}
         username={username}

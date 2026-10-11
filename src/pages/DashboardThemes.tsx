@@ -117,7 +117,7 @@ export default function DashboardThemes() {
   }, [user]);
 
   // Bypassed for development & testing so all themes and token customization can be tested
-  const isBusinessPlan = true;
+  const isBusinessPlan = user?.plan === 'business';
 
   const previewThemeConfig = useMemo<ShopThemeConfig>(() => {
     return {

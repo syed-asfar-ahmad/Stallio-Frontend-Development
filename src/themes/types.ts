@@ -5,8 +5,8 @@ export type ThemeId =
   | 'modern-minimal'
   | 'boutique-artisan'
   | 'retail-catalog'
-  | 'noir-luxe'        
-  | 'pacific-fresh';   
+  | 'noir-luxe'
+  | 'pacific-fresh';
 
 export type FontFamilyPreset =
   | 'outfit'
@@ -33,7 +33,8 @@ export type HeroLayoutVariant =
   | 'apothecary-duo'
   | 'cocoa-banner'
   | 'mart-bento'
-  | 'fresh-bloom';
+  | 'fresh-bloom'
+  | 'noir-atelier';
 
 export type ProductCardVariant =
   | 'bordered'
@@ -44,7 +45,8 @@ export type ProductCardVariant =
   | 'organic-pill'
   | 'cocoa-tile'
   | 'mart-deal'
-  | 'fresh-bloom';
+  | 'fresh-bloom'
+  | 'noir-gallery';
 
 export type HeaderNavigationVariant =
   | 'classic-bar'
@@ -54,7 +56,8 @@ export type HeaderNavigationVariant =
   | 'floating-capsule'
   | 'cocoa-overlay'
   | 'mart-market'
-  | 'fresh-nav';
+  | 'fresh-nav'
+  | 'noir-atelier';
 
 export type FooterLayoutVariant =
   | 'multi-column'
@@ -64,7 +67,8 @@ export type FooterLayoutVariant =
   | 'organic-curated'
   | 'cocoa-atelier'
   | 'mart-teal'
-  | 'fresh-sage';
+  | 'fresh-sage'
+  | 'noir-atelier';
 
 export interface ThemeColorTokens {
   primary: string;
@@ -130,7 +134,8 @@ export type ProductDetailLayoutVariant =
   | 'organic-wellness'
   | 'cocoa-gallery'
   | 'mart-shop'
-  | 'fresh-detail';
+  | 'fresh-detail'
+  | 'noir-detail';
 
 export type AboutLayoutVariant =
   | 'story-first'
@@ -141,7 +146,8 @@ export type AboutLayoutVariant =
   | 'sanctuary-story'
   | 'cocoa-story'
   | 'mart-story'
-  | 'fresh-story';
+  | 'fresh-story'
+  | 'noir-story';
 
 export type ContactLayoutVariant =
   | 'split-card'
@@ -151,13 +157,22 @@ export type ContactLayoutVariant =
   | 'curated-inquiry'
   | 'cocoa-studio'
   | 'mart-support'
-  | 'fresh-contact';
+  | 'fresh-contact'
+  | 'noir-contact';
 
-/** Layout of the all-products / search page. `classic` keeps the shared default. */
-export type ProductsPageLayoutVariant = 'classic' | 'cocoa-catalog' | 'mart-catalog' | 'fresh-catalog';
+export type ProductsPageLayoutVariant =
+  | 'classic'
+  | 'cocoa-catalog'
+  | 'mart-catalog'
+  | 'fresh-catalog'
+  | 'noir-catalog';
 
-/** Layout of the categories index and the single-category page. */
-export type CategoryLayoutVariant = 'classic' | 'cocoa-collections' | 'mart-collections' | 'fresh-collections';
+export type CategoryLayoutVariant =
+  | 'classic'
+  | 'cocoa-collections'
+  | 'mart-collections'
+  | 'fresh-collections'
+  | 'noir-collections';
 
 export type HomeSectionId =
   | 'hero'
@@ -205,7 +220,7 @@ export interface ThemeDefinition {
   displayName: string;
   tagline: string;
   description: string;
-  category: 'Modern' | 'Minimalist' | 'Luxury'  | 'High-Volume' | 'Premium';
+  category: 'Modern' | 'Minimalist' | 'Luxury' | 'High-Volume' | 'Premium';
   tier: SellerPlanTier;
   previewImage: string;
   demoUrl?: string;

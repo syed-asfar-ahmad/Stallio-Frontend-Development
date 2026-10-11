@@ -1494,3 +1494,6 @@ input[type='number'].dashboard-no-spin::-webkit-inner-spin-button {
   0%, 100% { opacity: 0.55; transform: scale(1); }
   50%      { opacity: 0.9;  transform: scale(1.06); }
 }
+html:has(.storefront-theme-root) {
+  font-size: clamp(16px, 0.55vw + 10px, 20px);
+}

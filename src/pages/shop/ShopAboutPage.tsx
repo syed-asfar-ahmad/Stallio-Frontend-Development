@@ -12,6 +12,7 @@ import { FreshButton } from '../../components/shop/theme-parts/fresh/FreshParts'
 import { MART_GRID_BG, MART_HAIR, MART_INK, MART_SOFT, MART_TEXT, MartEyebrow } from '../../components/shop/theme-parts/mart/MartParts';
 import { getLocalizedTrustLabel } from '../../lib/shopContentLanguages';
 import { resolveTrustBadgeType, TrustBadgeTypeIcon } from '../../lib/trustBadgeIcons';
+import NoirAboutPage from '../../components/shop/theme-parts/noir/NoirAboutPage';
 
 const containerClass = 'w-full max-w-7xl mx-auto px-3 sm:px-4 lg:px-5';
 const DEFAULT_ABOUT_TEXT_COLOR = '#ffffff';
@@ -35,7 +36,21 @@ export default function ShopAboutPage() {
   const heroImage = shop.aboutImages?.[0];
   const aboutHeroTextColor = getSafeHexColor(shop.aboutTextColor);
 
-  // ── FRESH-STORY (Pacific Fresh) ───────────────────────────────────────────
+  
+  if (aboutVariant === 'noir-story') {
+    return (
+      <NoirAboutPage
+        shop={shop}
+        username={username}
+        aboutTitleText={aboutTitleText}
+        aboutContentHtml={aboutContentHtml}
+        heroImage={heroImage}
+        containerClass={containerClass}
+      />
+    );
+  }
+
+ 
   if (aboutVariant === 'fresh-story') {
     const gallery = (shop.aboutImages ?? []).slice(1, 4);
     const values = shop.homeTrustEnabled ? (shop.homeTrustBadges ?? []).filter((b) => b.label?.trim()).slice(0, 6) : [];
@@ -108,7 +123,7 @@ export default function ShopAboutPage() {
     );
   }
 
-  // ── VOLT-STORY (Retail Catalog) ──────────────────────────────────────────
+ 
   if (aboutVariant === 'mart-story') {
     const gallery = (shop.aboutImages ?? []).slice(1, 5);
     const stats = shop.homeTrustEnabled ? (shop.homeTrustBadges ?? []).filter((b) => b.label?.trim()).slice(0, 4) : [];
@@ -193,7 +208,7 @@ export default function ShopAboutPage() {
     );
   }
 
-  // ── COCOA-STORY (Boutique Artisan) ───────────────────────────────────────
+
   if (aboutVariant === 'cocoa-story') {
     const gallery = (shop.aboutImages ?? []).slice(1, 5);
     const values = shop.homeTrustEnabled ? (shop.homeTrustBadges ?? []).filter((b) => b.label?.trim()).slice(0, 4) : [];
@@ -201,7 +216,7 @@ export default function ShopAboutPage() {
 
     return (
       <main className="flex-1 pb-16 lg:pb-28">
-        {/* Banner */}
+        { }
         <section className={`${containerClass} pt-5 lg:pt-8`}>
           <header
             className="relative isolate flex min-h-[22rem] items-end overflow-hidden rounded-[var(--theme-radius-card)] sm:min-h-[28rem] lg:min-h-[34rem]"
@@ -234,7 +249,7 @@ export default function ShopAboutPage() {
           </header>
         </section>
 
-        {/* Story */}
+        { }
         <section className={`${containerClass} mt-14 grid gap-8 lg:mt-24 lg:grid-cols-12 lg:gap-14`}>
           <div className="lg:col-span-4">
             <div className="lg:sticky lg:top-28">
@@ -263,7 +278,7 @@ export default function ShopAboutPage() {
           </article>
         </section>
 
-        {/* Studio images — staggered */}
+        { }
         {gallery.length > 0 && (
           <section className={`${containerClass} mt-14 lg:mt-24`}>
             <div className={`grid gap-4 lg:gap-5 ${gallery.length === 1 ? 'grid-cols-1' : 'grid-cols-2 lg:grid-cols-4'}`}>
@@ -285,7 +300,7 @@ export default function ShopAboutPage() {
           </section>
         )}
 
-        {/* Values (from the store's trust badges) */}
+        { }
         {values.length > 0 && (
           <section className={`${containerClass} mt-16 lg:mt-24`}>
             <ul
@@ -309,7 +324,7 @@ export default function ShopAboutPage() {
           </section>
         )}
 
-        {/* Closing call-to-action */}
+        { }
         <section className={`${containerClass} mt-16 lg:mt-24`}>
           <div
             className="flex flex-col items-start justify-between gap-6 rounded-[var(--theme-radius-card)] p-8 sm:flex-row sm:items-center sm:p-12"
@@ -334,11 +349,11 @@ export default function ShopAboutPage() {
     );
   }
 
-  // ── VARIANT 0: ORGANIC-JOURNAL (Pacific Fresh Wellness Editorial) ────────
+
   if (aboutVariant === 'organic-journal') {
     return (
       <main className="flex-1 pb-14 lg:pb-24">
-        {/* Editorial Top Section */}
+        { }
         <section className={`${containerClass} pt-8 lg:pt-16 max-w-4xl mx-auto text-center`}>
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-theme-border bg-theme-primary-light text-theme-primary text-xs font-bold uppercase tracking-widest mb-5">
             <Leaf className="w-3.5 h-3.5" />
@@ -373,7 +388,7 @@ export default function ShopAboutPage() {
           )}
         </section>
 
-        {/* Botanical Core Pillars */}
+        { }
         <section className={`${containerClass} pt-10 lg:pt-16 max-w-5xl mx-auto`}>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
@@ -396,7 +411,7 @@ export default function ShopAboutPage() {
           </div>
         </section>
 
-        {/* Main Journal Story Section */}
+        { }
         <section className={`${containerClass} pt-10 lg:pt-16 max-w-3xl mx-auto`}>
           <article
             className="rounded-[var(--theme-radius-card)] border border-theme-border bg-theme-surface p-6 sm:p-10 lg:p-14 shadow-[var(--theme-shadow-card)] relative overflow-hidden"
@@ -477,7 +492,7 @@ export default function ShopAboutPage() {
     );
   }
 
-  // ── VARIANT 2: SPLIT-IMAGE (Lookbook, Editorial & Catalog) ───────────────
+ 
   if (aboutVariant === 'split-image') {
     return (
       <main className="flex-1 pb-10 lg:pb-16">
@@ -512,7 +527,7 @@ export default function ShopAboutPage() {
               </div>
             </div>
 
-            {/* Narrative Column */}
+            { }
             <div className="lg:col-span-7">
               <div className="rounded-theme-card border border-theme-border bg-theme-surface p-6 sm:p-10 lg:p-12 shadow-theme-card">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-theme-badge border border-theme-border bg-theme-primary-light text-theme-primary text-xs font-semibold mb-4">
@@ -549,7 +564,7 @@ export default function ShopAboutPage() {
     );
   }
 
-  // ── VARIANT 3: MINIMAL-CLEAN (Default classic layout) ────────────────────
+  
   return (
     <main className="flex-1 pb-8 max-lg:pb-8 lg:pb-14">
       <section className={`${containerClass} pt-4 max-lg:pt-4 lg:pt-8`}>

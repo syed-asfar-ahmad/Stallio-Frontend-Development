@@ -16,8 +16,6 @@ import {
 import { DEFAULT_THEME_ID } from './constants';
 
 export const THEME_REGISTRY: Record<ThemeId, ThemeDefinition> = {
-  // ─── Existing themes ──────────────────────────────────────────────────────
-
   'classic-clean': {
     id: 'classic-clean',
     name: 'classic-clean',
@@ -87,7 +85,6 @@ export const THEME_REGISTRY: Record<ThemeId, ThemeDefinition> = {
       homeSections: ['hero', 'featured', 'products'],
     },
   },
-
 
   'boutique-artisan': {
     id: 'boutique-artisan',
@@ -166,8 +163,6 @@ export const THEME_REGISTRY: Record<ThemeId, ThemeDefinition> = {
     },
   },
 
-  // ─── Premium themes ────────────────────────────────────────────────────────
-
   'noir-luxe': {
     id: 'noir-luxe',
     name: 'noir-luxe',
@@ -184,22 +179,23 @@ export const THEME_REGISTRY: Record<ThemeId, ThemeDefinition> = {
       'Hard-edged square geometry for deliberate luxury severity',
       'Gold-tinted glow shadows and minimal floating navigation',
     ],
-    defaultTokens: noirLuxeTokens,
-    defaultDarkTokens: noirLuxeTokens,   // Dark is the canonical look
+    defaultTokens: noirLuxeLightTokens,
+    defaultDarkTokens: noirLuxeTokens,
     defaultLayout: {
-      heroVariant: 'split-image',
-      productCardVariant: 'flat',
-      headerVariant: 'minimal-floating',
-      footerVariant: 'centered-minimal',
-      productDetailVariant: 'gallery-stacked',
-      aboutVariant: 'split-image',
-      contactVariant: 'centered-minimal',
+      heroVariant: 'noir-atelier',
+      productCardVariant: 'noir-gallery',
+      headerVariant: 'noir-atelier',
+      footerVariant: 'noir-atelier',
+      productDetailVariant: 'noir-detail',
+      aboutVariant: 'noir-story',
+      contactVariant: 'noir-contact',
+      productsPageVariant: 'noir-catalog',
       productGridColumns: 2,
       showCategoryPillsOnHome: false,
       showFeaturedCollection: true,
       showReviewsSection: true,
-      showTrustBadges: false,
-      homeSections: ['hero', 'featured', 'products', 'reviews'],
+      showTrustBadges: true,
+      homeSections: ['hero', 'featured', 'products', 'collections', 'trust', 'reviews'],
     },
   },
 
@@ -241,7 +237,6 @@ export const THEME_REGISTRY: Record<ThemeId, ThemeDefinition> = {
       homeSections: ['hero', 'categories', 'products', 'trust', 'collections', 'featured', 'reviews'],
     },
   },
-
 };
 
 export const THEME_LIST: ThemeDefinition[] = Object.values(THEME_REGISTRY);

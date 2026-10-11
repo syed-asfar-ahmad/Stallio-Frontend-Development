@@ -8,12 +8,15 @@ import CardOrganicPill from './product-card/CardOrganicPill';
 import CardCocoaTile from './product-card/CardCocoaTile';
 import CardMartDeal from './product-card/CardMartDeal';
 import CardFreshBloom from './product-card/CardFreshBloom';
+import CardNoirGallery from './product-card/CardNoirGallery';
 import type { ThemeProductCardProps } from './types';
 
 export default function ProductCard(props: ThemeProductCardProps) {
   const { layout } = useStorefrontTheme();
 
   switch (layout.productCardVariant) {
+    case 'noir-gallery':
+      return <CardNoirGallery {...props} />;
     case 'fresh-bloom':
       return <CardFreshBloom {...props} />;
     case 'mart-deal':
@@ -35,4 +38,3 @@ export default function ProductCard(props: ThemeProductCardProps) {
       return <CardBordered {...props} />;
   }
 }
-

@@ -10,6 +10,7 @@ import { getSocialBrandColor, SocialIcon } from '../../components/SocialIcons';
 import ContactLtrText from '../../components/ContactLtrText';
 import { formatHoursRange, hasFooterAvailability, normalizeAvailabilityHours } from '../../lib/shopAvailability';
 import { shopWeekdayKey } from '../../lib/shopUiTranslations';
+import NoirContactPage from '../../components/shop/theme-parts/noir/NoirContactPage';
 
 const API_BASE = import.meta.env.VITE_API_URL ?? '';
 const containerClass = 'w-full max-w-7xl mx-auto px-3 sm:px-4 lg:px-5';
@@ -28,6 +29,10 @@ export default function ShopContactPage() {
   const [contactError, setContactError] = useState('');
 
   if (!shop) return null;
+
+  if (contactVariant === 'noir-contact') {
+    return <NoirContactPage shop={shop} username={username} containerClass={containerClass} />;
+  }
 
   if (contactSent && (contactVariant === 'fresh-contact' || contactVariant === 'mart-support')) {
     const fresh = contactVariant === 'fresh-contact';
@@ -112,7 +117,6 @@ export default function ShopContactPage() {
     }
   }
 
-  // ── FRESH-CONTACT (Pacific Fresh) ─────────────────────────────────────────
   if (contactVariant === 'fresh-contact') {
     const showHours = hasFooterAvailability(shop.availabilityEnabled, shop.availabilityHours);
     const schedule = normalizeAvailabilityHours(shop.availabilityHours);
@@ -218,7 +222,6 @@ export default function ShopContactPage() {
     );
   }
 
-  // ── VOLT-SUPPORT (Retail Catalog) ────────────────────────────────────────
   if (contactVariant === 'mart-support') {
     const showHours = hasFooterAvailability(shop.availabilityEnabled, shop.availabilityHours);
     const schedule = normalizeAvailabilityHours(shop.availabilityHours);
@@ -338,7 +341,6 @@ export default function ShopContactPage() {
     );
   }
 
-  // ── COCOA-STUDIO (Boutique Artisan) ──────────────────────────────────────
   if (contactVariant === 'cocoa-studio') {
     const CREAM = '#f7ead4';
     const SOFT = 'rgb(247 234 212 / 0.72)';
@@ -354,7 +356,6 @@ export default function ShopContactPage() {
     return (
       <main className={`${containerClass} flex-1 pb-16 pt-5 lg:pb-28 lg:pt-8`}>
         <div className="grid overflow-hidden rounded-[var(--theme-radius-card)] lg:grid-cols-[5fr_7fr]" style={{ boxShadow: 'var(--theme-shadow-card)' }}>
-          {/* Details panel */}
           <section
             className="relative flex flex-col justify-between gap-12 p-8 sm:p-12 lg:p-14"
             style={{ background: 'color-mix(in srgb, var(--theme-primary) 30%, #1a0f07)', color: CREAM }}
@@ -420,7 +421,6 @@ export default function ShopContactPage() {
             )}
           </section>
 
-          {/* Form */}
           <section className="p-8 sm:p-12 lg:p-14" style={{ background: 'var(--theme-surface)' }}>
             <h2
               className="text-2xl font-semibold sm:text-3xl"
@@ -498,11 +498,9 @@ export default function ShopContactPage() {
     );
   }
 
-  // ── VARIANT 0: ORGANIC-CONCIERGE (Pacific Fresh Botanical Concierge) ─────
   if (contactVariant === 'organic-concierge') {
     return (
       <main className={`${containerClass} flex-1 pt-8 pb-14 lg:pt-14 lg:pb-24 max-w-5xl mx-auto`}>
-        {/* Header */}
         <div className="text-center mb-10 lg:mb-14 max-w-2xl mx-auto">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-theme-border bg-theme-primary-light text-theme-primary text-xs font-bold uppercase tracking-widest mb-4">
             <Mail className="w-3.5 h-3.5" />
@@ -523,7 +521,6 @@ export default function ShopContactPage() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Direct Concierge Cards Column */}
           {hasContactSidebar && (
             <div className="lg:col-span-5 space-y-4">
               <div className="p-6 rounded-[var(--theme-radius-card)] border border-theme-border bg-theme-surface shadow-[var(--theme-shadow-card)] space-y-5">
@@ -617,7 +614,6 @@ export default function ShopContactPage() {
             </div>
           )}
 
-          {/* Form Column */}
           <div className={hasContactSidebar ? 'lg:col-span-7' : 'max-w-2xl mx-auto w-full'}>
             <form
               onSubmit={handleSubmitContact}
@@ -692,7 +688,6 @@ export default function ShopContactPage() {
     );
   }
 
-  // ── VARIANT 1: CENTERED-MINIMAL (Minimalist & Luxury brands) ────────────
   if (contactVariant === 'centered-minimal') {
     return (
       <main className={`${containerClass} flex-1 pt-6 pb-12 lg:pt-12 lg:pb-20 max-w-2xl mx-auto`}>
@@ -815,7 +810,6 @@ export default function ShopContactPage() {
     );
   }
 
-  // ── VARIANT 2: SPLIT-CARD (Default classic & catalog layout) ─────────────
   return (
     <main className={`${containerClass} flex-1 pt-4 pb-8 max-lg:pt-4 max-lg:pb-8 lg:pt-8 lg:pb-12`}>
       <section className="relative mb-5 max-lg:mb-5 overflow-hidden rounded-theme-card border border-theme-border bg-theme-surface p-5 shadow-theme-card max-lg:p-5 lg:mb-8 lg:p-10">

@@ -66,7 +66,7 @@ export default function ThemeThumbnail({
   const activeMode: ThumbnailMode = mode ?? resolved;
   const tokens = activeMode === 'dark' && theme.defaultDarkTokens ? theme.defaultDarkTokens : theme.defaultTokens;
   const c = tokens.colors;
-  const radius = tokens.radii.card;
+  
 
   const images = useMemo(() => previewImages(theme.id), [theme.id]);
   const tiles = [0, 1, 2, 3].map((i) => images.products[i % Math.max(1, images.products.length)] ?? '');
@@ -90,7 +90,7 @@ export default function ThemeThumbnail({
             style={{
               backgroundColor: c.surfaceSecondary,
               border: `1px solid ${c.border}`,
-              borderRadius: radius,
+              borderRadius: '12px',
             }}
           >
             <FadeImage src={sized(src, 320)} />
@@ -100,3 +100,4 @@ export default function ThemeThumbnail({
     </div>
   );
 }
+

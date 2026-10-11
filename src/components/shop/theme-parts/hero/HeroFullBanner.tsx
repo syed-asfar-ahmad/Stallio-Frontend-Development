@@ -17,7 +17,7 @@ export default function HeroFullBanner({ shop, username, containerClass }: Theme
   return (
     <section className={`${containerClass} py-4 lg:py-6`}>
       <div
-        className="relative isolate flex min-h-[320px] items-center overflow-hidden rounded-[var(--theme-radius-card)] border bg-[var(--theme-surface)] lg:min-h-[460px]"
+        className="relative isolate flex min-h-[240px] items-center overflow-hidden rounded-[var(--theme-radius-card)] border bg-[var(--theme-surface)] lg:min-h-[360px]"
         style={{ borderColor: 'var(--theme-border)' }}
       >
         {hasImage ? (
@@ -42,9 +42,9 @@ export default function HeroFullBanner({ shop, username, containerClass }: Theme
           />
         )}
 
-        <div className="relative w-full max-w-3xl space-y-5 px-5 py-12 sm:px-8 lg:px-14 lg:py-16">
+        <div className="relative w-full max-w-3xl space-y-5 px-5 py-8 sm:px-8 lg:px-14 lg:py-12">
           <h1
-            className="text-3xl font-bold leading-tight sm:text-4xl lg:text-6xl"
+            className="text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl"
             style={{
               color: hasImage ? '#ffffff' : 'var(--theme-text-primary)',
               fontFamily: 'var(--theme-font-heading)',

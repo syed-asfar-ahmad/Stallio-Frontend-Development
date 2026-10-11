@@ -12,7 +12,7 @@ export const classicCleanTokens: ThemeTokens = {
     surfaceSecondary: '#f1f5f9',
     textPrimary: '#0f172a',
     textSecondary: '#475569',
-    textMuted: '#94a3b8',
+    textMuted: '#64748b',
     border: '#e2e8f0',
     borderFocus: '#2563eb',
     badgeBg: '#eff6ff',
@@ -60,7 +60,7 @@ export const classicCleanDarkTokens: ThemeTokens = {
     surfaceSecondary: '#1f2937',
     textPrimary: '#f8fafc',
     textSecondary: '#94a3b8',
-    textMuted: '#64748b',
+    textMuted: '#7c8ba1',
     border: '#1e293b',
     borderFocus: '#3b82f6',
     badgeBg: '#1e3a8a',
@@ -85,7 +85,7 @@ export const modernMinimalTokens: ThemeTokens = {
     surfaceSecondary: '#f4f2ee',
     textPrimary: '#171717',
     textSecondary: '#525252',
-    textMuted: '#a3a3a3',
+    textMuted: '#6b6b6b',
     border: '#e8e5df',
     borderFocus: '#171717',
     badgeBg: '#171717',
@@ -133,7 +133,7 @@ export const modernMinimalDarkTokens: ThemeTokens = {
     surfaceSecondary: '#1c1c1c',
     textPrimary: '#fafafa',
     textSecondary: '#a3a3a3',
-    textMuted: '#737373',
+    textMuted: '#8a8a8a',
     border: '#262626',
     borderFocus: '#fafafa',
     badgeBg: '#262626',
@@ -360,7 +360,7 @@ export const noirLuxeTokens: ThemeTokens = {
     surfaceSecondary: '#1f1f1f', // Subtle step up
     textPrimary: '#f0ece4',      // Warm white
     textSecondary: '#b0a898',    // Warm grey
-    textMuted: '#6b6460',        // Muted taupe
+    textMuted: '#8a827b',        // Muted taupe
     border: '#2a2826',           // Barely-visible dark border
     borderFocus: '#c9a84c',      // Gold focus ring
     badgeBg: '#c9a84c',          // Gold badge
@@ -408,7 +408,7 @@ export const noirLuxeLightTokens: ThemeTokens = {
     surfaceSecondary: '#f5edd8', // Ivory surface
     textPrimary: '#1a1207',
     textSecondary: '#5c4e38',
-    textMuted: '#9c8c72',
+    textMuted: '#7a6b52',
     border: '#e8d9b8',
     borderFocus: '#8b6914',
     badgeBg: '#1a1207',
@@ -504,9 +504,14 @@ export const pacificFreshDarkTokens: ThemeTokens = {
     cardHover: '0 16px 40px -6px rgb(0 0 0 / 0.6), 0 0 0 1px rgb(180 227 58 / 0.18)',
     dropdown: '0 24px 48px -8px rgb(0 0 0 / 0.75)',
   },
-  personality: {
-    ...pacificFreshTokens.personality,
+    personality: {
+    imageAspectRatio: '4/5',
+    containerMaxWidth: 'max-w-7xl',
+    sectionDensity: 'airy',
+    cardPadding: '1rem',
     accentGlow: '0 10px 30px -10px rgba(180, 227, 58, 0.35)',
+    motionDuration: '260ms',
+    motionEasing: 'cubic-bezier(0.22, 1, 0.36, 1)',
   },
 };
 

@@ -7,12 +7,15 @@ import FooterOrganicCurated from './footer/FooterOrganicCurated';
 import FooterCocoaAtelier from './footer/FooterCocoaAtelier';
 import FooterMartTeal from './footer/FooterMartTeal';
 import FooterFreshSage from './footer/FooterFreshSage';
+import FooterNoirAtelier from './footer/FooterNoirAtelier';
 import type { ThemeFooterProps } from './types';
 
 export default function Footer(props: ThemeFooterProps) {
   const { layout } = useStorefrontTheme();
 
   switch (layout.footerVariant) {
+    case 'noir-atelier':
+      return <FooterNoirAtelier {...props} />;
     case 'fresh-sage':
       return <FooterFreshSage {...props} />;
     case 'mart-teal':
@@ -32,4 +35,3 @@ export default function Footer(props: ThemeFooterProps) {
       return <FooterMultiColumn {...props} />;
   }
 }
-

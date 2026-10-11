@@ -18,6 +18,7 @@ import type { ShopProductLinkState } from '../../lib/shopProductNav';
 import DetailCocoaGallery from '../../components/shop/theme-parts/detail/DetailCocoaGallery';
 import DetailMartShop from '../../components/shop/theme-parts/detail/DetailMartShop';
 import DetailFreshBloom from '../../components/shop/theme-parts/detail/DetailFreshBloom';
+import DetailNoirGallery from '../../components/shop/theme-parts/detail/DetailNoirGallery';
 
 const containerClass = 'w-full max-w-7xl mx-auto px-3 sm:px-4 lg:px-5';
 const ADD_TO_CART_ANIM_MS = 750;
@@ -174,9 +175,20 @@ export default function ShopProductDetailPage() {
     }, ADD_TO_CART_ANIM_MS);
   }
 
-  if (detailVariant === 'cocoa-gallery' || detailVariant === 'mart-shop' || detailVariant === 'fresh-detail') {
+  if (
+    detailVariant === 'cocoa-gallery' ||
+    detailVariant === 'mart-shop' ||
+    detailVariant === 'fresh-detail' ||
+    detailVariant === 'noir-detail'
+  ) {
     const DetailComponent =
-      detailVariant === 'mart-shop' ? DetailMartShop : detailVariant === 'fresh-detail' ? DetailFreshBloom : DetailCocoaGallery;
+      detailVariant === 'noir-detail'
+        ? DetailNoirGallery
+        : detailVariant === 'mart-shop'
+        ? DetailMartShop
+        : detailVariant === 'fresh-detail'
+        ? DetailFreshBloom
+        : DetailCocoaGallery;
     const pool = products.filter((x) => x.id !== product.id && x.isVisible !== false);
     const related = [
       ...pool.filter((x) => product.category && x.category === product.category),
@@ -271,7 +283,6 @@ export default function ShopProductDetailPage() {
       </div>
 
       <div className="grid gap-4 max-lg:gap-4 lg:grid-cols-[480px_1fr] lg:gap-8 xl:grid-cols-[560px_1fr] lg:items-start">
-        {/* Gallery Variants Dispatcher */}
         {detailVariant === 'gallery-stacked' ? (
           <div className="space-y-4">
             {detailImages.length > 0 ? (
@@ -345,7 +356,6 @@ export default function ShopProductDetailPage() {
             )}
           </div>
         ) : (
-          /* gallery-split (Default Classic & Retail) */
           <div
             className="relative z-0 mx-auto w-full max-w-[480px] lg:mx-0 lg:max-w-none lg:w-full overflow-hidden border"
             style={{
@@ -650,7 +660,6 @@ export default function ShopProductDetailPage() {
               </button>
             </div>
 
-            {/* Botanical Trust & Policy micro-row */}
             <div
               className="mt-4 pt-4 border-t grid grid-cols-2 gap-2 text-xs"
               style={{ borderColor: 'var(--theme-border)', color: 'var(--theme-text-muted)' }}

@@ -31,7 +31,7 @@ export default function ProductImage({
         src={getProductImageDisplayUrl(src)}
         alt={alt}
         loading={loading}
-        className={`${PRODUCT_IMAGE_CLASS} ${imageClassName}`.trim()}
+        className={`${PRODUCT_IMAGE_CLASS.replace('object-contain', 'object-cover')} ${imageClassName}`.trim()}
       />
       {children}
     </div>

@@ -159,7 +159,103 @@ export default function ShopProductsPage({ shop, products, username, containerCl
 
   // Determine grid columns from layout (default 4 for modern-minimal feel)
   const gridClass = 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4';
+  if (layout.productsPageVariant === 'noir-catalog') {
+    const catLabelN = (slug: string) => {
+      const c = shop.categories?.find((x) => x.slug === slug);
+      return c ? categoryName(c) : slug;
+    };
+    return (
+      <main className={`${containerClass} flex-1 pb-20 pt-12 lg:pb-32 lg:pt-20`}>
+        <div className="text-center">
+          <span className="text-[11px] font-semibold uppercase tracking-[0.45em]" style={{ color: 'var(--theme-primary)' }}>✦ {shop.shopName}</span>
+          <h1 className="mt-5 text-4xl uppercase tracking-[0.15em] lg:text-6xl" style={{ color: 'var(--theme-text-primary)', fontFamily: 'var(--theme-font-heading)' }}>
+            {t('productsPageTitle')}
+          </h1>
+          <span className="mx-auto mt-8 block h-px w-24" style={{ background: 'var(--theme-primary)' }} />
+        </div>
 
+        {visibleAll.length === 0 ? (
+          <div className="py-20 text-center">
+            <p className="text-sm" style={{ color: 'var(--theme-text-secondary)' }}>{t('productsEmpty')}</p>
+            <Link to={`/${username}`} className="mt-6 inline-flex border px-8 py-3 text-xs font-semibold uppercase tracking-[0.3em] no-underline" style={{ borderColor: 'var(--theme-primary)', color: 'var(--theme-primary)' }}>
+              {t('productsBackHome')}
+            </Link>
+          </div>
+        ) : (
+          <>
+            <div className="mt-14 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+              {[null, ...categories].map((cat) => {
+                const on = activeCategory === cat;
+                return (
+                  <button
+                    key={cat ?? 'all'}
+                    type="button"
+                    onClick={() => setActiveCategory(cat)}
+                    className="border-b pb-1.5 text-[11px] font-semibold uppercase tracking-[0.3em] transition-colors"
+                    style={{ borderColor: on ? 'var(--theme-primary)' : 'transparent', color: on ? 'var(--theme-primary)' : 'var(--theme-text-secondary)' }}
+                  >
+                    {cat ? catLabelN(cat) : t('categoryAll')}
+                  </button>
+                );
+              })}
+            </div>
+
+            <div
+              className={`relative mt-10 flex flex-col gap-4 border-y py-4 sm:flex-row sm:items-center sm:justify-between ${sortOpen ? 'z-40 isolate' : 'z-0'}`}
+              style={{ borderColor: 'var(--theme-border)' }}
+            >
+              <div className="relative flex-1">
+                <Search className="pointer-events-none absolute start-0 top-1/2 h-4 w-4 -translate-y-1/2" style={{ color: 'var(--theme-primary)' }} aria-hidden />
+                <input
+                  type="search"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder={t('productsSearchPh')}
+                  aria-label={t('productsSearchAria')}
+                  className="w-full border-0 bg-transparent py-2 ps-8 pe-8 text-sm focus:outline-none"
+                  style={{ color: 'var(--theme-text-primary)' }}
+                />
+                {trimmedSearch ? (
+                  <button type="button" onClick={() => setSearch('')} aria-label={t('productsClearSearch')} className="absolute end-0 top-1/2 -translate-y-1/2" style={{ color: 'var(--theme-text-muted)' }}>
+                    <X className="h-4 w-4" />
+                  </button>
+                ) : null}
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="hidden text-[10px] font-semibold uppercase tracking-[0.3em] sm:inline" style={{ color: 'var(--theme-text-muted)' }}>
+                  {t('showingCount', { shown: displayed.length, total: filteredSorted.length })}
+                </span>
+                <ShopSelect value={sort} onChange={(v) => setSort(v as SortKey)} onOpenChange={setSortOpen} options={sortOptions} aria-label={t('productsSortAria')} className="w-full sm:w-auto" />
+              </div>
+            </div>
+
+            {filteredSorted.length === 0 ? (
+              <div className="py-20 text-center">
+                <p className="text-lg uppercase tracking-[0.2em]" style={{ color: 'var(--theme-text-primary)', fontFamily: 'var(--theme-font-heading)' }}>{t('productsNoMatchTitle')}</p>
+                <button
+                  type="button"
+                  onClick={() => { setSearch(''); setSort('newest'); setActiveCategory(null); }}
+                  className="mt-6 border px-8 py-3 text-xs font-semibold uppercase tracking-[0.3em]"
+                  style={{ borderColor: 'var(--theme-primary)', color: 'var(--theme-primary)' }}
+                >
+                  {t('productsReset')}
+                </button>
+              </div>
+            ) : (
+              <>
+                <div className="relative z-0 mt-12 grid grid-cols-2 gap-x-5 gap-y-12 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-16">
+                  {displayed.map((p) => (
+                    <ProductCard key={p.id} product={p} shopUsername={username} currency={shop.currency} linkState={{ from: 'products' }} />
+                  ))}
+                </div>
+                <ShopPagination className="mt-16" page={safePage} total={filteredSorted.length} pageSize={SHOP_LIST_PAGE_SIZE} onPage={setPage} />
+              </>
+            )}
+          </>
+        )}
+      </main>
+    );
+  }
   if (layout.productsPageVariant === 'mart-catalog') {
     const catLabelV = (slug: string) => {
       const c = shop.categories?.find((x) => x.slug === slug);
