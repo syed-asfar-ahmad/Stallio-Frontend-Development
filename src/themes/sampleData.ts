@@ -57,27 +57,6 @@ export const SAMPLE_PREVIEWS: Record<ThemeId, SampleThemeData> = {
       },
     ],
   },
-  'bold-editorial': {
-    heroImage: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=800&auto=format&fit=crop',
-    products: [
-      {
-        id: '1',
-        name: 'Neo Streetwear Oversized Hoodie',
-        price: 98.0,
-        compare: 130.0,
-        image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=600&auto=format&fit=crop',
-        tag: 'Drop 04',
-      },
-      {
-        id: '2',
-        name: 'Industrial Utility Crossbody',
-        price: 65.0,
-        compare: 85.0,
-        image: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=600&auto=format&fit=crop',
-        tag: 'Popular',
-      },
-    ],
-  },
   'boutique-artisan': {
     heroImage: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?q=80&w=800&auto=format&fit=crop',
     products: [
@@ -159,27 +138,6 @@ export const SAMPLE_PREVIEWS: Record<ThemeId, SampleThemeData> = {
         compare: 45.0,
         image: 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?q=80&w=600&auto=format&fit=crop',
         tag: 'Organic',
-      },
-    ],
-  },
-  'studio-grid': {
-    heroImage: 'https://images.unsplash.com/photo-1550009158-9ebf69173e03?q=80&w=800&auto=format&fit=crop',
-    products: [
-      {
-        id: '1',
-        name: 'Studio Reference Precision Mechanical Keyboard',
-        price: 165.0,
-        compare: 210.0,
-        image: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?q=80&w=600&auto=format&fit=crop',
-        tag: 'Spec 01',
-      },
-      {
-        id: '2',
-        name: 'Anodized Aluminum Desk Monitor Arm',
-        price: 110.0,
-        compare: 140.0,
-        image: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?q=80&w=600&auto=format&fit=crop',
-        tag: 'CNC Machined',
       },
     ],
   },
