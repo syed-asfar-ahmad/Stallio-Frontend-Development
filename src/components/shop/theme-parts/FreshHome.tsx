@@ -18,7 +18,7 @@ import type { HomeSectionId } from '../../../themes/types';
 const DEFAULT_SECTIONS: HomeSectionId[] = ['hero', 'categories', 'products', 'trust', 'collections', 'featured', 'reviews'];
 
 /** Featured product card for the "Everyday" pair — beige tile, lime quick-add. */
-function EverydayCard({ product, username, currency }: { product: Product; username: string; currency: string }) {
+function EverydayCard({ product, username, currency }: { product: Product; username: string; currency?: string | null }) {
   const { t, productName } = useShopLanguage();
   const { addToCart } = useCart();
   const navigate = useNavigate();

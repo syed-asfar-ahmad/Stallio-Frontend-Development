@@ -130,7 +130,7 @@ export default function FooterOrganicCurated({ shop, quickLinks, containerClass 
               )}
             </Link>
             <p className="text-xs sm:text-sm leading-relaxed max-w-sm" style={{ color: 'var(--theme-text-secondary)' }}>
-              {shop.aboutContentPlain ||
+              {shop.aboutContent ||
                 'Crafting mindful botanical goods and clean living essentials with care, precision, and pure intentions.'}
             </p>
 

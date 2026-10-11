@@ -18,10 +18,10 @@ export default function ShopLanguageToggle() {
           key={item.id}
           type="button"
           onClick={() => setLang(item.id)}
-          className={`rounded-full px-1.5 py-1 text-[10px] font-bold transition-colors max-lg:px-1.5 max-lg:py-0.5 max-lg:text-[10px] lg:px-2.5 lg:py-1 lg:text-xs ${
+          className={`rounded-full px-2 py-1 text-[11px] font-bold transition-colors lg:px-2.5 lg:py-1 lg:text-xs ${
             lang === item.id
               ? 'bg-theme-primary text-theme-primary-contrast shadow-sm'
-              : 'text-theme-muted hover:text-theme-primary'
+              : 'text-[var(--theme-text-secondary)] hover:text-theme-primary'
           }`}
           aria-pressed={lang === item.id}
         >

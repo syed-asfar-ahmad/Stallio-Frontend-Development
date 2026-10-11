@@ -21,7 +21,7 @@ import { formatPrice, formatQuantity } from '../../../../lib/countryCurrencyOpti
 import { PRODUCT_CARD_ASPECT_CLASS } from '../../../../lib/imageCropViewports';
 import ProductImage from '../../../ProductImage';
 import ProductCard from '../ProductCard';
-import type { ShopDisplayOption } from '../../../../lib/shopContentLanguages';
+import type { ShopDisplayProductOption } from '../../../../lib/shopContentLanguages';
 import { PacificPillTag } from './PacificParts';
 
 type Props = {
@@ -34,7 +34,7 @@ type Props = {
   images: string[];
   activeIndex: number;
   setActiveIndex: (idx: number) => void;
-  options: ShopDisplayOption[];
+  options: ShopDisplayProductOption[];
   selected: Record<string, string>;
   setSelected: React.Dispatch<React.SetStateAction<Record<string, string>>>;
   message: string;
@@ -271,7 +271,7 @@ export default function PacificProductDetailPage({
                       )}
                     </div>
                     <div className="flex flex-wrap gap-2">
-                      {opt.values.map((val) => {
+                      {opt.choices.map((val: string) => {
                         const isChosen = selected[opt.canonicalName] === val;
                         return (
                           <button

@@ -10,7 +10,12 @@ type Props = {
   className?: string;
   id?: string;
   'aria-label'?: string;
-  onOpenChange?: (open: boolean) => void;
+    onOpenChange?: (open: boolean) => void;
+  label?: string;
+  hideLabel?: boolean;
+  buttonClassName?: string;
+  isOpen?: boolean;
+  onToggle?: () => void;
 };
 
 export default function ShopSelect({
