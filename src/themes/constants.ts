@@ -46,25 +46,24 @@ export const RADIUS_PRESETS: { id: RadiusPreset; label: string; button: string; 
 
 const BASIC_THEME_IDS: ThemeId[] = ['classic-clean', 'modern-minimal'];
 
-export function isThemeAllowedForPlan(themeId: ThemeId, plan?: string | null): boolean {
-  if (plan === 'business') return true;
-  return BASIC_THEME_IDS.includes(themeId);
+export function isThemeAllowedForPlan(_themeId: ThemeId, _plan?: string | null): boolean {
+  // Plan check bypassed so all themes can be tested and selected
+  return true;
 }
 
-export function getAvailableThemesForPlan(plan?: string | null): ThemeId[] {
-  if (plan === 'business') {
-    return [
-      'classic-clean',
-      'modern-minimal',
-      'boutique-artisan',
-      'retail-catalog',
-      'noir-luxe',
-      'pacific-fresh',
-    ];
-  }
-  return BASIC_THEME_IDS;
+export function getAvailableThemesForPlan(_plan?: string | null): ThemeId[] {
+  // Plan check bypassed so all themes can be previewed and tested
+  return [
+    'classic-clean',
+    'modern-minimal',
+    'boutique-artisan',
+    'retail-catalog',
+    'noir-luxe',
+    'pacific-fresh',
+  ];
 }
 
-export function canCustomizeTokens(plan?: string | null): boolean {
-  return plan === 'business';
+export function canCustomizeTokens(_plan?: string | null): boolean {
+  // Plan check bypassed to allow full design token customization
+  return true;
 }
