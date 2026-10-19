@@ -1,6 +1,6 @@
 {
   "contact": {
-    "toastSent": "¡Mensaje enviado! Nos pondremos en contacto contigo pronto.",
+    "toastSent": "Mensaje enviado. Nos pondremos en contacto contigo pronto.",
     "success": {
       "title": "Mensaje enviado",
       "body": "Gracias por escribirnos. Nos pondremos en contacto contigo pronto.",
@@ -15,7 +15,7 @@
     },
     "info": {
       "title": "Datos de contacto",
-      "body": "¿Prefieres correo electrónico o teléfono? Usa cualquiera de los dos abajo. El tiempo de respuesta habitual es de unos pocos días laborables.",
+      "body": "¿Prefieres el correo? Escríbenos abajo. El tiempo de respuesta habitual es de unos pocos días laborables.",
       "social": "Redes sociales"
     },
     "form": {
@@ -26,6 +26,7 @@
       "subject": "Asunto",
       "message": "Mensaje",
       "placeholderName": "Tu nombre",
+      "placeholderEmail": "tu@ejemplo.com",
       "placeholderSubject": "¿De qué se trata?",
       "placeholderMessage": "Tu mensaje...",
       "send": "Enviar mensaje",
@@ -39,12 +40,11 @@
         "messageMin": "El mensaje debe tener al menos 10 caracteres"
       }
     },
-    "strip": {
+    "cta": {
       "eyebrow": "Autoservicio",
       "title": "¿Probando Stallio primero?",
       "body": "La mayoría de las respuestas están en Cómo funciona y Características. Empieza gratis cuando quieras.",
-      "howItWorks": "Cómo funciona",
-      "features": "Características"
+      "secondary": "Cómo funciona"
     }
   }
 }

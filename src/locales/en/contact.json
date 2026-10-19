@@ -1,12 +1,12 @@
 {
   "contact": {
-    "toastSent": "Message sent! We'll get back to you soon.",
+    "toastSent": "Message sent. We will get back to you soon.",
     "success": {
       "title": "Message sent",
       "body": "Thanks for reaching out. We will get back to you soon.",
       "hint": "For urgent help with your shop, check your dashboard settings.",
-      "backHome": "Back To Home",
-      "openShop": "Start Free"
+      "backHome": "Back to home",
+      "openShop": "Start free"
     },
     "hero": {
       "eyebrow": "Contact",
@@ -15,7 +15,7 @@
     },
     "info": {
       "title": "Contact info",
-      "body": "Prefer email or phone? Use either below. Typical reply time is a few business days.",
+      "body": "Prefer email? Write us below. Typical reply time is a few business days.",
       "social": "Social"
     },
     "form": {
@@ -26,9 +26,10 @@
       "subject": "Subject",
       "message": "Message",
       "placeholderName": "Your name",
+      "placeholderEmail": "you@example.com",
       "placeholderSubject": "What is this about?",
       "placeholderMessage": "Your message...",
-      "send": "Send Message",
+      "send": "Send message",
       "sending": "Sending...",
       "errors": {
         "nameRequired": "Name is required",
@@ -39,12 +40,11 @@
         "messageMin": "Message should be at least 10 characters"
       }
     },
-    "strip": {
+    "cta": {
       "eyebrow": "Self-serve",
       "title": "Trying Stallio first?",
-      "body": "Most answers live in How it works and Features. Start Free anytime.",
-      "howItWorks": "How It Works",
-      "features": "Features"
+      "body": "Most answers live in How it works and Features. Start free anytime.",
+      "secondary": "How it works"
     }
   }
 }
