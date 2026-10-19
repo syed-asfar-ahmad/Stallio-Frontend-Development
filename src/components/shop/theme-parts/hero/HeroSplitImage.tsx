@@ -1,3 +1,4 @@
+import ShopImage from '../../../ShopImage';
 import { Link } from 'react-router-dom';
 import { ShoppingBag, ArrowRight, Sparkles } from 'lucide-react';
 import type { CSSProperties } from 'react';
@@ -14,10 +15,10 @@ export default function HeroSplitImage({ shop, username, containerClass }: Theme
   if (!showHero) return null;
 
   return (
-    <section className="w-full overflow-hidden py-4 sm:py-6 lg:py-8">
+    <section className="w-full overflow-hidden py-3 sm:py-4 lg:py-6">
       <div className={containerClass}>
         <div
-          className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center rounded-[var(--theme-radius-card)] border p-6 sm:p-8 lg:p-10"
+          className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 items-center rounded-[var(--theme-radius-card)] border p-5 sm:p-6 lg:p-8"
           style={{
             borderColor: 'var(--theme-border)',
             background: 'var(--theme-surface)',
@@ -25,19 +26,19 @@ export default function HeroSplitImage({ shop, username, containerClass }: Theme
           }}
         >
           {/* Left Column: Bold Copy & CTAs */}
-          <div className="lg:col-span-7 flex flex-col justify-center space-y-4 sm:space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-full w-fit"
+          <div className="lg:col-span-7 flex flex-col justify-center space-y-3 sm:space-y-4">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider rounded-full w-fit"
               style={{
                 background: 'var(--theme-badge-bg)',
                 color: 'var(--theme-badge-text)',
               }}
             >
-              <Sparkles className="w-3.5 h-3.5" />
+              <Sparkles className="w-3 h-3" />
               <span>Official Store</span>
             </div>
 
             <h1
-              className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold leading-[1.15]"
+              className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-extrabold leading-[1.15]"
               style={{
                 color: 'var(--theme-text-primary)',
                 fontFamily: 'var(--theme-font-heading)',
@@ -51,7 +52,7 @@ export default function HeroSplitImage({ shop, username, containerClass }: Theme
 
             {introText ? (
               <p
-                className="text-sm sm:text-base lg:text-lg leading-relaxed max-w-xl"
+                className="text-xs sm:text-sm lg:text-base leading-relaxed max-w-lg"
                 style={{ color: 'var(--theme-text-secondary)' }}
               >
                 {introText}
@@ -92,7 +93,7 @@ export default function HeroSplitImage({ shop, username, containerClass }: Theme
               }}
             >
               {shop.homeHeroImage ? (
-                <img
+                <ShopImage
                   src={shop.homeHeroImage}
                   alt={shop.shopName}
                   className="h-full w-full object-cover object-center transition-transform duration-700 hover:scale-105"

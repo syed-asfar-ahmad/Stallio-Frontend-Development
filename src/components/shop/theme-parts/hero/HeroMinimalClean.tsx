@@ -1,3 +1,4 @@
+import ShopImage from '../../../ShopImage';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import type { CSSProperties } from 'react';
@@ -14,12 +15,12 @@ export default function HeroMinimalClean({ shop, username, containerClass }: The
   if (!showHero) return null;
 
   return (
-    <section className={`${containerClass} pt-6 lg:pt-10`}>
+    <section className={`${containerClass} pt-4 lg:pt-6`}>
       <div className="relative overflow-hidden rounded-[var(--theme-radius-card)]" style={{ background: 'var(--theme-surface-secondary)' }}>
         {/* Background image with overlay */}
         {shop.homeHeroImage && (
           <>
-            <img
+            <ShopImage
               src={shop.homeHeroImage}
               alt=""
               className="absolute inset-0 h-full w-full object-cover object-center"
@@ -29,7 +30,7 @@ export default function HeroMinimalClean({ shop, username, containerClass }: The
         )}
 
         {/* Content — centered */}
-        <div className={`relative flex min-h-[260px] flex-col items-center justify-center gap-5 px-6 py-14 text-center lg:min-h-[380px] lg:py-20`}>
+        <div className={`relative flex min-h-[200px] flex-col items-center justify-center gap-3.5 px-5 py-8 text-center sm:min-h-[250px] lg:min-h-[290px] lg:py-12`}>
           {/* Decorative lines */}
           <div className="flex w-full max-w-xs items-center gap-3" aria-hidden>
             <div className="h-px flex-1 opacity-30" style={{ background: shop.homeHeroImage ? '#fff' : 'var(--theme-text-muted)' }} />
@@ -41,7 +42,7 @@ export default function HeroMinimalClean({ shop, username, containerClass }: The
           </div>
 
           <h1
-            className="max-w-2xl text-2xl leading-tight sm:text-3xl lg:text-5xl"
+            className="max-w-xl text-xl leading-tight sm:text-2xl lg:text-3xl"
             style={{
               color: shop.homeHeroImage ? '#ffffff' : 'var(--theme-text-primary)',
               fontFamily: 'var(--theme-font-heading)',
@@ -55,7 +56,7 @@ export default function HeroMinimalClean({ shop, username, containerClass }: The
 
           {introText && (
             <p
-              className="max-w-lg text-sm leading-relaxed lg:text-base"
+              className="max-w-md text-xs leading-relaxed sm:text-sm lg:text-sm"
               style={{ color: shop.homeHeroImage ? 'rgba(255,255,255,0.8)' : 'var(--theme-text-secondary)' }}
             >
               {introText}
@@ -64,7 +65,7 @@ export default function HeroMinimalClean({ shop, username, containerClass }: The
 
           <Link
             to={`/${username}/products`}
-            className="inline-flex items-center gap-2 rounded-[var(--theme-radius-btn)] px-7 py-3 text-sm font-semibold no-underline transition-opacity hover:opacity-85"
+            className="inline-flex items-center gap-1.5 rounded-[var(--theme-radius-btn)] px-5 py-2 sm:px-6 sm:py-2.5 text-xs sm:text-sm font-semibold no-underline transition-opacity hover:opacity-85"
             style={
               shop.homeHeroImage
                 ? { background: '#ffffff', color: '#0a0a0a' }
@@ -72,7 +73,7 @@ export default function HeroMinimalClean({ shop, username, containerClass }: The
             }
           >
             {t('heroBrowse')}
-            <ArrowRight className="h-4 w-4" />
+            <ArrowRight className="h-3.5 w-3.5" />
           </Link>
 
           {/* Decorative lines again */}

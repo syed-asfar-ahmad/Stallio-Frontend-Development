@@ -1,3 +1,4 @@
+import ShopImage from '../../../ShopImage';
 import { Link } from 'react-router-dom';
 import { useShopLanguage } from '../../../../context/ShopLanguageContext';
 import { getLocalizedHomeHeroTitle, getLocalizedHomeIntro } from '../../../../lib/shopContentLanguages';
@@ -9,10 +10,10 @@ type Tile = { key: string; to: string; image: string; name?: string };
 
 /** Absolute placements for the floating tiles on large screens. */
 const SLOTS = [
-  'start-[3%] bottom-[9%] w-40 xl:w-48 -rotate-3',
-  'end-[4%] top-[12%] w-36 xl:w-44 rotate-3',
-  'end-[17%] bottom-[7%] w-28 xl:w-32 rotate-2',
-  'start-[17%] top-[14%] w-24 xl:w-28 -rotate-2',
+  'start-[3%] bottom-[9%] w-32 xl:w-36 -rotate-3',
+  'end-[4%] top-[12%] w-28 xl:w-32 rotate-3',
+  'end-[17%] bottom-[7%] w-24 xl:w-28 rotate-2',
+  'start-[17%] top-[14%] w-20 xl:w-24 -rotate-2',
 ];
 
 /**
@@ -47,7 +48,7 @@ export default function HeroFreshBloom({ shop, username, containerClass, product
       style={{ background: FRESH_PEACH }}
     >
       <span className="relative block aspect-[3/4] overflow-hidden rounded-xl" style={{ background: shapeFor(tile.key, i) }}>
-        <img src={tile.image} alt="" loading={i === 0 ? 'eager' : 'lazy'} className="absolute inset-0 h-full w-full object-contain p-3 transition-transform duration-500 group-hover:scale-105" />
+        <ShopImage src={tile.image} alt="" loading={i === 0 ? 'eager' : 'lazy'} className="absolute inset-0 h-full w-full object-contain p-3 transition-transform duration-500 group-hover:scale-105" />
       </span>
     </Link>
   );
@@ -55,19 +56,19 @@ export default function HeroFreshBloom({ shop, username, containerClass, product
   return (
     <section className="relative overflow-hidden" style={{ background: 'var(--theme-surface-secondary)' }}>
       <div className={`${containerClass} relative`}>
-        <div className="relative mx-auto flex min-h-[26rem] max-w-3xl flex-col items-center justify-center px-2 pb-10 pt-14 text-center sm:min-h-[30rem] lg:min-h-[36rem] lg:pb-24 lg:pt-20">
+        <div className="relative mx-auto flex min-h-[19rem] max-w-2xl flex-col items-center justify-center px-2 pb-8 pt-10 text-center sm:min-h-[22rem] lg:min-h-[26rem] lg:pb-16 lg:pt-14">
           <h1
-            className="animate-[cocoaRise_700ms_cubic-bezier(0.22,1,0.36,1)_both] text-[2.9rem] font-medium leading-[1.02] sm:text-6xl lg:text-[5.25rem] motion-reduce:animate-none"
+            className="animate-[cocoaRise_700ms_cubic-bezier(0.22,1,0.36,1)_both] text-[2.1rem] font-medium leading-[1.04] sm:text-4xl lg:text-[3.5rem] motion-reduce:animate-none"
             style={{ color: 'var(--theme-text-primary)', fontFamily: 'var(--theme-font-heading)', letterSpacing: '-0.035em', textWrap: 'balance' as never }}
           >
             {title}
           </h1>
           {intro ? (
-            <p className="mt-5 line-clamp-3 max-w-md text-[15px] leading-relaxed" style={{ color: 'var(--theme-text-secondary)' }}>
+            <p className="mt-3.5 line-clamp-2 max-w-md text-xs leading-relaxed sm:text-sm" style={{ color: 'var(--theme-text-secondary)' }}>
               {intro}
             </p>
           ) : null}
-          <div className="mt-8">
+          <div className="mt-6">
             <FreshButton to={`/${username}/products`}>{t('shopNow')}</FreshButton>
           </div>
         </div>

@@ -6,7 +6,7 @@ import { api } from '../lib/api';
 import { getStoredToken } from '../context/AuthContext';
 import { getCurrencySymbol } from '../lib/countryCurrencyOptions';
 import type { Product, ProductOption } from '../types';
-import { X, ImagePlus, Plus, Trash2, ChevronDown, Eye, Package, Layers, Lock, Sparkles } from 'lucide-react';
+import { X, ImagePlus, Plus, Trash2, ChevronDown, Eye, Package, Layers, Lock, Sparkles, Crosshair, Crop } from 'lucide-react';
 import { SELLER_PLAN_LIMITS } from '../lib/sellerPlanLimits';
 import DashboardSwitch from './DashboardSwitch';
 import ConfirmDialog from './ConfirmDialog';
@@ -25,9 +25,17 @@ import {
 import DashboardSearchSelect from './DashboardSearchSelect';
 import { formatPrice } from '../lib/countryCurrencyOptions';
 import { AdminLoadingInline } from './DashboardLoading';
-import { PRODUCT_CARD_ASPECT_CLASS, PRODUCT_IMAGE_CLASS, PRODUCT_IMAGE_FRAME_CLASS } from '../lib/imageCropViewports';
+import {
+  PRODUCT_CARD_ASPECT_CLASS,
+  PRODUCT_IMAGE_COVER_CLASS,
+  PRODUCT_IMAGE_FRAME_CLASS,
+  PRODUCT_CARD_VIEWPORT,
+} from '../lib/imageCropViewports';
 import ProductImage from './ProductImage';
 import { getProductImageDisplayUrl } from '../lib/productImageUrl';
+import ShopImage from './ShopImage';
+import FocalPointPicker, { PRODUCT_FOCAL_PREVIEWS } from './FocalPointPicker';
+import ImageCropModal from './ImageCropModal';
 import PlanUsageBar from './plan/PlanUsageBar';
 import MultilingualTextSection from './MultilingualTextSection';
 import { useCloseOnOutsideClick } from '../hooks/useCloseOnOutsideClick';
@@ -100,6 +108,8 @@ type Props = {
   adminButtons?: boolean;
   catalogProducts?: Product[];
   maxImages?: number;
+  /** Show the "upgrade for more images" nudge when the plan image limit is reached. */
+  canUpgrade?: boolean;
 };
 
 export default function ProductForm({
@@ -114,6 +124,7 @@ export default function ProductForm({
   adminButtons = false,
   catalogProducts = [],
   maxImages,
+  canUpgrade = false,
 }: Props) {
   const { t } = useTranslation();
   const btn = (key: string, adminLabel: string) => (adminButtons ? adminLabel : t(key));
@@ -181,12 +192,18 @@ export default function ProductForm({
   const [showPreview, setShowPreview] = useState(false);
   const [previewImageIndex, setPreviewImageIndex] = useState(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [focusIndex, setFocusIndex] = useState<number | null>(null);
+  const [cropOpen, setCropOpen] = useState(false);
+  const [cropFile, setCropFile] = useState<File | null>(null);
+  const [cropTargetIndex, setCropTargetIndex] = useState<number | null>(null);
+  const [cropLoadingIndex, setCropLoadingIndex] = useState<number | null>(null);
   const [copyFromProductId, setCopyFromProductId] = useState('');
   const showCategory = Boolean(categoriesEnabled && categories && categories.length > 0);
   const categoryLabel = (categories ?? []).find((c) => c.slug === category)?.name ?? t('dashboard.productForm.noCategory');
 
   const displayImages = images.length > 0 ? images : (image ? [image] : []);
   const displayPublicIds = imagePublicIds.length > 0 ? imagePublicIds : (imagePublicId ? [imagePublicId] : []);
+  const atImageLimit = maxImages !== undefined && displayImages.length >= maxImages;
 
   useEffect(() => {
     setFormNames({
@@ -333,6 +350,91 @@ export default function ProductForm({
     }
   }
 
+  function replaceUploadedImage(index: number, url: string, publicId?: string) {
+    const urls = [...displayImages];
+    const ids = [...displayPublicIds];
+    if (index < 0 || index >= urls.length) return;
+    urls[index] = url;
+    if (publicId) {
+      ids[index] = publicId;
+    }
+    setImages(urls);
+    setImagePublicIds(ids);
+    setImage(urls[0] ?? null);
+    if (publicId && index === 0) {
+      setImagePublicId(publicId);
+    }
+  }
+
+  async function handleCropConfirm(blob: Blob) {
+    const targetIdx = cropTargetIndex;
+    const originalFile = cropFile;
+    setCropOpen(false);
+    setCropFile(null);
+    setCropTargetIndex(null);
+    setUploading(true);
+    setError('');
+    try {
+      const baseName = originalFile?.name ? originalFile.name.replace(/\.[^.]+$/, '') : 'product';
+      const file = new File([blob], `${baseName}-cropped.png`, { type: 'image/png' });
+      const { url, publicId } = await uploadImageFile(file);
+      if (targetIdx !== null && targetIdx < displayImages.length) {
+        replaceUploadedImage(targetIdx, url, publicId);
+        toast.success(t('dashboard.productForm.toastSingleUpload'));
+      } else {
+        appendUploadedImage(url, publicId);
+        toast.success(t('dashboard.productForm.toastSingleUpload'));
+      }
+    } catch (err) {
+      setError((err as Error).message);
+      toast.error((err as Error).message);
+    } finally {
+      setUploading(false);
+    }
+  }
+
+  async function handleSkipCropUpload() {
+    if (!cropFile) return;
+    const file = cropFile;
+    setCropOpen(false);
+    setCropFile(null);
+    setCropTargetIndex(null);
+    setUploading(true);
+    setError('');
+    try {
+      const { url, publicId } = await uploadImageFile(file);
+      appendUploadedImage(url, publicId);
+      toast.success(t('dashboard.productForm.toastSingleUpload'));
+    } catch (err) {
+      setError((err as Error).message);
+      toast.error((err as Error).message);
+    } finally {
+      setUploading(false);
+    }
+  }
+
+  async function handleCropExisting(index: number) {
+    const rawUrl = displayImages[index];
+    if (!rawUrl) return;
+    setCropLoadingIndex(index);
+    try {
+      const cleanUrl = getProductImageDisplayUrl(rawUrl);
+      const res = await fetch(cleanUrl);
+      if (!res.ok) throw new Error(t('dashboard.productForm.toastUploadFail'));
+      const blob = await res.blob();
+      const mime = blob.type || 'image/png';
+      const ext = mime.includes('jpeg') || mime.includes('jpg') ? 'jpg' : 'png';
+      const file = new File([blob], `product-${index + 1}.${ext}`, { type: mime });
+      setCropTargetIndex(index);
+      setCropFile(file);
+      setCropOpen(true);
+    } catch {
+      toast.error(t('dashboard.productForm.toastUploadFail'));
+    } finally {
+      setCropLoadingIndex(null);
+    }
+  }
+
   async function handleImageChange(e: React.ChangeEvent<HTMLInputElement>) {
     const picked = Array.from(e.target.files ?? []).filter((f) => f.type.startsWith('image/'));
     e.target.value = '';
@@ -348,6 +450,17 @@ export default function ProductForm({
     }
     const toUpload = picked.slice(0, slotsLeft);
     const skipped = picked.length - toUpload.length;
+
+    if (toUpload.length === 1) {
+      setCropTargetIndex(null);
+      setCropFile(toUpload[0]);
+      setCropOpen(true);
+      if (skipped > 0 && maxImages !== undefined) {
+        toast.error(t('dashboard.productForm.imagesLimitBody', { max: maxImages }));
+      }
+      return;
+    }
+
     setError('');
     setUploading(true);
     try {
@@ -355,11 +468,7 @@ export default function ProductForm({
         const { url, publicId } = await uploadImageFile(file);
         appendUploadedImage(url, publicId);
       }
-      toast.success(
-        toUpload.length === 1
-          ? t('dashboard.productForm.toastSingleUpload')
-          : t('dashboard.productForm.toastMultiUpload', { count: toUpload.length }),
-      );
+      toast.success(t('dashboard.productForm.toastMultiUpload', { count: toUpload.length }));
       if (skipped > 0 && maxImages !== undefined) {
         toast.error(t('dashboard.productForm.imagesLimitBody', { max: maxImages }));
       }
@@ -417,6 +526,15 @@ export default function ProductForm({
         return { ...o, choices, choicePriceModifiers: mods };
       }),
     );
+  }
+
+  function applyImageFocus(index: number, nextSrc: string) {
+    const urls = [...displayImages];
+    if (index < 0 || index >= urls.length) return;
+    urls[index] = nextSrc;
+    setImages(urls);
+    setImage(urls[0] ?? null);
+    setFocusIndex(null);
   }
 
   function removeImage(index: number) {
@@ -1067,6 +1185,15 @@ export default function ProductForm({
                 <FieldLabelWithHelp required={isSharedFieldRequired(multilingualEnabled, formLang)} help={t('dashboard.productForm.imagesHint')} className="mb-0">
                   {t('dashboard.productForm.imagesTitle')}
                 </FieldLabelWithHelp>
+                {maxImages !== undefined && (
+                  <span
+                    className={`text-xs font-semibold tabular-nums ${
+                      atImageLimit ? 'text-amber-600 dark:text-amber-400' : 'text-stone-500 dark:text-zinc-400'
+                    }`}
+                  >
+                    {t('dashboard.productForm.imagesLimitUsage', { count: displayImages.length, max: maxImages })}
+                  </span>
+                )}
               </div>
 
               <input
@@ -1082,7 +1209,7 @@ export default function ProductForm({
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                disabled={uploading || sharedLocked}
+                disabled={uploading || sharedLocked || atImageLimit}
                 className="w-full flex items-center justify-center gap-2 py-5 rounded-xl border-2 border-dashed border-stone-200 dark:border-zinc-700 bg-stone-50/30 dark:bg-zinc-950/50 text-stone-600 dark:text-zinc-400 hover:border-brand-300 hover:bg-brand-50 dark:hover:bg-brand-950/40 hover:text-brand-600 dark:hover:text-brand-300 transition-all disabled:opacity-60 font-medium"
               >
                 {uploading ? (
@@ -1098,6 +1225,35 @@ export default function ProductForm({
                 )}
               </button>
               </SharedLockedField>
+              {atImageLimit && canUpgrade && (
+                <p className="mt-2 text-xs leading-relaxed text-amber-700 dark:text-amber-300" role="status">
+                  {t('dashboard.productForm.imagesLimitBody', { max: maxImages })}{' '}
+                  <Link to="/pricing" className="font-semibold underline underline-offset-2 hover:text-amber-800 dark:hover:text-amber-200">
+                    {t('dashboard.layout.upgradeBannerCta')}
+                  </Link>
+                </p>
+              )}
+              <FocalPointPicker
+                open={focusIndex !== null}
+                src={focusIndex !== null ? displayImages[focusIndex] ?? null : null}
+                previews={PRODUCT_FOCAL_PREVIEWS}
+                onClose={() => setFocusIndex(null)}
+                onConfirm={(next) => {
+                  if (focusIndex !== null) applyImageFocus(focusIndex, next);
+                }}
+              />
+              <ImageCropModal
+                open={cropOpen}
+                imageFile={cropFile}
+                viewport={PRODUCT_CARD_VIEWPORT}
+                onClose={() => {
+                  setCropOpen(false);
+                  setCropFile(null);
+                  setCropTargetIndex(null);
+                }}
+                onConfirm={handleCropConfirm}
+                onSkip={cropTargetIndex === null ? handleSkipCropUpload : undefined}
+              />
               {displayImages.length > 0 && (
                 <div className="mt-4 flex flex-wrap gap-3">
                   {displayImages.map((url, i) => (
@@ -1105,19 +1261,45 @@ export default function ProductForm({
                       <div
                         className={`${PRODUCT_CARD_ASPECT_CLASS} ${PRODUCT_IMAGE_FRAME_CLASS} rounded-xl border-2 border-stone-200 shadow-sm dark:border-zinc-700`}
                       >
-                        <img src={getProductImageDisplayUrl(url)} alt="" className={`${PRODUCT_IMAGE_CLASS} rounded-[10px]`} />
+                        <ShopImage src={getProductImageDisplayUrl(url)} alt="" className={`${PRODUCT_IMAGE_COVER_CLASS} rounded-[10px]`} />
                         {i === 0 && (
                           <span
-                            className="absolute bottom-1 left-1 z-10 px-2 py-0.5 rounded-md bg-brand-600 text-white text-[10px] font-semibold"
+                            className="absolute top-1 left-1 z-10 px-1.5 py-0.5 rounded-md bg-brand-600 text-white text-[10px] font-semibold"
                             title={t('dashboard.productForm.imagesHint')}
                           >
                             1
                           </span>
                         )}
                       </div>
+                      <div className="absolute bottom-1 right-1 z-20 flex items-center gap-1">
+                        <button
+                          type="button"
+                          onClick={() => void handleCropExisting(i)}
+                          disabled={sharedLocked || cropLoadingIndex !== null || uploading}
+                          className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-black/65 text-white shadow transition-colors hover:bg-brand-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 disabled:opacity-50"
+                          aria-label={t('dashboard.productForm.cropButton', 'Crop image')}
+                          title={t('dashboard.productForm.cropButton', 'Crop image')}
+                        >
+                          {cropLoadingIndex === i ? (
+                            <AdminLoadingInline light dotsOnly />
+                          ) : (
+                            <Crop className="h-3.5 w-3.5" aria-hidden />
+                          )}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setFocusIndex(i)}
+                          disabled={sharedLocked || uploading}
+                          className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-black/65 text-white shadow transition-colors hover:bg-brand-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 disabled:opacity-50"
+                          aria-label={t('dashboard.focal.adjust')}
+                          title={t('dashboard.focal.adjust')}
+                        >
+                          <Crosshair className="h-3.5 w-3.5" aria-hidden />
+                        </button>
+                      </div>
                       <DashboardImageRemoveButton
                         onClick={() => removeImage(i)}
-                        disabled={sharedLocked}
+                        disabled={sharedLocked || uploading}
                         className="z-20"
                         aria-label={t('dashboard.categories.ariaRemoveImage')}
                       />
@@ -1154,7 +1336,7 @@ export default function ProductForm({
                         }`}
                         aria-label={`${t('dashboard.productForm.previewTitle')} ${idx + 1}`}
                       >
-                        <img src={getProductImageDisplayUrl(url)} alt="" className={PRODUCT_IMAGE_CLASS} />
+                        <ShopImage src={getProductImageDisplayUrl(url)} alt="" className={PRODUCT_IMAGE_COVER_CLASS} />
                       </button>
                     ))}
                   </div>

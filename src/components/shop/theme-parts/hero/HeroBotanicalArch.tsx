@@ -1,3 +1,4 @@
+import ShopImage from '../../../ShopImage';
 import { Link } from 'react-router-dom';
 import { ShoppingBag, ArrowRight, Sparkles, Leaf, ShieldCheck, Check, Droplets } from 'lucide-react';
 import type { CSSProperties } from 'react';
@@ -14,10 +15,10 @@ export default function HeroBotanicalArch({ shop, username, containerClass }: Th
   if (!showHero) return null;
 
   return (
-    <section className="w-full py-4 sm:py-6 lg:py-10">
+    <section className="w-full py-3 sm:py-4 lg:py-6">
       <div className={containerClass}>
         <div
-          className="relative overflow-hidden rounded-[2rem] border p-6 sm:p-10 lg:p-14 shadow-[var(--theme-shadow-card)] transition-all"
+          className="relative overflow-hidden rounded-[1.75rem] border p-5 sm:p-7 lg:p-9 shadow-[var(--theme-shadow-card)] transition-all"
           style={{
             borderColor: 'var(--theme-border)',
             background: 'linear-gradient(135deg, var(--theme-surface) 0%, var(--theme-surface-secondary) 100%)',
@@ -35,24 +36,24 @@ export default function HeroBotanicalArch({ shop, username, containerClass }: Th
             aria-hidden
           />
 
-          <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+          <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
             {/* Left Editorial Narrative */}
-            <div className="lg:col-span-7 space-y-6">
+            <div className="lg:col-span-7 space-y-4">
               {/* Badges Row */}
-              <div className="flex flex-wrap items-center gap-2.5">
+              <div className="flex flex-wrap items-center gap-2">
                 <span
-                  className="inline-flex items-center gap-1.5 px-3.5 py-1 text-xs font-bold uppercase tracking-widest rounded-full shadow-sm"
+                  className="inline-flex items-center gap-1.5 px-3 py-0.5 text-[11px] font-bold uppercase tracking-widest rounded-full shadow-sm"
                   style={{
                     background: 'var(--theme-primary-light)',
                     color: 'var(--theme-primary)',
                     border: '1px solid var(--theme-border)',
                   }}
                 >
-                  <Leaf className="w-3.5 h-3.5" />
+                  <Leaf className="w-3 h-3" />
                   <span>100% Certified Botanical Formula</span>
                 </span>
                 <span
-                  className="inline-flex items-center gap-1 px-3 py-1 text-xs font-medium rounded-full"
+                  className="inline-flex items-center gap-1 px-2.5 py-0.5 text-[11px] font-medium rounded-full"
                   style={{
                     color: 'var(--theme-text-muted)',
                     background: 'var(--theme-surface)',
@@ -149,7 +150,7 @@ export default function HeroBotanicalArch({ shop, username, containerClass }: Th
               >
                 {shop.homeHeroImage ? (
                   <>
-                    <img
+                    <ShopImage
                       src={shop.homeHeroImage}
                       alt={shop.shopName}
                       className="h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"

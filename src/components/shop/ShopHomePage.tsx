@@ -1,3 +1,4 @@
+import ShopImage from '../ShopImage';
 import { Link } from 'react-router-dom';
 import { LayoutGrid, Star, ShoppingBag } from 'lucide-react';
 import { resolveTrustBadgeType, TrustBadgeTypeIcon } from '../../lib/trustBadgeIcons';
@@ -77,7 +78,7 @@ export function ShopCategoryCard({ category: c, shopUsername, productCount }: Ca
     >
       <div className="absolute inset-0 bg-theme-surface">
         {c.image ? (
-          <img
+          <ShopImage
             src={c.image}
             alt=""
             className="h-full w-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.05]"
@@ -97,19 +98,19 @@ export function ShopCategoryCard({ category: c, shopUsername, productCount }: Ca
         aria-hidden
       />
 
-      <span className="absolute start-3 top-3 z-10 inline-flex items-center rounded-full border border-white/25 bg-white/15 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white backdrop-blur-md max-lg:normal-case max-lg:tracking-normal lg:start-4 lg:top-4 lg:px-3 lg:py-1 lg:text-xs">
+      <span className="absolute start-2.5 top-2.5 z-10 inline-flex items-center rounded-full border border-white/25 bg-white/15 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-white backdrop-blur-md max-lg:normal-case max-lg:tracking-normal lg:start-3 lg:top-3 lg:px-2.5 lg:py-0.5 lg:text-[11px]">
         {productCount} {productLabel}
       </span>
 
-      <div className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-between p-3 lg:p-4">
-        <h3 className="line-clamp-2 text-base font-bold leading-tight tracking-tight text-white drop-shadow-sm lg:text-xl">
+      <div className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-between p-2.5 sm:p-3 lg:p-3.5">
+        <h3 className="line-clamp-2 text-sm font-bold leading-tight tracking-tight text-white drop-shadow-sm sm:text-base lg:text-lg">
           {displayName}
         </h3>
         <span
-          className="ms-2 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white/20 text-white opacity-0 backdrop-blur-sm transition-all duration-200 group-hover:translate-x-0.5 group-hover:opacity-100"
+          className="ms-1.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/20 text-white opacity-0 backdrop-blur-sm transition-all duration-200 group-hover:translate-x-0.5 group-hover:opacity-100"
           aria-hidden
         >
-          <svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+          <svg width="10" height="10" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
         </span>
@@ -328,7 +329,7 @@ export default function ShopHomePage({ shop, products, username, containerClass 
                 className={`relative w-full min-w-0 overflow-hidden bg-theme-bg max-lg:order-1 ${STORE_HERO_ASPECT_CLASS}`}
               >
                 {shop.homeHeroImage ? (
-                  <img
+                  <ShopImage
                     src={shop.homeHeroImage}
                     alt=""
                     className="absolute inset-0 h-full w-full object-cover object-center max-lg:object-cover lg:object-contain"

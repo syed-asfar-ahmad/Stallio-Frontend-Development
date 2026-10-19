@@ -1,3 +1,4 @@
+import ShopImage from '../../../ShopImage';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import type { CSSProperties } from 'react';
@@ -15,14 +16,14 @@ export default function HeroFullBanner({ shop, username, containerClass }: Theme
   if (!showHero) return null;
 
   return (
-    <section className={`${containerClass} py-4 lg:py-6`}>
+    <section className={`${containerClass} py-3 lg:py-5`}>
       <div
-        className="relative isolate flex min-h-[240px] items-center overflow-hidden rounded-[var(--theme-radius-card)] border bg-[var(--theme-surface)] lg:min-h-[360px]"
+        className="relative isolate flex min-h-[200px] items-center overflow-hidden rounded-[var(--theme-radius-card)] border bg-[var(--theme-surface)] sm:min-h-[260px] lg:min-h-[300px]"
         style={{ borderColor: 'var(--theme-border)' }}
       >
         {hasImage ? (
           <>
-            <img
+            <ShopImage
               src={shop.homeHeroImage!}
               alt=""
               className="absolute inset-0 h-full w-full object-cover"
@@ -42,9 +43,9 @@ export default function HeroFullBanner({ shop, username, containerClass }: Theme
           />
         )}
 
-        <div className="relative w-full max-w-3xl space-y-5 px-5 py-8 sm:px-8 lg:px-14 lg:py-12">
+        <div className="relative w-full max-w-2xl space-y-3 px-5 py-6 sm:px-7 sm:py-8 lg:px-10 lg:py-10">
           <h1
-            className="text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl"
+            className="text-2xl font-bold leading-tight sm:text-3xl lg:text-4xl"
             style={{
               color: hasImage ? '#ffffff' : 'var(--theme-text-primary)',
               fontFamily: 'var(--theme-font-heading)',
@@ -58,24 +59,24 @@ export default function HeroFullBanner({ shop, username, containerClass }: Theme
 
           {introText ? (
             <p
-              className="max-w-xl text-sm leading-relaxed sm:text-base lg:text-lg"
+              className="max-w-lg text-xs leading-relaxed sm:text-sm lg:text-base"
               style={{ color: hasImage ? 'rgba(255,255,255,0.86)' : 'var(--theme-text-secondary)' }}
             >
               {introText}
             </p>
           ) : null}
 
-          <div className="flex flex-wrap gap-3 pt-1">
+          <div className="flex flex-wrap gap-2.5 pt-1">
             <Link
               to={`/${username}/products`}
-              className="inline-flex items-center justify-center gap-2 rounded-[var(--theme-radius-btn)] bg-theme-primary px-6 py-3 text-sm font-semibold text-theme-primary-contrast no-underline shadow-sm transition-colors hover:bg-theme-primary-hover"
+              className="inline-flex items-center justify-center gap-1.5 rounded-[var(--theme-radius-btn)] bg-theme-primary px-4 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-sm font-semibold text-theme-primary-contrast no-underline shadow-sm transition-colors hover:bg-theme-primary-hover"
             >
               {t('heroBrowse')}
-              <ArrowRight className="h-4 w-4 rtl:rotate-180" aria-hidden />
+              <ArrowRight className="h-3.5 w-3.5 rtl:rotate-180" aria-hidden />
             </Link>
             <Link
               to={`/${username}/contact`}
-              className="inline-flex items-center justify-center gap-2 rounded-[var(--theme-radius-btn)] border px-6 py-3 text-sm font-semibold no-underline transition-colors"
+              className="inline-flex items-center justify-center gap-1.5 rounded-[var(--theme-radius-btn)] border px-4 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-sm font-semibold no-underline transition-colors"
               style={
                 hasImage
                   ? { borderColor: 'rgba(255,255,255,0.65)', color: '#ffffff', background: 'rgba(0,0,0,0.15)' }

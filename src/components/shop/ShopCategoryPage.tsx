@@ -1,3 +1,4 @@
+import ShopImage from '../ShopImage';
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ChevronRight, LayoutGrid, Package, ShoppingBag } from 'lucide-react';
@@ -70,7 +71,7 @@ export default function ShopCategoryPage({
 
         <header className="flex flex-col items-center rounded-[var(--theme-radius-card)] px-6 py-12 text-center lg:py-16" style={{ background: 'var(--theme-surface-secondary)' }}>
           <span className="relative flex h-28 w-28 items-center justify-center overflow-hidden rounded-full sm:h-32 sm:w-32" style={{ background: shapeFor(category?.slug ?? categoryDisplayName) }}>
-            {categoryImage ? <img src={categoryImage} alt="" loading="eager" className="absolute inset-0 h-full w-full object-cover" /> : <LayoutGrid className="h-8 w-8" style={{ color: '#1e1611' }} aria-hidden />}
+            {categoryImage ? <ShopImage src={categoryImage} alt="" loading="eager" className="absolute inset-0 h-full w-full object-cover" /> : <LayoutGrid className="h-8 w-8" style={{ color: '#1e1611' }} aria-hidden />}
           </span>
           <h1 className="mt-6 text-[2.4rem] font-medium leading-[1.05] sm:text-6xl" style={{ color: 'var(--theme-text-primary)', fontFamily: 'var(--theme-font-heading)', letterSpacing: '-0.035em' }}>
             {categoryDisplayName}
@@ -116,7 +117,7 @@ export default function ShopCategoryPage({
           <div aria-hidden className="absolute -end-20 -top-20 h-80 w-80 rounded-full blur-3xl" style={{ background: 'radial-gradient(circle, rgb(245 166 35 / 0.5), transparent 65%)' }} />
           {categoryImage ? (
             <>
-              <img src={categoryImage} alt="" loading="eager" className="absolute inset-y-0 end-0 hidden h-full w-1/2 object-cover opacity-80 sm:block" />
+              <ShopImage src={categoryImage} alt="" loading="eager" className="absolute inset-y-0 end-0 hidden h-full w-1/2 object-cover opacity-80 sm:block" />
               <div aria-hidden className="absolute inset-y-0 end-0 hidden w-1/2 sm:block" style={{ background: 'linear-gradient(90deg, #0c4a43 0%, rgb(12 74 67 / 0.3) 60%, transparent 100%)' }} />
             </>
           ) : null}
@@ -175,7 +176,7 @@ export default function ShopCategoryPage({
           style={{ background: 'color-mix(in srgb, var(--theme-primary) 42%, #1a0f07)' }}
         >
           {categoryImage ? (
-            <img src={categoryImage} alt="" className="absolute inset-0 h-full w-full object-cover" loading="eager" />
+            <ShopImage src={categoryImage} alt="" className="absolute inset-0 h-full w-full object-cover" loading="eager" />
           ) : (
             <LayoutGrid className="absolute end-10 top-10 h-24 w-24 text-white/10" strokeWidth={1} aria-hidden />
           )}
@@ -278,7 +279,7 @@ export default function ShopCategoryPage({
       >
         <div className="absolute inset-0 bg-theme-surface">
           {categoryImage ? (
-            <img
+            <ShopImage
               src={categoryImage}
               alt=""
               className="h-full w-full object-cover object-center"
@@ -314,7 +315,7 @@ export default function ShopCategoryPage({
       <header className="mb-10 hidden items-center gap-6 rounded-theme-card border border-theme-border bg-theme-surface p-6 shadow-theme-card lg:flex">
         {categoryImage ? (
           <div className={categoryImageClass}>
-            <img
+            <ShopImage
               src={categoryImage}
               alt=""
               className="absolute inset-0 h-full w-full object-cover object-center"

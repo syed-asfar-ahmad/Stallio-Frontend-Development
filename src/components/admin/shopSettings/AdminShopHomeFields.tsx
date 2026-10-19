@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
-import { Home, Plus, Upload } from 'lucide-react';
+import { Home, Plus, Upload, Crop } from 'lucide-react';
+import { getProductImageDisplayUrl } from '../../../lib/productImageUrl';
 import type { AdminSellerShopFields } from '../../../types/admin';
 import type { ShopTestimonial, ShopTrustBadge } from '../../../types';
 import { getStoredToken } from '../../../context/AuthContext';
@@ -10,6 +11,9 @@ import DashboardSelect from '../../DashboardSelect';
 import ConfirmDialog from '../../ConfirmDialog';
 import ContentLanguagePicker from '../../ContentLanguagePicker';
 import HeroImageCropModal from '../../HeroImageCropModal';
+import ImageFocusButton from '../../ImageFocusButton';
+import { HERO_FOCAL_PREVIEWS } from '../../FocalPointPicker';
+import ShopImage from '../../ShopImage';
 import DashboardImageRemoveButton from '../../DashboardImageRemoveButton';
 import { FieldLabelWithHelp } from '../../FieldLabelWithHelp';
 import { AdminLoadingInline } from '../AdminLoading';
@@ -126,6 +130,7 @@ export default function AdminShopHomeFields({ form, set, shopName }: Props) {
   const [heroUploading, setHeroUploading] = useState(false);
   const [heroCropOpen, setHeroCropOpen] = useState(false);
   const [heroCropFile, setHeroCropFile] = useState<File | null>(null);
+  const [heroCropLoading, setHeroCropLoading] = useState(false);
   const [heroToggleConfirm, setHeroToggleConfirm] = useState<boolean | null>(null);
   const [trustToggleConfirm, setTrustToggleConfirm] = useState<boolean | null>(null);
   const [reviewsToggleConfirm, setReviewsToggleConfirm] = useState<boolean | null>(null);
@@ -165,6 +170,55 @@ export default function AdminShopHomeFields({ form, set, shopName }: Props) {
     }
     setHeroCropFile(file);
     setHeroCropOpen(true);
+  }
+
+  async function handleSkipHeroCropUpload() {
+    if (!heroCropFile) return;
+    const file = heroCropFile;
+    setHeroCropOpen(false);
+    setHeroCropFile(null);
+    setHeroUploading(true);
+    try {
+      const token = getStoredToken();
+      if (!token) return;
+      const body = new FormData();
+      body.append('file', file, file.name || 'hero.jpg');
+      body.append('type', 'product');
+      const res = await fetch(`${API_BASE}/api/upload`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+        body,
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || t('dashboard.productForm.toastUploadFail'));
+      set('homeHeroImage', data.url);
+      set('homeHeroImagePublicId', data.publicId ?? null);
+      toast.success(t('dashboard.home.toastHeroImage'));
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : t('dashboard.productForm.toastUploadFail'));
+    } finally {
+      setHeroUploading(false);
+    }
+  }
+
+  async function handleCropExistingHero() {
+    if (!form.homeHeroImage) return;
+    setHeroCropLoading(true);
+    try {
+      const cleanUrl = getProductImageDisplayUrl(form.homeHeroImage);
+      const res = await fetch(cleanUrl);
+      if (!res.ok) throw new Error('Failed to load image');
+      const blob = await res.blob();
+      const mime = blob.type || 'image/jpeg';
+      const ext = mime.includes('png') ? 'png' : 'jpg';
+      const file = new File([blob], `hero.${ext}`, { type: mime });
+      setHeroCropFile(file);
+      setHeroCropOpen(true);
+    } catch {
+      toast.error(t('dashboard.productForm.toastUploadFail'));
+    } finally {
+      setHeroCropLoading(false);
+    }
   }
 
   async function uploadHeroBlob(blob: Blob) {
@@ -273,12 +327,39 @@ export default function AdminShopHomeFields({ form, set, shopName }: Props) {
               <div className="flex flex-col sm:flex-row flex-wrap items-start gap-3 min-w-0">
                 {form.homeHeroImage ? (
                   <div className="relative shrink-0">
-                    <img
-                      src={form.homeHeroImage}
-                      alt=""
-                      className="w-full max-w-[12rem] sm:w-48 rounded-lg border border-stone-200 dark:border-zinc-700"
-                      style={{ aspectRatio: `${STORE_HERO_IMAGE_WIDTH} / ${STORE_HERO_IMAGE_HEIGHT}` }}
-                    />
+                    <div className="relative overflow-hidden rounded-lg border border-stone-200 dark:border-zinc-700">
+                      <ShopImage
+                        src={form.homeHeroImage}
+                        alt=""
+                        className="w-full max-w-[12rem] sm:w-48 object-cover"
+                        style={{ aspectRatio: `${STORE_HERO_IMAGE_WIDTH} / ${STORE_HERO_IMAGE_HEIGHT}` }}
+                      />
+                      <div className="absolute bottom-1 right-1 z-20 flex items-center gap-1">
+                        <button
+                          type="button"
+                          onClick={() => void handleCropExistingHero()}
+                          disabled={sharedLocked || heroCropLoading || heroUploading}
+                          className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-black/65 text-white shadow transition-colors hover:bg-brand-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 disabled:opacity-50"
+                          aria-label={t('dashboard.home.cropButton', 'Crop image')}
+                          title={t('dashboard.home.cropButton', 'Crop image')}
+                        >
+                          {heroCropLoading ? (
+                            <AdminLoadingInline light dotsOnly />
+                          ) : (
+                            <Crop className="h-3.5 w-3.5" aria-hidden />
+                          )}
+                        </button>
+                        <ImageFocusButton
+                          iconOnly
+                          src={form.homeHeroImage}
+                          onChange={(next) => set('homeHeroImage', next)}
+                          previews={HERO_FOCAL_PREVIEWS}
+                          disabled={heroUploading || sharedLocked}
+                          className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-black/65 text-white shadow transition-colors hover:bg-brand-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 disabled:opacity-50"
+                          iconClassName="h-3.5 w-3.5"
+                        />
+                      </div>
+                    </div>
                     <DashboardImageRemoveButton
                       disabled={sharedLocked}
                       onClick={() => {
@@ -290,16 +371,38 @@ export default function AdminShopHomeFields({ form, set, shopName }: Props) {
                     />
                   </div>
                 ) : null}
-                <input ref={heroFileRef} type="file" accept="image/*" className="hidden" onChange={handleHeroFilePick} />
-                <button
-                  type="button"
-                  onClick={() => heroFileRef.current?.click()}
-                  disabled={heroUploading || sharedLocked}
-                  className={`${DASHBOARD_BTN_OUTLINE} border-dashed w-full sm:w-auto justify-center`}
-                >
-                  {heroUploading ? <AdminLoadingInline dotsOnly /> : <Upload className="h-4 w-4" />}
-                  {form.homeHeroImage ? t('dashboard.home.heroImageReplace') : t('dashboard.common.upload')}
-                </button>
+                <div className="flex flex-col gap-2 w-full sm:w-auto min-w-0">
+                  <input ref={heroFileRef} type="file" accept="image/*" className="hidden" onChange={handleHeroFilePick} />
+                  <button
+                    type="button"
+                    onClick={() => heroFileRef.current?.click()}
+                    disabled={heroUploading || sharedLocked}
+                    className={`${DASHBOARD_BTN_OUTLINE} border-dashed w-full sm:w-auto justify-center`}
+                  >
+                    {heroUploading ? <AdminLoadingInline dotsOnly /> : <Upload className="h-4 w-4" />}
+                    {form.homeHeroImage ? t('dashboard.home.heroImageReplace') : t('dashboard.common.upload')}
+                  </button>
+                  {form.homeHeroImage ? (
+                    <>
+                      <button
+                        type="button"
+                        onClick={() => void handleCropExistingHero()}
+                        disabled={heroUploading || sharedLocked || heroCropLoading}
+                        className={`${DASHBOARD_BTN_OUTLINE} w-full sm:w-auto justify-center`}
+                      >
+                        {heroCropLoading ? <AdminLoadingInline dotsOnly /> : <Crop className="h-4 w-4" />}
+                        {t('dashboard.home.cropButton', 'Crop image')}
+                      </button>
+                      <ImageFocusButton
+                        src={form.homeHeroImage}
+                        onChange={(next) => set('homeHeroImage', next)}
+                        previews={HERO_FOCAL_PREVIEWS}
+                        disabled={heroUploading || sharedLocked}
+                        className={`${DASHBOARD_BTN_OUTLINE} w-full sm:w-auto justify-center`}
+                      />
+                    </>
+                  ) : null}
+                </div>
               </div>
             </div>
           </div>
@@ -515,6 +618,7 @@ export default function AdminShopHomeFields({ form, set, shopName }: Props) {
           setHeroCropFile(null);
         }}
         onConfirm={uploadHeroBlob}
+        onSkip={handleSkipHeroCropUpload}
       />
 
       <ConfirmDialog

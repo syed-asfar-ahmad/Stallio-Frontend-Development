@@ -1,3 +1,4 @@
+import ShopImage from '../../../ShopImage';
 import { Link } from 'react-router-dom';
 import type { Shop } from '../../../../types';
 import { useShopLanguage } from '../../../../context/ShopLanguageContext';
@@ -36,7 +37,7 @@ export default function NoirAboutPage({ shop, username, aboutTitleText, aboutCon
           <div className="relative mx-auto max-w-5xl">
             <span aria-hidden className="absolute -bottom-5 -end-5 h-full w-full border" style={{ borderColor: 'var(--theme-primary)' }} />
             <div className="relative aspect-[16/9] overflow-hidden">
-              <img src={heroImage} alt={shop.shopName} className="absolute inset-0 h-full w-full object-cover" />
+              <ShopImage src={heroImage} alt={shop.shopName} className="absolute inset-0 h-full w-full object-cover" />
               <span aria-hidden className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.5), transparent 50%)' }} />
             </div>
           </div>
@@ -69,7 +70,7 @@ export default function NoirAboutPage({ shop, username, aboutTitleText, aboutCon
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
             {gallery.map((img, i) => (
               <div key={i} className="group relative overflow-hidden border" style={{ borderColor: 'var(--theme-border)' }}>
-                <img src={img} alt="" loading="lazy" className="aspect-[3/4] w-full object-cover transition-transform duration-[900ms] group-hover:scale-105" />
+                <ShopImage src={img} alt="" loading="lazy" className="aspect-[3/4] w-full object-cover transition-transform duration-[900ms] group-hover:scale-105" />
                 <span className="absolute start-4 top-4 text-[11px] font-semibold tabular-nums tracking-[0.3em]" style={{ color: 'var(--theme-primary)' }}>
                   0{i + 1}
                 </span>

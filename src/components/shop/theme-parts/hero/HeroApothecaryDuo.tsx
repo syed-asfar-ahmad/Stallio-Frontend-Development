@@ -1,3 +1,4 @@
+import ShopImage from '../../../ShopImage';
 import { Link } from 'react-router-dom';
 import { ShoppingBag, ArrowRight, Star, Leaf, Award } from 'lucide-react';
 import type { CSSProperties } from 'react';
@@ -14,34 +15,34 @@ export default function HeroApothecaryDuo({ shop, username, containerClass }: Th
   if (!showHero) return null;
 
   return (
-    <section className="w-full py-4 sm:py-6 lg:py-8">
+    <section className="w-full py-3 sm:py-4 lg:py-6">
       <div className={containerClass}>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
           {/* Main Hero Card */}
           <div
-            className="lg:col-span-8 p-6 sm:p-10 lg:p-12 rounded-[2rem] border shadow-[var(--theme-shadow-card)] flex flex-col justify-between relative overflow-hidden"
+            className="lg:col-span-8 p-5 sm:p-7 lg:p-9 rounded-[1.75rem] border shadow-[var(--theme-shadow-card)] flex flex-col justify-between relative overflow-hidden"
             style={{
               borderColor: 'var(--theme-border)',
               background: 'var(--theme-surface)',
             }}
           >
-            <div className="space-y-4 max-w-xl">
+            <div className="space-y-3.5 max-w-lg">
               <div className="flex items-center gap-2">
                 <span
-                  className="inline-flex items-center gap-1 px-3 py-1 text-xs font-bold uppercase rounded-full"
+                  className="inline-flex items-center gap-1 px-2.5 py-0.5 text-[11px] font-bold uppercase rounded-full"
                   style={{
                     background: 'var(--theme-primary-light)',
                     color: 'var(--theme-primary)',
                   }}
                 >
-                  <Leaf className="w-3.5 h-3.5" />
+                  <Leaf className="w-3 h-3" />
                   <span>Apothecary Release</span>
                 </span>
-                <span className="text-xs text-theme-text-muted">Direct Sourcing</span>
+                <span className="text-[11px] text-theme-text-muted">Direct Sourcing</span>
               </div>
 
               <h1
-                className="text-2xl sm:text-4xl lg:text-5xl font-normal leading-[1.15] text-theme-text tracking-tight"
+                className="text-xl sm:text-3xl lg:text-4xl font-normal leading-[1.15] text-theme-text tracking-tight"
                 style={{
                   fontFamily: 'var(--theme-font-heading)',
                   letterSpacing: 'var(--theme-heading-spacing)',
@@ -52,7 +53,7 @@ export default function HeroApothecaryDuo({ shop, username, containerClass }: Th
               </h1>
 
               {introText ? (
-                <p className="text-xs sm:text-sm lg:text-base leading-relaxed text-theme-text-secondary">
+                <p className="text-xs sm:text-xs lg:text-sm leading-relaxed text-theme-text-secondary">
                   {introText}
                 </p>
               ) : null}
@@ -84,7 +85,7 @@ export default function HeroApothecaryDuo({ shop, username, containerClass }: Th
           >
             {shop.homeHeroImage ? (
               <div className="relative h-44 w-full rounded-2xl overflow-hidden mb-4 border border-theme-border shadow-sm">
-                <img src={shop.homeHeroImage} alt="" className="h-full w-full object-cover" />
+                <ShopImage src={shop.homeHeroImage} alt="" className="h-full w-full object-cover" />
                 <div className="absolute top-2.5 start-2.5 px-2.5 py-0.5 rounded-full bg-black/40 backdrop-blur-md text-white text-[10px] font-bold">
                   ★ Spotlight
                 </div>

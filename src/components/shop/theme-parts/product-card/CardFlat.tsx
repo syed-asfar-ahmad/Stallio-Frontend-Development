@@ -59,24 +59,24 @@ export default function CardFlat({ product: p, shopUsername, currency, linkState
       </div>
 
       {/* Minimal text content — no card, no border */}
-      <div className="mt-3 min-w-0 space-y-1">
+      <div className="mt-2 min-w-0 space-y-0.5">
         {p.category && (
           <span
-            className="block text-[9px] font-medium uppercase tracking-[0.15em]"
+            className="block text-[8px] sm:text-[9px] font-medium uppercase tracking-[0.15em]"
             style={{ color: 'var(--theme-text-muted)' }}
           >
             {p.category}
           </span>
         )}
-        <h3 className="line-clamp-2 text-sm leading-snug" style={{ color: 'var(--theme-text-primary)', fontFamily: 'var(--theme-font-heading)', fontWeight: 300 }}>
+        <h3 className="line-clamp-2 text-xs sm:text-sm leading-snug" style={{ color: 'var(--theme-text-primary)', fontFamily: 'var(--theme-font-heading)', fontWeight: 300 }}>
           {localizedName}
         </h3>
-        <div className="flex items-baseline gap-2 pt-0.5">
-          <span className="text-sm font-light" style={{ color: 'var(--theme-text-secondary)' }}>
+        <div className="flex items-baseline gap-1.5 pt-0.5">
+          <span className="text-xs sm:text-sm font-light" style={{ color: 'var(--theme-text-secondary)' }}>
             {formatPrice(sale, currency)}
           </span>
           {compare ? (
-            <span className="text-xs line-through" style={{ color: 'var(--theme-text-muted)' }}>
+            <span className="text-[10px] sm:text-xs line-through" style={{ color: 'var(--theme-text-muted)' }}>
               {formatPrice(compare, currency)}
             </span>
           ) : null}

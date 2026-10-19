@@ -1,3 +1,4 @@
+import ShopImage from '../../../ShopImage';
 import { Link } from 'react-router-dom';
 import { ShoppingBag, ArrowRight, Star, ShieldCheck, Truck } from 'lucide-react';
 import type { CSSProperties } from 'react';
@@ -14,37 +15,37 @@ export default function HeroCardShowcase({ shop, username, containerClass }: The
   if (!showHero) return null;
 
   return (
-    <section className="w-full py-4 sm:py-6 lg:py-8">
+    <section className="w-full py-3 sm:py-4 lg:py-6">
       <div className={containerClass}>
         <div
-          className="relative overflow-hidden rounded-[var(--theme-radius-card)] border p-6 sm:p-8 lg:p-12 shadow-[var(--theme-shadow-card)]"
+          className="relative overflow-hidden rounded-[var(--theme-radius-card)] border p-5 sm:p-6 lg:p-8 shadow-[var(--theme-shadow-card)]"
           style={{
             borderColor: 'var(--theme-border)',
             background: 'var(--theme-surface)',
           }}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
             {/* Left Content Area */}
-            <div className="lg:col-span-7 space-y-5">
+            <div className="lg:col-span-7 space-y-3.5">
               <div className="flex items-center gap-2">
                 <span
-                  className="px-2.5 py-1 text-xs font-bold uppercase rounded-md tracking-wider inline-flex items-center gap-1.5"
+                  className="px-2 py-0.5 text-[11px] font-bold uppercase rounded-md tracking-wider inline-flex items-center gap-1.5"
                   style={{
                     background: 'var(--theme-primary)',
                     color: '#ffffff',
                     borderRadius: 'var(--theme-radius-badge)',
                   }}
                 >
-                  <Star className="w-3.5 h-3.5 fill-current" />
+                  <Star className="w-3 h-3 fill-current" />
                   Premium Catalog
                 </span>
-                <span className="text-xs font-medium" style={{ color: 'var(--theme-text-muted)' }}>
+                <span className="text-[11px] font-medium" style={{ color: 'var(--theme-text-muted)' }}>
                   Verified Seller
                 </span>
               </div>
 
               <h1
-                className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight"
+                className="text-xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight"
                 style={{
                   color: 'var(--theme-text-primary)',
                   fontFamily: 'var(--theme-font-heading)',
@@ -114,7 +115,7 @@ export default function HeroCardShowcase({ shop, username, containerClass }: The
               >
                 {shop.homeHeroImage ? (
                   <div className="relative h-64 sm:h-72 w-full overflow-hidden">
-                    <img
+                    <ShopImage
                       src={shop.homeHeroImage}
                       alt={shop.shopName}
                       className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"

@@ -5,6 +5,8 @@ import { LayoutGrid, Pencil, Plus, Trash2, Upload } from 'lucide-react';
 import type { AdminSellerShopFields } from '../../../types/admin';
 import { getStoredToken } from '../../../context/AuthContext';
 import ImageCropModal from '../../ImageCropModal';
+import ImageFocusButton from '../../ImageFocusButton';
+import ShopImage from '../../ShopImage';
 import { AdminLoadingInline } from '../AdminLoading';
 import { DASHBOARD_BTN_PRIMARY, DASHBOARD_INPUT } from '../../../lib/dashboardFormClasses';
 import { CATEGORY_CARD_ASPECT_CLASS, CATEGORY_CARD_VIEWPORT } from '../../../lib/imageCropViewports';
@@ -139,7 +141,7 @@ export default function AdminShopCategoriesFields({ form, set }: Props) {
               >
                 <div className={`${CATEGORY_CARD_ASPECT_CLASS} relative overflow-hidden bg-stone-100 dark:bg-zinc-800`}>
                   {c.image ? (
-                    <img
+                    <ShopImage
                       src={getProductImageDisplayUrl(c.image)}
                       alt=""
                       className="w-full h-full object-cover"
@@ -185,6 +187,18 @@ export default function AdminShopCategoriesFields({ form, set }: Props) {
                         }}
                       />
                     </label>
+                    {c.image ? (
+                      <ImageFocusButton
+                        src={c.image}
+                        onChange={(next) => {
+                          const list = [...form.categories];
+                          list[i] = { ...list[i], image: next };
+                          set('categories', list);
+                        }}
+                        iconClassName="h-3.5 w-3.5 sm:h-4 sm:w-4"
+                        className="inline-flex min-w-0 flex-1 items-center justify-center gap-1 rounded-lg border-2 border-stone-200 bg-white px-2 py-2 text-xs font-medium text-stone-700 transition-all hover:border-brand-300 hover:bg-brand-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 disabled:opacity-50"
+                      />
+                    ) : null}
                     <button
                       type="button"
                       onClick={() => set('categories', form.categories.filter((_, j) => j !== i))}

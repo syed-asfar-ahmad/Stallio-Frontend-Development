@@ -1,3 +1,4 @@
+import ShopImage from '../../../ShopImage';
 import { useRef, useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Check, ShoppingBag } from 'lucide-react';
@@ -72,22 +73,22 @@ export default function CardCocoaTile({ product: p, shopUsername, currency, link
       >
         <div className={`relative ${PRODUCT_CARD_ASPECT_CLASS}`}>
           {p.image ? (
-            <img
+            <ShopImage
               src={getProductImageDisplayUrl(p.image)}
               alt=""
               loading="lazy"
-              className={`absolute inset-0 h-full w-full object-contain p-[9%] transition-transform duration-500 ease-out group-hover:-translate-y-1 group-hover:scale-[1.05] motion-reduce:transition-none ${
+              className={`absolute inset-0 h-full w-full object-contain p-[6%] transition-transform duration-500 ease-out group-hover:-translate-y-1 group-hover:scale-[1.04] motion-reduce:transition-none ${
                 soldOut ? 'opacity-40 grayscale' : ''
               }`}
             />
           ) : (
             <div className="absolute inset-0 flex items-center justify-center" style={{ color: 'var(--theme-text-muted)' }}>
-              <ShoppingBag className="h-10 w-10 opacity-30" strokeWidth={1} />
+              <ShoppingBag className="h-8 w-8 opacity-30" strokeWidth={1} />
             </div>
           )}
           {(soldOut || discountPct) && (
             <span
-              className="absolute start-3 top-3 rounded-full px-2.5 py-1 text-[10px] font-semibold leading-none"
+              className="absolute start-2.5 top-2.5 rounded-full px-2 py-0.5 text-[9px] font-semibold leading-none"
               style={{ background: soldOut ? 'var(--theme-badge-bg)' : 'var(--theme-secondary)', color: soldOut ? 'var(--theme-badge-text)' : 'var(--theme-bg)' }}
             >
               {soldOut ? t('badgeSoldOut') : `-${discountPct}%`}
@@ -96,25 +97,25 @@ export default function CardCocoaTile({ product: p, shopUsername, currency, link
         </div>
       </Link>
 
-      <div className="flex flex-1 flex-col px-0.5 pt-3.5">
+      <div className="flex flex-1 flex-col px-0.5 pt-2.5 sm:pt-3">
         <Link to={detailTo} state={linkState} className="flex flex-1 flex-col no-underline">
-          <div className="flex items-center justify-between gap-2">
-            <p className="flex items-baseline gap-2">
+          <div className="flex items-center justify-between gap-1.5">
+            <p className="flex items-baseline gap-1.5">
               <span
-                className="text-[1.0625rem] font-bold leading-none sm:text-lg"
+                className="text-[0.95rem] font-bold leading-none sm:text-base"
                 style={{ color: 'var(--theme-text-primary)', fontFamily: 'var(--theme-font-heading)', letterSpacing: '-0.02em' }}
               >
                 {formatPrice(sale, currency)}
               </span>
               {compare ? (
-                <span className="text-xs line-through" style={{ color: 'var(--theme-text-muted)' }}>
+                <span className="text-[10px] line-through sm:text-[11px]" style={{ color: 'var(--theme-text-muted)' }}>
                   {formatPrice(compare, currency)}
                 </span>
               ) : null}
             </p>
             {categoryLabel ? (
               <span
-                className="max-w-[48%] truncate rounded-full px-2.5 py-1 text-[10px] font-medium capitalize leading-none"
+                className="max-w-[48%] truncate rounded-full px-2 py-0.5 text-[9px] font-medium capitalize leading-none sm:text-[10px]"
                 style={{ background: 'var(--theme-primary-light)', color: 'var(--theme-badge-text)' }}
               >
                 {categoryLabel}
@@ -122,30 +123,30 @@ export default function CardCocoaTile({ product: p, shopUsername, currency, link
             ) : null}
           </div>
           <h3
-            className="mt-2.5 line-clamp-1 text-[13px] font-semibold leading-snug sm:text-sm"
+            className="mt-1.5 line-clamp-1 text-xs font-semibold leading-snug sm:text-[13px]"
             style={{ color: 'var(--theme-text-primary)', fontFamily: 'var(--theme-font-body)', letterSpacing: 0 }}
           >
             {name}
           </h3>
           <p
-            className="mt-1 line-clamp-2 min-h-[2.4em] text-[11px] leading-[1.2rem]"
+            className="mt-0.5 line-clamp-2 min-h-[2em] text-[10px] leading-[1.15rem] sm:text-[11px]"
             style={{ color: 'var(--theme-text-muted)' }}
           >
             {blurb}
           </p>
         </Link>
 
-        <div className="mt-3.5 grid grid-cols-2 gap-2">
+        <div className="mt-2.5 grid grid-cols-2 gap-1.5 sm:gap-2">
           <button
             type="button"
             onClick={handleAdd}
             disabled={soldOut}
-            className="inline-flex h-9 items-center justify-center gap-1.5 rounded-[var(--theme-radius-btn)] px-2 text-xs font-semibold transition-colors hover:brightness-95 disabled:cursor-not-allowed disabled:opacity-50"
+            className="inline-flex h-8 sm:h-8.5 items-center justify-center gap-1 rounded-[var(--theme-radius-btn)] px-1.5 text-[11px] font-semibold transition-colors hover:brightness-95 disabled:cursor-not-allowed disabled:opacity-50"
             style={{ background: 'var(--theme-primary-light)', color: 'var(--theme-text-primary)' }}
           >
             {justAdded ? (
               <>
-                <Check className="h-3.5 w-3.5" strokeWidth={3} aria-hidden />
+                <Check className="h-3 w-3" strokeWidth={3} aria-hidden />
                 {t('added')}
               </>
             ) : (
@@ -156,7 +157,7 @@ export default function CardCocoaTile({ product: p, shopUsername, currency, link
             type="button"
             onClick={handleBuy}
             disabled={soldOut}
-            className="inline-flex h-9 items-center justify-center rounded-[var(--theme-radius-btn)] px-2 text-xs font-semibold transition-colors hover:bg-[var(--theme-primary-hover)] disabled:cursor-not-allowed disabled:opacity-50"
+            className="inline-flex h-8 sm:h-8.5 items-center justify-center rounded-[var(--theme-radius-btn)] px-1.5 text-[11px] font-semibold transition-colors hover:bg-[var(--theme-primary-hover)] disabled:cursor-not-allowed disabled:opacity-50"
             style={{ background: 'var(--theme-primary)', color: 'var(--theme-primary-contrast)' }}
           >
             {t('buyNow')}

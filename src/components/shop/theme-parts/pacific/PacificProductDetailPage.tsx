@@ -1,3 +1,4 @@
+import ShopImage from '../../../ShopImage';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -150,7 +151,7 @@ export default function PacificProductDetailPage({
               style={{ borderColor: 'var(--theme-border)' }}
             >
               {currentImage ? (
-                <img
+                <ShopImage
                   src={currentImage}
                   alt={displayName}
                   className={`h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105 ${
@@ -201,7 +202,7 @@ export default function PacificProductDetailPage({
                         : 'border-theme-border opacity-70 hover:opacity-100'
                     }`}
                   >
-                    <img src={img} alt="" className="h-full w-full object-cover object-center" />
+                    <ShopImage src={img} alt="" className="h-full w-full object-cover object-center" />
                   </button>
                 ))}
               </div>

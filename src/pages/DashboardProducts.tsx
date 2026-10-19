@@ -384,6 +384,7 @@ export default function DashboardProducts() {
           categories={user?.categories}
           catalogProducts={products.filter((p) => !editing || p.id !== editing.id)}
           maxImages={planLimits.maxImagesPerProduct}
+          canUpgrade={canUpgradePlan(user?.plan)}
         />
       )}
 

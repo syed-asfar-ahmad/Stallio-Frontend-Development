@@ -1,3 +1,4 @@
+import ShopImage from '../../components/ShopImage';
 import { useEffect, useRef, useState } from 'react';
 import { useParams, useLocation, Link } from 'react-router-dom';
 import { ArrowLeft, ChevronRight, ChevronDown, ShoppingBag, MessageCircle, Loader2, Check } from 'lucide-react';
@@ -400,7 +401,7 @@ export default function ShopProductDetailPage() {
                       }}
                       aria-label={t('viewImage', { n: idx + 1 })}
                     >
-                      <img src={getProductImageDisplayUrl(img)} alt="" className={PRODUCT_IMAGE_CLASS} />
+                      <ShopImage src={getProductImageDisplayUrl(img)} alt="" className={PRODUCT_IMAGE_CLASS} />
                     </button>
                   ))}
                 </div>

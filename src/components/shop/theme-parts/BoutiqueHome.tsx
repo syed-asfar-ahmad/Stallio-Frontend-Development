@@ -89,7 +89,7 @@ export default function BoutiqueHome({
   const showFeaturedHeading = featuredGrid.length > 0;
 
   return (
-    <div className="flex flex-col pb-16 lg:pb-24">
+    <div className="flex flex-col pb-12 lg:pb-16">
       {sections.map((id, idx) => {
         switch (id) {
           case 'hero':
@@ -98,7 +98,7 @@ export default function BoutiqueHome({
           case 'categories':
             if (promoItems.length === 0) return null;
             return (
-              <section key="promo" className={`${containerClass} mt-14 lg:mt-20`} aria-label={t('homeCategoriesTitle')}>
+              <section key="promo" className={`${containerClass} mt-8 lg:mt-12`} aria-label={t('homeCategoriesTitle')}>
                 <CocoaPromoCards items={promoItems} />
               </section>
             );
@@ -106,9 +106,9 @@ export default function BoutiqueHome({
           case 'featured':
             if (!showFeaturedHeading) return null;
             return (
-              <section key="featured" className={`${containerClass} mt-16 lg:mt-28`}>
+              <section key="featured" className={`${containerClass} mt-10 lg:mt-14`}>
                 {newlyDropped}
-                <div className={`grid ${gridCols} gap-x-4 gap-y-9 lg:gap-x-5 lg:gap-y-12`}>
+                <div className={`grid ${gridCols} gap-x-3.5 gap-y-6 sm:gap-x-4 sm:gap-y-8 lg:gap-x-5 lg:gap-y-8`}>
                   {featuredGrid.map((p) => (
                     <ProductCard key={p.id} product={p} shopUsername={username} currency={shop.currency} linkState={{ from: 'home' }} />
                   ))}
@@ -118,7 +118,7 @@ export default function BoutiqueHome({
 
           case 'products':
             return (
-              <section key="products" className={`${containerClass} ${showFeaturedHeading ? 'mt-12 lg:mt-14' : 'mt-16 lg:mt-28'}`}>
+              <section key="products" className={`${containerClass} ${showFeaturedHeading ? 'mt-8 lg:mt-12' : 'mt-10 lg:mt-14'}`}>
                 {!showFeaturedHeading && newlyDropped}
                 {gridProducts.length === 0 ? (
                   <div className="flex flex-col items-center gap-3 py-16 text-center">
@@ -129,12 +129,12 @@ export default function BoutiqueHome({
                   </div>
                 ) : (
                   <>
-                    <div className={`grid ${gridCols} gap-x-4 gap-y-9 lg:gap-x-5 lg:gap-y-12`}>
+                    <div className={`grid ${gridCols} gap-x-3.5 gap-y-6 sm:gap-x-4 sm:gap-y-8 lg:gap-x-5 lg:gap-y-8`}>
                       {gridProducts.map((p) => (
                         <ProductCard key={p.id} product={p} shopUsername={username} currency={shop.currency} linkState={{ from: 'home' }} />
                       ))}
                     </div>
-                    <div className="mt-12 flex justify-center">
+                    <div className="mt-8 flex justify-center">
                       <CocoaOutlineLink to={`/${username}/products`}>{t('seeMoreProducts')}</CocoaOutlineLink>
                     </div>
                   </>
@@ -145,7 +145,7 @@ export default function BoutiqueHome({
           case 'collections':
             if (!showCategories || mosaicCategories.length === 0) return null;
             return (
-              <section key="collections" className={`${containerClass} mt-20 lg:mt-32`}>
+              <section key="collections" className={`${containerClass} mt-12 lg:mt-16`}>
                 <CocoaHeading title={t('recommendedTitle')} body={t('recommendedBody')} />
                 <CocoaMosaic categories={mosaicCategories} username={username} />
               </section>
@@ -154,7 +154,7 @@ export default function BoutiqueHome({
           case 'trust':
             if (trustBadges.length === 0) return null;
             return (
-              <section key="trust" className={`${containerClass} mt-16 lg:mt-24`} aria-label={t('trustTitle')}>
+              <section key="trust" className={`${containerClass} mt-10 lg:mt-14`} aria-label={t('trustTitle')}>
                 <ul
                   className="grid grid-cols-1 gap-px overflow-hidden rounded-[var(--theme-radius-card)] sm:grid-cols-2 lg:grid-cols-4"
                   style={{ background: 'var(--theme-border)' }}
@@ -162,16 +162,16 @@ export default function BoutiqueHome({
                   {trustBadges.map((badge, i) => (
                     <li
                       key={`${badge.label}-${i}`}
-                      className="flex items-center gap-3.5 px-6 py-5"
+                      className="flex items-center gap-3 px-5 py-3.5 sm:px-6 sm:py-4"
                       style={{ background: 'var(--theme-surface-secondary)' }}
                     >
                       <span
-                        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full"
+                        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full"
                         style={{ background: 'var(--theme-primary-light)', color: 'var(--theme-primary)' }}
                       >
-                        <TrustBadgeTypeIcon type={resolveTrustBadgeType(badge.icon)} className="h-[18px] w-[18px]" />
+                        <TrustBadgeTypeIcon type={resolveTrustBadgeType(badge.icon)} className="h-4 w-4" />
                       </span>
-                      <span className="text-sm font-semibold" style={{ color: 'var(--theme-text-primary)' }}>
+                      <span className="text-xs sm:text-sm font-semibold" style={{ color: 'var(--theme-text-primary)' }}>
                         {getLocalizedTrustLabel(badge, lang)}
                       </span>
                     </li>

@@ -6,6 +6,8 @@ type Props = {
   imageFile: File | null;
   onClose: () => void;
   onConfirm: (blob: Blob) => void | Promise<void>;
+  onSkip?: () => void;
+  skipLabel?: string;
 };
 
 export default function AboutHeroImageCropModal(props: Props) {

@@ -44,7 +44,7 @@ export default function HeaderCocoaOverlay({
       {showAnnouncementBar && announcements.length > 0 && (
         <aside
           aria-label={t('announcementsAria')}
-          className="relative z-50 px-4 py-2 text-center text-xs font-medium"
+          className="relative z-50 px-4 py-1.5 text-center text-[11px] font-medium"
           style={{ background: '#1f130b', color: CREAM }}
         >
           {announcements[0]}
@@ -57,16 +57,16 @@ export default function HeaderCocoaOverlay({
           style={overlay ? undefined : { background: solidBg }}
         >
           <div
-            className={`${containerClass} grid h-[4.5rem] grid-cols-[1fr_auto] items-center gap-6 lg:h-[5.25rem] lg:grid-cols-[1fr_auto_1fr]`}
+            className={`${containerClass} grid h-14 grid-cols-[1fr_auto] items-center gap-3 sm:h-16 lg:h-[4.25rem] lg:grid-cols-[1fr_auto_1fr] lg:gap-5`}
             style={{ color: CREAM }}
           >
             {/* Brand */}
-            <Link to={`/${username}`} className="flex min-w-0 items-center gap-2.5 no-underline" style={{ color: CREAM }}>
+            <Link to={`/${username}`} className="flex min-w-0 items-center gap-2 no-underline" style={{ color: CREAM }}>
               {shop.logo ? (
                 <img
                   src={shop.logo}
                   alt={shop.shopName}
-                  className="h-8 w-auto max-w-[150px] object-contain sm:h-9 sm:max-w-[190px]"
+                  className="h-7 w-auto max-w-[130px] object-contain sm:h-8 sm:max-w-[170px]"
                 />
               ) : (
                 <>
@@ -78,7 +78,7 @@ export default function HeaderCocoaOverlay({
                     <span className="h-1.5 w-1.5 rounded-full" style={{ background: CREAM }} />
                   </span>
                   <span
-                    className="truncate text-xl font-semibold leading-none sm:text-2xl"
+                    className="truncate text-lg font-semibold leading-none sm:text-xl"
                     style={{ fontFamily: 'var(--theme-font-heading)', letterSpacing: '-0.03em' }}
                   >
                     {shop.shopName}
@@ -88,7 +88,7 @@ export default function HeaderCocoaOverlay({
             </Link>
 
             {/* Primary navigation */}
-            <nav aria-label="Main Navigation" className="hidden items-center gap-8 lg:flex">
+            <nav aria-label="Main Navigation" className="hidden items-center gap-5 xl:gap-6 lg:flex">
               {navLinks.map((link) => {
                 const active = isNavActive(link.to);
                 return (
@@ -96,7 +96,7 @@ export default function HeaderCocoaOverlay({
                     key={link.to}
                     to={link.to}
                     aria-current={active ? 'page' : undefined}
-                    className="group relative py-1 text-[13px] font-medium no-underline transition-opacity"
+                    className="group relative py-1 text-xs font-medium no-underline transition-opacity"
                     style={{ color: CREAM, opacity: active ? 1 : 0.82 }}
                   >
                     {link.label}
@@ -113,14 +113,14 @@ export default function HeaderCocoaOverlay({
             </nav>
 
             {/* Actions */}
-            <div className="flex items-center justify-end gap-1 sm:gap-2">
+            <div className="flex items-center justify-end gap-0.5 sm:gap-1 lg:gap-1.5">
               <ShopLanguageToggle />
               <button
                 type="button"
                 onClick={toggleLightDark}
                 aria-label={isDark ? tApp('layout.theme.switchToLight') : tApp('layout.theme.switchToDark')}
                 title={isDark ? tApp('layout.theme.lightMode') : tApp('layout.theme.darkMode')}
-                className="flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-white/10"
+                className="flex h-9 w-9 items-center justify-center rounded-full transition-colors hover:bg-white/10"
                 style={{ color: CREAM }}
               >
                 {isDark ? <Sun className="h-[18px] w-[18px]" strokeWidth={1.75} aria-hidden /> : <Moon className="h-[18px] w-[18px]" strokeWidth={1.75} aria-hidden />}
@@ -128,7 +128,7 @@ export default function HeaderCocoaOverlay({
               <Link
                 to={`/${username}/products`}
                 aria-label={t('productsSearchAria')}
-                className="flex h-10 w-10 items-center justify-center rounded-full no-underline transition-colors hover:bg-white/10"
+                className="flex h-9 w-9 items-center justify-center rounded-full no-underline transition-colors hover:bg-white/10"
                 style={{ color: CREAM }}
               >
                 <Search className="h-[18px] w-[18px]" strokeWidth={1.75} />
@@ -137,7 +137,7 @@ export default function HeaderCocoaOverlay({
                 type="button"
                 onClick={onOpenCheckout}
                 aria-label={t('navCart')}
-                className="relative flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-white/10"
+                className="relative flex h-9 w-9 items-center justify-center rounded-full transition-colors hover:bg-white/10"
                 style={{ color: CREAM }}
               >
                 <ShoppingBag className="h-[18px] w-[18px]" strokeWidth={1.75} />
@@ -155,7 +155,7 @@ export default function HeaderCocoaOverlay({
                 onClick={onToggleMobileMenu}
                 aria-expanded={mobileMenuOpen}
                 aria-label={t('navMenu')}
-                className="flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-white/10 lg:hidden"
+                className="flex h-9 w-9 items-center justify-center rounded-full transition-colors hover:bg-white/10 lg:hidden"
                 style={{ color: CREAM }}
               >
                 {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -169,7 +169,7 @@ export default function HeaderCocoaOverlay({
           <div className="absolute inset-x-0 top-full px-3 pb-4 pt-1 lg:hidden">
             <nav
               aria-label="Mobile Navigation"
-              className="flex flex-col gap-1 rounded-2xl p-3 shadow-2xl"
+              className="flex flex-col gap-0.5 rounded-2xl p-2.5 shadow-2xl"
               style={{ background: '#24160c', border: '1px solid rgb(251 243 228 / 0.12)' }}
             >
               {navLinks.map((link) => {
@@ -179,7 +179,7 @@ export default function HeaderCocoaOverlay({
                     key={link.to}
                     to={link.to}
                     onClick={onCloseMobileMenu}
-                    className="rounded-xl px-4 py-3 text-sm font-medium no-underline transition-colors"
+                    className="rounded-xl px-3.5 py-2.5 text-[13px] font-medium no-underline transition-colors"
                     style={{
                       color: CREAM,
                       background: active ? 'rgb(251 243 228 / 0.12)' : 'transparent',

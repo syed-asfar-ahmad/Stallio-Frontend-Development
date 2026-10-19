@@ -1,3 +1,4 @@
+import ShopImage from '../../../ShopImage';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ShoppingBag, ArrowRight, Sprout, Leaf, Droplets, Sun, Sparkles, SlidersHorizontal, Check, ShieldCheck, Heart } from 'lucide-react';
@@ -325,7 +326,7 @@ export default function PacificHome({ shop, products, username, containerClass }
             {/* Right Photo Column */}
             <div className="lg:col-span-5 relative min-h-[18rem] sm:min-h-[24rem] lg:min-h-full h-full">
               {shop.aboutImages?.[0] || shop.homeHeroImage ? (
-                <img
+                <ShopImage
                   src={shop.aboutImages?.[0] || shop.homeHeroImage || ''}
                   alt={shop.shopName}
                   className="absolute inset-0 h-full w-full object-cover object-center"
@@ -363,7 +364,7 @@ export default function PacificHome({ shop, products, username, containerClass }
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-5 relative aspect-square rounded-[calc(var(--theme-radius-card)*0.75)] overflow-hidden border shadow-md">
                 {seasonalItem.image ? (
-                  <img
+                  <ShopImage
                     src={seasonalItem.image}
                     alt={seasonalItem.name}
                     className="h-full w-full object-cover object-center transition-transform duration-700 hover:scale-105"

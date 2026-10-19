@@ -1,3 +1,4 @@
+import ShopImage from '../../../ShopImage';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Check, ChevronRight, Loader2, MessageCircle, Minus, Plus, ShoppingBag, ShoppingCart, Zap } from 'lucide-react';
 import { useShopLanguage } from '../../../../context/ShopLanguageContext';
@@ -65,7 +66,7 @@ export default function DetailMartShop(p: DetailCocoaGalleryProps) {
             style={{ borderColor: 'var(--theme-border)', background: 'var(--theme-surface)' }}
           >
             {active ? (
-              <img
+              <ShopImage
                 key={active}
                 src={getProductImageDisplayUrl(active)}
                 alt={p.displayName}
@@ -105,7 +106,7 @@ export default function DetailMartShop(p: DetailCocoaGalleryProps) {
                       opacity: on ? 1 : 0.75,
                     }}
                   >
-                    <img src={getProductImageDisplayUrl(img)} alt="" className="absolute inset-0 h-full w-full object-contain p-2" />
+                    <ShopImage src={getProductImageDisplayUrl(img)} alt="" className="absolute inset-0 h-full w-full object-contain p-2" />
                   </button>
                 );
               })}

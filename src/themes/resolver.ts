@@ -109,7 +109,7 @@ export function resolveShopTheme(
   };
 
   const density = mergedTokens.personality?.sectionDensity ?? 'normal';
-  const sectionGap = density === 'compact' ? '2rem' : density === 'airy' ? '4.5rem' : '3rem';
+  const sectionGap = density === 'compact' ? '1.5rem' : density === 'airy' ? '2.75rem' : '2rem';
 
   const cssVariables: Record<string, string> = {
     '--theme-primary': mergedTokens.colors.primary,

@@ -1,3 +1,4 @@
+import ShopImage from '../../../ShopImage';
 import { Link } from 'react-router-dom';
 import { LayoutGrid, ArrowRight, Sparkles, Check, Droplets, ShieldCheck, Sprout, Sun, Apple, Heart } from 'lucide-react';
 import type { ReactNode } from 'react';
@@ -200,7 +201,7 @@ export function PacificCategoryMosaic({
           }}
         >
           {first.image ? (
-            <img
+            <ShopImage
               src={first.image}
               alt=""
               loading="lazy"
@@ -243,7 +244,7 @@ export function PacificCategoryMosaic({
             }}
           >
             {second.image ? (
-              <img
+              <ShopImage
                 src={second.image}
                 alt=""
                 loading="lazy"
@@ -275,7 +276,7 @@ export function PacificCategoryMosaic({
             }}
           >
             {third.image ? (
-              <img
+              <ShopImage
                 src={third.image}
                 alt=""
                 loading="lazy"
@@ -312,7 +313,7 @@ export function PacificCategoryMosaic({
               }}
             >
               {c.image ? (
-                <img
+                <ShopImage
                   src={c.image}
                   alt=""
                   loading="lazy"
@@ -360,7 +361,7 @@ export function PacificCategoryCard({
     >
       <div className="relative aspect-[4/3] w-full overflow-hidden" style={{ background: 'var(--theme-surface-secondary)' }}>
         {c.image ? (
-          <img
+          <ShopImage
             src={c.image}
             alt={displayName}
             loading="lazy"

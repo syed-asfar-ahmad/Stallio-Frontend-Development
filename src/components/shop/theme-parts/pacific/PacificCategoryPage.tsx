@@ -1,3 +1,4 @@
+import ShopImage from '../../../ShopImage';
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ChevronRight, LayoutGrid, ShoppingBag, Sprout, ArrowRight } from 'lucide-react';
@@ -95,7 +96,7 @@ export default function PacificCategoryPage({
         }}
       >
         {categoryImage ? (
-          <img
+          <ShopImage
             src={categoryImage}
             alt={categoryDisplayName}
             className="absolute inset-0 h-full w-full object-cover object-center"

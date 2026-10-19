@@ -35,13 +35,13 @@ export default function HeaderNoirAtelier({
         </div>
       ) : null}
 
-      <div className={`${containerClass} flex items-center justify-between gap-4 py-6`}>
-        <nav className="hidden flex-1 items-center gap-10 lg:flex" aria-label={t('navStoreNav')}>
+      <div className={`${containerClass} flex items-center justify-between gap-4 py-2 sm:py-2.5`}>
+        <nav className="hidden flex-1 items-center gap-6 lg:flex" aria-label={t('navStoreNav')}>
           {navLinks.map(({ to, label }) => (
             <Link
               key={to}
               to={to}
-              className="group relative pb-2 text-[13px] font-semibold uppercase tracking-[0.22em] no-underline transition-colors hover:text-[var(--theme-primary)]"
+              className="group relative pb-1 text-[10px] font-semibold uppercase tracking-[0.18em] no-underline transition-colors hover:text-[var(--theme-primary)]"
               style={{ color: isNavActive(to) ? 'var(--theme-primary)' : 'var(--theme-text-secondary)' }}
             >
               {label}
@@ -55,10 +55,10 @@ export default function HeaderNoirAtelier({
 
         <Link to={`/${username}`} className="shrink-0 text-center no-underline lg:flex-1" aria-label={shop.shopName}>
           {shop.logo ? (
-            <img src={shop.logo} alt="" className="mx-auto h-11 w-auto max-w-[11rem] object-contain" />
+            <img src={shop.logo} alt="" className="mx-auto h-7 w-auto max-w-[8rem] object-contain" />
           ) : (
             <span
-              className="text-xl uppercase tracking-[0.45em] lg:text-2xl"
+              className="text-base uppercase tracking-[0.4em] lg:text-lg"
               style={{ color: 'var(--theme-text-primary)', fontFamily: 'var(--theme-font-heading)' }}
             >
               {shop.shopName}
@@ -66,28 +66,28 @@ export default function HeaderNoirAtelier({
           )}
         </Link>
 
-        <div className="flex flex-1 items-center justify-end gap-3">
+        <div className="flex flex-1 items-center justify-end gap-2.5">
           <ShopLanguageToggle />
-          <ThemeToggle className="h-8 w-8" />
+          <ThemeToggle className="h-7 w-7" />
           <button
             type="button"
             onClick={onOpenCheckout}
-            className="flex items-center gap-2 border px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] transition-colors hover:bg-[var(--theme-primary)] hover:text-[var(--theme-primary-contrast)]"
+            className="flex items-center gap-1.5 border px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.18em] transition-colors hover:bg-[var(--theme-primary)] hover:text-[var(--theme-primary-contrast)]"
             style={{ borderColor: 'var(--theme-primary)', color: 'var(--theme-primary)' }}
           >
-            <ShoppingBag className="h-4 w-4" strokeWidth={1.5} />
+            <ShoppingBag className="h-3.5 w-3.5" strokeWidth={1.5} />
             <span className="hidden sm:inline">{t('navCart')}</span>
             {cartCount > 0 ? <span className="tabular-nums">({cartCount})</span> : null}
           </button>
           <button
             type="button"
             onClick={onToggleMobileMenu}
-            className="inline-flex h-9 w-9 items-center justify-center lg:hidden"
+            className="inline-flex h-8 w-8 items-center justify-center lg:hidden"
             style={{ color: 'var(--theme-text-primary)' }}
             aria-label={mobileMenuOpen ? t('navCloseMenu') : t('navOpenMenu')}
             aria-expanded={mobileMenuOpen}
           >
-            {mobileMenuOpen ? <X className="h-5 w-5" strokeWidth={1.5} /> : <Menu className="h-5 w-5" strokeWidth={1.5} />}
+            {mobileMenuOpen ? <X className="h-4.5 w-4.5" strokeWidth={1.5} /> : <Menu className="h-4.5 w-4.5" strokeWidth={1.5} />}
           </button>
         </div>
       </div>
@@ -97,16 +97,16 @@ export default function HeaderNoirAtelier({
         style={{ borderColor: 'var(--theme-border)' }}
         aria-hidden={!mobileMenuOpen}
       >
-        <nav className={`${containerClass} flex flex-col py-4`} aria-label={t('navStoreNav')}>
+        <nav className={`${containerClass} flex flex-col py-3`} aria-label={t('navStoreNav')}>
           {navLinks.map(({ to, label }, i) => (
             <Link
               key={to}
               to={to}
               onClick={onCloseMobileMenu}
-              className="flex items-center gap-4 border-b py-4 text-sm uppercase tracking-[0.25em] no-underline"
+              className="flex items-center gap-3.5 border-b py-3 text-xs uppercase tracking-[0.2em] no-underline"
               style={{ borderColor: 'var(--theme-border)', color: isNavActive(to) ? 'var(--theme-primary)' : 'var(--theme-text-secondary)' }}
             >
-              <span className="text-[10px] tabular-nums" style={{ color: 'var(--theme-primary)' }}>0{i + 1}</span>
+              <span className="text-[9px] tabular-nums" style={{ color: 'var(--theme-primary)' }}>0{i + 1}</span>
               {label}
             </Link>
           ))}
