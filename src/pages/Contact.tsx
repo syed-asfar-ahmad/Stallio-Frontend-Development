@@ -22,12 +22,24 @@ export default function Contact() {
         ) : (
           <>
             <ContactHero />
-            <section className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-24">
-              <div className="grid gap-8 md:grid-cols-[1fr_1.2fr] md:gap-12 lg:gap-16">
-                <ContactInfo />
-                <ContactForm onSuccess={() => setSubmitted(true)} />
+
+            <section
+              id="write"
+              className="border-border relative scroll-mt-28 overflow-hidden border-y bg-surface dark:bg-background"
+            >
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_12%_0%,color-mix(in_srgb,var(--brand)_10%,transparent),transparent_50%)] dark:bg-[radial-gradient(ellipse_at_12%_0%,color-mix(in_srgb,var(--brand)_18%,transparent),transparent_50%)]"
+              />
+              <div className="relative mx-auto grid w-full max-w-6xl gap-12 px-4 py-24 sm:px-6 md:py-32 lg:grid-cols-12 lg:gap-14 lg:py-36">
+                <ContactInfo className="lg:col-span-5" />
+                <ContactForm
+                  className="lg:col-span-7"
+                  onSuccess={() => setSubmitted(true)}
+                />
               </div>
             </section>
+
             <MarketingCta
               eyebrow={t('contact.cta.eyebrow')}
               title={t('contact.cta.title')}

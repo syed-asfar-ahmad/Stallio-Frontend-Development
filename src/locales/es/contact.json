@@ -3,24 +3,33 @@
     "toastSent": "Mensaje enviado. Nos pondremos en contacto contigo pronto.",
     "success": {
       "title": "Mensaje enviado",
-      "body": "Gracias por escribirnos. Nos pondremos en contacto contigo pronto.",
-      "hint": "Para ayuda urgente con tu tienda, revisa los ajustes de tu panel.",
+      "body": "Gracias por escribir. Alguien del equipo de Stallio lo leerá y te responderá.",
+      "hint": "¿Necesitas ayuda antes? Empieza gratis y usa el soporte del panel desde tu cuenta.",
       "backHome": "Volver al inicio",
       "openShop": "Empieza gratis"
     },
     "hero": {
-      "eyebrow": "Contacto",
-      "title": "Leemos cada mensaje",
-      "subtitle": "Dudas sobre el producto, ideas de colaboración o algo roto: envía una nota y te indicaremos la dirección adecuada."
+      "titleBefore": "Habla con",
+      "titleAccent": "Stallio",
+      "body": "Dudas sobre el producto, facturación o algo roto. Envía una nota y te orientamos.",
+      "writeUs": "Escribir un mensaje",
+      "directLine": "Línea directa"
     },
     "info": {
-      "title": "Datos de contacto",
-      "body": "¿Prefieres el correo? Escríbenos abajo. El tiempo de respuesta habitual es de unos pocos días laborables.",
+      "eyebrow": "Contáctanos",
+      "title": "Elige un canal",
+      "body": "Usa el formulario si necesitas contexto, o el correo si te resulta más fácil. Las redes valen para un saludo breve.",
+      "replyTime": "Respuesta habitual: unos pocos días laborables. Los temas de facturación tienen prioridad.",
+      "topics": [
+        "Cómo encaja Stallio en tu tienda",
+        "Facturación, planes y recibos",
+        "Errores o algo que no encaja"
+      ],
       "social": "Redes sociales"
     },
     "form": {
-      "title": "Enviar un mensaje",
-      "intro": "Todos los campos son obligatorios para que podamos responder con contexto.",
+      "title": "Escribe un mensaje",
+      "intro": "Cuéntanos el contexto para que podamos responder sin tantos mensajes de ida y vuelta.",
       "name": "Nombre",
       "email": "Correo electrónico",
       "subject": "Asunto",
@@ -28,7 +37,7 @@
       "placeholderName": "Tu nombre",
       "placeholderEmail": "tu@ejemplo.com",
       "placeholderSubject": "¿De qué se trata?",
-      "placeholderMessage": "Tu mensaje...",
+      "placeholderMessage": "Cuéntanos en qué necesitas ayuda...",
       "send": "Enviar mensaje",
       "sending": "Enviando...",
       "errors": {
@@ -37,7 +46,8 @@
         "emailInvalid": "Introduce un correo electrónico válido",
         "subjectRequired": "El asunto es obligatorio",
         "messageRequired": "El mensaje es obligatorio",
-        "messageMin": "El mensaje debe tener al menos 10 caracteres"
+        "messageMin": "El mensaje debe tener al menos 10 caracteres",
+        "sendFailed": "No se pudo enviar el mensaje. Inténtalo de nuevo."
       }
     },
     "cta": {
