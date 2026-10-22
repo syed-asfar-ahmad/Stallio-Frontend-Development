@@ -2,16 +2,19 @@ import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import toast from 'react-hot-toast';
-import { CreditCard, Search, Trash2 } from 'lucide-react';
+import { CreditCard, Handshake, Search, Trash2 } from 'lucide-react';
 import AdminLayout from '../../components/admin/AdminLayout';
 import AdminLoading from '../../components/admin/AdminLoading';
 import AdminPagination from '../../components/admin/AdminPagination';
 import { adminTheme } from '../../components/admin/adminTheme';
 import ConfirmDialog from '../../components/ConfirmDialog';
 import { api } from '../../lib/api';
+import { adminAffiliateApi } from '../../affiliate/adminAffiliateApi';
+import { formatBps, formatCents } from '../../lib/formatCurrency';
 import {
   SUBSCRIPTION_USD_MONTHLY,
   SUBSCRIPTION_USD_YEARLY,
+  subscriptionAmountForPlan,
   subscriptionPlanLabel,
   type SubscriptionPlan,
 } from '../../lib/subscriptionPricing';
@@ -22,6 +25,7 @@ import {
   type SubscriptionBillingStatus,
 } from '../../lib/subscriptionSchedule';
 import type { AdminSubscriptionsPage } from '../../types/admin';
+import type { SubscriptionReferralAttribution } from '../../affiliate/types';
 
 const SELLERS_LIMIT = 30;
 const HISTORY_LIMIT = 15;
@@ -51,6 +55,7 @@ export default function AdminSubscriptions() {
   } | null>(null);
   const [deletePaymentId, setDeletePaymentId] = useState<string | null>(null);
   const [deletingPayment, setDeletingPayment] = useState(false);
+  const [attribution, setAttribution] = useState<Record<string, SubscriptionReferralAttribution>>({});
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -75,6 +80,37 @@ export default function AdminSubscriptions() {
   useEffect(() => {
     load();
   }, [load]);
+
+  // Resolve affiliate attribution for every seller on screen (non-blocking; chips simply stay hidden on failure).
+  useEffect(() => {
+    if (!data) return;
+    const inline: Record<string, SubscriptionReferralAttribution> = {};
+    const lookup = new Map<string, { id: string; username: string }>();
+    data.sellers.forEach((s) => {
+      if (s.referral) inline[s.id] = s.referral;
+      else if (s.referral === undefined) lookup.set(s.id, { id: s.id, username: s.username });
+    });
+    data.history.forEach((p) => {
+      if (p.referral) inline[p.userId] = p.referral;
+      else if (p.referral === undefined && !inline[p.userId]) lookup.set(p.userId, { id: p.userId, username: p.username });
+    });
+    setAttribution(inline);
+    if (lookup.size === 0) return;
+    let alive = true;
+    adminAffiliateApi<{ attribution: Record<string, SubscriptionReferralAttribution> }>('/api/admin/affiliate/attribution', {
+      method: 'POST',
+      body: { sellers: [...lookup.values()] },
+    })
+      .then((res) => {
+        if (alive) setAttribution((prev) => ({ ...res.attribution, ...prev }));
+      })
+      .catch(() => {
+        /* attribution is optional context */
+      });
+    return () => {
+      alive = false;
+    };
+  }, [data]);
 
   async function markPaid(sellerId: string, plan: SubscriptionPlan) {
     setRecording({ sellerId, plan });
@@ -117,6 +153,45 @@ export default function AdminSubscriptions() {
     }
   }
 
+  /** Chip: "Referred by @ahmad (20% commission)" */
+  function renderReferralChip(userId: string) {
+    const r = attribution[userId];
+    if (!r) return null;
+    return (
+      <Link
+        to={`/admin/affiliates/${r.affiliateId}`}
+        title={`Referred by ${r.name}`}
+        className={`mt-1 inline-flex max-w-full items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold no-underline transition-colors ${
+          r.affiliateActive
+            ? 'bg-emerald-50 text-emerald-800 hover:bg-emerald-100 dark:bg-emerald-950/40 dark:text-emerald-300 dark:hover:bg-emerald-950/60'
+            : 'bg-amber-100 text-amber-800 dark:bg-amber-950/50 dark:text-amber-300'
+        }`}
+      >
+        <Handshake className="h-3 w-3 shrink-0" aria-hidden />
+        <span className="truncate">
+          Referred by @{r.handle} ({formatBps(r.rateBps)} commission)
+          {r.affiliateActive ? '' : ', suspended'}
+        </span>
+      </Link>
+    );
+  }
+
+  /** Describes what recording a payment will do for the affiliate (first-paid-plan rule). */
+  function commissionNote(sellerId: string, plan: SubscriptionPlan): string {
+    const r = attribution[sellerId];
+    if (!r) return '';
+    const seller = data?.sellers.find((s) => s.id === sellerId);
+    if (!r.affiliateActive) return ` Affiliate @${r.handle} is suspended, so no commission will be created.`;
+    if (r.commissionIssued) return ` A commission was already issued for @${r.handle}; no additional commission will be created.`;
+    if (seller?.lastPaidAt) return ` Commission is only earned on a referred seller's first paid plan, so none will be created for @${r.handle}.`;
+    if (new Date(r.payDeadlineAt).getTime() < Date.now()) {
+      return ` The qualification window for @${r.handle} has closed, so no commission will be created.`;
+    }
+    const cents = Math.round((subscriptionAmountForPlan(plan) * 100 * r.rateBps) / 10_000);
+    return ` A qualified commission of ${formatCents(cents)} will be created for affiliate @${r.handle}.`;
+  }
+
+  const deletePayment = deletePaymentId ? data?.history.find((h) => h.id === deletePaymentId) ?? null : null;
   const summary = data?.summary;
   const sellers = data?.sellers ?? [];
   const history = data?.history ?? [];
@@ -301,6 +376,7 @@ export default function AdminSubscriptions() {
                                 {s.shopName}
                               </Link>
                               <p className={`text-xs ${adminTheme.muted}`}>@{s.username}</p>
+                              {renderReferralChip(s.id)}
                             </td>
                             <td className={adminTheme.td}>
                               <span
@@ -350,6 +426,7 @@ export default function AdminSubscriptions() {
                                 {s.shopName}
                               </Link>
                               <p className={`text-xs ${adminTheme.muted}`}>@{s.username}</p>
+                              {renderReferralChip(s.id)}
                             </div>
                             <span
                               className={`shrink-0 inline-flex rounded-full px-2.5 py-0.5 text-[10px] font-semibold ${subscriptionBillingStatusClass(s.billingStatus)}`}
@@ -444,6 +521,7 @@ export default function AdminSubscriptions() {
                               {p.shopName}
                             </Link>
                             <p className={`text-xs ${adminTheme.muted}`}>@{p.username}</p>
+                            {renderReferralChip(p.userId)}
                           </td>
                           <td className={adminTheme.td}>{subscriptionPlanLabel(p.plan)}</td>
                           <td className={adminTheme.td}>${p.amount}</td>
@@ -479,6 +557,7 @@ export default function AdminSubscriptions() {
                             {p.shopName}
                           </Link>
                           <p className={`text-xs ${adminTheme.muted}`}>@{p.username}</p>
+                          {renderReferralChip(p.userId)}
                           <p className="mt-2 text-sm text-stone-700 dark:text-zinc-300">
                             <span className="font-medium">{subscriptionPlanLabel(p.plan)}</span>
                             <span className="mx-1.5 text-stone-400 dark:text-zinc-500">·</span>
@@ -519,7 +598,7 @@ export default function AdminSubscriptions() {
         title="Record Subscription Payment?"
         message={
           markPaidConfirm
-            ? `Mark ${markPaidConfirm.shopName} as paid for the ${subscriptionPlanLabel(markPaidConfirm.plan)} plan ($${markPaidConfirm.plan === 'yearly' ? SUBSCRIPTION_USD_YEARLY : SUBSCRIPTION_USD_MONTHLY})? The next due date will be scheduled automatically.`
+            ? `Mark ${markPaidConfirm.shopName} as paid for the ${subscriptionPlanLabel(markPaidConfirm.plan)} plan ($${markPaidConfirm.plan === 'yearly' ? SUBSCRIPTION_USD_YEARLY : SUBSCRIPTION_USD_MONTHLY})? The next due date will be scheduled automatically.${commissionNote(markPaidConfirm.sellerId, markPaidConfirm.plan)}`
             : ''
         }
         confirmLabel={
@@ -542,7 +621,11 @@ export default function AdminSubscriptions() {
       <ConfirmDialog
         open={!!deletePaymentId}
         title="Remove Payment?"
-        message="This removes the payment from history and recalculates the seller's next due date from their remaining payments."
+        message={`This removes the payment from history and recalculates the seller's next due date from their remaining payments.${
+          deletePayment && attribution[deletePayment.userId]
+            ? ' Deleting this payment will reverse the linked affiliate commission.'
+            : ''
+        }`}
         confirmLabel={deletingPayment ? 'Removing...' : 'Remove'}
         cancelLabel="Cancel"
         danger

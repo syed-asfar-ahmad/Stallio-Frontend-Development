@@ -2,6 +2,24 @@ import { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import ErrorBoundary from './components/ErrorBoundary';
 import AdminLoading from './components/admin/AdminLoading';
+import { useReferralCapture } from './lib/referral';
+
+const ReferralRedirect = lazy(() => import('./pages/ReferralRedirect'));
+
+// Affiliate Platform
+const RequireAffiliate = lazy(() => import('./affiliate/RequireAffiliate'));
+const AffiliateLayout = lazy(() => import('./affiliate/AffiliateLayout'));
+const AffiliateSignup = lazy(() => import('./affiliate/pages/AffiliateSignup'));
+const AffiliateVerifyEmail = lazy(() => import('./affiliate/pages/AffiliateVerifyEmail'));
+const AffiliateLogin = lazy(() => import('./affiliate/pages/AffiliateLogin'));
+const AffiliateForgotPassword = lazy(() => import('./affiliate/pages/AffiliateForgotPassword'));
+const AffiliateResetPassword = lazy(() => import('./affiliate/pages/AffiliateResetPassword'));
+const AffiliateDashboardOverview = lazy(() => import('./affiliate/pages/DashboardOverview'));
+const AffiliateReferrals = lazy(() => import('./affiliate/pages/Referrals'));
+const AffiliateLinkQrStudio = lazy(() => import('./affiliate/pages/LinkQrStudio'));
+const AffiliateEarnings = lazy(() => import('./affiliate/pages/Earnings'));
+const AffiliatePayouts = lazy(() => import('./affiliate/pages/Payouts'));
+const AffiliateSettings = lazy(() => import('./affiliate/pages/Settings'));
 
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
@@ -46,6 +64,12 @@ const AdminShopEdit = lazy(() => import('./pages/admin/AdminShopEdit'));
 const AdminSubscriptions = lazy(() => import('./pages/admin/AdminSubscriptions'));
 const AdminSupportChat = lazy(() => import('./pages/admin/AdminSupportChat'));
 const AdminNotifications = lazy(() => import('./pages/admin/AdminNotifications'));
+const AdminAffiliates = lazy(() => import('./pages/admin/AdminAffiliates'));
+const AdminAffiliateDetail = lazy(() => import('./pages/admin/AdminAffiliateDetail'));
+const AdminReferrals = lazy(() => import('./pages/admin/AdminReferrals'));
+const AdminCommissions = lazy(() => import('./pages/admin/AdminCommissions'));
+const AdminPayouts = lazy(() => import('./pages/admin/AdminPayouts'));
+const AdminAffiliateSettings = lazy(() => import('./pages/admin/AdminAffiliateSettings'));
 // const DashboardThemes = lazy(() => import('./pages/DashboardThemes'));
 function LegacyShopRedirect() {
   const { pathname, search, hash } = useLocation();
@@ -63,6 +87,8 @@ function RouteFallback() {
 }
 
 export default function App() {
+  useReferralCapture();
+
   return (
     <Suspense fallback={<RouteFallback />}>
       <Routes>
@@ -93,6 +119,12 @@ export default function App() {
         <Route path="/admin/support-chat/:sellerId" element={<AdminSupportChat />} />
         <Route path="/admin/subscriptions" element={<AdminSubscriptions />} />
         <Route path="/admin/notifications" element={<AdminNotifications />} />
+        <Route path="/admin/affiliates" element={<AdminAffiliates />} />
+        <Route path="/admin/affiliates/:id" element={<AdminAffiliateDetail />} />
+        <Route path="/admin/referrals" element={<AdminReferrals />} />
+        <Route path="/admin/commissions" element={<AdminCommissions />} />
+        <Route path="/admin/payouts" element={<AdminPayouts />} />
+        <Route path="/admin/affiliate-settings" element={<AdminAffiliateSettings />} />
         <Route path="/dashboard" element={<DashboardOverview />} />
         <Route path="/dashboard/home" element={<DashboardHome />} />
         <Route path="/dashboard/products" element={<DashboardProducts />} />
@@ -117,6 +149,32 @@ export default function App() {
         <Route path="/dashboard/delivery" element={<DashboardDelivery />} />
         <Route path="/dashboard/themes" element={<DashboardThemes />} />
         <Route path="/shop/*" element={<LegacyShopRedirect />} />
+        <Route path="/r/:code" element={<ReferralRedirect />} />
+
+        {/* Affiliate Public & Auth Routes */}
+        <Route path="/affiliate/signup" element={<AffiliateSignup />} />
+        <Route path="/affiliate/verify-email" element={<AffiliateVerifyEmail />} />
+        <Route path="/affiliate/login" element={<AffiliateLogin />} />
+        <Route path="/affiliate/forgot-password" element={<AffiliateForgotPassword />} />
+        <Route path="/affiliate/reset-password" element={<AffiliateResetPassword />} />
+
+        {/* Affiliate Protected Dashboard */}
+        <Route
+          path="/affiliate/dashboard"
+          element={
+            <RequireAffiliate>
+              <AffiliateLayout />
+            </RequireAffiliate>
+          }
+        >
+          <Route index element={<AffiliateDashboardOverview />} />
+          <Route path="referrals" element={<AffiliateReferrals />} />
+          <Route path="link" element={<AffiliateLinkQrStudio />} />
+          <Route path="earnings" element={<AffiliateEarnings />} />
+          <Route path="payouts" element={<AffiliatePayouts />} />
+          <Route path="settings" element={<AffiliateSettings />} />
+        </Route>
+
         <Route path="/:username/product/:productId" element={<Shop />} />
         <Route path="/:username/category/:categorySlug" element={<Shop />} />
         <Route path="/:username/categories" element={<Shop />} />

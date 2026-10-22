@@ -1,6 +1,22 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { Fragment, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, Users, Store, Inbox, CreditCard, LogOut, X, ExternalLink, Headphones, Bell } from 'lucide-react';
+import {
+  LayoutDashboard,
+  Users,
+  Store,
+  Inbox,
+  CreditCard,
+  LogOut,
+  X,
+  ExternalLink,
+  Headphones,
+  Bell,
+  Handshake,
+  UserCheck,
+  ReceiptText,
+  Layers,
+  Settings2,
+} from 'lucide-react';
 import { api } from '../../lib/api';
 import AdminBrandMark from './AdminBrandMark';
 import { useAuth } from '../../context/AuthContext';
@@ -17,7 +33,7 @@ import { attachBlockNumberInputWheel } from '../../lib/blockNumberInputWheel';
 import { adminTheme } from './adminTheme';
 import type { LucideIcon } from 'lucide-react';
 
-const NAV: { to: string; label: string; icon: LucideIcon; end?: boolean }[] = [
+const NAV: { to: string; label: string; icon: LucideIcon; end?: boolean; section?: string }[] = [
   { to: '/admin', label: 'Overview', icon: LayoutDashboard, end: true },
   { to: '/admin/users', label: 'Sellers', icon: Users },
   { to: '/admin/shops', label: 'Shop Settings', icon: Store },
@@ -25,6 +41,11 @@ const NAV: { to: string; label: string; icon: LucideIcon; end?: boolean }[] = [
   { to: '/admin/messages', label: 'Messages', icon: Inbox },
   { to: '/admin/notifications', label: 'Notifications', icon: Bell },
   { to: '/admin/support-chat', label: 'Seller Chat', icon: Headphones },
+  { to: '/admin/affiliates', label: 'Affiliates', icon: Handshake, section: 'Affiliate Program' },
+  { to: '/admin/referrals', label: 'Referrals', icon: UserCheck },
+  { to: '/admin/commissions', label: 'Commissions', icon: ReceiptText },
+  { to: '/admin/payouts', label: 'Payouts', icon: Layers },
+  { to: '/admin/affiliate-settings', label: 'Program Settings', icon: Settings2 },
 ];
 
 function SidebarBrand() {
@@ -150,18 +171,23 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   function renderNav(onNavigate?: () => void) {
     return (
       <nav ref={adminNavRef} className="flex-1 space-y-1 overflow-y-auto overflow-x-hidden p-4 [overflow-anchor:none]">
-        {NAV.map(({ to, label, icon: Icon, end }) => {
+        {NAV.map(({ to, label, icon: Icon, end, section }) => {
           const showBadge = to === '/admin/support-chat' && supportUnreadCount > 0;
           return (
-            <Link key={to} to={to} onMouseDown={onAdminNavMouseDown} onClick={onNavigate} className={linkClass(to, end)}>
-              <Icon className="h-[18px] w-[18px] shrink-0" strokeWidth={2} />
-              <span className="truncate flex-1">{label}</span>
-              {showBadge && (
-                <span className="ml-auto inline-flex min-w-5 h-5 items-center justify-center rounded-full bg-red-500 px-1.5 text-[11px] font-bold text-white">
-                  {supportUnreadCount > 99 ? '99+' : supportUnreadCount}
-                </span>
-              )}
-            </Link>
+            <Fragment key={to}>
+              {section ? (
+                <p className="px-4 pb-1 pt-4 text-[11px] font-semibold uppercase tracking-widest text-stone-400 dark:text-zinc-500">{section}</p>
+              ) : null}
+              <Link to={to} onMouseDown={onAdminNavMouseDown} onClick={onNavigate} className={linkClass(to, end)}>
+                <Icon className="h-[18px] w-[18px] shrink-0" strokeWidth={2} />
+                <span className="truncate flex-1">{label}</span>
+                {showBadge && (
+                  <span className="ml-auto inline-flex min-w-5 h-5 items-center justify-center rounded-full bg-red-500 px-1.5 text-[11px] font-bold text-white">
+                    {supportUnreadCount > 99 ? '99+' : supportUnreadCount}
+                  </span>
+                )}
+              </Link>
+            </Fragment>
           );
         })}
       </nav>

@@ -601,6 +601,35 @@ export default function Pricing() {
           </div>
         </section>
 
+        {/* Affiliate Program Callout Banner */}
+        <section className="relative px-4 pb-12 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl">
+            <div className="relative overflow-hidden rounded-3xl border border-emerald-200/80 bg-gradient-to-r from-emerald-500/10 via-teal-500/5 to-transparent p-6 sm:p-8 dark:border-emerald-800/60 dark:bg-zinc-900/90">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+                <div className="min-w-0">
+                  <div className="inline-flex items-center gap-2 rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300">
+                    <Sparkles className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
+                    <span>Earn With Stallio</span>
+                  </div>
+                  <h3 className="mt-3 text-lg font-bold text-stone-900 sm:text-xl dark:text-zinc-100">
+                    Join the Stallio Affiliate Program
+                  </h3>
+                  <p className="mt-1 text-sm text-stone-600 dark:text-zinc-400">
+                    Share your unique link or QR code and earn a one-time 20% commission on every merchant's first paid subscription.
+                  </p>
+                </div>
+                <Link
+                  to="/affiliate/signup"
+                  className="inline-flex shrink-0 items-center gap-2 rounded-2xl bg-emerald-600 px-5 py-3 text-sm font-bold text-white shadow-md shadow-emerald-600/25 transition-all hover:bg-emerald-500 hover:scale-[1.02] active:scale-[0.98]"
+                >
+                  <span>Become an Affiliate</span>
+                  <ArrowRight className="h-4 w-4 rtl:rotate-180" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section className="relative overflow-hidden border-t border-stone-200/80 bg-white py-12 max-lg:py-12 md:py-24">
           <div
             className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_70%_at_50%_100%,rgba(91,69,229,0.09),transparent_55%)]"

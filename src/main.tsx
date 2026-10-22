@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import { AffiliateAuthProvider } from './affiliate/AffiliateAuthContext';
 import { ThemeProvider } from './context/ThemeContext';
 import ThemedToaster from './components/ThemedToaster';
 import App from './App';
@@ -14,8 +15,10 @@ void i18nReady.then(() => {
       <BrowserRouter>
         <ThemeProvider>
           <AuthProvider>
-            <App />
-            <ThemedToaster />
+            <AffiliateAuthProvider>
+              <App />
+              <ThemedToaster />
+            </AffiliateAuthProvider>
           </AuthProvider>
         </ThemeProvider>
       </BrowserRouter>
