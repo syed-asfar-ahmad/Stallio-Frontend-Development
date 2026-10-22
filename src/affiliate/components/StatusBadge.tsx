@@ -4,6 +4,7 @@
 // ============================================================================
 
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   Clock,
   ShieldCheck,
@@ -156,6 +157,7 @@ export default function StatusBadge({
   size = 'sm',
   className = '',
 }: StatusBadgeProps) {
+  const { t } = useTranslation();
   // If context is commission and status is 'paid', customize label
   let key = status;
   let customLabel: string | undefined;
@@ -177,7 +179,9 @@ export default function StatusBadge({
   };
 
   const Icon = config.icon;
-  const label = customLabel || config.label;
+  const label = t(`affiliate.${statusLabelKey(customLabel || config.label)}`, {
+    defaultValue: customLabel || config.label,
+  });
 
   const sizeClasses =
     size === 'sm'
@@ -196,4 +200,26 @@ export default function StatusBadge({
       <span>{label}</span>
     </span>
   );
+}
+
+function statusLabelKey(label: string): string {
+  const keys: Record<string, string> = {
+    'Pending Verification': 'pendingVerification',
+    'Email Verified': 'emailVerified',
+    '30-Day Free Trial': 'freeTrial',
+    'Paid Plan': 'paidPlan',
+    'Trial Expired': 'trialExpired',
+    'Flagged / Rejected': 'flaggedRejected',
+    '30-Day Hold': 'refundHold',
+    'Approved / Ready': 'approvedReady',
+    Reversed: 'reversed',
+    Requested: 'requested',
+    'Processing Batch': 'processingBatch',
+    'Payout Failed': 'payoutFailed',
+    Active: 'active',
+    Suspended: 'suspended',
+    Disbursed: 'disbursed',
+    'Paid Plan (20%)': 'paidPlan',
+  };
+  return keys[label] || label;
 }

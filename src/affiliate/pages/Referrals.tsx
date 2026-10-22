@@ -4,6 +4,7 @@
 // ============================================================================
 
 import React, { useEffect, useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   Users,
   Search,
@@ -29,6 +30,8 @@ import {
 type FilterTab = 'all' | 'trial' | 'paid' | 'pending' | 'churned';
 
 export default function Referrals() {
+  const { t, i18n } = useTranslation();
+  const tx = (key: string, options?: Record<string, unknown>) => t(`affiliate.${key}`, options);
   const [referrals, setReferrals] = useState<ReferralItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
@@ -108,7 +111,7 @@ export default function Referrals() {
     if (!iso) return '—';
     try {
       const d = new Date(iso);
-      return d.toLocaleDateString('en-US', {
+      return d.toLocaleDateString(i18n.resolvedLanguage || 'en', {
         month: 'short',
         day: 'numeric',
         year: 'numeric',
@@ -126,7 +129,7 @@ export default function Referrals() {
   if (loading) {
     return (
       <div className="flex min-h-[50vh] items-center justify-center">
-        <AdminLoading message="Loading referred merchants ledger..." />
+        <AdminLoading message={tx('loadingReferrals')} />
       </div>
     );
   }
@@ -139,14 +142,14 @@ export default function Referrals() {
           <div className="flex items-center gap-1.5 lg:gap-2 text-brand-600 mb-0.5">
             <Users className="w-4 h-4 lg:w-5 lg:h-5" />
             <span className="text-[11px] lg:text-sm font-semibold uppercase tracking-wide lg:tracking-widest">
-              ATTRIBUTED MERCHANTS
+              {tx('attributedMerchants')}
             </span>
           </div>
           <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-stone-900 dark:text-zinc-100 tracking-tight">
-            Referred Merchants
+            {tx('referredMerchants')}
           </h1>
           <p className="text-stone-500 dark:text-zinc-400 mt-0.5 text-xs lg:text-sm">
-            Monitor seller registrations, free trial completion, and 90-day qualifying payment deadlines.
+            {tx('referralsDescription')}
           </p>
         </div>
       </div>
@@ -159,10 +162,9 @@ export default function Referrals() {
           </div>
           <div className="text-xs sm:text-sm text-stone-700 dark:text-zinc-300 leading-relaxed">
             <strong className="text-stone-900 dark:text-zinc-100">
-              One-Time 20% Commission Eligibility:
+              {tx('eligibilityHeading')}
             </strong>{' '}
-            Referred sellers must complete their 1-month free trial and purchase their first paid plan within{' '}
-            <strong className="text-brand-700 dark:text-brand-400">90 days of registration</strong>. Once the subscription payment is recorded by admin, commission enters a 30-day refund hold.
+            {tx('eligibilityDescription')}
           </div>
         </div>
       </div>
@@ -172,11 +174,11 @@ export default function Referrals() {
         {/* Filter Tabs */}
         <div className="flex items-center gap-1 p-1 rounded-xl bg-stone-100 dark:bg-zinc-800/80 overflow-x-auto">
           {[
-            { id: 'all', label: 'All Merchants', count: counts.all },
-            { id: 'trial', label: 'In Trial', count: counts.trial },
-            { id: 'paid', label: 'Paid Plans', count: counts.paid },
-            { id: 'pending', label: 'Pending', count: counts.pending },
-            { id: 'churned', label: 'Expired / Flagged', count: counts.churned },
+            { id: 'all', label: tx('allMerchants'), count: counts.all },
+            { id: 'trial', label: tx('inTrial'), count: counts.trial },
+            { id: 'paid', label: tx('paidPlans'), count: counts.paid },
+            { id: 'pending', label: tx('pending'), count: counts.pending },
+            { id: 'churned', label: tx('expiredFlagged'), count: counts.churned },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -209,7 +211,7 @@ export default function Referrals() {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search by shop, email, code..."
+            placeholder={tx('searchReferrals')}
             className={`${DASHBOARD_SEARCH_INPUT} text-xs py-2`}
           />
         </div>
@@ -221,12 +223,12 @@ export default function Referrals() {
           <table className="w-full text-left text-xs sm:text-sm">
             <thead>
               <tr className="border-b border-stone-100 bg-stone-50/80 text-stone-500 font-semibold dark:border-zinc-800 dark:bg-zinc-800/80 dark:text-zinc-400">
-                <th className="py-3.5 px-4">Merchant & Shop</th>
-                <th className="py-3.5 px-4">Referral Code</th>
-                <th className="py-3.5 px-4">Signup Date</th>
-                <th className="py-3.5 px-4">30-Day Trial</th>
-                <th className="py-3.5 px-4">90-Day Pay Deadline</th>
-                <th className="py-3.5 px-4 text-right">Status</th>
+                <th className="py-3.5 px-4">{tx('merchantShop')}</th>
+                <th className="py-3.5 px-4">{tx('referralCode')}</th>
+                <th className="py-3.5 px-4">{tx('signupDate')}</th>
+                <th className="py-3.5 px-4">{tx('trialPeriod')}</th>
+                <th className="py-3.5 px-4">{tx('payDeadline')}</th>
+                <th className="py-3.5 px-4 text-right">{tx('status')}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-stone-100 dark:divide-zinc-800 text-stone-700 dark:text-zinc-300">
@@ -234,11 +236,11 @@ export default function Referrals() {
                 <tr>
                   <td colSpan={6} className="py-12 text-center text-stone-400 dark:text-zinc-500">
                     <Store className="w-8 h-8 mx-auto mb-2 opacity-40" />
-                    <p className="text-sm font-semibold">No referred merchants found</p>
+                    <p className="text-sm font-semibold">{tx('noReferrals')}</p>
                     <p className="text-xs text-stone-400 dark:text-zinc-500 mt-0.5">
                       {searchQuery
-                        ? 'Try clearing your search query or switching tabs.'
-                        : 'Share your referral link or QR code to attract your first seller!'}
+                        ? tx('clearSearch')
+                        : tx('shareLinkPrompt')}
                     </p>
                   </td>
                 </tr>
@@ -286,15 +288,15 @@ export default function Referrals() {
                         {r.status === 'trial' ? (
                           <div className="space-y-0.5">
                             <span className="font-semibold text-brand-700 dark:text-brand-300">
-                              {trialDaysLeft} days remaining
+                              {tx('daysRemaining', { count: trialDaysLeft })}
                             </span>
                             <p className="text-[11px] text-stone-400 dark:text-zinc-500 tabular-nums">
-                              Ends {formatDisplayDate(r.trialEndsAt)}
+                              {tx('trialEnds', { date: formatDisplayDate(r.trialEndsAt) })}
                             </p>
                           </div>
                         ) : r.status === 'paid' ? (
                           <span className="text-emerald-700 dark:text-emerald-400 font-medium">
-                            Completed & Paid
+                            {tx('completedPaid')}
                           </span>
                         ) : (
                           <span className="text-stone-400 dark:text-zinc-500">
@@ -307,16 +309,16 @@ export default function Referrals() {
                       <td className="py-3 px-4 text-xs">
                         {r.status === 'paid' ? (
                           <span className="text-stone-400 dark:text-zinc-500">
-                            Qualified on {formatDisplayDate(r.paidAt)}
+                            {tx('qualifiedOn', { date: formatDisplayDate(r.paidAt) })}
                           </span>
                         ) : r.status === 'churned' ? (
                           <span className="text-red-600 dark:text-red-400">
-                            Deadline Expired
+                            {tx('deadlineExpired')}
                           </span>
                         ) : (
                           <div className="space-y-0.5">
                             <span className="font-medium text-stone-800 dark:text-zinc-200 tabular-nums">
-                              {payDeadlineDaysLeft} days left
+                              {tx('daysLeft', { count: payDeadlineDaysLeft })}
                             </span>
                             <p className="text-[11px] text-stone-400 dark:text-zinc-500 tabular-nums">
                               Due {formatDisplayDate(r.payDeadlineAt)}

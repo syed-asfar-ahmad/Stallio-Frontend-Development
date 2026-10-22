@@ -137,7 +137,7 @@ export default function PublicLayout({ children, hideFooter }: { children: React
         { to: '/contact', labelKey: 'layout.nav.contact' as const, icon: Mail },
         { to: '/careers', labelKey: 'layout.nav.careers' as const, icon: Briefcase },
         { to: '/affiliate/signup', label: t('layout.footer.affiliate', 'Affiliate Program'), icon: Gift },
-      ].map((item) => ({ ...item, label: 'label' in item ? item.label : t(item.labelKey) })),
+      ].map((item) => ({ ...item, label: ('label' in item ? item.label : t(item.labelKey)) ?? '' })),
     [t],
   );
 

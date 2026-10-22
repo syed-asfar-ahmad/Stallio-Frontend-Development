@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ArrowLeft, ShieldCheck, Mail, ArrowRight, Loader2 } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -6,6 +7,8 @@ import { useAffiliateAuth } from '../AffiliateAuthContext';
 import PublicLayout from '../../components/PublicLayout';
 
 export default function AffiliateVerifyEmail() {
+  const { t } = useTranslation();
+  const tx = (key: string, options?: Record<string, unknown>) => t(`affiliate.${key}`, options);
   const location = useLocation();
   const navigate = useNavigate();
   const stateEmail = ((location.state as { email?: string } | null)?.email ?? '').trim().toLowerCase();
@@ -44,7 +47,7 @@ export default function AffiliateVerifyEmail() {
       return;
     }
 
-    toast.success('Email verified successfully! Welcome to the Partner Portal.');
+    toast.success(tx('verifiedSuccess'));
     navigate('/affiliate/dashboard');
   }
 
@@ -61,7 +64,7 @@ export default function AffiliateVerifyEmail() {
     }
 
     setCooldown(60);
-    toast.success('A new 6-digit verification code was dispatched to your inbox.');
+    toast.success(tx('codeDispatched'));
   }
 
   return (
@@ -78,14 +81,14 @@ export default function AffiliateVerifyEmail() {
           </div>
 
           <p className="mt-4 text-[0.7rem] font-bold uppercase tracking-[0.14em] text-brand-600 sm:text-[0.8125rem] sm:tracking-[0.16em] dark:text-brand-400">
-            Security Check
+            {tx('verifyEyebrow')}
           </p>
           <h1 className="mt-1 text-xl font-extrabold tracking-tight text-stone-900 sm:mt-2 sm:text-3xl dark:text-zinc-100">
-            Verify Partner Email
+            {tx('verifyTitle')}
           </h1>
           <p className="mt-2 text-xs font-medium text-stone-600 sm:text-sm dark:text-zinc-400">
-            We sent a 6-digit confirmation code to{' '}
-            <strong className="text-stone-900 dark:text-zinc-100">{email || 'your email'}</strong>.
+            {tx('verificationSent')}{' '}
+            <strong className="text-stone-900 dark:text-zinc-100">{email || tx('yourEmail')}</strong>.
           </p>
 
           <div className="mt-4 rounded-2xl border border-stone-200/90 bg-white/95 p-5 text-start shadow-[0_16px_48px_-36px_rgba(15,23,42,0.28)] ring-1 ring-stone-100/80 backdrop-blur-sm sm:mt-5 sm:rounded-3xl sm:p-7 dark:border-zinc-600/90 dark:bg-zinc-900/95 dark:ring-zinc-800/80 dark:shadow-black/40">
@@ -108,7 +111,7 @@ export default function AffiliateVerifyEmail() {
                     htmlFor="email"
                     className="mb-1.5 block text-xs font-semibold text-stone-800 sm:mb-2 sm:text-sm dark:text-zinc-200"
                   >
-                    Email Address
+                    {tx('email')}
                   </label>
                   <div className="relative">
                     <Mail className="pointer-events-none absolute start-3.5 top-1/2 h-[1.125rem] w-[1.125rem] -translate-y-1/2 text-stone-400 sm:start-4 sm:h-5 sm:w-5 dark:text-zinc-500" />
@@ -117,7 +120,7 @@ export default function AffiliateVerifyEmail() {
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="you@example.com"
+                      placeholder={tx('emailPlaceholder')}
                       required
                       dir="ltr"
                       className={`${inputClass} ps-11 pe-3 text-sm sm:ps-12 sm:pe-4 sm:text-base [unicode-bidi:isolate]`}
@@ -132,7 +135,7 @@ export default function AffiliateVerifyEmail() {
                   htmlFor="code"
                   className="mb-1.5 block text-xs font-semibold text-stone-800 sm:mb-2 sm:text-sm dark:text-zinc-200"
                 >
-                  Verification Code
+                  {tx('verificationCode')}
                 </label>
                 <input
                   id="code"
@@ -156,7 +159,7 @@ export default function AffiliateVerifyEmail() {
               >
                 <span className="relative z-[2] inline-flex items-center gap-2">
                   <ShieldCheck className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" aria-hidden />
-                  {submitting ? 'Verifying...' : 'Confirm & Open Portal'}
+                  {submitting ? tx('verifying') : tx('confirmOpenPortal')}
                 </span>
               </button>
             </form>
@@ -165,8 +168,7 @@ export default function AffiliateVerifyEmail() {
             <div className="mt-5 flex flex-col items-center justify-center gap-2.5 border-t border-stone-100 pt-4 text-center text-xs font-medium dark:border-zinc-700">
               {cooldown > 0 ? (
                 <p className="text-stone-500 dark:text-zinc-400">
-                  Resend code available in{' '}
-                  <span className="font-bold font-mono text-brand-600 dark:text-brand-400">{cooldown}s</span>
+                  {tx('resendIn', { seconds: cooldown })}
                 </p>
               ) : (
                 <button
@@ -176,7 +178,7 @@ export default function AffiliateVerifyEmail() {
                   className="font-bold text-brand-700 hover:text-brand-800 dark:text-brand-400 dark:hover:text-brand-300 inline-flex items-center gap-1.5"
                 >
                   {resending && <Loader2 className="h-3.5 w-3.5 animate-spin" />}
-                  <span>Didn't receive the email? Send again</span>
+                  <span>{tx('resendCode')}</span>
                 </button>
               )}
 
@@ -185,7 +187,7 @@ export default function AffiliateVerifyEmail() {
                 className="inline-flex items-center gap-1 text-stone-500 hover:text-stone-700 dark:text-zinc-400 dark:hover:text-zinc-200"
               >
                 <ArrowLeft className="h-3.5 w-3.5 rtl:rotate-180" />
-                <span>Change email or back to registration</span>
+                <span>{tx('backToLogin')}</span>
               </Link>
             </div>
           </div>

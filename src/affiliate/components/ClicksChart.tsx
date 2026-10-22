@@ -4,6 +4,7 @@
 // ============================================================================
 
 import React, { useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   ResponsiveContainer,
   AreaChart,
@@ -23,6 +24,8 @@ interface ClicksChartProps {
 }
 
 export default function ClicksChart({ series, className = '' }: ClicksChartProps) {
+  const { t } = useTranslation();
+  const tx = (key: string) => t(`affiliate.${key}`);
   const { resolved } = useTheme();
   const isDark = resolved === 'dark';
   const [mode, setMode] = useState<'daily' | 'cumulative'>('daily');
@@ -73,10 +76,10 @@ export default function ClicksChart({ series, className = '' }: ClicksChartProps
         <div>
           <h3 className="text-sm lg:text-base font-bold text-stone-900 dark:text-zinc-100 flex items-center gap-2">
             <MousePointerClick className="w-4 h-4 text-brand-600" />
-            <span>Referral Engagement & Traffic Timeline</span>
+            <span>{tx('referralEngagement')}</span>
           </h3>
           <p className="text-xs text-stone-500 dark:text-zinc-400">
-            Compare total traffic against unique visitor engagement
+            {tx('trafficDescription')}
           </p>
         </div>
 
@@ -91,7 +94,7 @@ export default function ClicksChart({ series, className = '' }: ClicksChartProps
                 : 'text-stone-600 hover:text-stone-900 dark:text-zinc-400 dark:hover:text-zinc-200'
             }`}
           >
-            Daily Velocity
+            {tx('dailyVelocity')}
           </button>
           <button
             type="button"
@@ -102,7 +105,7 @@ export default function ClicksChart({ series, className = '' }: ClicksChartProps
                 : 'text-stone-600 hover:text-stone-900 dark:text-zinc-400 dark:hover:text-zinc-200'
             }`}
           >
-            Cumulative Growth
+            {tx('cumulativeGrowth')}
           </button>
         </div>
       </div>
@@ -137,7 +140,7 @@ export default function ClicksChart({ series, className = '' }: ClicksChartProps
             <Area
               type="monotone"
               dataKey="clicks"
-              name="Total Clicks"
+              name={tx('totalClicks')}
               stroke="#5b45e5"
               strokeWidth={2}
               fill="url(#affiliateTrafficFill)"
@@ -147,7 +150,7 @@ export default function ClicksChart({ series, className = '' }: ClicksChartProps
             <Area
               type="monotone"
               dataKey="uniqueClicks"
-              name="Unique Visitors"
+              name={tx('uniqueVisitors')}
               stroke="#8b5cf6"
               strokeWidth={2}
               fill="transparent"

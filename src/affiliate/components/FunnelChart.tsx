@@ -4,6 +4,7 @@
 // ============================================================================
 
 import React, { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   ResponsiveContainer,
   BarChart,
@@ -23,6 +24,8 @@ interface FunnelChartProps {
 }
 
 export default function FunnelChart({ summary, className = '' }: FunnelChartProps) {
+  const { t } = useTranslation();
+  const tx = (key: string) => t(`affiliate.${key}`);
   const { resolved } = useTheme();
   const isDark = resolved === 'dark';
 
@@ -36,43 +39,43 @@ export default function FunnelChart({ summary, className = '' }: FunnelChartProp
 
     return [
       {
-        stage: 'Total Clicks',
+        stage: tx('totalClicks'),
         value: summary.clicks,
         percentOfTop: 100,
         color: '#5b45e5', // Brand primary
       },
       {
-        stage: 'Unique Visitors',
+        stage: tx('uniqueVisitors'),
         value: uniqueClicks,
         percentOfTop: Math.round((uniqueClicks / rawClicks) * 100),
         color: '#6d28d9',
       },
       {
-        stage: 'Seller Signups',
+        stage: tx('sellerSignups'),
         value: signups,
         percentOfTop: Math.round((signups / rawClicks) * 100),
         color: '#7c3aed',
       },
       {
-        stage: 'Email Verified',
+        stage: tx('emailVerified'),
         value: verified,
         percentOfTop: Math.round((verified / rawClicks) * 100),
         color: '#8b5cf6',
       },
       {
-        stage: 'Free Trials',
+        stage: tx('freeTrials'),
         value: trials,
         percentOfTop: Math.round((trials / rawClicks) * 100),
         color: '#a78bfa',
       },
       {
-        stage: 'Paid Plans (20%)',
+        stage: tx('paidPlansCommission'),
         value: paid,
         percentOfTop: Math.round((paid / rawClicks) * 100),
         color: '#10b981', // Emerald conversion
       },
     ];
-  }, [summary]);
+  }, [summary, t]);
 
   const overallConversion = summary.clicks > 0
     ? ((summary.paid / summary.clicks) * 100).toFixed(1)
@@ -98,15 +101,15 @@ export default function FunnelChart({ summary, className = '' }: FunnelChartProp
         <div>
           <h3 className="text-sm lg:text-base font-bold text-stone-900 dark:text-zinc-100 flex items-center gap-2">
             <Sparkles className="w-4 h-4 text-brand-600" />
-            <span>Referral Conversion Funnel</span>
+            <span>{tx('conversionFunnel')}</span>
           </h3>
           <p className="text-xs text-stone-500 dark:text-zinc-400">
-            End-to-end attribution journey from initial click to paid commission
+            {tx('funnelDescription')}
           </p>
         </div>
 
         <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-brand-50 border border-brand-200/80 text-brand-800 text-xs font-bold dark:bg-brand-950/50 dark:border-brand-800/60 dark:text-brand-300">
-          <span>Overall Conversion:</span>
+          <span>{tx('overallConversion')}</span>
           <span className="text-sm text-brand-600 dark:text-brand-400">{overallConversion}%</span>
         </div>
       </div>

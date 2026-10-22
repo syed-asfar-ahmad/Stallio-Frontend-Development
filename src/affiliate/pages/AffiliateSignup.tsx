@@ -27,14 +27,15 @@ function getPasswordStrength(pwd: string): {
   const hasNumber = /[0-9]/.test(pwd);
   const hasSpecial = /[^a-zA-Z0-9]/.test(pwd);
   const score = [hasMinLen, hasLower, hasUpper, hasNumber, hasSpecial].filter(Boolean).length;
-  if (score <= 1) return { score, label: 'Weak', color: 'bg-red-500' };
-  if (score === 2) return { score, label: 'Fair', color: 'bg-amber-500' };
-  if (score === 3) return { score, label: 'Good', color: 'bg-lime-500' };
-  return { score, label: 'Strong', color: 'bg-brand-500' };
+  if (score <= 1) return { score, label: 'weak', color: 'bg-red-500' };
+  if (score === 2) return { score, label: 'fair', color: 'bg-amber-500' };
+  if (score === 3) return { score, label: 'good', color: 'bg-lime-500' };
+  return { score, label: 'strong', color: 'bg-brand-500' };
 }
 
 export default function AffiliateSignup() {
   const { t } = useTranslation();
+  const tx = (key: string, options?: Record<string, unknown>) => t(`affiliate.${key}`, options);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -58,12 +59,12 @@ export default function AffiliateSignup() {
     setError('');
 
     if (password !== confirmPassword) {
-      setError('Passwords do not match.');
+      setError(tx('passwordMismatch'));
       return;
     }
 
     if (!acceptedTerms) {
-      setError('You must accept the Affiliate Operating Agreement & Anti-Fraud policy to join.');
+      setError(tx('acceptTermsError'));
       return;
     }
 
@@ -81,7 +82,7 @@ export default function AffiliateSignup() {
       return;
     }
 
-    toast.success('Registration successful! Please verify your email with the 6-digit code.');
+    toast.success(tx('signupSuccess'));
     navigate('/affiliate/verify-email', {
       state: { email: result.email ?? email.trim().toLowerCase() },
     });
@@ -99,13 +100,13 @@ export default function AffiliateSignup() {
         <div className="relative flex min-h-0 min-w-0 w-full flex-1 flex-col overflow-y-auto overflow-x-hidden">
           <div className="mx-auto w-full min-w-0 max-w-xl px-4 py-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:px-6 sm:py-8 text-center">
           <p className="text-[0.7rem] font-bold uppercase tracking-[0.14em] text-brand-600 sm:text-[0.8125rem] sm:tracking-[0.16em] dark:text-brand-400">
-            Stallio Partner Program
+            {tx('signupEyebrow')}
           </p>
           <h1 className="mt-1 text-2xl font-extrabold tracking-tight text-stone-900 sm:mt-2 sm:text-3xl dark:text-zinc-100">
-            Become a Stallio Affiliate
+            {tx('signupTitle')}
           </h1>
           <p className="mx-auto mt-2 max-w-md text-xs font-medium leading-relaxed text-stone-600 sm:text-sm dark:text-zinc-400">
-            Earn a 20% one-time commission on every referred merchant's first paid subscription.
+            {tx('signupDescription')}
           </p>
 
           <div className="mt-5 rounded-2xl border border-stone-200/90 bg-white/95 p-5 text-start shadow-[0_16px_48px_-36px_rgba(15,23,42,0.28)] ring-1 ring-stone-100/80 backdrop-blur-sm sm:mt-7 sm:rounded-3xl sm:p-7 dark:border-zinc-600/90 dark:bg-zinc-900/95 dark:ring-zinc-800/80 dark:shadow-black/40">
@@ -128,7 +129,7 @@ export default function AffiliateSignup() {
                   htmlFor="name"
                   className="mb-1.5 block text-xs font-semibold text-stone-800 sm:mb-2 sm:text-sm dark:text-zinc-200"
                 >
-                  Full Name <span className="text-red-500">*</span>
+                  {tx('fullName')} <span className="text-red-500">*</span>
                 </label>
                 <div className="relative">
                   <User className="pointer-events-none absolute start-3.5 top-1/2 h-[1.125rem] w-[1.125rem] -translate-y-1/2 text-stone-400 sm:start-4 sm:h-5 sm:w-5 dark:text-zinc-500" />
@@ -137,7 +138,7 @@ export default function AffiliateSignup() {
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="Sarah Jenkins"
+                    placeholder={tx('namePlaceholder')}
                     required
                     className={`${inputClass} ps-11 pe-3 text-sm sm:ps-12 sm:pe-4 sm:text-base`}
                   />
@@ -150,7 +151,7 @@ export default function AffiliateSignup() {
                   htmlFor="email"
                   className="mb-1.5 block text-xs font-semibold text-stone-800 sm:mb-2 sm:text-sm dark:text-zinc-200"
                 >
-                  Email Address <span className="text-red-500">*</span>
+                  {tx('email')} <span className="text-red-500">*</span>
                 </label>
                 <div className="relative">
                   <Mail className="pointer-events-none absolute start-3.5 top-1/2 h-[1.125rem] w-[1.125rem] -translate-y-1/2 text-stone-400 sm:start-4 sm:h-5 sm:w-5 dark:text-zinc-500" />
@@ -159,7 +160,7 @@ export default function AffiliateSignup() {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="you@example.com"
+                    placeholder={tx('emailPlaceholder')}
                     required
                     dir="ltr"
                     className={`${inputClass} ps-11 pe-3 text-sm sm:ps-12 sm:pe-4 sm:text-base [unicode-bidi:isolate]`}
@@ -182,7 +183,7 @@ export default function AffiliateSignup() {
                     type={showPassword ? 'text' : 'password'}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Create a strong password"
+                    placeholder={tx('createStrongPassword')}
                     required
                     minLength={8}
                     autoComplete="new-password"
@@ -192,7 +193,7 @@ export default function AffiliateSignup() {
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute end-2 top-1/2 -translate-y-1/2 rounded-lg p-1.5 text-stone-400 transition-colors hover:bg-stone-100 hover:text-stone-700 sm:end-2.5 sm:rounded-xl sm:p-2 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
-                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                    aria-label={showPassword ? tx('hidePassword') : tx('showPassword')}
                   >
                     {showPassword ? <EyeOff className="h-4 w-4 sm:h-5 sm:w-5" /> : <Eye className="h-4 w-4 sm:h-5 sm:w-5" />}
                   </button>
@@ -211,7 +212,7 @@ export default function AffiliateSignup() {
                       ))}
                     </div>
                     <p className="mt-1 text-[0.7rem] font-medium text-stone-500 dark:text-zinc-400">
-                      Password strength: <strong className="font-semibold text-brand-600 dark:text-brand-400">{strength.label}</strong>
+                      {tx('passwordStrength')} <strong className="font-semibold text-brand-600 dark:text-brand-400">{tx(strength.label)}</strong>
                     </p>
                   </div>
                 )}
@@ -223,7 +224,7 @@ export default function AffiliateSignup() {
                   htmlFor="confirmPassword"
                   className="mb-1.5 block text-xs font-semibold text-stone-800 sm:mb-2 sm:text-sm dark:text-zinc-200"
                 >
-                  Confirm Password <span className="text-red-500">*</span>
+                  {tx('confirmPassword')} <span className="text-red-500">*</span>
                 </label>
                 <div className="relative">
                   <Lock className="pointer-events-none absolute start-3.5 top-1/2 h-[1.125rem] w-[1.125rem] -translate-y-1/2 text-stone-400 sm:start-4 sm:h-5 sm:w-5 dark:text-zinc-500" />
@@ -232,7 +233,7 @@ export default function AffiliateSignup() {
                     type={showConfirmPassword ? 'text' : 'password'}
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    placeholder="Repeat password"
+                    placeholder={tx('confirmPassword')}
                     required
                     minLength={8}
                     autoComplete="new-password"
@@ -242,7 +243,7 @@ export default function AffiliateSignup() {
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                     className="absolute end-2 top-1/2 -translate-y-1/2 rounded-lg p-1.5 text-stone-400 transition-colors hover:bg-stone-100 hover:text-stone-700 sm:end-2.5 sm:rounded-xl sm:p-2 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
-                    aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
+                    aria-label={showConfirmPassword ? tx('hidePassword') : tx('showPassword')}
                   >
                     {showConfirmPassword ? <EyeOff className="h-4 w-4 sm:h-5 sm:w-5" /> : <Eye className="h-4 w-4 sm:h-5 sm:w-5" />}
                   </button>
@@ -260,11 +261,7 @@ export default function AffiliateSignup() {
                     className="mt-1 h-4 w-4 rounded border-stone-300 text-brand-600 focus:ring-brand-500 dark:border-zinc-600 dark:bg-zinc-800"
                   />
                   <span className="text-xs leading-relaxed text-stone-600 dark:text-zinc-300">
-                    I agree to the{' '}
-                    <strong className="text-stone-900 dark:text-zinc-100">
-                      Affiliate Operating Agreement
-                    </strong>
-                    . I understand that self-referrals, search-engine trademark bidding, spam, and fraudulent signups are strictly prohibited. Approved commissions are held for 30 days.
+                    {tx('termsAgree')} {tx('termsDetail')}
                   </span>
                 </label>
               </div>
@@ -277,7 +274,7 @@ export default function AffiliateSignup() {
               >
                 <span className="relative z-[2] inline-flex items-center gap-2">
                   <UserPlus className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" aria-hidden />
-                  {submitting ? 'Joining Program...' : 'Join Partner Program'}
+                  {submitting ? tx('creatingAccount') : tx('createAffiliateAccount')}
                 </span>
               </button>
             </form>
@@ -285,23 +282,23 @@ export default function AffiliateSignup() {
             {/* Bottom Cross-links */}
             <div className="mt-5 border-t border-stone-100 pt-4 text-center text-xs font-medium text-stone-600 sm:mt-6 sm:pt-5 sm:text-sm dark:border-zinc-700 dark:text-zinc-400 space-y-2">
               <p>
-                Already have an affiliate account?{' '}
+                {tx('alreadyHaveAccount')}{' '}
                 <Link
                   to="/affiliate/login"
                   className="inline-flex items-center justify-center gap-1 font-bold text-brand-700 no-underline transition-colors hover:text-brand-800 dark:text-brand-400 dark:hover:text-brand-300"
                 >
-                  Log In
+                  {tx('signInLink')}
                   <ArrowRight className="h-3.5 w-3.5 shrink-0 rtl:rotate-180 sm:h-4 sm:w-4" aria-hidden />
                 </Link>
               </p>
               <p className="text-stone-500 dark:text-zinc-400">
-                Looking to start an online store?{' '}
+                {tx('merchantSignupPrompt')}{' '}
                 <Link
                   to="/signup"
                   className="inline-flex items-center gap-1 font-semibold text-stone-700 hover:text-stone-900 dark:text-zinc-300 dark:hover:text-zinc-100"
                 >
                   <Store className="h-3 w-3" />
-                  Create a Merchant Shop
+                  {tx('createMerchantShop')}
                 </Link>
               </p>
             </div>

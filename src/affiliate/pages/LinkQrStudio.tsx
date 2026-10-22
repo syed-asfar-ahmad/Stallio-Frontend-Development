@@ -4,6 +4,7 @@
 // ============================================================================
 
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 import {
   QrCode,
@@ -28,6 +29,8 @@ import {
 type StudioTab = 'qr' | 'code' | 'campaigns';
 
 export default function LinkQrStudio() {
+  const { t } = useTranslation();
+  const tx = (key: string) => t(`affiliate.${key}`);
   const { affiliate } = useAffiliateAuth();
   const [activeTab, setActiveTab] = useState<StudioTab>('qr');
   const [campaignTag, setCampaignTag] = useState('');
@@ -48,10 +51,10 @@ export default function LinkQrStudio() {
     try {
       await navigator.clipboard.writeText(campaignLink);
       setCopiedLink(true);
-      toast.success('Campaign link copied to clipboard!');
+      toast.success(tx('campaignLinkCopied'));
       setTimeout(() => setCopiedLink(false), 2000);
     } catch {
-      toast.error('Failed to copy link');
+      toast.error(tx('copyFailed'));
     }
   }
 
@@ -63,14 +66,14 @@ export default function LinkQrStudio() {
           <div className="flex items-center gap-1.5 lg:gap-2 text-brand-600 mb-0.5">
             <QrCode className="w-4 h-4 lg:w-5 lg:h-5" />
             <span className="text-[11px] lg:text-sm font-semibold uppercase tracking-wide lg:tracking-widest">
-              ASSET & LINK GENERATOR
+              {tx('assetLinkGenerator')}
             </span>
           </div>
           <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-stone-900 dark:text-zinc-100 tracking-tight">
-            Link & QR Code Studio
+            {tx('linkStudio')}
           </h1>
           <p className="text-stone-500 dark:text-zinc-400 mt-0.5 text-xs lg:text-sm">
-            Generate high-resolution marketing QR assets, customize your referral slug, and build tracked campaign links.
+            {tx('linkStudioDescription')}
           </p>
         </div>
       </div>
@@ -87,7 +90,7 @@ export default function LinkQrStudio() {
           }`}
         >
           <QrCode className="w-4 h-4" />
-          <span>QR Code Studio</span>
+          <span>{tx('qrCodeStudio')}</span>
         </button>
 
         <button
@@ -100,7 +103,7 @@ export default function LinkQrStudio() {
           }`}
         >
           <Tag className="w-4 h-4" />
-          <span>Custom Slug & Aliases</span>
+          <span>{tx('customSlugAliases')}</span>
         </button>
 
         <button
@@ -113,7 +116,7 @@ export default function LinkQrStudio() {
           }`}
         >
           <Share2 className="w-4 h-4" />
-          <span>Campaign Link Builder</span>
+          <span>{tx('campaignLinkBuilder')}</span>
         </button>
       </div>
 
@@ -122,7 +125,7 @@ export default function LinkQrStudio() {
         <div className="space-y-6">
           <QrCard
             code={primaryCode}
-            partnerName={affiliate?.name || 'Partner'}
+            partnerName={affiliate?.name || tx('partner')}
           />
         </div>
       )}
@@ -140,23 +143,23 @@ export default function LinkQrStudio() {
           <div className="rounded-2xl border border-stone-200/80 bg-white p-6 shadow-lg shadow-stone-200/30 dark:border-zinc-700/80 dark:bg-zinc-900 dark:shadow-black/40">
             <h3 className="text-base font-bold text-stone-900 dark:text-zinc-100 flex items-center gap-2 mb-1">
               <Share2 className="w-4 h-4 text-brand-600" />
-              <span>Multi-Channel Campaign Link Generator</span>
+              <span>{tx('multiChannelGenerator')}</span>
             </h3>
             <p className="text-xs text-stone-500 dark:text-zinc-400 mb-6">
-              Append custom channel parameters to trace conversions across your social bios, YouTube descriptions, emails, or business cards.
+              {tx('campaignBuilderDescription')}
             </p>
 
             <div className="space-y-4 max-w-2xl">
               <div>
                 <label className="block text-xs font-semibold text-stone-700 dark:text-zinc-300 mb-1.5">
-                  Source / Campaign Tag (e.g. instagram, youtube, email, flyer)
+                  {tx('campaignTagLabel')}
                 </label>
                 <div className="flex gap-2">
                   <input
                     type="text"
                     value={campaignTag}
                     onChange={(e) => setCampaignTag(e.target.value)}
-                    placeholder="e.g. instagram-bio"
+                    placeholder={tx('campaignTagPlaceholder')}
                     className={DASHBOARD_INPUT}
                   />
                 </div>
@@ -164,7 +167,7 @@ export default function LinkQrStudio() {
 
               {/* Preset Shortcuts */}
               <div className="flex flex-wrap items-center gap-2">
-                <span className="text-xs text-stone-400 dark:text-zinc-500">Presets:</span>
+                <span className="text-xs text-stone-400 dark:text-zinc-500">{tx('presets')}</span>
                 {['instagram', 'youtube', 'tiktok', 'newsletter', 'event-flyer'].map((preset) => (
                   <button
                     key={preset}
@@ -180,7 +183,7 @@ export default function LinkQrStudio() {
               {/* Resulting URL display */}
               <div className="pt-2">
                 <label className="block text-xs font-semibold text-stone-700 dark:text-zinc-300 mb-1.5">
-                  Generated Campaign Target URL
+                  {tx('campaignTargetUrl')}
                 </label>
                 <div className="flex flex-col sm:flex-row sm:items-center gap-2">
                   <code className="block flex-1 overflow-hidden text-ellipsis whitespace-nowrap rounded-xl bg-stone-50 dark:bg-zinc-950 px-3.5 py-3 text-xs sm:text-sm font-mono text-stone-800 dark:text-zinc-200 border border-stone-200 dark:border-zinc-700">
@@ -194,12 +197,12 @@ export default function LinkQrStudio() {
                     {copiedLink ? (
                       <>
                         <Check className="w-4 h-4 text-emerald-300" />
-                        <span>Copied!</span>
+                        <span>{tx('copied')}</span>
                       </>
                     ) : (
                       <>
                         <Copy className="w-4 h-4" />
-                        <span>Copy Link</span>
+                        <span>{tx('copyLink')}</span>
                       </>
                     )}
                   </button>

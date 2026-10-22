@@ -3,6 +3,7 @@
 // ============================================================================
 
 import { useEffect, useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import {
@@ -48,6 +49,8 @@ import ClicksChart from '../components/ClicksChart';
 type RangeOption = '7d' | '30d' | '90d';
 
 export default function AffiliateDashboardOverview() {
+  const { t } = useTranslation();
+  const tx = (key: string, options?: Record<string, unknown>) => t(`affiliate.${key}`, options);
   const { affiliate } = useAffiliateAuth();
   const { resolved } = useTheme();
   const isDark = resolved === 'dark';
@@ -79,9 +82,9 @@ export default function AffiliateDashboardOverview() {
   }, [range]);
 
   const rangeLabels: Record<RangeOption, string> = {
-    '7d': 'Last 7 Days',
-    '30d': 'Last 30 Days',
-    '90d': 'Last 90 Days',
+    '7d': tx('last7Days'),
+    '30d': tx('last30Days'),
+    '90d': tx('last90Days'),
   };
 
   // Recharts themes matching Stallio's DashboardOverview.tsx
@@ -112,16 +115,16 @@ export default function AffiliateDashboardOverview() {
   async function copyReferralUrl() {
     try {
       await navigator.clipboard.writeText(referralUrl);
-      toast.success('Referral link copied to clipboard!');
+      toast.success(tx('referralLinkCopied'));
     } catch {
-      toast.error('Failed to copy referral link');
+      toast.error(tx('copyFailed'));
     }
   }
 
   if (loading && !data) {
     return (
       <div className="flex min-h-[50vh] items-center justify-center">
-        <AdminLoading message="Loading partner analytics..." />
+        <AdminLoading message={tx('loadingAnalytics')} />
       </div>
     );
   }
@@ -138,17 +141,17 @@ export default function AffiliateDashboardOverview() {
           <div className="flex items-center gap-1.5 lg:gap-2 text-brand-600 mb-0.5 lg:mb-1">
             <Sparkles className="w-4 h-4 lg:w-5 lg:h-5" />
             <span className="text-[11px] lg:text-sm font-semibold uppercase tracking-wide lg:tracking-widest">
-              AFFILIATE PARTNER PORTAL
+              {tx('portal')}
             </span>
           </div>
           <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-stone-900 dark:text-zinc-100 tracking-tight leading-snug">
-            Welcome back,{' '}
+            {tx('welcomeBackHeading')}{' '}
             <span className="bg-gradient-to-r from-brand-600 to-brand-600 bg-clip-text text-transparent break-words">
-              {affiliate?.name || 'Partner'}
+              {affiliate?.name || tx('partner')}
             </span>
           </h1>
           <p className="text-stone-500 dark:text-zinc-400 mt-0.5 text-xs lg:text-sm">
-            Track referral clicks, active trials, 30-day commission hold progress, and payout balances.
+            {tx('trackPerformance')}
           </p>
         </div>
 
@@ -198,10 +201,10 @@ export default function AffiliateDashboardOverview() {
         <div className="min-w-0 w-full max-w-full overflow-hidden rounded-xl lg:rounded-2xl border border-stone-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4 lg:p-5 shadow-sm">
           <div className="flex items-center justify-between gap-2 mb-2">
             <p className="text-[10px] lg:text-xs font-semibold uppercase tracking-wider text-stone-500 dark:text-zinc-400">
-              YOUR PRIMARY REFERRAL LINK
+              {tx('primaryReferralLink')}
             </p>
             <span className="rounded-md bg-brand-50 px-2 py-0.5 text-[0.6875rem] font-bold text-brand-700 dark:bg-brand-950/60 dark:text-brand-300">
-              Code: {primaryCode}
+              {tx('codeLabel', { code: primaryCode })}
             </span>
           </div>
 
@@ -215,18 +218,18 @@ export default function AffiliateDashboardOverview() {
               className="inline-flex items-center justify-center gap-1.5 lg:gap-2 rounded-lg lg:rounded-xl border-2 border-stone-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 lg:px-4 py-1.5 lg:py-2 text-xs lg:text-sm font-semibold text-stone-800 dark:text-zinc-200 hover:border-brand-200 dark:hover:border-brand-600/45 hover:bg-brand-50 dark:hover:bg-brand-950/40 shrink-0 w-full sm:w-auto transition-colors"
             >
               <Copy className="w-3.5 h-3.5 lg:w-4 lg:h-4 text-brand-600" />
-              <span>Copy Link</span>
+              <span>{tx('copyLink')}</span>
             </button>
           </div>
 
           <div className="mt-3 flex items-center justify-between text-xs text-stone-500 dark:text-zinc-400 pt-3 border-t border-stone-100 dark:border-zinc-800">
-            <span>Prefills referral code & tracks clicks for 30 days.</span>
+            <span>{tx('referralLinkDescription')}</span>
             <Link
               to="/affiliate/dashboard/link"
               className="font-semibold text-brand-600 hover:underline dark:text-brand-400 inline-flex items-center gap-1"
             >
               <QrCode className="w-3.5 h-3.5" />
-              <span>Get QR Code</span>
+              <span>{tx('getQrCode')}</span>
             </Link>
           </div>
         </div>
@@ -235,25 +238,25 @@ export default function AffiliateDashboardOverview() {
         <div className="min-w-0 w-full max-w-full overflow-hidden rounded-xl lg:rounded-2xl border border-stone-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4 lg:p-5 shadow-sm">
           <p className="text-[10px] lg:text-xs font-semibold uppercase tracking-wider text-stone-500 dark:text-zinc-400 mb-2 flex items-center gap-1.5 lg:gap-2 min-w-0">
             <ShieldCheck className="w-3.5 h-3.5 lg:w-4 lg:h-4 text-brand-600 shrink-0" />
-            <span className="min-w-0">PARTNER COMMISSION POLICY</span>
+            <span className="min-w-0">{tx('partnerPolicy')}</span>
           </p>
           <ul className="min-w-0 w-full space-y-1.5 text-xs lg:text-sm text-stone-700 dark:text-zinc-300 leading-relaxed">
             <li className="flex items-start gap-2">
               <span className="h-1.5 w-1.5 rounded-full bg-brand-500 mt-1.5 shrink-0" />
               <span>
-                <strong>20% One-Time Commission</strong> on the seller&apos;s first recorded paid payment (Basic at $5 pays $1.00; Business yearly at $50 pays $10.00).
+                <strong>{tx('commissionOneTime')}</strong> {tx('commissionExample')}
               </span>
             </li>
             <li className="flex items-start gap-2">
               <span className="h-1.5 w-1.5 rounded-full bg-brand-500 mt-1.5 shrink-0" />
               <span>
-                <strong>90-Day Pay Deadline:</strong> Seller must pay within 90 days of signup.
+                <strong>{tx('payDeadline')}:</strong> {tx('payDeadlineDescription')}
               </span>
             </li>
             <li className="flex items-start gap-2">
               <span className="h-1.5 w-1.5 rounded-full bg-brand-500 mt-1.5 shrink-0" />
               <span>
-                <strong>30-Day Hold Period:</strong> Held for 30 days matching refund dispute policy, then approved for monthly payout batches.
+                <strong>{tx('holdPeriod')}:</strong> {tx('holdDescription')}
               </span>
             </li>
           </ul>
@@ -267,13 +270,13 @@ export default function AffiliateDashboardOverview() {
           <div className="flex items-start justify-between gap-3 lg:gap-4">
             <div className="min-w-0 flex-1">
               <p className="text-[10px] lg:text-xs font-semibold uppercase tracking-wider text-stone-400 dark:text-zinc-500 mb-0.5 lg:mb-1">
-                AVAILABLE BALANCE
+                {tx('availableBalance').toUpperCase()}
               </p>
               <p className="text-xl lg:text-2xl font-bold text-stone-900 dark:text-zinc-100 tabular-nums break-all leading-tight">
                 {formatCents(s?.balanceCents ?? 0)}
               </p>
               <p className="text-[11px] lg:text-xs text-stone-500 dark:text-zinc-400 mt-0.5 line-clamp-2">
-                Min. payout: {formatCents(settings?.minimumPayoutCents ?? 5000)} (disbursed monthly)
+                {tx('minimumPayout', { amount: formatCents(settings?.minimumPayoutCents ?? 5000) })}
               </p>
             </div>
             <Wallet className="w-7 h-7 lg:w-9 lg:h-9 text-brand-600 shrink-0 mt-0.5" strokeWidth={2} />
@@ -285,13 +288,13 @@ export default function AffiliateDashboardOverview() {
           <div className="flex items-start justify-between gap-3 lg:gap-4">
             <div className="min-w-0 flex-1">
               <p className="text-[10px] lg:text-xs font-semibold uppercase tracking-wider text-stone-400 dark:text-zinc-500 mb-0.5 lg:mb-1">
-                30-DAY REFUND HOLD
+                {tx('refundHold').toUpperCase()}
               </p>
               <p className="text-xl lg:text-2xl font-bold text-amber-600 dark:text-amber-400 tabular-nums break-all leading-tight">
                 {formatCents(s?.pendingEarningsCents ?? 0)}
               </p>
               <p className="text-[11px] lg:text-xs text-stone-500 dark:text-zinc-400 mt-0.5 line-clamp-2">
-                Held 30 days from recorded payment
+                {tx('heldFromPayment')}
               </p>
             </div>
             <Clock className="w-7 h-7 lg:w-9 lg:h-9 text-amber-500 shrink-0 mt-0.5" strokeWidth={2} />
@@ -303,13 +306,13 @@ export default function AffiliateDashboardOverview() {
           <div className="flex items-start justify-between gap-3 lg:gap-4">
             <div className="min-w-0 flex-1">
               <p className="text-[10px] lg:text-xs font-semibold uppercase tracking-wider text-stone-400 dark:text-zinc-500 mb-0.5 lg:mb-1">
-                PAID CONVERSIONS
+                {tx('paidConversions').toUpperCase()}
               </p>
               <p className="text-xl lg:text-2xl font-bold text-stone-900 dark:text-zinc-100 tabular-nums">
                 {s?.paid ?? 0}
               </p>
               <p className="text-[11px] lg:text-xs text-stone-500 dark:text-zinc-400 mt-0.5 line-clamp-2">
-                Qualified first paid subscriptions
+                {tx('qualifiedSubscriptions')}
               </p>
             </div>
             <CheckCircle2 className="w-7 h-7 lg:w-9 lg:h-9 text-brand-600 shrink-0 mt-0.5" strokeWidth={2} />
@@ -321,13 +324,13 @@ export default function AffiliateDashboardOverview() {
           <div className="flex items-start justify-between gap-3 lg:gap-4">
             <div className="min-w-0 flex-1">
               <p className="text-[10px] lg:text-xs font-semibold uppercase tracking-wider text-stone-400 dark:text-zinc-500 mb-0.5 lg:mb-1">
-                SELLERS IN TRIAL
+                {tx('activeTrials').toUpperCase()}
               </p>
               <p className="text-xl lg:text-2xl font-bold text-stone-900 dark:text-zinc-100 tabular-nums">
                 {s?.trials ?? 0}
               </p>
               <p className="text-[11px] lg:text-xs text-stone-500 dark:text-zinc-400 mt-0.5 line-clamp-2">
-                Running 1-month free trial
+                {tx('trialRunning')}
               </p>
             </div>
             <Store className="w-7 h-7 lg:w-9 lg:h-9 text-brand-600 shrink-0 mt-0.5" strokeWidth={2} />
@@ -339,13 +342,13 @@ export default function AffiliateDashboardOverview() {
           <div className="flex items-start justify-between gap-3 lg:gap-4">
             <div className="min-w-0 flex-1">
               <p className="text-[10px] lg:text-xs font-semibold uppercase tracking-wider text-stone-400 dark:text-zinc-500 mb-0.5 lg:mb-1">
-                TOTAL SIGNUPS
+                {tx('signups').toUpperCase()}
               </p>
               <p className="text-xl lg:text-2xl font-bold text-stone-900 dark:text-zinc-100 tabular-nums">
                 {s?.signups ?? 0}
               </p>
               <p className="text-[11px] lg:text-xs text-stone-500 dark:text-zinc-400 mt-0.5 line-clamp-2">
-                Referred seller accounts
+                {tx('referredSellerAccounts')}
               </p>
             </div>
             <Users className="w-7 h-7 lg:w-9 lg:h-9 text-brand-600 shrink-0 mt-0.5" strokeWidth={2} />
@@ -357,13 +360,13 @@ export default function AffiliateDashboardOverview() {
           <div className="flex items-start justify-between gap-3 lg:gap-4">
             <div className="min-w-0 flex-1">
               <p className="text-[10px] lg:text-xs font-semibold uppercase tracking-wider text-stone-400 dark:text-zinc-500 mb-0.5 lg:mb-1">
-                UNIQUE CLICKS
+                {tx('uniqueClicks').toUpperCase()}
               </p>
               <p className="text-xl lg:text-2xl font-bold text-stone-900 dark:text-zinc-100 tabular-nums">
                 {s?.uniqueClicks ?? 0}
               </p>
               <p className="text-[11px] lg:text-xs text-stone-500 dark:text-zinc-400 mt-0.5 line-clamp-2">
-                {s?.clicks ?? 0} total link & QR scans
+                {tx('totalLinkScans', { count: s?.clicks ?? 0 })}
               </p>
             </div>
             <MousePointerClick className="w-7 h-7 lg:w-9 lg:h-9 text-brand-600 shrink-0 mt-0.5" strokeWidth={2} />
@@ -376,7 +379,7 @@ export default function AffiliateDashboardOverview() {
         <div className="flex items-center gap-1.5 lg:gap-2 text-brand-600 mb-2 lg:mb-3">
           <TrendingUp className="w-4 h-4 lg:w-5 lg:h-5" strokeWidth={2} />
           <span className="text-[11px] lg:text-sm font-semibold uppercase tracking-wide lg:tracking-widest">
-            PERFORMANCE METRICS
+            {tx('performanceMetrics').toUpperCase()}
           </span>
         </div>
 
@@ -387,10 +390,10 @@ export default function AffiliateDashboardOverview() {
           {/* Chart 2: Signups & Conversions */}
           <div className="rounded-xl lg:rounded-2xl bg-white dark:bg-zinc-900 p-4 lg:p-6 shadow-lg shadow-stone-200/30 dark:shadow-black/40 border border-stone-200/80 dark:border-zinc-600/80 overflow-hidden">
             <h3 className="text-sm lg:text-base font-bold text-stone-900 dark:text-zinc-100 mb-0.5 lg:mb-1">
-              Signups & Paid Conversions
+              {tx('signupsPaidConversions')}
             </h3>
             <p className="text-[11px] lg:text-xs text-stone-500 dark:text-zinc-400 mb-3 lg:mb-4">
-              Registered sellers and qualifying paid subscriptions ({rangeLabels[range]})
+              {tx('chartDescription', { range: rangeLabels[range] })}
             </p>
             <div className="h-[220px] lg:h-[260px] w-full min-w-0">
               <ResponsiveContainer width="100%" height="100%">
@@ -417,14 +420,14 @@ export default function AffiliateDashboardOverview() {
                   />
                   <Bar
                     dataKey="signups"
-                    name="Signups"
+                    name={tx('signups')}
                     fill="#b8adf5"
                     radius={[4, 4, 0, 0]}
                     maxBarSize={32}
                   />
                   <Bar
                     dataKey="paid"
-                    name="Paid Plan"
+                    name={tx('paidPlan')}
                     fill="#5b45e5"
                     radius={[4, 4, 0, 0]}
                     maxBarSize={32}
@@ -442,51 +445,51 @@ export default function AffiliateDashboardOverview() {
         <div className="lg:col-span-2 rounded-xl lg:rounded-2xl bg-white dark:bg-zinc-900 p-4 lg:p-6 shadow-lg shadow-stone-200/30 dark:shadow-black/40 border border-stone-200/80 dark:border-zinc-600/80 overflow-hidden">
           <h3 className="text-sm lg:text-base font-bold text-stone-900 dark:text-zinc-100 mb-3 lg:mb-4 flex items-center gap-1.5 lg:gap-2">
             <FileText className="w-4 h-4 lg:w-5 lg:h-5 text-brand-600 shrink-0" />
-            <span>Partner Economics & Summary</span>
+            <span>{tx('partnerEconomics')}</span>
           </h3>
 
           <div className="overflow-x-auto rounded-lg lg:rounded-xl border border-stone-100 dark:border-zinc-800">
             <table className="w-full text-xs lg:text-sm min-w-[16rem]">
               <thead>
                 <tr className="bg-stone-50/80 dark:bg-zinc-800/80 text-left text-stone-500 dark:text-zinc-400 font-semibold">
-                  <th className="py-2.5 lg:py-3.5 px-3 lg:px-4">Metric / Rule</th>
-                  <th className="py-2.5 lg:py-3.5 px-3 lg:px-4 text-right">Value / Status</th>
+                  <th className="py-2.5 lg:py-3.5 px-3 lg:px-4">{tx('metricRule')}</th>
+                  <th className="py-2.5 lg:py-3.5 px-3 lg:px-4 text-right">{tx('valueStatus')}</th>
                 </tr>
               </thead>
               <tbody className="text-stone-700 dark:text-zinc-300 divide-y divide-stone-100 dark:divide-zinc-800">
                 <tr className="hover:bg-stone-50 dark:hover:bg-zinc-800/40">
-                  <td className="py-2.5 lg:py-3 px-3 lg:px-4">Commission Rate</td>
+                  <td className="py-2.5 lg:py-3 px-3 lg:px-4">{tx('commissionRate')}</td>
                   <td className="py-2.5 lg:py-3 px-3 lg:px-4 text-right font-semibold text-brand-600 dark:text-brand-400">
-                    {formatBps(settings?.rateBps ?? 2000)} (One-Time on 1st Payment)
+                    {formatBps(settings?.rateBps ?? 2000)} {tx('firstPaymentOnce')}
                   </td>
                 </tr>
                 <tr className="hover:bg-stone-50 dark:hover:bg-zinc-800/40">
-                  <td className="py-2.5 lg:py-3 px-3 lg:px-4">Payment Qualifying Window</td>
+                  <td className="py-2.5 lg:py-3 px-3 lg:px-4">{tx('paymentQualifyingWindow')}</td>
                   <td className="py-2.5 lg:py-3 px-3 lg:px-4 text-right font-medium">
-                    {settings?.payDeadlineDays ?? 90} Days from Signup
+                    {tx('daysFromSignup', { count: settings?.payDeadlineDays ?? 90 })}
                   </td>
                 </tr>
                 <tr className="hover:bg-stone-50 dark:hover:bg-zinc-800/40">
-                  <td className="py-2.5 lg:py-3 px-3 lg:px-4">Refund Dispute Escrow Hold</td>
+                  <td className="py-2.5 lg:py-3 px-3 lg:px-4">{tx('refundEscrow')}</td>
                   <td className="py-2.5 lg:py-3 px-3 lg:px-4 text-right font-medium">
-                    {settings?.holdPeriodDays ?? 30} Days Post Payment
+                    {tx('daysAfterPayment', { count: settings?.holdPeriodDays ?? 30 })}
                   </td>
                 </tr>
                 <tr className="hover:bg-stone-50 dark:hover:bg-zinc-800/40">
-                  <td className="py-2.5 lg:py-3 px-3 lg:px-4">Total Pending Commissions (Hold)</td>
+                  <td className="py-2.5 lg:py-3 px-3 lg:px-4">{tx('totalPendingCommissions')}</td>
                   <td className="py-2.5 lg:py-3 px-3 lg:px-4 text-right font-semibold text-amber-600 dark:text-amber-400 tabular-nums">
                     {formatCents(s?.pendingEarningsCents ?? 0)}
                   </td>
                 </tr>
                 <tr className="hover:bg-stone-50 dark:hover:bg-zinc-800/40">
-                  <td className="py-2.5 lg:py-3 px-3 lg:px-4">Lifetime Paid Out</td>
+                  <td className="py-2.5 lg:py-3 px-3 lg:px-4">{tx('lifetimeDisbursed')}</td>
                   <td className="py-2.5 lg:py-3 px-3 lg:px-4 text-right font-semibold tabular-nums">
                     {formatCents(s?.paidEarningsCents ?? 0)}
                   </td>
                 </tr>
                 <tr className="bg-brand-50/70 dark:bg-brand-950/30">
                   <td className="py-2.5 lg:py-3 px-3 lg:px-4 font-semibold text-stone-900 dark:text-zinc-100">
-                    Ready Available Balance
+                    {tx('availableBalance')}
                   </td>
                   <td className="py-2.5 lg:py-3 px-3 lg:px-4 text-right font-bold text-brand-600 dark:text-brand-300 tabular-nums">
                     {formatCents(s?.balanceCents ?? 0)}
@@ -501,7 +504,7 @@ export default function AffiliateDashboardOverview() {
         <div className="rounded-xl lg:rounded-2xl bg-white dark:bg-zinc-900 p-4 lg:p-6 shadow-lg shadow-stone-200/30 dark:shadow-black/40 border border-stone-200/80 dark:border-zinc-600/80 overflow-hidden">
           <h3 className="text-sm lg:text-base font-bold text-stone-900 dark:text-zinc-100 mb-3 lg:mb-4 flex items-center gap-1.5 lg:gap-2">
             <LayoutDashboard className="w-4 h-4 lg:w-5 lg:h-5 text-brand-600 shrink-0" />
-            <span>Quick Actions</span>
+            <span>{tx('quickActions')}</span>
           </h3>
 
           <div className="space-y-2 lg:space-y-3">
@@ -512,8 +515,8 @@ export default function AffiliateDashboardOverview() {
               <div className="flex items-center gap-2.5 lg:gap-3 min-w-0">
                 <QrCode className="w-5 h-5 text-brand-600 shrink-0" />
                 <div className="min-w-0">
-                  <p className="text-sm font-semibold text-stone-900 dark:text-zinc-100">Link & QR Generator</p>
-                  <p className="text-[11px] text-stone-500 dark:text-zinc-400">Download high-res QR for print</p>
+                  <p className="text-sm font-semibold text-stone-900 dark:text-zinc-100">{tx('linkQrGenerator')}</p>
+                  <p className="text-[11px] text-stone-500 dark:text-zinc-400">{tx('downloadQrPrint')}</p>
                 </div>
               </div>
               <ArrowRight className="w-4 h-4 text-brand-500 group-hover:translate-x-0.5 transition-transform shrink-0" />
@@ -526,8 +529,8 @@ export default function AffiliateDashboardOverview() {
               <div className="flex items-center gap-2.5 lg:gap-3 min-w-0">
                 <Users className="w-5 h-5 text-brand-600 shrink-0" />
                 <div className="min-w-0">
-                  <p className="text-sm font-semibold text-stone-900 dark:text-zinc-100">Referred Merchants</p>
-                  <p className="text-[11px] text-stone-500 dark:text-zinc-400">{s?.signups ?? 0} total referred sellers</p>
+                  <p className="text-sm font-semibold text-stone-900 dark:text-zinc-100">{tx('referredMerchants')}</p>
+                  <p className="text-[11px] text-stone-500 dark:text-zinc-400">{tx('totalReferredSellers', { count: s?.signups ?? 0 })}</p>
                 </div>
               </div>
               <ArrowRight className="w-4 h-4 text-brand-500 group-hover:translate-x-0.5 transition-transform shrink-0" />
@@ -540,8 +543,8 @@ export default function AffiliateDashboardOverview() {
               <div className="flex items-center gap-2.5 lg:gap-3 min-w-0">
                 <CreditCard className="w-5 h-5 text-brand-600 shrink-0" />
                 <div className="min-w-0">
-                  <p className="text-sm font-semibold text-stone-900 dark:text-zinc-100">Payouts & Banking</p>
-                  <p className="text-[11px] text-stone-500 dark:text-zinc-400">Manage bank & Wise details</p>
+                  <p className="text-sm font-semibold text-stone-900 dark:text-zinc-100">{tx('payoutsBanking')}</p>
+                  <p className="text-[11px] text-stone-500 dark:text-zinc-400">{tx('managePayoutDetails')}</p>
                 </div>
               </div>
               <ArrowRight className="w-4 h-4 text-brand-500 group-hover:translate-x-0.5 transition-transform shrink-0" />
@@ -554,8 +557,8 @@ export default function AffiliateDashboardOverview() {
               <div className="flex items-center gap-2.5 lg:gap-3 min-w-0">
                 <Settings className="w-5 h-5 text-brand-600 shrink-0" />
                 <div className="min-w-0">
-                  <p className="text-sm font-semibold text-stone-900 dark:text-zinc-100">Account Settings</p>
-                  <p className="text-[11px] text-stone-500 dark:text-zinc-400">Custom alias codes & security</p>
+                  <p className="text-sm font-semibold text-stone-900 dark:text-zinc-100">{tx('accountSettings')}</p>
+                  <p className="text-[11px] text-stone-500 dark:text-zinc-400">{tx('aliasCodesSecurity')}</p>
                 </div>
               </div>
               <ArrowRight className="w-4 h-4 text-brand-500 group-hover:translate-x-0.5 transition-transform shrink-0" />

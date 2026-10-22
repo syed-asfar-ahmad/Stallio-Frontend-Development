@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { Lock, Eye, EyeOff, KeyRound } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -25,6 +26,8 @@ function getPasswordStrength(pwd: string): {
 }
 
 export default function AffiliateResetPassword() {
+  const { t } = useTranslation();
+  const tx = (key: string, options?: Record<string, unknown>) => t(`affiliate.${key}`, options);
   const [searchParams] = useSearchParams();
   const token = searchParams.get('token') || '';
   const email = searchParams.get('email') || '';
@@ -47,7 +50,7 @@ export default function AffiliateResetPassword() {
     setError('');
 
     if (password !== confirmPassword) {
-      setError('Passwords do not match.');
+      setError(tx('passwordMismatch'));
       return;
     }
 
@@ -61,7 +64,7 @@ export default function AffiliateResetPassword() {
         });
         const data = await res.json();
         if (!res.ok) {
-          setError(data.error || 'Failed to reset password. Link may have expired.');
+          setError(data.error || tx('resetPassword'));
           setSubmitting(false);
           return;
         }
@@ -71,7 +74,7 @@ export default function AffiliateResetPassword() {
     }
 
     setSubmitting(false);
-    toast.success('Your affiliate account password has been updated!');
+    toast.success(tx('passwordUpdated'));
     navigate('/affiliate/login');
   }
 
@@ -89,13 +92,13 @@ export default function AffiliateResetPassword() {
           </div>
 
           <p className="mt-4 text-[0.7rem] font-bold uppercase tracking-[0.14em] text-brand-600 sm:text-[0.8125rem] sm:tracking-[0.16em] dark:text-brand-400">
-            Reset Password
+            {tx('passwordResetEyebrow')}
           </p>
           <h1 className="mt-1 text-xl font-extrabold tracking-tight text-stone-900 sm:mt-2 sm:text-3xl dark:text-zinc-100">
-            Set New Password
+            {tx('newPasswordTitle')}
           </h1>
           <p className="mt-2 text-xs font-medium text-stone-600 sm:text-sm dark:text-zinc-400">
-            Choose a secure, strong password for your affiliate account.
+            {tx('newPasswordDescription')}
           </p>
 
           <div className="mt-4 rounded-2xl border border-stone-200/90 bg-white/95 p-5 text-start shadow-[0_16px_48px_-36px_rgba(15,23,42,0.28)] ring-1 ring-stone-100/80 backdrop-blur-sm sm:mt-5 sm:rounded-3xl sm:p-7 dark:border-zinc-600/90 dark:bg-zinc-900/95 dark:ring-zinc-800/80 dark:shadow-black/40">
@@ -117,7 +120,7 @@ export default function AffiliateResetPassword() {
                   htmlFor="password"
                   className="mb-1.5 block text-xs font-semibold text-stone-800 sm:mb-2 sm:text-sm dark:text-zinc-200"
                 >
-                  New Password <span className="text-red-500">*</span>
+                  {tx('newPassword')} <span className="text-red-500">*</span>
                 </label>
                 <div className="relative">
                   <Lock className="pointer-events-none absolute start-3.5 top-1/2 h-[1.125rem] w-[1.125rem] -translate-y-1/2 text-stone-400 sm:start-4 sm:h-5 sm:w-5 dark:text-zinc-500" />
@@ -126,7 +129,7 @@ export default function AffiliateResetPassword() {
                     type={showPassword ? 'text' : 'password'}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Enter new password"
+                    placeholder={tx('enterNewPassword')}
                     required
                     minLength={8}
                     className={`${inputClass} ps-11 pe-11 text-sm sm:ps-12 sm:pe-12 sm:text-base`}
@@ -154,7 +157,7 @@ export default function AffiliateResetPassword() {
                       ))}
                     </div>
                     <p className="mt-1 text-[0.7rem] font-medium text-stone-500 dark:text-zinc-400">
-                      Strength: <strong className="font-semibold text-brand-600 dark:text-brand-400">{strength.label}</strong>
+                      {tx('passwordStrength')} <strong className="font-semibold text-brand-600 dark:text-brand-400">{tx(strength.label)}</strong>
                     </p>
                   </div>
                 )}
@@ -165,7 +168,7 @@ export default function AffiliateResetPassword() {
                   htmlFor="confirmPassword"
                   className="mb-1.5 block text-xs font-semibold text-stone-800 sm:mb-2 sm:text-sm dark:text-zinc-200"
                 >
-                  Confirm New Password <span className="text-red-500">*</span>
+                  {tx('confirmNewPassword')} <span className="text-red-500">*</span>
                 </label>
                 <div className="relative">
                   <Lock className="pointer-events-none absolute start-3.5 top-1/2 h-[1.125rem] w-[1.125rem] -translate-y-1/2 text-stone-400 sm:start-4 sm:h-5 sm:w-5 dark:text-zinc-500" />
@@ -174,7 +177,7 @@ export default function AffiliateResetPassword() {
                     type={showConfirmPassword ? 'text' : 'password'}
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    placeholder="Repeat new password"
+                    placeholder={tx('confirmNewPassword')}
                     required
                     minLength={8}
                     className={`${inputClass} ps-11 pe-11 text-sm sm:ps-12 sm:pe-12 sm:text-base`}
@@ -183,7 +186,7 @@ export default function AffiliateResetPassword() {
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                     className="absolute end-2 top-1/2 -translate-y-1/2 rounded-lg p-1.5 text-stone-400 transition-colors hover:bg-stone-100 hover:text-stone-700 sm:end-2.5 sm:rounded-xl sm:p-2 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
-                    aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
+                    aria-label={showConfirmPassword ? tx('hidePassword') : tx('showPassword')}
                   >
                     {showConfirmPassword ? <EyeOff className="h-4 w-4 sm:h-5 sm:w-5" /> : <Eye className="h-4 w-4 sm:h-5 sm:w-5" />}
                   </button>
@@ -197,7 +200,7 @@ export default function AffiliateResetPassword() {
               >
                 <span className="relative z-[2] inline-flex items-center gap-2">
                   <KeyRound className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" aria-hidden />
-                  {submitting ? 'Updating...' : 'Save & Sign In'}
+                  {submitting ? tx('updating') : tx('saveChanges')}
                 </span>
               </button>
             </form>

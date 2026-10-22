@@ -4,6 +4,7 @@
 // ============================================================================
 
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 import {
   Settings as SettingsIcon,
@@ -26,6 +27,8 @@ import {
 } from '../../lib/dashboardFormClasses';
 
 export default function Settings() {
+  const { t } = useTranslation();
+  const tx = (key: string) => t(`affiliate.${key}`);
   const { affiliate, updateAffiliateProfile } = useAffiliateAuth();
 
   // Profile Form State
@@ -50,9 +53,9 @@ export default function Settings() {
     setUpdatingProfile(true);
     try {
       await updateAffiliateProfile({ name: name.trim() });
-      toast.success('Partner profile updated successfully');
+      toast.success(tx('profileUpdated'));
     } catch {
-      toast.error('Failed to update profile');
+      toast.error(tx('profileUpdateFailed'));
     } finally {
       setUpdatingProfile(false);
     }
@@ -61,23 +64,23 @@ export default function Settings() {
   async function handlePasswordSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (newPassword !== confirmPassword) {
-      toast.error('New passwords do not match');
+      toast.error(tx('passwordMismatch'));
       return;
     }
     if (newPassword.length < 8) {
-      toast.error('Password must be at least 8 characters');
+      toast.error(tx('passwordMinLength'));
       return;
     }
 
     setUpdatingPassword(true);
     try {
       await new Promise((r) => setTimeout(r, 600));
-      toast.success('Password updated successfully');
+      toast.success(tx('passwordUpdated'));
       setCurrentPassword('');
       setNewPassword('');
       setConfirmPassword('');
     } catch {
-      toast.error('Failed to update password');
+      toast.error(tx('passwordUpdateFailed'));
     } finally {
       setUpdatingPassword(false);
     }
@@ -91,14 +94,14 @@ export default function Settings() {
           <div className="flex items-center gap-1.5 lg:gap-2 text-brand-600 mb-0.5">
             <SettingsIcon className="w-4 h-4 lg:w-5 lg:h-5" />
             <span className="text-[11px] lg:text-sm font-semibold uppercase tracking-wide lg:tracking-widest">
-              ACCOUNT & PREFERENCES
+              {tx('accountPreferences')}
             </span>
           </div>
           <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-stone-900 dark:text-zinc-100 tracking-tight">
-            Partner Settings
+            {tx('profileSettings')}
           </h1>
           <p className="text-stone-500 dark:text-zinc-400 mt-0.5 text-xs lg:text-sm">
-            Manage your partner profile, custom referral slug, notification alerts, and portal security.
+            {tx('settingsDescription')}
           </p>
         </div>
       </div>
@@ -110,16 +113,16 @@ export default function Settings() {
       <div className="rounded-2xl border border-stone-200/80 bg-white p-5 lg:p-6 shadow-lg shadow-stone-200/30 dark:border-zinc-700/80 dark:bg-zinc-900 dark:shadow-black/40">
         <h3 className="text-base font-bold text-stone-900 dark:text-zinc-100 flex items-center gap-2 mb-1">
           <User className="w-4 h-4 text-brand-600" />
-          <span>Profile Information</span>
+          <span>{tx('profileInformation')}</span>
         </h3>
         <p className="text-xs text-stone-500 dark:text-zinc-400 mb-5">
-          Your partner account contact and identification details.
+          {tx('profileDetailsDescription')}
         </p>
 
         <form onSubmit={handleProfileSubmit} className="space-y-4 max-w-xl">
           <div>
             <label className="block text-xs font-semibold text-stone-700 dark:text-zinc-300 mb-1.5">
-              Full Name or Business Name
+              {tx('fullNameOrBusiness')}
             </label>
             <input
               type="text"
@@ -132,7 +135,7 @@ export default function Settings() {
 
           <div>
             <label className="block text-xs font-semibold text-stone-700 dark:text-zinc-300 mb-1.5">
-              Email Address (Login & OTP Verification)
+              {tx('emailLoginOtp')}
             </label>
             <input
               type="email"
@@ -141,7 +144,7 @@ export default function Settings() {
               className={`${DASHBOARD_INPUT} cursor-not-allowed opacity-75`}
             />
             <p className="mt-1 text-[0.7rem] text-stone-500 dark:text-zinc-400">
-              Email changes require administrative security verification.
+              {tx('emailSecurityNotice')}
             </p>
           </div>
 
@@ -154,10 +157,10 @@ export default function Settings() {
               {updatingProfile ? (
                 <>
                   <Loader2 className="w-4 h-4 animate-spin" />
-                  <span>Saving...</span>
+                  <span>{tx('saving')}</span>
                 </>
               ) : (
-                <span>Save Profile Changes</span>
+                <span>{tx('saveChanges')}</span>
               )}
             </button>
           </div>
@@ -168,20 +171,20 @@ export default function Settings() {
       <div className="rounded-2xl border border-stone-200/80 bg-white p-5 lg:p-6 shadow-lg shadow-stone-200/30 dark:border-zinc-700/80 dark:bg-zinc-900 dark:shadow-black/40">
         <h3 className="text-base font-bold text-stone-900 dark:text-zinc-100 flex items-center gap-2 mb-1">
           <Bell className="w-4 h-4 text-brand-600" />
-          <span>Notification Alerts</span>
+          <span>{tx('notificationAlerts')}</span>
         </h3>
         <p className="text-xs text-stone-500 dark:text-zinc-400 mb-5">
-          Choose which notifications you receive to your email address.
+          {tx('notificationDescription')}
         </p>
 
         <div className="space-y-4 max-w-xl">
           <div className="flex items-center justify-between p-3.5 rounded-xl border border-stone-200/80 dark:border-zinc-700/80">
             <div>
               <p className="text-sm font-semibold text-stone-900 dark:text-zinc-100">
-                New Merchant Signup
+                {tx('newMerchantSignup')}
               </p>
               <p className="text-xs text-stone-500 dark:text-zinc-400">
-                Receive an email when a seller registers with your link or QR code.
+                {tx('newSignupNotice')}
               </p>
             </div>
             <input
@@ -195,10 +198,10 @@ export default function Settings() {
           <div className="flex items-center justify-between p-3.5 rounded-xl border border-stone-200/80 dark:border-zinc-700/80">
             <div>
               <p className="text-sm font-semibold text-stone-900 dark:text-zinc-100">
-                Commission Released from Hold
+                {tx('commissionReleased')}
               </p>
               <p className="text-xs text-stone-500 dark:text-zinc-400">
-                Get notified when a 30-day hold concludes and funds enter your available balance.
+                {tx('commissionReleasedNotice')}
               </p>
             </div>
             <input
@@ -212,10 +215,10 @@ export default function Settings() {
           <div className="flex items-center justify-between p-3.5 rounded-xl border border-stone-200/80 dark:border-zinc-700/80">
             <div>
               <p className="text-sm font-semibold text-stone-900 dark:text-zinc-100">
-                Monthly Payout Disbursed
+                {tx('monthlyPayoutDisbursed')}
               </p>
               <p className="text-xs text-stone-500 dark:text-zinc-400">
-                Receive confirmation receipts whenever a monthly batch transfer is executed.
+                {tx('monthlyPayoutNotice')}
               </p>
             </div>
             <input
@@ -232,16 +235,16 @@ export default function Settings() {
       <div className="rounded-2xl border border-stone-200/80 bg-white p-5 lg:p-6 shadow-lg shadow-stone-200/30 dark:border-zinc-700/80 dark:bg-zinc-900 dark:shadow-black/40">
         <h3 className="text-base font-bold text-stone-900 dark:text-zinc-100 flex items-center gap-2 mb-1">
           <Shield className="w-4 h-4 text-brand-600" />
-          <span>Security & Password</span>
+          <span>{tx('securityPassword')}</span>
         </h3>
         <p className="text-xs text-stone-500 dark:text-zinc-400 mb-5">
-          Keep your partner account protected with a strong password.
+          {tx('securityDescription')}
         </p>
 
         <form onSubmit={handlePasswordSubmit} className="space-y-4 max-w-xl">
           <div>
             <label className="block text-xs font-semibold text-stone-700 dark:text-zinc-300 mb-1.5">
-              Current Password
+              {tx('currentPassword')}
             </label>
             <input
               type="password"
@@ -255,7 +258,7 @@ export default function Settings() {
           <div className="grid sm:grid-cols-2 gap-3">
             <div>
               <label className="block text-xs font-semibold text-stone-700 dark:text-zinc-300 mb-1.5">
-                New Password
+                {tx('newPassword')}
               </label>
               <input
                 type="password"
@@ -267,7 +270,7 @@ export default function Settings() {
             </div>
             <div>
               <label className="block text-xs font-semibold text-stone-700 dark:text-zinc-300 mb-1.5">
-                Confirm New Password
+                {tx('confirmNewPassword')}
               </label>
               <input
                 type="password"
@@ -288,10 +291,10 @@ export default function Settings() {
               {updatingPassword ? (
                 <>
                   <Loader2 className="w-4 h-4 animate-spin" />
-                  <span>Updating...</span>
+                  <span>{tx('updating')}</span>
                 </>
               ) : (
-                <span>Update Password</span>
+                <span>{tx('updatePassword')}</span>
               )}
             </button>
           </div>

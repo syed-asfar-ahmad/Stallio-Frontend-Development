@@ -4,6 +4,7 @@
 // ============================================================================
 
 import React, { useState, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 import {
   Sparkles,
@@ -39,6 +40,8 @@ export default function CustomCodeEditor({
   onCodeUpdated,
   className = '',
 }: CustomCodeEditorProps) {
+  const { t } = useTranslation();
+  const tx = (key: string, options?: Record<string, unknown>) => t(`affiliate.${key}`, options);
   const { affiliate, updateAffiliateProfile } = useAffiliateAuth();
   const currentCode = affiliate?.primaryCode || '';
   const aliasCodes = affiliate?.aliasCodes || [];
@@ -95,18 +98,18 @@ export default function CustomCodeEditor({
         if (res.available) {
           setAvailability({
             status: 'valid_available',
-            message: `stallio.shop/r/${normalized} is available!`,
+            message: tx('codeAvailable', { url: `stallio.shop/r/${normalized}` }),
           });
         } else {
           setAvailability({
             status: 'taken',
-            message: res.reason || 'This code is already in use by another affiliate or store.',
+            message: res.reason || tx('codeAlreadyUsed'),
           });
         }
       } catch {
         setAvailability({
           status: 'taken',
-          message: 'Unable to verify code availability right now.',
+          message: tx('codeCheckUnavailable'),
         });
       } finally {
         setChecking(false);
@@ -139,7 +142,7 @@ export default function CustomCodeEditor({
         referralLink: `https://stallio.shop/r/${inputCode}`,
       });
 
-      toast.success(`Primary referral code updated to "${inputCode}"`);
+      toast.success(tx('codeUpdated', { code: `"${inputCode}"` }));
       setShowConfirmModal(false);
       setAvailability({ status: 'idle' });
       onCodeUpdated?.(inputCode);
@@ -147,13 +150,13 @@ export default function CustomCodeEditor({
       // 409 Conflict Handling per spec
       const msg = err instanceof Error ? err.message : '';
       if (msg.includes('409') || msg.includes('conflict') || msg.includes('taken')) {
-        toast.error('Code conflict: this slug was just registered by someone else.');
+        toast.error(tx('codeConflict'));
         setAvailability({
           status: 'taken',
-          message: 'Conflict: this slug was just claimed. Please choose another.',
+          message: tx('codeConflictMessage'),
         });
       } else {
-        toast.error(msg || 'Failed to update referral code');
+        toast.error(msg || tx('codeUpdateFailed'));
       }
     } finally {
       setSubmitting(false);
@@ -174,16 +177,16 @@ export default function CustomCodeEditor({
           <div className="flex items-center gap-2">
             <Sparkles className="w-4 h-4 text-brand-600" />
             <h4 className="text-sm lg:text-base font-bold text-stone-900 dark:text-zinc-100">
-              Custom Referral Code & Slug
+              {tx('customCode')}
             </h4>
           </div>
           <span className="text-xs text-stone-500 dark:text-zinc-400">
-            Current: <strong className="font-mono text-brand-600 dark:text-brand-400">{currentCode}</strong>
+            {tx('currentCode')} <strong className="font-mono text-brand-600 dark:text-brand-400">{currentCode}</strong>
           </span>
         </div>
 
         <p className="text-xs text-stone-600 dark:text-zinc-400 mb-4">
-          Choose a memorable brand slug for your referral links. Must be 4-20 alphanumeric characters or hyphens.
+          {tx('customCodeHelp')}
         </p>
 
         {/* Input with prefix and live availability badge */}
@@ -196,7 +199,7 @@ export default function CustomCodeEditor({
               type="text"
               value={inputCode}
               onChange={(e) => handleInputChange(e.target.value)}
-              placeholder="your-brand-slug"
+              placeholder={tx('codePlaceholder')}
               maxLength={20}
               className="flex-1 px-3.5 py-3 text-sm font-mono font-semibold text-stone-900 dark:text-zinc-100 bg-transparent focus:outline-none placeholder:text-stone-400"
             />
@@ -239,7 +242,7 @@ export default function CustomCodeEditor({
               onClick={() => setShowConfirmModal(true)}
               className={DASHBOARD_BTN_PRIMARY}
             >
-              <span>Save New Primary Code</span>
+              <span>{tx('saveCode')}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
@@ -250,15 +253,15 @@ export default function CustomCodeEditor({
       <div className="rounded-2xl border border-stone-200/80 bg-stone-50/50 p-5 lg:p-6 dark:border-zinc-800 dark:bg-zinc-900/50">
         <div className="flex items-center gap-2 text-stone-800 dark:text-zinc-200 mb-1">
           <History className="w-4 h-4 text-brand-600" />
-          <h4 className="text-sm font-bold">Retired Alias Codes</h4>
+          <h4 className="text-sm font-bold">{tx('retiredAliases')}</h4>
         </div>
         <p className="text-xs text-stone-500 dark:text-zinc-400 mb-3">
-          Previous codes you used remain permanently bound to your account. Sellers who register through retired links or QR cards are still attributed to you.
+          {tx('aliasDescription')}
         </p>
 
         {aliasCodes.length === 0 ? (
           <p className="text-xs text-stone-400 dark:text-zinc-500 italic">
-            No previous alias codes. Your current code is your only active slug.
+            {tx('noAliases')}
           </p>
         ) : (
           <div className="flex flex-wrap gap-2">
@@ -282,17 +285,17 @@ export default function CustomCodeEditor({
             <div className="flex items-center gap-3 text-brand-600">
               <ShieldAlert className="w-6 h-6" />
               <h3 className="text-base font-bold text-stone-900 dark:text-zinc-100">
-                Confirm Code Migration
+                {tx('confirmMigration')}
               </h3>
             </div>
 
             <p className="text-xs sm:text-sm text-stone-600 dark:text-zinc-300 leading-relaxed">
-              Are you sure you want to change your primary referral code to{' '}
+              {tx('confirmMigrationText', { code: inputCode })}{' '}
               <strong className="font-mono text-brand-600 dark:text-brand-400">{inputCode}</strong>?
             </p>
 
             <div className="p-3 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-800 dark:bg-amber-950/40 dark:border-amber-900/60 dark:text-amber-300">
-              Your previous code (<strong className="font-mono">{currentCode}</strong>) will be archived as a permanent alias. Any printed QR codes or links using it will continue to credit your account.
+              {tx('migrationWarning', { code: currentCode })}
             </div>
 
             <div className="flex justify-end gap-3 pt-2">
@@ -302,7 +305,7 @@ export default function CustomCodeEditor({
                 disabled={submitting}
                 className={DASHBOARD_BTN_SECONDARY}
               >
-                Cancel
+                {tx('cancel')}
               </button>
               <button
                 type="button"
@@ -313,10 +316,10 @@ export default function CustomCodeEditor({
                 {submitting ? (
                   <>
                     <Loader2 className="w-4 h-4 animate-spin" />
-                    <span>Updating...</span>
+                    <span>{tx('updating')}</span>
                   </>
                 ) : (
-                  <span>Confirm & Update</span>
+                  <span>{tx('confirmUpdate')}</span>
                 )}
               </button>
             </div>

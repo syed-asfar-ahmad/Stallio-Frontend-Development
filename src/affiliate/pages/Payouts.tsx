@@ -4,6 +4,7 @@
 // ============================================================================
 
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 import {
   CreditCard,
@@ -38,6 +39,8 @@ interface PayoutsResponse {
 }
 
 export default function Payouts() {
+  const { t, i18n } = useTranslation();
+  const tx = (key: string, options?: Record<string, unknown>) => t(`affiliate.${key}`, options);
   const [data, setData] = useState<PayoutsResponse | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -74,7 +77,7 @@ export default function Payouts() {
   async function handleSaveMethod(e: React.FormEvent) {
     e.preventDefault();
     if (!editDetails.trim()) {
-      toast.error('Please enter your account details');
+      toast.error(tx('enterAccountDetails'));
       return;
     }
 
@@ -93,12 +96,12 @@ export default function Payouts() {
 
       if (res.success && res.payoutMethod) {
         setData((prev) => (prev ? { ...prev, payoutMethod: res.payoutMethod } : null));
-        toast.success('Payout destination updated and encrypted');
+        toast.success(tx('payoutUpdated'));
         setShowEditModal(false);
         setEditDetails('');
       }
     } catch {
-      toast.error('Failed to update payout method');
+      toast.error(tx('payoutUpdateFailed'));
     } finally {
       setUpdatingMethod(false);
     }
@@ -108,7 +111,7 @@ export default function Payouts() {
     if (!iso) return '—';
     try {
       const d = new Date(iso);
-      return d.toLocaleDateString('en-US', {
+      return d.toLocaleDateString(i18n.resolvedLanguage || 'en', {
         month: 'short',
         day: 'numeric',
         year: 'numeric',
@@ -121,7 +124,7 @@ export default function Payouts() {
   if (loading && !data) {
     return (
       <div className="flex min-h-[50vh] items-center justify-center">
-        <AdminLoading message="Loading payout history and balances..." />
+        <AdminLoading message={tx('loadingPayouts')} />
       </div>
     );
   }
@@ -131,6 +134,11 @@ export default function Payouts() {
   const progressPercent = Math.min(100, Math.round((balanceCents / minPayoutCents) * 100));
   const method = data?.payoutMethod;
   const payouts = data?.payouts || [];
+  const payoutMethodLabel = (type?: string) => {
+    if (type === 'paypal') return tx('paypal');
+    if (type === 'wise') return tx('wise');
+    return tx('bankTransfer');
+  };
 
   return (
     <div className="space-y-6">
@@ -140,14 +148,14 @@ export default function Payouts() {
           <div className="flex items-center gap-1.5 lg:gap-2 text-brand-600 mb-0.5">
             <CreditCard className="w-4 h-4 lg:w-5 lg:h-5" />
             <span className="text-[11px] lg:text-sm font-semibold uppercase tracking-wide lg:tracking-widest">
-              DISBURSEMENTS & BANKING
+              {tx('disbursementsBanking')}
             </span>
           </div>
           <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-stone-900 dark:text-zinc-100 tracking-tight">
-            Payouts & Banking
+            {tx('payoutsBanking')}
           </h1>
           <p className="text-stone-500 dark:text-zinc-400 mt-0.5 text-xs lg:text-sm">
-            Approved partner commissions are disbursed in scheduled monthly batches once reaching the minimum balance.
+            {tx('payoutDescription')}
           </p>
         </div>
       </div>
@@ -159,10 +167,10 @@ export default function Payouts() {
           <div>
             <div className="flex items-center justify-between gap-2 mb-2">
               <span className="text-xs font-bold uppercase tracking-wider text-stone-500 dark:text-zinc-400">
-                Monthly Payout Threshold
+                {tx('monthlyThreshold')}
               </span>
               <span className="px-2.5 py-0.5 rounded-full bg-brand-50 text-brand-700 dark:bg-brand-950/60 dark:text-brand-300 text-xs font-bold">
-                {progressPercent}% Reached
+                {tx('reached', { percent: progressPercent })}
               </span>
             </div>
 
@@ -171,7 +179,7 @@ export default function Payouts() {
                 {formatCents(balanceCents)}
               </span>
               <span className="text-xs text-stone-500 dark:text-zinc-400">
-                / {formatCents(minPayoutCents)} minimum threshold
+                / {formatCents(minPayoutCents)} {tx('minimumThreshold')}
               </span>
             </div>
 
@@ -187,15 +195,15 @@ export default function Payouts() {
           <div className="pt-3 border-t border-stone-100 dark:border-zinc-800 flex items-center justify-between text-xs text-stone-600 dark:text-zinc-400">
             <div className="flex items-center gap-1.5">
               <Calendar className="w-4 h-4 text-brand-600" />
-              <span>Next Batch: <strong>1st of next month</strong></span>
+              <span>{tx('nextBatch')} <strong>{tx('nextMonth')}</strong></span>
             </div>
             {balanceCents >= minPayoutCents ? (
               <span className="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1">
                 <CheckCircle2 className="w-3.5 h-3.5" />
-                <span>Eligible for next batch</span>
+                <span>{tx('eligibleNextBatch')}</span>
               </span>
             ) : (
-              <span>Need {formatCents(minPayoutCents - balanceCents)} more to disburse</span>
+              <span>{tx('moreToDisburse', { amount: formatCents(minPayoutCents - balanceCents) })}</span>
             )}
           </div>
         </div>
@@ -206,7 +214,7 @@ export default function Payouts() {
             <div className="flex items-center justify-between gap-2 mb-3">
               <span className="text-xs font-bold uppercase tracking-wider text-stone-500 dark:text-zinc-400 flex items-center gap-1.5">
                 <Building2 className="w-3.5 h-3.5 text-brand-600" />
-                <span>Payout Destination</span>
+                <span>{tx('payoutDestination')}</span>
               </span>
               <button
                 type="button"
@@ -214,13 +222,13 @@ export default function Payouts() {
                 className="inline-flex items-center gap-1 text-xs font-semibold text-brand-600 hover:text-brand-500 dark:text-brand-400"
               >
                 <Edit2 className="w-3 h-3" />
-                <span>Edit</span>
+                <span>{tx('edit')}</span>
               </button>
             </div>
 
             <div className="p-3.5 rounded-xl bg-stone-50 dark:bg-zinc-800/60 border border-stone-200/70 dark:border-zinc-700/70 space-y-1">
               <p className="text-xs font-bold text-stone-900 dark:text-zinc-100 capitalize">
-                {method?.type.replace('_', ' ') || 'Bank Transfer'}
+                {payoutMethodLabel(method?.type)}
               </p>
               <p className="text-xs text-stone-600 dark:text-zinc-400 font-mono">
                 {method?.detailsSummary || `Account ending in •••• ${method?.last4 || '4892'}`}
@@ -230,7 +238,7 @@ export default function Payouts() {
 
           <div className="pt-3 border-t border-stone-100 dark:border-zinc-800 flex items-center gap-1.5 text-[0.7rem] text-stone-500 dark:text-zinc-400">
             <Lock className="w-3 h-3 text-stone-400" />
-            <span>Encrypted at rest. Admin only views masked identifier.</span>
+            <span>{tx('encryptedPayoutNotice')}</span>
           </div>
         </div>
       </div>
@@ -238,7 +246,7 @@ export default function Payouts() {
       {/* Payout History Ledger */}
       <div className="space-y-3">
         <h3 className="text-base font-bold text-stone-900 dark:text-zinc-100">
-          Disbursement History
+          {tx('payoutHistory')}
         </h3>
 
         <div className="overflow-hidden rounded-2xl border border-stone-200/80 bg-white shadow-lg shadow-stone-200/30 dark:border-zinc-700/80 dark:bg-zinc-900 dark:shadow-black/40">
@@ -246,12 +254,12 @@ export default function Payouts() {
             <table className="w-full text-left text-xs sm:text-sm">
               <thead>
                 <tr className="border-b border-stone-100 bg-stone-50/80 text-stone-500 font-semibold dark:border-zinc-800 dark:bg-zinc-800/80 dark:text-zinc-400">
-                  <th className="py-3.5 px-4">Date Disbursed</th>
-                  <th className="py-3.5 px-4">Amount</th>
-                  <th className="py-3.5 px-4">Method & Account</th>
-                  <th className="py-3.5 px-4">Batch ID</th>
-                  <th className="py-3.5 px-4">Reference #</th>
-                  <th className="py-3.5 px-4 text-right">Status</th>
+                  <th className="py-3.5 px-4">{tx('dateDisbursed')}</th>
+                  <th className="py-3.5 px-4">{tx('amount')}</th>
+                  <th className="py-3.5 px-4">{tx('methodAccount')}</th>
+                  <th className="py-3.5 px-4">{tx('batchId')}</th>
+                  <th className="py-3.5 px-4">{tx('reference')}</th>
+                  <th className="py-3.5 px-4 text-right">{tx('status')}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-stone-100 dark:divide-zinc-800 text-stone-700 dark:text-zinc-300">
@@ -259,9 +267,9 @@ export default function Payouts() {
                   <tr>
                     <td colSpan={6} className="py-12 text-center text-stone-400 dark:text-zinc-500">
                       <CreditCard className="w-8 h-8 mx-auto mb-2 opacity-40" />
-                      <p className="text-sm font-semibold">No disbursements recorded yet</p>
+                      <p className="text-sm font-semibold">{tx('noDisbursements')}</p>
                       <p className="text-xs text-stone-400 dark:text-zinc-500 mt-0.5">
-                        Once your balance reaches {formatCents(minPayoutCents)}, it will be processed in the next monthly batch.
+                        {tx('noDisbursementsNote', { amount: formatCents(minPayoutCents) })}
                       </p>
                     </td>
                   </tr>
@@ -278,7 +286,7 @@ export default function Payouts() {
                         {formatCents(p.amountCents)}
                       </td>
                       <td className="py-3.5 px-4 text-xs capitalize text-stone-700 dark:text-zinc-300">
-                        {p.method.replace('_', ' ')} (•••• {p.last4})
+                        {payoutMethodLabel(p.method)} (•••• {p.last4})
                       </td>
                       <td className="py-3.5 px-4 text-xs font-mono text-stone-500 dark:text-zinc-400">
                         {p.batchId || '—'}
@@ -304,7 +312,7 @@ export default function Payouts() {
           <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl border border-stone-200 dark:bg-zinc-900 dark:border-zinc-700 space-y-4">
             <div className="flex items-center justify-between">
               <h3 className="text-base font-bold text-stone-900 dark:text-zinc-100">
-                Update Payout Method
+                {tx('updatePayoutMethod')}
               </h3>
               <button
                 type="button"
@@ -318,13 +326,13 @@ export default function Payouts() {
             <form onSubmit={handleSaveMethod} className="space-y-4">
               <div>
                 <label className="block text-xs font-semibold text-stone-700 dark:text-zinc-300 mb-1.5">
-                  Payout Method Type
+                  {tx('payoutMethodType')}
                 </label>
                 <div className="grid grid-cols-3 gap-2">
                   {[
-                    { id: 'bank_transfer', label: 'Bank (ACH)' },
-                    { id: 'paypal', label: 'PayPal' },
-                    { id: 'wise', label: 'Wise' },
+                    { id: 'bank_transfer', label: tx('bankTransfer') },
+                    { id: 'paypal', label: tx('paypal') },
+                    { id: 'wise', label: tx('wise') },
                   ].map((m) => (
                     <button
                       key={m.id}
@@ -345,10 +353,10 @@ export default function Payouts() {
               <div>
                 <label className="block text-xs font-semibold text-stone-700 dark:text-zinc-300 mb-1.5">
                   {editType === 'paypal'
-                    ? 'PayPal Email Address'
+                    ? tx('paypalEmail')
                     : editType === 'wise'
-                    ? 'Wise Account Email / IBAN'
-                    : 'Bank Account Number or IBAN'}
+                    ? tx('wiseDetails')
+                    : tx('bankDetails')}
                 </label>
                 <input
                   type="text"
@@ -360,14 +368,14 @@ export default function Payouts() {
                       ? 'payments@yourbrand.com'
                       : editType === 'wise'
                       ? 'name@wise.com'
-                      : 'Account or IBAN'
+                      : tx('accountOrIban')
                   }
                   className={DASHBOARD_INPUT}
                 />
               </div>
 
               <div className="p-3 rounded-xl bg-stone-50 dark:bg-zinc-800 border border-stone-200 dark:border-zinc-700 text-xs text-stone-500 dark:text-zinc-400">
-                Details are stored encrypted. Only the last 4 characters will be visible after saving.
+                {tx('payoutDetailsNotice')}
               </div>
 
               <div className="flex justify-end gap-3 pt-2">
@@ -377,7 +385,7 @@ export default function Payouts() {
                   disabled={updatingMethod}
                   className={DASHBOARD_BTN_SECONDARY}
                 >
-                  Cancel
+                  {tx('cancel')}
                 </button>
                 <button
                   type="submit"
@@ -387,10 +395,10 @@ export default function Payouts() {
                   {updatingMethod ? (
                     <>
                       <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>Saving...</span>
+                      <span>{tx('saving')}</span>
                     </>
                   ) : (
-                    <span>Save Method</span>
+                    <span>{tx('saveMethod')}</span>
                   )}
                 </button>
               </div>

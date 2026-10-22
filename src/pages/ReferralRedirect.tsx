@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import { Sparkles, ArrowRight } from 'lucide-react';
 import BrandLogo from '../components/BrandLogo';
@@ -6,6 +7,7 @@ import { saveReferralCode, recordReferralClick } from '../lib/referral';
 import { normalizeSlug } from '../lib/reservedWords';
 
 export default function ReferralRedirect() {
+  const { t } = useTranslation();
   const { code } = useParams<{ code: string }>();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -55,16 +57,16 @@ export default function ReferralRedirect() {
         {/* Partner Invitation Pill */}
         <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200/80 bg-emerald-50/90 px-3.5 py-1.5 text-xs font-semibold text-emerald-800 shadow-sm backdrop-blur-sm dark:border-emerald-800/60 dark:bg-emerald-950/50 dark:text-emerald-300">
           <Sparkles className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
-          <span>Special Partner Invitation</span>
+          <span>{t('affiliate.specialInvitation')}</span>
           <span className="font-mono text-emerald-600 dark:text-emerald-400">• {cleanCode.toUpperCase()}</span>
         </div>
 
         {/* Status text */}
         <h1 className="mt-4 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl dark:text-zinc-100">
-          Connecting to Stallio...
+          {t('affiliate.connectingToStallio')}
         </h1>
         <p className="mt-2 text-sm text-stone-500 dark:text-zinc-400">
-          Applying your exclusive referral link and redirecting you to setup your store.
+          {t('affiliate.redirectDescription')}
         </p>
 
         {/* Triple Dot Loader matching Stallio design */}
@@ -85,7 +87,7 @@ export default function ReferralRedirect() {
             onClick={() => navigate(`/signup?ref=${encodeURIComponent(cleanCode)}`, { replace: true })}
             className="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-600 hover:text-brand-700 dark:text-brand-400 dark:hover:text-brand-300"
           >
-            <span>Click here if you are not redirected automatically</span>
+            <span>{t('affiliate.redirectFallback')}</span>
             <ArrowRight className="h-3.5 w-3.5 rtl:rotate-180" />
           </button>
         </div>

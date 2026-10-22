@@ -4,6 +4,7 @@
 // ============================================================================
 
 import React, { useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { QRCodeSVG, QRCodeCanvas } from 'qrcode.react';
 import toast from 'react-hot-toast';
 import {
@@ -35,6 +36,8 @@ export default function QrCard({
   baseUrl,
   className = '',
 }: QrCardProps) {
+  const { t } = useTranslation();
+  const tx = (key: string, options?: Record<string, unknown>) => t(`affiliate.${key}`, options);
   const [copied, setCopied] = useState(false);
   const [downloading, setDownloading] = useState(false);
   const printableCardRef = useRef<HTMLDivElement>(null);
@@ -55,10 +58,10 @@ export default function QrCard({
     try {
       await navigator.clipboard.writeText(rawQrUrl);
       setCopied(true);
-      toast.success('QR target link copied to clipboard!');
+      toast.success(tx('copyQrTarget'));
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      toast.error('Failed to copy link');
+      toast.error(tx('qrCopyFailed'));
     }
   }
 
@@ -66,7 +69,7 @@ export default function QrCard({
   function downloadSvg() {
     const svgEl = document.getElementById(`stallio-qr-svg-${code}`) as SVGSVGElement | null;
     if (!svgEl) {
-      toast.error('Unable to export SVG QR code');
+      toast.error(tx('svgDownloadFailed'));
       return;
     }
 
@@ -80,7 +83,7 @@ export default function QrCard({
     downloadLink.click();
     document.body.removeChild(downloadLink);
     URL.revokeObjectURL(svgUrl);
-    toast.success('Vector SVG downloaded successfully');
+    toast.success(tx('svgDownloaded'));
   }
 
   // 3. Download Ultra High-Res 1024px PNG
@@ -138,9 +141,9 @@ export default function QrCard({
       document.body.appendChild(downloadLink);
       downloadLink.click();
       document.body.removeChild(downloadLink);
-      toast.success('High-res 1024px PNG exported');
+      toast.success(tx('pngDownloaded'));
     } catch {
-      toast.error('Failed to export 1024px PNG');
+      toast.error(tx('pngExportFailed'));
     } finally {
       setDownloading(false);
     }
@@ -217,7 +220,7 @@ export default function QrCard({
           <div className="mt-4 text-center">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-50 text-brand-800 dark:bg-brand-950/60 dark:text-brand-300 text-xs font-bold border border-brand-200/80 dark:border-brand-800/60">
               <QrIcon className="w-3.5 h-3.5 text-brand-600 dark:text-brand-400" />
-              <span>Includes ?s=qr Scan Tracker</span>
+              <span>{tx('qrScanTracker')}</span>
             </div>
             <p className="mt-2 text-sm font-mono font-semibold text-stone-800 dark:text-zinc-200">
               {cleanDisplayUrl}
@@ -234,12 +237,12 @@ export default function QrCard({
               {copied ? (
                 <>
                   <Check className="w-4 h-4 text-emerald-600" />
-                  <span>Copied!</span>
+                  <span>{tx('copied')}</span>
                 </>
               ) : (
                 <>
                   <Copy className="w-4 h-4 text-stone-600 dark:text-zinc-400" />
-                  <span>Copy Link</span>
+                  <span>{tx('copyLink')}</span>
                 </>
               )}
             </button>
@@ -248,10 +251,10 @@ export default function QrCard({
               type="button"
               onClick={downloadSvg}
               className={`${DASHBOARD_BTN_SECONDARY} flex-1 min-w-[120px] text-xs flex items-center justify-center gap-1.5`}
-              title="Download vector SVG for high quality printing"
+              title={tx('downloadSvgTitle')}
             >
               <Download className="w-4 h-4 text-brand-600 dark:text-brand-400" />
-              <span>Vector SVG</span>
+              <span>{tx('vectorSvg')}</span>
             </button>
 
             <button
@@ -261,7 +264,7 @@ export default function QrCard({
               className={`${DASHBOARD_BTN_PRIMARY} w-full text-xs flex items-center justify-center gap-2`}
             >
               <Download className="w-4 h-4" />
-              <span>{downloading ? 'Exporting...' : 'Download 1024px PNG'}</span>
+              <span>{downloading ? tx('exporting') : tx('downloadPng')}</span>
             </button>
           </div>
         </div>
@@ -272,10 +275,10 @@ export default function QrCard({
             <div>
               <h3 className="text-base font-bold text-stone-900 dark:text-zinc-100 flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-brand-600" />
-                <span>Printable Merchant Promo Card</span>
+                <span>{tx('printableCard')}</span>
               </h3>
               <p className="text-xs text-stone-500 dark:text-zinc-400">
-                Ready to print or share at events, store counters, or packaging inserts.
+                {tx('printCardDescription')}
               </p>
             </div>
 
@@ -285,7 +288,7 @@ export default function QrCard({
               className={`${DASHBOARD_BTN_SECONDARY} text-xs flex items-center gap-1.5`}
             >
               <Printer className="w-4 h-4 text-brand-600" />
-              <span>Print Card</span>
+              <span>{tx('printCard')}</span>
             </button>
           </div>
 
@@ -317,22 +320,22 @@ export default function QrCard({
                 <div className="flex items-center justify-center sm:justify-start gap-2">
                   <BrandLogo className="h-6 w-auto" />
                   <span className="rounded bg-brand-100 px-2 py-0.5 text-[0.625rem] font-extrabold uppercase tracking-wider text-brand-800 dark:bg-brand-950/80 dark:text-brand-300">
-                    Official Partner
+                    {tx('officialPartner')}
                   </span>
                 </div>
 
                 <h4 className="text-lg sm:text-xl font-extrabold text-stone-900 dark:text-zinc-100 tracking-tight leading-snug">
-                  Start Your Online Store on Stallio
+                  {tx('promoHeadline')}
                 </h4>
 
                 <p className="text-xs text-stone-600 dark:text-zinc-300 leading-relaxed">
-                  Scan this QR code to claim a <strong className="text-brand-600 dark:text-brand-400">1-Month Free Trial</strong> with zero setup fees. Create your catalog, accept orders, and sell online in minutes.
+                  {tx('promoDescription')}
                 </p>
 
                 <div className="pt-2 flex items-center justify-center sm:justify-start gap-2 text-[0.7rem] text-stone-500 dark:text-zinc-400">
-                  <span>Referred by <strong>{partnerName}</strong></span>
+                  <span>{tx('referredBy', { name: partnerName })}</span>
                   <span>•</span>
-                  <span className="font-mono font-bold text-brand-700 dark:text-brand-400">Code: {code}</span>
+                  <span className="font-mono font-bold text-brand-700 dark:text-brand-400">{tx('codeLabel', { code })}</span>
                 </div>
               </div>
             </div>

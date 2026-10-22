@@ -8,6 +8,7 @@ import PublicLayout from '../../components/PublicLayout';
 
 export default function AffiliateLogin() {
   const { t } = useTranslation();
+  const tx = (key: string, options?: Record<string, unknown>) => t(`affiliate.${key}`, options);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -36,7 +37,7 @@ export default function AffiliateLogin() {
       return;
     }
 
-    toast.success('Welcome back to your Affiliate Dashboard!');
+    toast.success(tx('welcomeBack'));
     navigate(returnUrl);
   }
 
@@ -51,10 +52,10 @@ export default function AffiliateLogin() {
 
         <div className="relative w-full min-w-0 max-w-[min(100%,22rem)] shrink-0 text-center sm:max-w-md">
           <p className="text-[0.7rem] font-bold uppercase tracking-[0.14em] text-brand-600 sm:text-[0.8125rem] sm:tracking-[0.16em] dark:text-brand-400">
-            Affiliate Partner Access
+            {tx('loginEyebrow')}
           </p>
           <h1 className="mt-1 text-xl font-extrabold tracking-tight text-stone-900 sm:mt-2 sm:text-3xl dark:text-zinc-100">
-            Sign In to Affiliate Portal
+            {tx('loginTitle')}
           </h1>
 
           <div className="mt-4 rounded-2xl border border-stone-200/90 bg-white/95 p-5 text-start shadow-[0_16px_48px_-36px_rgba(15,23,42,0.28)] ring-1 ring-stone-100/80 backdrop-blur-sm sm:mt-5 sm:rounded-3xl sm:p-7 dark:border-zinc-600/90 dark:bg-zinc-900/95 dark:ring-zinc-800/80 dark:shadow-black/40">
@@ -77,7 +78,7 @@ export default function AffiliateLogin() {
                   htmlFor="email"
                   className="mb-1.5 block text-xs font-semibold text-stone-800 sm:mb-2 sm:text-sm dark:text-zinc-200"
                 >
-                  Affiliate Email <span className="text-red-500">*</span>
+                  {tx('affiliateEmail')} <span className="text-red-500">*</span>
                 </label>
                 <div className="relative">
                   <Mail className="pointer-events-none absolute start-3.5 top-1/2 h-[1.125rem] w-[1.125rem] -translate-y-1/2 text-stone-400 sm:start-4 sm:h-5 sm:w-5 dark:text-zinc-500" />
@@ -86,7 +87,7 @@ export default function AffiliateLogin() {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="you@example.com"
+                    placeholder={tx('emailPlaceholder')}
                     required
                     autoComplete="email"
                     dir="ltr"
@@ -102,13 +103,13 @@ export default function AffiliateLogin() {
                     htmlFor="password"
                     className="block text-xs font-semibold text-stone-800 sm:text-sm dark:text-zinc-200"
                   >
-                    Password <span className="text-red-500">*</span>
+                    {tx('password')} <span className="text-red-500">*</span>
                   </label>
                   <Link
                     to="/affiliate/forgot-password"
                     className="shrink-0 text-xs font-bold text-brand-700 no-underline hover:text-brand-800 sm:text-sm dark:text-brand-400 dark:hover:text-brand-300"
                   >
-                    Forgot password?
+                    {tx('forgotPassword')}
                   </Link>
                 </div>
                 <div className="relative">
@@ -118,7 +119,7 @@ export default function AffiliateLogin() {
                     type={showPassword ? 'text' : 'password'}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Enter your password"
+                    placeholder={tx('enterPassword')}
                     required
                     minLength={8}
                     autoComplete="current-password"
@@ -128,7 +129,7 @@ export default function AffiliateLogin() {
                     type="button"
                     onClick={() => setShowPassword((v) => !v)}
                     className="absolute end-2 top-1/2 -translate-y-1/2 rounded-lg p-1.5 text-stone-400 transition-colors hover:bg-stone-100 hover:text-stone-700 sm:end-2.5 sm:rounded-xl sm:p-2 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
-                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                    aria-label={showPassword ? tx('hidePassword') : tx('showPassword')}
                   >
                     {showPassword ? (
                       <EyeOff className="h-4 w-4 sm:h-5 sm:w-5" />
@@ -147,31 +148,31 @@ export default function AffiliateLogin() {
               >
                 <span className="relative z-[2] inline-flex items-center gap-2">
                   <LogIn className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" aria-hidden />
-                  {submitting ? 'Signing in...' : 'Sign In as Affiliate'}
+                  {submitting ? tx('signingIn') : tx('signIn')}
                 </span>
               </button>
             </form>
 
             {/* Bottom Cross-links */}
             <p className="mt-5 border-t border-stone-100 pt-4 text-center text-xs font-medium text-stone-600 sm:mt-6 sm:pt-5 sm:text-sm dark:border-zinc-700 dark:text-zinc-400">
-              New to the affiliate program?{' '}
+              {tx('newToProgram')}{' '}
               <Link
                 to="/affiliate/signup"
                 className="inline-flex items-center justify-center gap-1 font-bold text-brand-700 no-underline transition-colors hover:text-brand-800 dark:text-brand-400 dark:hover:text-brand-300"
               >
-                Join Now
+                {tx('createAccount')}
                 <ArrowRight className="h-3.5 w-3.5 shrink-0 rtl:rotate-180 sm:h-4 sm:w-4" aria-hidden />
               </Link>
             </p>
 
             <p className="mt-3 text-center text-xs font-medium text-stone-500 dark:text-zinc-400">
-              Looking for your merchant store?{' '}
+              {tx('merchantLoginPrompt')}{' '}
               <Link
                 to="/login"
                 className="inline-flex items-center gap-1 font-semibold text-stone-700 hover:text-stone-900 dark:text-zinc-300 dark:hover:text-zinc-100"
               >
                 <Store className="h-3 w-3" />
-                Seller Login
+                {tx('sellerLogin')}
               </Link>
             </p>
           </div>
