@@ -827,6 +827,26 @@ export default function DashboardOverview() {
             ) : null}
           </ul>
         </div>
+        <Link
+          to="/affiliate/signup"
+          className="md:col-span-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 rounded-xl max-lg:rounded-xl lg:rounded-2xl border border-brand-200 dark:border-brand-600/40 bg-brand-50/70 dark:bg-brand-950/25 p-4 max-lg:p-4 lg:p-5 no-underline transition-colors hover:bg-brand-50 dark:hover:bg-brand-950/40"
+        >
+          <div className="flex min-w-0 items-start gap-3">
+            <Sparkles className="mt-0.5 h-5 w-5 shrink-0 text-brand-600 dark:text-brand-400" aria-hidden />
+            <div className="min-w-0">
+              <p className="text-sm font-semibold text-stone-900 dark:text-zinc-100">
+                {t('dashboard.overview.affiliateTitle')}
+              </p>
+              <p className="mt-1 text-xs leading-relaxed text-stone-600 dark:text-zinc-400">
+                {t('dashboard.overview.affiliateDescription')}
+              </p>
+            </div>
+          </div>
+          <span className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-brand-700">
+            {t('dashboard.overview.affiliateCta')}
+            <ArrowRight className="h-4 w-4" aria-hidden />
+          </span>
+        </Link>
       </div>
 
       <div className="rounded-xl max-lg:rounded-xl lg:rounded-2xl bg-white dark:bg-zinc-900 p-4 max-lg:p-4 lg:p-6 shadow-lg shadow-stone-200/30 dark:shadow-black/40 border border-stone-200/80 dark:border-zinc-600/80 overflow-hidden mb-5 max-lg:mb-5 lg:mb-8">

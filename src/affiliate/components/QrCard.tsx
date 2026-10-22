@@ -43,11 +43,7 @@ export default function QrCard({
   const printableCardRef = useRef<HTMLDivElement>(null);
   const hiddenCanvasRef = useRef<HTMLDivElement>(null);
 
-  const origin =
-    baseUrl ||
-    (typeof window !== 'undefined'
-      ? window.location.origin
-      : 'https://stallio.shop');
+  const origin = baseUrl || 'https://stalio.shop';
 
   // Spec Rule: A QR code encodes the link with ?s=qr so scans are counted apart from clicks.
   const rawQrUrl = `${origin}/r/${code.toLowerCase()}?s=qr`;
