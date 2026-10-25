@@ -19,7 +19,17 @@ import type { HomeSectionId } from '../../../themes/types';
 
 const HOME_PRODUCTS_LIMIT = 6;
 const DEFAULT_SECTIONS: HomeSectionId[] = ['hero', 'featured', 'products', 'collections', 'trust', 'reviews'];
-// const GRID = 'grid-cols-2 lg:grid-cols-3';
+
+function productCreatedAt(p: Product): number {
+  const raw = p.createdAt;
+  if (raw == null) return 0;
+  if (typeof raw === 'number' && Number.isFinite(raw)) return raw;
+  if (typeof raw === 'string') {
+    const time = Date.parse(raw);
+    return Number.isFinite(time) ? time : 0;
+  }
+  return 0;
+}
 
 function NoirHeading({ eyebrow, title }: { eyebrow?: string; title: string }) {
   return (
@@ -60,7 +70,9 @@ export default function NoirHome({
   const categories = (shop.categories ?? []).filter((c) => (c as ShopCategory).visible !== false);
   const showCategories = Boolean(shop.categoriesEnabled && categories.length > 0);
 
-  const featured = visibleProducts.filter((p) => p.isFeatured);
+  const featured = visibleProducts
+    .filter((p) => p.isFeatured)
+    .sort((a, b) => productCreatedAt(b) - productCreatedAt(a));
   const rest = visibleProducts.filter((p) => !p.isFeatured);
   const spotlight = featured[0] ?? null;
   const featuredRest = featured.slice(1, HOME_PRODUCTS_LIMIT);

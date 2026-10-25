@@ -32,9 +32,6 @@ const GRID_COLUMN_CLASS: Record<2 | 3 | 4, string> = {
 
 const DEFAULT_SECTIONS: HomeSectionId[] = ['hero', 'categories', 'featured', 'products', 'trust', 'reviews'];
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Modern-Minimal (Shopcart-style) layout — distinct from classic-clean
-// ─────────────────────────────────────────────────────────────────────────────
 function MinimalHome({
   shop,
   products,
@@ -46,118 +43,27 @@ function MinimalHome({
   username: string;
   containerClass: string;
 }) {
-  const { t, lang } = useShopLanguage();
+  const { t } = useShopLanguage();
   const { layout } = useStorefrontTheme();
-
-  const visibleCategories = (shop.categories ?? []).filter(
-    (c) => (c as ShopCategory).visible !== false,
-  );
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   const featuredProducts = products.filter((p) => p.isFeatured && p.isVisible !== false);
   const allVisible = products.filter((p) => p.isVisible !== false);
-  const filteredByCategory = activeCategory
-    ? allVisible.filter((p) => p.category === activeCategory)
-    : allVisible;
 
-  // Featured first, then rest — up to limit
-  const displayProducts = [
-    ...filteredByCategory.filter((p) => p.isFeatured),
-    ...filteredByCategory.filter((p) => !p.isFeatured),
-  ].slice(0, HOME_PRODUCTS_LIMIT * 2);
+  const displayProducts = (featuredProducts.length > 0 ? featuredProducts : allVisible).slice(
+    0,
+    HOME_PRODUCTS_LIMIT * 2,
+  );
 
   return (
     <div className="flex flex-col">
-      {/* Hero */}
       <Hero shop={shop} username={username} containerClass={containerClass} />
 
-      {/* ── Horizontal category filter chips ── */}
-      {visibleCategories.length > 0 && (
-        <div
-          className="border-b border-t"
-          style={{ borderColor: 'var(--theme-border)', background: 'var(--theme-surface)' }}
-        >
-          <div className={`${containerClass} flex items-center justify-between gap-4 py-3`}>
-            {/* Category pills — horizontal scroll */}
-            <div className="flex min-w-0 flex-1 items-center gap-2 overflow-x-auto pb-0.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-              <button
-                type="button"
-                onClick={() => setActiveCategory(null)}
-                className="inline-flex shrink-0 items-center gap-1 rounded-full border px-3.5 py-1.5 text-xs font-medium transition-all"
-                style={
-                  activeCategory === null
-                    ? {
-                        background: 'var(--theme-primary)',
-                        color: 'var(--theme-primary-contrast)',
-                        borderColor: 'var(--theme-primary)',
-                      }
-                    : {
-                        background: 'var(--theme-surface)',
-                        color: 'var(--theme-text-secondary)',
-                        borderColor: 'var(--theme-border)',
-                      }
-                }
-              >
-                All
-              </button>
-              {visibleCategories.slice(0, HOME_CATEGORIES_LIMIT).map((c) => {
-                const name = lang === 'ar' ? (c.nameAr ?? c.name) : lang === 'es' ? (c.nameEs ?? c.name) : c.name;
-                const isActive = activeCategory === c.slug;
-                return (
-                  <button
-                    key={c.slug}
-                    type="button"
-                    onClick={() => setActiveCategory(isActive ? null : c.slug)}
-                    className="inline-flex shrink-0 items-center rounded-full border px-3.5 py-1.5 text-xs font-medium capitalize transition-all"
-                    style={
-                      isActive
-                        ? {
-                            background: 'var(--theme-primary)',
-                            color: 'var(--theme-primary-contrast)',
-                            borderColor: 'var(--theme-primary)',
-                          }
-                        : {
-                            background: 'var(--theme-surface)',
-                            color: 'var(--theme-text-secondary)',
-                            borderColor: 'var(--theme-border)',
-                          }
-                    }
-                  >
-                    {name}
-                    {/* dropdown arrow */}
-                    <svg className="ms-1 h-3 w-3 opacity-60" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden>
-                      <path d="M6 9l6 6 6-6" />
-                    </svg>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Sort by — right */}
-            <Link
-              to={`/${username}/products`}
-              className="inline-flex shrink-0 items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-xs font-medium no-underline transition-colors hover:bg-[var(--theme-surface-secondary)]"
-              style={{ borderColor: 'var(--theme-border)', color: 'var(--theme-text-secondary)' }}
-            >
-              <SlidersHorizontal className="h-3.5 w-3.5" aria-hidden />
-              {t('productsSort')}
-            </Link>
-          </div>
-        </div>
-      )}
-
-      {/* ── Product grid section ── */}
       <main className={`${containerClass} flex-1 pb-10 pt-6 lg:pb-16 lg:pt-8`}>
-        {/* Section heading — Shopcart style: bold, no border-b */}
         <h2
           className="mb-5 text-xl font-bold lg:text-2xl"
           style={{ color: 'var(--theme-text-primary)', fontFamily: 'var(--theme-font-heading, inherit)' }}
         >
-          {activeCategory
-            ? visibleCategories.find((c) => c.slug === activeCategory)?.name ?? activeCategory
-            : featuredProducts.length > 0
-            ? t('homeFeaturedTitle')
-            : t('homeAllTitle')}
+          {featuredProducts.length > 0 ? t('homeFeaturedTitle') : t('homeAllTitle')}
         </h2>
 
         {displayProducts.length === 0 ? (
@@ -184,7 +90,6 @@ function MinimalHome({
               ))}
             </div>
 
-            {/* View all link */}
             {allVisible.length > displayProducts.length && (
               <div className="mt-8 flex justify-center">
                 <Link
@@ -206,9 +111,6 @@ function MinimalHome({
   );
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Pacific Fresh (Organic Botanical Wellness) layout — dedicated signature storefront
-// ─────────────────────────────────────────────────────────────────────────────
 function PacificHome({
   shop,
   products,
@@ -256,10 +158,8 @@ function PacificHome({
 
   return (
     <div className="flex flex-col space-y-8 sm:space-y-12 pb-12 lg:pb-20">
-      {/* 1. Hero Section */}
       <Hero shop={shop} username={username} containerClass={containerClass} />
 
-      {/* 2. Horizontal Organic Category Navigation Bar */}
       {visibleCategories.length > 0 && (
         <div className={containerClass}>
           <div
@@ -346,7 +246,6 @@ function PacificHome({
         </div>
       )}
 
-      {/* 3. Pacific Trust Badges Bar (Organic & Clean Guarantee) */}
       {trustBadges.length > 0 && (
         <section className={containerClass}>
           <div
@@ -389,7 +288,6 @@ function PacificHome({
         </section>
       )}
 
-      {/* 4. Curated Botanical Products Grid */}
       <main className={containerClass}>
         <div className="flex items-end justify-between gap-4 mb-6 sm:mb-8 border-b pb-4" style={{ borderColor: 'var(--theme-border)' }}>
           <div>
@@ -460,7 +358,6 @@ function PacificHome({
         )}
       </main>
 
-      {/* 5. Customer Stories / Reviews Section */}
       {reviews.length > 0 && (
         <section className={containerClass}>
           <div
@@ -478,9 +375,6 @@ function PacificHome({
   );
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Classic / default home layout (classic-clean, boutique-artisan, etc.)
-// ─────────────────────────────────────────────────────────────────────────────
 export default function Home({
   shop,
   products,
@@ -495,7 +389,6 @@ export default function Home({
   const { layout, themeId } = useStorefrontTheme();
   const { t, lang } = useShopLanguage();
 
-  // Route pacific-fresh to its own distinctive botanical layout
   if (themeId === 'pacific-fresh') {
     return (
       <FreshHome
@@ -507,7 +400,6 @@ export default function Home({
     );
   }
 
-  // Route retail-catalog to its Mart electronics layout
   if (themeId === 'retail-catalog') {
     return (
       <MartHome
@@ -519,7 +411,6 @@ export default function Home({
     );
   }
 
-  // Route boutique-artisan to its cocoa editorial layout
   if (themeId === 'boutique-artisan') {
     return (
       <BoutiqueHome
@@ -531,7 +422,6 @@ export default function Home({
     );
   }
 
-  // Route modern-minimal to its own distinctive layout
   if (themeId === 'modern-minimal') {
     return (
       <MinimalHome
@@ -542,7 +432,7 @@ export default function Home({
       />
     );
   }
-    // Route noir-luxe to its own dark editorial layout
+
   if (themeId === 'noir-luxe') {
     return (
       <NoirHome
@@ -554,7 +444,6 @@ export default function Home({
     );
   }
 
-  // ── Classic-clean / Boutique / Retail / Noir layout ──
   const visibleCategories = (shop.categories ?? []).filter(
     (c) => (c as ShopCategory).visible !== false,
   );

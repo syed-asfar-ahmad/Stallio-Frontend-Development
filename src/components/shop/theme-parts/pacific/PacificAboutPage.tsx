@@ -26,9 +26,8 @@ export default function PacificAboutPage({
   const gallery = (shop.aboutImages ?? []).slice(0, 4);
 
   return (
-    <main className="flex-1 pb-16 lg:pb-28">
-      {/* 1. Cinematic Hero */}
-      <section className={`${containerClass} pt-6 lg:pt-12 max-w-5xl mx-auto text-center space-y-6`}>
+    <main className="flex-1 px-5 sm:px-10 lg:px-16 pb-16 lg:pb-24">
+      <section className={`${containerClass} pt-8 lg:pt-14 max-w-5xl mx-auto text-center space-y-6`}>
         <div className="flex justify-center">
           <PacificPillTag icon={Sprout}>Our Harvest Manifesto</PacificPillTag>
         </div>
@@ -49,7 +48,6 @@ export default function PacificAboutPage({
               'A dedication to pure artisanal produce, unbroken cold chains, and biological vitality.'}
         </p>
 
-        {/* Hero Image Frame */}
         {heroImage && (
           <div className="mt-8 lg:mt-12 relative overflow-hidden rounded-[var(--theme-radius-card)] border border-theme-border shadow-[var(--theme-shadow-card)] group">
             <img
@@ -66,14 +64,12 @@ export default function PacificAboutPage({
         )}
       </section>
 
-      {/* 2. Core Sourcing Pillars */}
       <section className={`${containerClass} pt-12 lg:pt-20 max-w-5xl mx-auto`}>
         <PacificSourcingPillars />
       </section>
 
-      {/* 3. Main Story Section with Rich Text */}
       <section className={`${containerClass} pt-12 lg:pt-20 max-w-3xl mx-auto`}>
-        <article className="rounded-[var(--theme-radius-card)] border border-theme-border bg-theme-surface p-6 sm:p-12 lg:p-16 shadow-[var(--theme-shadow-card)] relative overflow-hidden space-y-6">
+        <article className="rounded-[var(--theme-radius-card)] border border-theme-border bg-theme-surface p-6 sm:p-10 lg:p-14 shadow-[var(--theme-shadow-card)] relative overflow-hidden space-y-6">
           <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-theme-primary/20 via-theme-primary to-theme-primary/20" />
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-full bg-theme-primary-light text-theme-primary">
@@ -102,7 +98,6 @@ export default function PacificAboutPage({
         </article>
       </section>
 
-      {/* 4. Asymmetrical Photo Essay (if gallery available) */}
       {gallery.length > 0 && (
         <section className={`${containerClass} pt-12 lg:pt-20 max-w-6xl mx-auto`}>
           <div className="text-center mb-8">
@@ -114,7 +109,7 @@ export default function PacificAboutPage({
               Life on the Partner Estates
             </h2>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
             {gallery.map((img, i) => (
               <div
                 key={i}
@@ -133,8 +128,7 @@ export default function PacificAboutPage({
         </section>
       )}
 
-      {/* 5. Closing Call to Action */}
-      <section className={`${containerClass} pt-14 lg:pt-24 max-w-4xl mx-auto text-center`}>
+      <section className={`${containerClass} pt-12 lg:pt-20 max-w-4xl mx-auto text-center`}>
         <div
           className="rounded-[var(--theme-radius-card)] p-8 sm:p-12 text-white border shadow-[var(--theme-shadow-card)]"
           style={{

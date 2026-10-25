@@ -299,7 +299,9 @@ export default function ShopProductsPage({ shop, products, username, containerCl
               <div className="relative">
                 <Search className="pointer-events-none absolute start-3.5 top-1/2 h-4 w-4 -translate-y-1/2" style={{ color: 'var(--theme-text-muted)' }} aria-hidden />
                 <input
-                  type="search"
+                  type="text"
+                  inputMode="search"
+                  enterKeyHint="search"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder={t('productsSearchPh')}

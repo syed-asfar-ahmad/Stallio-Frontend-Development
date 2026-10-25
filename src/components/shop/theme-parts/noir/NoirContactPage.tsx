@@ -13,8 +13,8 @@ const API_BASE = import.meta.env.VITE_API_URL ?? '';
 type Props = { shop: Shop; username: string; containerClass: string };
 
 const inputCls =
-  'w-full border-0 border-b bg-transparent px-0 py-3 text-sm focus:outline-none focus:border-[var(--theme-primary)]';
-const labelCls = 'text-[10px] font-semibold uppercase tracking-[0.3em]';
+  'mt-2 block w-full border bg-[var(--theme-surface-secondary)] px-4 py-3 text-sm placeholder:text-[var(--theme-text-muted)] placeholder:opacity-70 focus:outline-none focus:border-[var(--theme-primary)]';
+const labelCls = 'block text-[10px] font-semibold uppercase tracking-[0.3em]';
 
 export default function NoirContactPage({ shop, username, containerClass }: Props) {
   const { t, lang } = useShopLanguage();
@@ -117,16 +117,44 @@ export default function NoirContactPage({ shop, username, containerClass }: Prop
           <div className="grid gap-8 sm:grid-cols-2">
             <div>
               <label htmlFor="noir-name" className={labelCls} style={{ color: 'var(--theme-primary)' }}>{t('yourName')} *</label>
-              <input id="noir-name" value={name} onChange={(e) => setName(e.target.value)} required className={inputCls} style={{ borderColor: 'var(--theme-border)', color: 'var(--theme-text-primary)' }} />
+              <input
+                id="noir-name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+                placeholder="John Doe"
+                autoComplete="name"
+                className={inputCls}
+                style={{ borderColor: 'var(--theme-border)', color: 'var(--theme-text-primary)' }}
+              />
             </div>
             <div>
               <label htmlFor="noir-email" className={labelCls} style={{ color: 'var(--theme-primary)' }}>{t('email')} *</label>
-              <input id="noir-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required className={inputCls} style={{ borderColor: 'var(--theme-border)', color: 'var(--theme-text-primary)' }} />
+              <input
+                id="noir-email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                placeholder="you@example.com"
+                autoComplete="email"
+                className={inputCls}
+                style={{ borderColor: 'var(--theme-border)', color: 'var(--theme-text-primary)' }}
+              />
             </div>
           </div>
           <div>
             <label htmlFor="noir-msg" className={labelCls} style={{ color: 'var(--theme-primary)' }}>{t('message')} *</label>
-            <textarea id="noir-msg" value={message} onChange={(e) => setMessage(e.target.value)} required rows={6} className={inputCls} style={{ borderColor: 'var(--theme-border)', color: 'var(--theme-text-primary)' }} />
+            <textarea
+              id="noir-msg"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              required
+              rows={6}
+              placeholder="How can we help you?"
+              className={`${inputCls} resize-y`}
+              style={{ borderColor: 'var(--theme-border)', color: 'var(--theme-text-primary)' }}
+            />
           </div>
           <button
             type="submit"
