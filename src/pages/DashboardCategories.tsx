@@ -48,6 +48,8 @@ import {
 import SharedLockedField from '../components/SharedLockedField';
 import { useSellerContentLanguages, useSellerMultilingualEnabled } from '../hooks/useSellerContentLanguages';
 import ImageCropModal from '../components/ImageCropModal';
+import ImageFocusButton from '../components/ImageFocusButton';
+import ShopImage from '../components/ShopImage';
 import DashboardImageRemoveButton from '../components/DashboardImageRemoveButton';
 import { CATEGORY_CARD_ASPECT_CLASS, CATEGORY_CARD_VIEWPORT } from '../lib/imageCropViewports';
 import { scrollOnPaginationChange } from '../lib/scrollDashboardMainToTop';
@@ -641,7 +643,7 @@ const [categoryModal, setCategoryModal] = useState<null | 'add' | number>(null);
                                 />
                               )}
                               {c.image ? (
-                                <img src={c.image} alt={c.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                                <ShopImage src={c.image} alt={c.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                               ) : (
                                 <div className="w-full h-full flex items-center justify-center text-stone-400 dark:text-zinc-500">
                                   <Upload className="w-14 h-14" />
@@ -826,7 +828,7 @@ const [categoryModal, setCategoryModal] = useState<null | 'add' | number>(null);
                   {formImage ? (
                     <div className="relative z-10 shrink-0 overflow-visible">
                       <div className="overflow-hidden rounded-xl border-2 border-stone-200 dark:border-zinc-700">
-                        <img
+                        <ShopImage
                           src={formImage}
                           alt=""
                           className="w-20 rounded-xl object-cover"
@@ -859,6 +861,9 @@ const [categoryModal, setCategoryModal] = useState<null | 'add' | number>(null);
                       {uploadingFormImage ? <AdminLoadingInline dotsOnly /> : <Upload className="w-4 h-4" />}
                       {t('dashboard.categories.changeImage')}
                     </button>
+                  )}
+                  {formImage && (
+                    <ImageFocusButton src={formImage} onChange={setFormImage} disabled={uploadingFormImage || sharedLocked} />
                   )}
                 </div>
               </div>

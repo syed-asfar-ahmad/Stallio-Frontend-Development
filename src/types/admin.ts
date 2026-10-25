@@ -1,3 +1,4 @@
+import type { SubscriptionReferralAttribution } from '../affiliate/types';
 import type { ProductOption, ShopAvailabilitySlot, ShopTestimonial, ShopTrustBadge } from './index';
 
 export type ChartPoint = { label: string; value: number };
@@ -51,6 +52,8 @@ export type AdminSubscriptionSellerRow = {
   lastAmount: number | null;
   paidThisMonth: boolean;
   billingStatus: SubscriptionBillingStatus;
+  /** Present when the backend resolves affiliate attribution inline (Phase 4). */
+  referral?: SubscriptionReferralAttribution | null;
 };
 
 export type AdminSubscriptionHistoryRow = {
@@ -62,6 +65,7 @@ export type AdminSubscriptionHistoryRow = {
   plan: SubscriptionPlan;
   amount: number;
   paidAt: string;
+  referral?: SubscriptionReferralAttribution | null;
 };
 
 export type AdminSubscriptionsPage = {

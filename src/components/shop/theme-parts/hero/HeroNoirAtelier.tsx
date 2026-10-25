@@ -1,3 +1,4 @@
+import ShopImage from '../../../ShopImage';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { useShopLanguage } from '../../../../context/ShopLanguageContext';
@@ -29,20 +30,20 @@ export default function HeroNoirAtelier({ shop, username, containerClass, produc
       }}
     >
       <div className={`${containerClass} relative`}>
-        <div className="grid items-center gap-14 py-16 lg:min-h-[40rem] lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 lg:py-24">
+        <div className="grid items-center gap-6 py-7 sm:py-10 lg:min-h-[24rem] lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 lg:py-12">
           { }
           <div className="order-2 text-center lg:order-1 lg:text-start">
-            <div className="mb-7 flex items-center justify-center gap-4 lg:justify-start">
-              <span className="h-px w-10" style={{ background: 'var(--theme-primary)' }} />
+            <div className="mb-3.5 flex items-center justify-center gap-3 lg:justify-start">
+              <span className="h-px w-6" style={{ background: 'var(--theme-primary)' }} />
               <span
-                className="text-[11px] font-semibold uppercase tracking-[0.45em]"
+                className="text-[10px] font-semibold uppercase tracking-[0.35em]"
                 style={{ color: 'var(--theme-primary)' }}
               >
                 {shop.shopName}
               </span>
             </div>
             <h1
-              className="animate-[cocoaRise_700ms_cubic-bezier(0.22,1,0.36,1)_both] text-[2.6rem] uppercase leading-[1.05] tracking-[0.1em] sm:text-6xl lg:text-[4.5rem] motion-reduce:animate-none"
+              className="animate-[cocoaRise_700ms_cubic-bezier(0.22,1,0.36,1)_both] text-[1.7rem] uppercase leading-[1.08] tracking-[0.08em] sm:text-3xl lg:text-[2.6rem] motion-reduce:animate-none"
               style={{
                 color: 'var(--theme-text-primary)',
                 fontFamily: 'var(--theme-font-heading)',
@@ -53,28 +54,28 @@ export default function HeroNoirAtelier({ shop, username, containerClass, produc
             </h1>
             {intro ? (
               <p
-                className="mx-auto mt-7 line-clamp-3 max-w-md text-[15px] leading-relaxed lg:mx-0"
+                className="mx-auto mt-3.5 line-clamp-2 max-w-md text-xs leading-relaxed sm:text-sm lg:mx-0"
                 style={{ color: 'var(--theme-text-secondary)' }}
               >
                 {intro}
               </p>
             ) : null}
-            <div className="mt-10 flex flex-wrap justify-center gap-4 lg:justify-start">
+            <div className="mt-5 flex flex-wrap justify-center gap-2.5 lg:justify-start">
               <Link
                 to={`/${username}/products`}
-                className="group inline-flex items-center gap-3 px-9 py-4 text-xs font-semibold uppercase tracking-[0.25em] no-underline transition-all hover:gap-4 hover:opacity-90"
+                className="group inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] no-underline transition-all hover:gap-3 hover:opacity-90"
                 style={{
                   background: 'var(--theme-primary)',
                   color: 'var(--theme-primary-contrast)',
-                  boxShadow: '0 0 40px color-mix(in srgb, var(--theme-primary) 35%, transparent)',
+                  boxShadow: '0 0 24px color-mix(in srgb, var(--theme-primary) 28%, transparent)',
                 }}
               >
                 {t('shopNow')}
-                <ArrowUpRight className="h-4 w-4" aria-hidden />
+                <ArrowUpRight className="h-3 w-3" aria-hidden />
               </Link>
               <Link
                 to={`/${username}/about`}
-                className="inline-flex items-center border px-9 py-4 text-xs font-semibold uppercase tracking-[0.25em] no-underline transition-colors hover:bg-[var(--theme-surface-secondary)]"
+                className="inline-flex items-center border px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] no-underline transition-colors hover:bg-[var(--theme-surface-secondary)]"
                 style={{ borderColor: 'var(--theme-primary)', color: 'var(--theme-primary)' }}
               >
                 {t('navAbout')}
@@ -83,23 +84,23 @@ export default function HeroNoirAtelier({ shop, username, containerClass, produc
           </div>
 
           { }
-          <div className="order-1 mx-auto w-full max-w-sm lg:order-2 lg:max-w-md">
+          <div className="order-1 mx-auto w-full max-w-[17rem] lg:order-2 lg:max-w-[20rem]">
             <div className="relative">
               { }
               <span
                 aria-hidden
-                className="absolute -end-5 top-5 h-full w-full rounded-t-[999px] border"
+                className="absolute -end-4 top-4 h-full w-full rounded-t-[999px] border"
                 style={{ borderColor: 'var(--theme-primary)' }}
               />
               <div
                 className="relative aspect-[3/4] w-full overflow-hidden rounded-t-[999px]"
                 style={{
                   background: 'var(--theme-surface-secondary)',
-                  boxShadow: '0 30px 80px -20px color-mix(in srgb, var(--theme-primary) 30%, transparent)',
+                  boxShadow: '0 24px 60px -16px color-mix(in srgb, var(--theme-primary) 28%, transparent)',
                 }}
               >
                 {mainImage ? (
-                  <img src={mainImage} alt="" loading="eager" className="absolute inset-0 h-full w-full object-cover" />
+                  <ShopImage src={mainImage} alt="" loading="eager" className="absolute inset-0 h-full w-full object-cover" />
                 ) : null}
                 <span
                   aria-hidden
@@ -111,7 +112,7 @@ export default function HeroNoirAtelier({ shop, username, containerClass, produc
               {     }
               <div
                 aria-hidden
-                className="absolute -start-6 top-10 h-24 w-24 sm:-start-10 sm:h-28 sm:w-28"
+                className="absolute -start-5 top-8 h-20 w-20 sm:-start-8 sm:h-24 sm:w-24"
                 style={{ color: 'var(--theme-primary)' }}
               >
                 <svg viewBox="0 0 120 120" className="h-full w-full animate-[spin_24s_linear_infinite] motion-reduce:animate-none">
@@ -125,7 +126,7 @@ export default function HeroNoirAtelier({ shop, username, containerClass, produc
                   </text>
                 </svg>
                 <span
-                  className="absolute inset-[34%] flex items-center justify-center rounded-full text-lg"
+                  className="absolute inset-[34%] flex items-center justify-center rounded-full text-base"
                   style={{ background: 'var(--theme-primary)', color: 'var(--theme-primary-contrast)' }}
                 >
                   ✦
@@ -136,21 +137,21 @@ export default function HeroNoirAtelier({ shop, username, containerClass, produc
               {floating && floatingImage ? (
                 <Link
                   to={`/${username}/product/${floating.id}`}
-                  className="absolute -bottom-6 -start-4 flex items-center gap-3 border p-2.5 pe-5 no-underline backdrop-blur-md transition-transform hover:-translate-y-1 sm:-start-10"
+                  className="absolute -bottom-5 -start-3 flex items-center gap-2.5 border p-2 pe-4 no-underline backdrop-blur-md transition-transform hover:-translate-y-1 sm:-start-8"
                   style={{
                     background: 'color-mix(in srgb, var(--theme-surface) 88%, transparent)',
                     borderColor: 'var(--theme-primary)',
                   }}
                 >
-                  <img src={floatingImage} alt="" className="h-14 w-14 object-cover" />
+                  <ShopImage src={floatingImage} alt="" className="h-12 w-12 object-cover" />
                   <span className="flex flex-col">
                     <span
-                      className="text-[10px] font-semibold uppercase tracking-[0.3em]"
+                      className="text-[9px] font-semibold uppercase tracking-[0.28em]"
                       style={{ color: 'var(--theme-primary)' }}
                     >
                       {t('homeFeaturedTitle')}
                     </span>
-                    <span className="line-clamp-1 max-w-[9rem] text-xs" style={{ color: 'var(--theme-text-primary)' }}>
+                    <span className="line-clamp-1 max-w-[8rem] text-[11px]" style={{ color: 'var(--theme-text-primary)' }}>
                       {productName(floating)}
                     </span>
                   </span>
@@ -163,11 +164,11 @@ export default function HeroNoirAtelier({ shop, username, containerClass, produc
 
       { }
       <div
-        className="overflow-hidden whitespace-nowrap border-y py-3.5"
+        className="overflow-hidden whitespace-nowrap border-y py-2.5"
         style={{ borderColor: 'var(--theme-border)', background: 'var(--theme-surface)' }}
         aria-hidden
       >
-        <div className="flex justify-center gap-10 text-[11px] font-semibold uppercase tracking-[0.4em]" style={{ color: 'var(--theme-primary)' }}>
+        <div className="flex justify-center gap-9 text-[10px] font-semibold uppercase tracking-[0.4em]" style={{ color: 'var(--theme-primary)' }}>
           {Array.from({ length: 8 }).map((_, i) => (
             <span key={i} className="shrink-0">
               {shop.shopName} ✦

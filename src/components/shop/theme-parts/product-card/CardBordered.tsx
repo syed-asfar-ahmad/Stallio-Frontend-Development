@@ -74,7 +74,7 @@ export default function CardBordered({ product: p, shopUsername, currency, linkS
       </Link>
 
       {/* ── Card body ── */}
-      <div className="flex flex-1 flex-col gap-1.5 p-3">
+      <div className="flex flex-1 flex-col gap-1 p-2.5 sm:p-3">
         {/* Name */}
         <Link
           to={`/${shopUsername}/product/${p.id}`}
@@ -82,7 +82,7 @@ export default function CardBordered({ product: p, shopUsername, currency, linkS
           className="no-underline"
         >
           <h3
-            className="line-clamp-2 text-sm font-bold leading-snug hover:underline"
+            className="line-clamp-2 text-xs sm:text-sm font-semibold leading-snug hover:underline"
             style={{ color: 'var(--theme-text-primary)' }}
           >
             {localizedName}
@@ -91,7 +91,7 @@ export default function CardBordered({ product: p, shopUsername, currency, linkS
 
         {/* Description */}
         {localizedDesc && (
-          <p className="line-clamp-1 text-[11px] leading-snug" style={{ color: 'var(--theme-text-muted)' }}>
+          <p className="line-clamp-1 text-[10px] sm:text-[11px] leading-snug" style={{ color: 'var(--theme-text-muted)' }}>
             {localizedDesc}
           </p>
         )}
@@ -101,33 +101,33 @@ export default function CardBordered({ product: p, shopUsername, currency, linkS
           {[1, 2, 3, 4, 5].map((s) => (
             <Star
               key={s}
-              className="h-3 w-3"
+              className="h-2.5 w-2.5 sm:h-3 sm:w-3"
               style={{
                 color: s <= 4 ? '#f59e0b' : '#d1d5db',
                 fill: s <= 4 ? '#f59e0b' : '#d1d5db',
               }}
             />
           ))}
-          <span className="text-[10px]" style={{ color: 'var(--theme-text-muted)' }}>(121)</span>
+          <span className="text-[9px] sm:text-[10px]" style={{ color: 'var(--theme-text-muted)' }}>(121)</span>
         </div>
 
         {/* Price row */}
         <div className="flex items-baseline gap-1.5">
-          <span className="text-sm font-bold" style={{ color: 'var(--theme-primary)' }}>
+          <span className="text-xs sm:text-sm font-bold" style={{ color: 'var(--theme-primary)' }}>
             {formatPrice(sale, currency)}
           </span>
           {compare ? (
-            <span className="text-[11px] line-through" style={{ color: 'var(--theme-text-muted)' }}>
+            <span className="text-[10px] sm:text-[11px] line-through" style={{ color: 'var(--theme-text-muted)' }}>
               {formatPrice(compare, currency)}
             </span>
           ) : null}
         </div>
 
         {/* ── Add to Cart button — always visible, Shopcart outline style ── */}
-        <div className="mt-auto pt-1.5">
+        <div className="mt-auto pt-1">
           {outOfStock ? (
             <span
-              className="flex w-full items-center justify-center rounded-[var(--theme-radius-btn)] border px-3 py-2 text-xs font-semibold opacity-50"
+              className="flex w-full items-center justify-center rounded-[var(--theme-radius-btn)] border px-2 py-1.5 text-[11px] font-semibold opacity-50"
               style={{ borderColor: 'var(--theme-border)', color: 'var(--theme-text-muted)' }}
             >
               {t('badgeSoldOut')}
@@ -136,10 +136,10 @@ export default function CardBordered({ product: p, shopUsername, currency, linkS
             <Link
               to={`/${shopUsername}/product/${p.id}`}
               state={linkState}
-              className="flex w-full items-center justify-center gap-1.5 rounded-[var(--theme-radius-btn)] border-2 px-3 py-2 text-xs font-semibold text-theme-primary no-underline transition-colors hover:border-theme-primary hover:bg-theme-primary hover:text-theme-primary-contrast"
+              className="flex w-full items-center justify-center gap-1.5 rounded-[var(--theme-radius-btn)] border-2 px-2 py-1.5 text-[11px] sm:text-xs font-semibold text-theme-primary no-underline transition-colors hover:border-theme-primary hover:bg-theme-primary hover:text-theme-primary-contrast"
               style={{ borderColor: 'var(--theme-primary)' }}
             >
-              <ShoppingCart className="h-3.5 w-3.5" />
+              <ShoppingCart className="h-3 w-3" />
               {t('addToCart')}
             </Link>
           )}

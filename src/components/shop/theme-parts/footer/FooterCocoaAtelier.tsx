@@ -165,13 +165,12 @@ export default function FooterCocoaAtelier({ shop, quickLinks, containerClass }:
       {/* Oversized wordmark */}
       <p
         aria-hidden
-        className="pointer-events-none relative z-0 -mt-4 select-none whitespace-nowrap px-4 text-center font-semibold leading-[0.8] lg:-mt-8"
+        className="pointer-events-none relative z-0 mt-2 w-full select-none break-words px-3 text-center font-semibold leading-[0.86] sm:px-5"
         style={{
           fontFamily: 'var(--theme-font-heading)',
-          fontSize: 'clamp(4rem, 17vw, 15rem)',
-          letterSpacing: '-0.05em',
+          fontSize: 'clamp(3rem, 11vw, 10rem)',
+          letterSpacing: '-0.045em',
           color: 'rgb(247 234 212 / 0.07)',
-          transform: 'translateY(18%)',
         }}
       >
         {shop.shopName}

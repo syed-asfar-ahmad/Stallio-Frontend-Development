@@ -45,18 +45,18 @@ export default function HeaderMinimalFloating({
             }
           `}</style>
           <div
-            className="h-7 overflow-hidden border-b lg:h-8"
+            className="h-6 overflow-hidden border-b lg:h-7"
             style={{ background: 'var(--theme-primary)', color: 'var(--theme-primary-contrast)', borderColor: 'transparent' }}
             role="region"
             aria-label={t('navAnnouncementAria')}
           >
             <div
-              className="theme-announcement-track-mf flex h-full shrink-0 items-center whitespace-nowrap text-[11px] font-light uppercase tracking-[0.12em] leading-none lg:text-xs"
+              className="theme-announcement-track-mf flex h-full shrink-0 items-center whitespace-nowrap text-[10px] font-light uppercase tracking-[0.1em] leading-none lg:text-[11px]"
               style={{ width: 'max-content', animation: `theme-announcement-scroll-mf ${scrollSeconds}s linear infinite` }}
             >
               {Array.from({ length: copies }, () => announcements).flat().map((text, i) => (
                 <span key={i} className="shrink-0">
-                  <span className="inline-block px-4 lg:px-6">{text}</span>
+                  <span className="inline-block px-3 lg:px-5">{text}</span>
                   <span className="opacity-50" aria-hidden>·</span>
                 </span>
               ))}
@@ -66,14 +66,14 @@ export default function HeaderMinimalFloating({
       ) : null}
 
       {/* Main bar */}
-      <div className={`${containerClass} flex items-center justify-between gap-4 py-4 lg:py-5`}>
+      <div className={`${containerClass} flex items-center justify-between gap-3 py-2.5 sm:py-3 lg:gap-5 lg:py-3.5`}>
         {/* Logo / shop name */}
         <Link to={`/${username}`} className="shrink-0 no-underline" aria-label={shop.shopName}>
           {shop.logo ? (
-            <img src={shop.logo} alt="" className="h-10 w-auto max-w-[10rem] object-contain lg:h-12 lg:max-w-[12rem]" />
+            <img src={shop.logo} alt="" className="h-8 w-auto max-w-[9rem] object-contain sm:h-9 lg:max-w-[11rem]" />
           ) : (
             <span
-              className="text-base font-light uppercase tracking-[0.3em] lg:text-lg"
+              className="text-sm font-light uppercase tracking-[0.24em] sm:text-base"
               style={{ color: 'var(--theme-text-primary)' }}
             >
               {shop.shopName}
@@ -82,12 +82,12 @@ export default function HeaderMinimalFloating({
         </Link>
 
         {/* Desktop nav — plain text links with active underline */}
-        <nav className="hidden items-center gap-7 lg:flex" aria-label={t('navStoreNav')}>
+        <nav className="hidden items-center gap-5 lg:flex xl:gap-6" aria-label={t('navStoreNav')}>
           {navLinks.map(({ to, label }) => (
             <Link
               key={to}
               to={to}
-              className="relative pb-1 text-xs font-medium uppercase tracking-[0.18em] no-underline transition-colors"
+              className="relative pb-1 text-[11px] font-medium uppercase tracking-[0.12em] no-underline transition-colors"
               style={isNavActive(to) ? { color: 'var(--theme-text-primary)' } : { color: 'var(--theme-text-muted)' }}
             >
               {label}
@@ -102,7 +102,7 @@ export default function HeaderMinimalFloating({
         </nav>
 
         {/* Right actions */}
-        <div className="flex shrink-0 items-center gap-2.5 lg:gap-3">
+        <div className="flex shrink-0 items-center gap-1.5 sm:gap-2 lg:gap-2.5">
           <ShopLanguageToggle />
           <ThemeToggle className="h-8 w-8 lg:h-9 lg:w-9" />
 
@@ -110,7 +110,7 @@ export default function HeaderMinimalFloating({
           <button
             type="button"
             onClick={onOpenCheckout}
-            className="flex items-center gap-1.5 text-xs font-medium uppercase tracking-[0.15em] transition-opacity hover:opacity-60"
+            className="flex items-center gap-1 text-[11px] font-medium uppercase tracking-[0.1em] transition-opacity hover:opacity-60"
             style={{ color: 'var(--theme-text-primary)' }}
           >
             <ShoppingBag className="h-[1.05rem] w-[1.05rem]" strokeWidth={1.5} />
@@ -150,13 +150,13 @@ export default function HeaderMinimalFloating({
         style={{ borderColor: 'var(--theme-border)' }}
         aria-hidden={!mobileMenuOpen}
       >
-        <nav className={`${containerClass} flex flex-col py-4`} aria-label={t('navStoreNav')}>
+        <nav className={`${containerClass} flex flex-col py-2.5`} aria-label={t('navStoreNav')}>
           {navLinks.map(({ to, label }) => (
             <Link
               key={to}
               to={to}
               onClick={onCloseMobileMenu}
-              className="border-b py-3.5 text-sm font-light uppercase tracking-[0.18em] no-underline"
+              className="border-b py-2.5 text-xs font-light uppercase tracking-[0.12em] no-underline"
               style={{
                 borderColor: 'var(--theme-border)',
                 color: isNavActive(to) ? 'var(--theme-text-primary)' : 'var(--theme-text-muted)',
@@ -168,7 +168,7 @@ export default function HeaderMinimalFloating({
           <button
             type="button"
             onClick={() => { onOpenCheckout(); onCloseMobileMenu(); }}
-            className="mt-4 flex items-center gap-3 text-sm font-medium uppercase tracking-[0.15em]"
+            className="mt-3 flex items-center gap-2.5 text-xs font-medium uppercase tracking-[0.1em]"
             style={{ color: 'var(--theme-text-primary)' }}
           >
             <ShoppingBag className="h-4 w-4" strokeWidth={1.5} />

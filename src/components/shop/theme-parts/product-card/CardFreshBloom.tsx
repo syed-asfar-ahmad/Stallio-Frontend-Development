@@ -1,3 +1,4 @@
+import ShopImage from '../../../ShopImage';
 import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Check, Plus, ShoppingBag } from 'lucide-react';
@@ -54,20 +55,20 @@ export default function CardFreshBloom({ product: p, shopUsername, currency, lin
             style={{ background: shapeFor(p.id), transformOrigin: 'bottom' }}
           />
           {p.image ? (
-            <img
+            <ShopImage
               src={getProductImageDisplayUrl(p.image)}
               alt=""
               loading="lazy"
-              className={`absolute inset-0 h-full w-full object-contain p-[13%] drop-shadow-[0_14px_14px_rgb(30_22_17/0.14)] transition-transform duration-500 ease-out group-hover:-translate-y-1.5 group-hover:scale-[1.04] motion-reduce:transition-none ${soldOut ? 'opacity-40 grayscale' : ''}`}
+              className={`absolute inset-0 h-full w-full object-contain p-[8%] drop-shadow-[0_10px_10px_rgb(30_22_17/0.12)] transition-transform duration-500 ease-out group-hover:-translate-y-1 group-hover:scale-[1.04] motion-reduce:transition-none ${soldOut ? 'opacity-40 grayscale' : ''}`}
             />
           ) : (
             <span className="absolute inset-0 flex items-center justify-center" style={{ color: 'var(--theme-text-muted)' }}>
-              <ShoppingBag className="h-10 w-10 opacity-30" strokeWidth={1} />
+              <ShoppingBag className="h-8 w-8 opacity-30" strokeWidth={1} />
             </span>
           )}
         </Link>
 
-        <div className="pointer-events-none absolute start-3 top-3 flex gap-1.5">
+        <div className="pointer-events-none absolute start-2.5 top-2.5 flex gap-1">
           {fresh && <span className={tag}>{t('newBadge')}</span>}
           {pct ? <span className={tag}>-{pct}%</span> : null}
           {soldOut && <span className={tag}>{t('badgeSoldOut')}</span>}
@@ -79,24 +80,24 @@ export default function CardFreshBloom({ product: p, shopUsername, currency, lin
           disabled={soldOut}
           aria-label={t('addToCart')}
           title={t('addToCart')}
-          className="absolute bottom-3 end-3 flex h-9 w-9 items-center justify-center rounded-lg shadow-md transition-all hover:brightness-95 disabled:cursor-not-allowed disabled:opacity-40 lg:translate-y-1 lg:opacity-0 lg:focus-visible:translate-y-0 lg:focus-visible:opacity-100 lg:group-hover:translate-y-0 lg:group-hover:opacity-100"
+          className="absolute bottom-2.5 end-2.5 flex h-8 w-8 items-center justify-center rounded-lg shadow-md transition-all hover:brightness-95 disabled:cursor-not-allowed disabled:opacity-40 lg:translate-y-1 lg:opacity-0 lg:focus-visible:translate-y-0 lg:focus-visible:opacity-100 lg:group-hover:translate-y-0 lg:group-hover:opacity-100"
           style={{ background: FRESH_LIME, color: FRESH_INK }}
         >
-          {added ? <Check className="h-4 w-4" strokeWidth={3} aria-hidden /> : <Plus className="h-4 w-4" strokeWidth={2.5} aria-hidden />}
+          {added ? <Check className="h-3.5 w-3.5" strokeWidth={3} aria-hidden /> : <Plus className="h-3.5 w-3.5" strokeWidth={2.5} aria-hidden />}
         </button>
       </div>
 
-      <Link to={detailTo} state={linkState} className="mt-3.5 flex flex-col items-center px-1 text-center no-underline">
+      <Link to={detailTo} state={linkState} className="mt-2.5 flex flex-col items-center px-1 text-center no-underline">
         <h3
-          className="line-clamp-1 text-[13px] font-medium leading-snug sm:text-sm"
+          className="line-clamp-1 text-xs font-medium leading-snug sm:text-xs"
           style={{ color: 'var(--theme-text-primary)', fontFamily: 'var(--theme-font-body)', letterSpacing: 0 }}
         >
           {name}
         </h3>
-        <p className="mt-1 flex items-baseline gap-2">
-          <span className="text-sm font-bold" style={{ color: 'var(--theme-text-primary)' }}>{formatPrice(sale, currency)}</span>
+        <p className="mt-0.5 flex items-baseline gap-1.5">
+          <span className="text-xs sm:text-sm font-bold" style={{ color: 'var(--theme-text-primary)' }}>{formatPrice(sale, currency)}</span>
           {compare ? (
-            <span className="text-xs line-through" style={{ color: 'var(--theme-text-muted)' }}>{formatPrice(compare, currency)}</span>
+            <span className="text-[10px] line-through sm:text-[11px]" style={{ color: 'var(--theme-text-muted)' }}>{formatPrice(compare, currency)}</span>
           ) : null}
         </p>
       </Link>

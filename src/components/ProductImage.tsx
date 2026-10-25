@@ -1,10 +1,11 @@
 import type { ReactNode } from 'react';
 import {
   PRODUCT_CARD_ASPECT_CLASS,
-  PRODUCT_IMAGE_CLASS,
+  PRODUCT_IMAGE_COVER_CLASS,
   PRODUCT_IMAGE_FRAME_CLASS,
 } from '../lib/imageCropViewports';
 import { getProductImageDisplayUrl } from '../lib/productImageUrl';
+import ShopImage from './ShopImage';
 
 type Props = {
   src: string;
@@ -27,11 +28,11 @@ export default function ProductImage({
 }: Props) {
   return (
     <div className={`${aspectClass} ${PRODUCT_IMAGE_FRAME_CLASS} ${className}`.trim()}>
-      <img
+      <ShopImage
         src={getProductImageDisplayUrl(src)}
         alt={alt}
         loading={loading}
-        className={`${PRODUCT_IMAGE_CLASS.replace('object-contain', 'object-cover')} ${imageClassName}`.trim()}
+        className={`${PRODUCT_IMAGE_COVER_CLASS} ${imageClassName}`.trim()}
       />
       {children}
     </div>

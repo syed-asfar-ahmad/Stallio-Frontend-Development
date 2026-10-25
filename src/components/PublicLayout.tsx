@@ -17,6 +17,7 @@ import {
   Scale,
   RotateCcw,
   Briefcase,
+  Gift,
 } from 'lucide-react';
 import { getSocialBrandColor, SocialIcon } from './SocialIcons';
 import ContactLtrText from './ContactLtrText';
@@ -135,7 +136,8 @@ export default function PublicLayout({ children, hideFooter }: { children: React
         { to: '/how-it-works', labelKey: 'layout.footer.howItWorks' as const, icon: ListOrdered },
         { to: '/contact', labelKey: 'layout.nav.contact' as const, icon: Mail },
         { to: '/careers', labelKey: 'layout.nav.careers' as const, icon: Briefcase },
-      ].map((item) => ({ ...item, label: t(item.labelKey) })),
+        { to: '/affiliate/signup', label: t('layout.footer.affiliate', 'Affiliate Program'), icon: Gift },
+      ].map((item) => ({ ...item, label: ('label' in item ? item.label : t(item.labelKey)) ?? '' })),
     [t],
   );
 

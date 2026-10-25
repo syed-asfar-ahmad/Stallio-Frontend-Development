@@ -67,7 +67,7 @@ export default function HeaderClassicBar({
         </>
       ) : null}
 
-      <div className={`${containerClass} flex min-h-[3.25rem] items-center justify-between gap-1.5 py-2 lg:min-h-[4rem] lg:gap-3 lg:py-2.5`}>
+      <div className={`${containerClass} flex min-h-[3rem] items-center justify-between gap-1.5 py-1.5 lg:min-h-[3.5rem] lg:gap-3 lg:py-2`}>
         <Link to={`/${username}`} className="group flex shrink-0 items-center no-underline" aria-label={shop.shopName}>
           {shop.logo ? (
             <img src={shop.logo} alt="" className="h-10 w-auto max-w-[9rem] shrink-0 object-contain lg:h-12 lg:max-w-[12rem]" />

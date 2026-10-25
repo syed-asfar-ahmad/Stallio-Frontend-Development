@@ -1,3 +1,4 @@
+import ShopImage from '../../components/ShopImage';
 import { useShop } from '../../context/ShopContext';
 import { useStorefrontTheme } from '../../themes';
 import { useShopLanguage } from '../../context/ShopLanguageContext';
@@ -69,7 +70,7 @@ export default function ShopAboutPage() {
         {heroImage ? (
           <section className={`${containerClass} -mt-4 lg:-mt-8`}>
             <div className="mx-auto max-w-5xl overflow-hidden rounded-[var(--theme-radius-card)] shadow-[var(--theme-shadow-card)]">
-              <img src={heroImage} alt="" loading="eager" className="aspect-[16/9] w-full object-cover" />
+              <ShopImage src={heroImage} alt="" loading="eager" className="aspect-[16/9] w-full object-cover" />
             </div>
           </section>
         ) : null}
@@ -92,7 +93,7 @@ export default function ShopAboutPage() {
             <div className={`grid gap-3 lg:gap-5 ${gallery.length === 1 ? 'grid-cols-1' : gallery.length === 2 ? 'grid-cols-2' : 'grid-cols-2 lg:grid-cols-3'}`}>
               {gallery.map((img, i) => (
                 <div key={`${img}-${i}`} className={`overflow-hidden rounded-[var(--theme-radius-card)] ${i === 1 ? 'lg:mt-10' : ''}`} style={{ background: 'var(--theme-surface-secondary)' }}>
-                  <img src={img} alt="" loading="lazy" className={`w-full object-cover ${gallery.length === 1 ? 'aspect-[16/9]' : 'aspect-[4/5]'}`} />
+                  <ShopImage src={img} alt="" loading="lazy" className={`w-full object-cover ${gallery.length === 1 ? 'aspect-[16/9]' : 'aspect-[4/5]'}`} />
                 </div>
               ))}
             </div>
@@ -146,7 +147,7 @@ export default function ShopAboutPage() {
               </div>
               {heroImage ? (
                 <div className="overflow-hidden rounded-2xl border" style={{ borderColor: MART_HAIR, boxShadow: '0 0 0 8px rgb(255 255 255 / 0.03)' }}>
-                  <img src={heroImage} alt="" loading="eager" className="aspect-[4/3] w-full object-cover" />
+                  <ShopImage src={heroImage} alt="" loading="eager" className="aspect-[4/3] w-full object-cover" />
                 </div>
               ) : null}
             </div>
@@ -188,7 +189,7 @@ export default function ShopAboutPage() {
             <div className={`grid gap-3 lg:gap-5 ${gallery.length === 1 ? 'grid-cols-1' : 'grid-cols-2 lg:grid-cols-4'}`}>
               {gallery.map((img, i) => (
                 <div key={`${img}-${i}`} className="overflow-hidden rounded-[var(--theme-radius-card)] border" style={{ borderColor: 'var(--theme-border)', background: 'var(--theme-surface-secondary)' }}>
-                  <img src={img} alt="" loading="lazy" className={`w-full object-cover ${gallery.length === 1 ? 'aspect-[16/9]' : 'aspect-square'}`} />
+                  <ShopImage src={img} alt="" loading="lazy" className={`w-full object-cover ${gallery.length === 1 ? 'aspect-[16/9]' : 'aspect-square'}`} />
                 </div>
               ))}
             </div>
@@ -223,7 +224,7 @@ export default function ShopAboutPage() {
             style={{ background: 'color-mix(in srgb, var(--theme-primary) 42%, #1a0f07)' }}
           >
             {heroImage ? (
-              <img src={heroImage} alt="" className="absolute inset-0 h-full w-full object-cover" loading="eager" />
+              <ShopImage src={heroImage} alt="" className="absolute inset-0 h-full w-full object-cover" loading="eager" />
             ) : null}
             <div
               aria-hidden
@@ -288,7 +289,7 @@ export default function ShopAboutPage() {
                   className={`overflow-hidden rounded-[var(--theme-radius-card)] ${i % 2 === 1 ? 'lg:mt-12' : ''}`}
                   style={{ background: 'var(--theme-surface-secondary)' }}
                 >
-                  <img
+                  <ShopImage
                     src={img}
                     alt=""
                     loading="lazy"
@@ -374,7 +375,7 @@ export default function ShopAboutPage() {
 
           {heroImage && (
             <div className="mt-10 lg:mt-14 relative overflow-hidden rounded-[var(--theme-radius-card)] border border-theme-border shadow-[var(--theme-shadow-card)] group">
-              <img
+              <ShopImage
                 src={heroImage}
                 alt={shop.shopName}
                 className="w-full h-auto max-h-[560px] object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
@@ -459,7 +460,7 @@ export default function ShopAboutPage() {
 
           {heroImage && (
             <div className="mt-8 lg:mt-12 relative overflow-hidden rounded-theme-card border border-theme-border shadow-theme-card group">
-              <img
+              <ShopImage
                 src={heroImage}
                 alt={shop.shopName}
                 className="w-full h-auto max-h-[520px] object-cover object-center transition-theme group-hover:scale-105 duration-700"
@@ -503,7 +504,7 @@ export default function ShopAboutPage() {
               <div className="relative overflow-hidden rounded-theme-card border border-theme-border bg-theme-surface shadow-theme-card">
                 {heroImage ? (
                   <div className="aspect-[4/5] w-full overflow-hidden">
-                    <img
+                    <ShopImage
                       src={heroImage}
                       alt={shop.shopName}
                       className="h-full w-full object-cover object-center"
@@ -579,7 +580,7 @@ export default function ShopAboutPage() {
         >
           {heroImage ? (
             <div className="relative w-full aspect-[16/10] lg:aspect-[12/5]">
-              <img src={heroImage} alt="" className="absolute inset-0 h-full w-full object-cover object-center" />
+              <ShopImage src={heroImage} alt="" className="absolute inset-0 h-full w-full object-cover object-center" />
               <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/50 to-transparent" />
               <div className="absolute inset-0 flex max-w-2xl flex-col justify-end p-5 sm:p-8 lg:p-12">
                 <p

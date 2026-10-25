@@ -1,3 +1,4 @@
+import ShopImage from '../../ShopImage';
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ShoppingBag } from 'lucide-react';
@@ -104,7 +105,7 @@ export default function MartHome({
           case 'featured':
             if (dealsPool.length === 0) return null;
             return (
-              <section key="deals" className="mt-10 py-10 lg:mt-14 lg:py-14" style={{ background: MART_DEEP }}>
+              <section key="deals" className="mt-7 py-7 lg:mt-10 lg:py-10" style={{ background: MART_DEEP }}>
                 <div className={containerClass}>
                   <MartSectionHeader
                     tone="dark"
@@ -112,7 +113,7 @@ export default function MartHome({
                     action={{ to: `/${username}/products`, label: t('viewAll') }}
                   />
                   {dealCategories.length > 1 && (
-                    <div className="-mt-2 mb-6 flex gap-2 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" role="tablist" aria-label={t('weeklyBestDeals')}>
+                    <div className="-mt-3 mb-5 flex gap-2 overflow-x-auto pb-1.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" role="tablist" aria-label={t('weeklyBestDeals')}>
                       {[{ slug: 'all', label: t('allFilter') }, ...dealCategories.map((c) => ({ slug: c.slug, label: categoryName(c) }))].map((chip) => {
                         const on = dealFilter === chip.slug;
                         return (
@@ -122,7 +123,7 @@ export default function MartHome({
                             role="tab"
                             aria-selected={on}
                             onClick={() => setDealFilter(chip.slug)}
-                            className="shrink-0 rounded-full border px-4 py-2 text-xs font-semibold transition-colors"
+                            className="shrink-0 rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-colors"
                             style={
                               on
                                 ? { background: MART_ORANGE, borderColor: MART_ORANGE, color: MART_ORANGE_INK }
@@ -142,7 +143,7 @@ export default function MartHome({
                   </div>
 
                   {promoCats.length > 0 && (
-                    <div className={`mt-6 grid gap-4 ${promoCats.length === 1 ? '' : promoCats.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3'}`}>
+                    <div className={`mt-5 grid gap-3 sm:gap-4 ${promoCats.length === 1 ? '' : promoCats.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3'}`}>
                       {promoCats.map((c, i) => (
                         <MartPromoBanner
                           key={c.slug}
@@ -163,18 +164,18 @@ export default function MartHome({
           case 'categories':
             if (!showCategories) return null;
             return (
-              <section key="cats" className={`${containerClass} mt-14 lg:mt-20`} aria-label={t('dealsByCategory')}>
+              <section key="cats" className={`${containerClass} mt-9 lg:mt-12`} aria-label={t('dealsByCategory')}>
                 <MartSectionHeader center title={t('dealsByCategory')} body={t('dealsByCategoryBody')} />
-                <div className="-mx-1 flex gap-5 overflow-x-auto px-1 pb-3 [scrollbar-width:none] sm:gap-8 lg:flex-wrap lg:justify-center [&::-webkit-scrollbar]:hidden">
+                <div className="-mx-1 flex gap-4 overflow-x-auto px-1 pb-2 [scrollbar-width:none] sm:gap-6 lg:flex-wrap lg:justify-center [&::-webkit-scrollbar]:hidden">
                   {categories.slice(0, 8).map((c) => (
-                    <Link key={c.slug} to={`/${username}/category/${c.slug}`} className="group flex w-24 shrink-0 flex-col items-center gap-3 no-underline sm:w-28">
+                    <Link key={c.slug} to={`/${username}/category/${c.slug}`} className="group flex w-20 shrink-0 flex-col items-center gap-2 no-underline sm:w-24">
                       <span
-                        className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-full border-2 transition-all group-hover:-translate-y-1 group-hover:border-[var(--theme-secondary)] sm:h-28 sm:w-28"
+                        className="flex h-18 w-18 items-center justify-center overflow-hidden rounded-full border-2 transition-all group-hover:-translate-y-0.5 group-hover:border-[var(--theme-secondary)] sm:h-22 sm:w-22"
                         style={{ borderColor: 'var(--theme-border)', background: 'var(--theme-primary-light)', color: 'var(--theme-primary)' }}
                       >
-                        {c.image ? <img src={c.image} alt="" loading="lazy" className="h-full w-full object-cover" /> : <ShoppingBag className="h-7 w-7" aria-hidden />}
+                        {c.image ? <ShopImage src={c.image} alt="" loading="lazy" className="h-full w-full object-cover" /> : <ShoppingBag className="h-6 w-6" aria-hidden />}
                       </span>
-                      <span className="text-center text-xs font-semibold leading-tight sm:text-[13px]" style={{ color: 'var(--theme-text-primary)' }}>
+                      <span className="text-center text-[11px] font-semibold leading-tight sm:text-xs" style={{ color: 'var(--theme-text-primary)' }}>
                         {categoryName(c)}
                       </span>
                     </Link>
@@ -185,10 +186,10 @@ export default function MartHome({
 
           case 'products':
             return (
-              <section key="popular" className={`${containerClass} mt-14 lg:mt-20`}>
+              <section key="popular" className={`${containerClass} mt-9 lg:mt-12`}>
                 <MartSectionHeader center title={t('popularProducts')} body={t('popularProductsBody')} />
                 {popular.length === 0 ? (
-                  <div className="flex flex-col items-center gap-3 py-16 text-center">
+                  <div className="flex flex-col items-center gap-3 py-14 text-center">
                     <ShoppingBag className="h-8 w-8" style={{ color: 'var(--theme-text-muted)' }} strokeWidth={1} />
                     <p className="text-sm" style={{ color: 'var(--theme-text-secondary)' }}>{t('homeNoProducts')}</p>
                   </div>
@@ -199,11 +200,10 @@ export default function MartHome({
                         <ProductCard key={p.id} product={p} shopUsername={username} currency={shop.currency} linkState={{ from: 'home' }} />
                       ))}
                     </div>
-                    <div className="mt-9 flex justify-center">
+                    <div className="mt-6 flex justify-center">
                       <Link
                         to={`/${username}/products`}
-                        className="inline-flex h-10 items-center rounded-full border px-8 text-xs font-semibold no-underline transition-colors hover:bg-[var(--theme-primary)] hover:text-[var(--theme-primary-contrast)]"
-                        style={{ borderColor: 'var(--theme-primary)', color: 'var(--theme-primary)' }}
+                        className="inline-flex h-9 items-center rounded-full border border-[var(--theme-primary)] px-6 text-xs font-semibold text-[var(--theme-primary)] no-underline transition-colors hover:bg-[var(--theme-primary)] hover:text-[var(--theme-primary-contrast)]"
                       >
                         {t('loadMore')}
                       </Link>
@@ -218,24 +218,32 @@ export default function MartHome({
             return (
               <div key="showcase">
                 {bannerCat && (
-                  <section className={`${containerClass} mt-14 lg:mt-20`}>
+                  <section className={`${containerClass} mt-9 lg:mt-12`}>
                     <Link
                       to={`/${username}/category/${bannerCat.slug}`}
-                      className="group relative isolate flex min-h-[12rem] items-center overflow-hidden rounded-xl no-underline sm:min-h-[14rem]"
+                      className="group relative isolate flex min-h-[15rem] items-center overflow-hidden rounded-xl no-underline sm:min-h-[18rem] lg:min-h-[21rem]"
                       style={{ background: 'linear-gradient(100deg, color-mix(in srgb, var(--theme-primary) 18%, var(--theme-surface)) 0%, color-mix(in srgb, var(--theme-primary) 6%, var(--theme-surface)) 100%)' }}
                     >
-                      <img
+                      <ShopImage
                         src={bannerCat.image as string}
                         alt=""
                         loading="lazy"
-                        className="absolute inset-y-0 start-0 h-full w-1/2 object-cover transition-transform duration-700 group-hover:scale-[1.03] motion-reduce:transition-none"
-                        style={{ WebkitMaskImage: `linear-gradient(${lang === 'ar' ? 90 : 270}deg, transparent 0%, #000 45%)`, maskImage: `linear-gradient(${lang === 'ar' ? 90 : 270}deg, transparent 0%, #000 45%)` }}
+                        className="absolute inset-y-0 start-0 h-full w-[54%] sm:w-[56%] lg:w-[58%] object-cover object-center transition-transform duration-700 group-hover:scale-[1.03] motion-reduce:transition-none"
+                        style={{ WebkitMaskImage: `linear-gradient(${lang === 'ar' ? 90 : 270}deg, transparent 0%, #000 36%)`, maskImage: `linear-gradient(${lang === 'ar' ? 90 : 270}deg, transparent 0%, #000 36%)` }}
                       />
-                      <div className="relative z-10 ms-auto flex w-1/2 flex-col items-center gap-3 p-6 text-center">
-                        <p className="text-2xl font-extrabold uppercase leading-tight sm:text-4xl" style={{ color: 'var(--theme-text-primary)', fontFamily: 'var(--theme-font-heading)', letterSpacing: '-0.02em' }}>
+                      <div className="relative z-10 ms-auto flex w-1/2 sm:w-[46%] lg:w-[42%] flex-col items-center justify-center gap-3 p-5 sm:p-7 lg:p-9 text-center">
+                        {countOf(bannerCat.slug) > 0 && (
+                          <span
+                            className="inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] sm:text-xs font-semibold uppercase tracking-wider"
+                            style={{ background: 'color-mix(in srgb, var(--theme-primary) 14%, var(--theme-surface))', color: 'var(--theme-primary)' }}
+                          >
+                            {countOf(bannerCat.slug)} {countOf(bannerCat.slug) === 1 ? t('categoryProduct') : t('categoryProducts')}
+                          </span>
+                        )}
+                        <p className="text-xl font-extrabold uppercase leading-tight sm:text-3xl lg:text-4xl" style={{ color: 'var(--theme-text-primary)', fontFamily: 'var(--theme-font-heading)', letterSpacing: '-0.02em' }}>
                           {categoryName(bannerCat)}
                         </p>
-                        <span className="inline-flex h-9 items-center rounded-md border bg-white px-5 text-[11px] font-semibold text-[#101c1a]" style={{ borderColor: 'var(--theme-border)' }}>
+                        <span className="inline-flex h-8 sm:h-9 items-center rounded-md border bg-white px-4 sm:px-5 text-[11px] sm:text-xs font-semibold text-[#101c1a] shadow-xs transition-transform duration-200 group-hover:scale-105" style={{ borderColor: 'var(--theme-border)' }}>
                           {t('shopNow')}
                         </span>
                       </div>
@@ -243,8 +251,8 @@ export default function MartHome({
                   </section>
                 )}
 
-                <section className={`${containerClass} mt-12 lg:mt-16`}>
-                  <div className="mb-7 flex justify-center gap-6 sm:gap-9" role="tablist" aria-label={t('popularProducts')}>
+                <section className={`${containerClass} mt-8 lg:mt-11`}>
+                  <div className="mb-5 flex justify-center gap-5 sm:gap-7" role="tablist" aria-label={t('popularProducts')}>
                     {tabs.map((tb) => {
                       const on = tab === tb.id;
                       return (
@@ -254,7 +262,7 @@ export default function MartHome({
                           role="tab"
                           aria-selected={on}
                           onClick={() => setTab(tb.id)}
-                          className="relative pb-1.5 text-sm font-semibold transition-colors"
+                          className="relative pb-1 text-xs sm:text-sm font-semibold transition-colors"
                           style={{ color: on ? 'var(--theme-primary)' : 'var(--theme-text-primary)' }}
                         >
                           {tb.label}
@@ -266,11 +274,11 @@ export default function MartHome({
                   <div className="grid gap-3 sm:gap-4 lg:grid-cols-5">
                     <Link
                       to={tileCat ? `/${username}/category/${tileCat.slug}` : `/${username}/products`}
-                      className="group relative isolate flex min-h-[16rem] flex-col justify-end overflow-hidden rounded-xl p-5 no-underline lg:row-span-2 lg:min-h-0"
+                      className="group relative isolate flex min-h-[13rem] flex-col justify-end overflow-hidden rounded-xl p-4 sm:p-5 no-underline lg:row-span-2 lg:min-h-0"
                       style={{ background: MART_DEEP }}
                     >
                       {tileImage ? (
-                        <img
+                        <ShopImage
                           src={tileCat?.image ? tileImage : getProductImageDisplayUrl(tileImage)}
                           alt=""
                           loading="lazy"
@@ -279,10 +287,10 @@ export default function MartHome({
                       ) : null}
                       <div aria-hidden className="absolute inset-0" style={{ background: 'linear-gradient(0deg, rgb(8 46 41 / 0.92) 0%, rgb(8 46 41 / 0.1) 70%)' }} />
                       <div className="relative">
-                        <p className="text-lg font-bold leading-tight" style={{ color: MART_TEXT, fontFamily: 'var(--theme-font-heading)' }}>
+                        <p className="text-base font-bold leading-tight sm:text-lg" style={{ color: MART_TEXT, fontFamily: 'var(--theme-font-heading)' }}>
                           {tileCat ? categoryName(tileCat) : shop.shopName}
                         </p>
-                        <span className="mt-2 inline-block text-xs font-semibold underline underline-offset-4" style={{ color: MART_ORANGE }}>{t('shopNow')}</span>
+                        <span className="mt-1.5 inline-block text-[11px] sm:text-xs font-semibold underline underline-offset-4" style={{ color: MART_ORANGE }}>{t('shopNow')}</span>
                       </div>
                     </Link>
                     <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4 lg:col-span-4">
@@ -298,14 +306,14 @@ export default function MartHome({
           case 'trust':
             if (trust.length === 0) return null;
             return (
-              <section key="trust" className={`${containerClass} mt-14 lg:mt-20`} aria-label={t('trustTitle')}>
-                <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              <section key="trust" className={`${containerClass} mt-9 lg:mt-12`} aria-label={t('trustTitle')}>
+                <ul className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
                   {trust.map((b, i) => (
-                    <li key={`${b.label}-${i}`} className="flex items-center gap-3.5 rounded-xl px-5 py-4" style={{ background: 'var(--theme-primary-light)' }}>
-                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full" style={{ background: 'var(--theme-surface)', color: 'var(--theme-primary)' }}>
-                        <TrustBadgeTypeIcon type={resolveTrustBadgeType(b.icon)} className="h-[18px] w-[18px]" />
+                    <li key={`${b.label}-${i}`} className="flex items-center gap-3 rounded-xl px-4 py-3" style={{ background: 'var(--theme-primary-light)' }}>
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full" style={{ background: 'var(--theme-surface)', color: 'var(--theme-primary)' }}>
+                        <TrustBadgeTypeIcon type={resolveTrustBadgeType(b.icon)} className="h-4 w-4" />
                       </span>
-                      <span className="text-sm font-semibold" style={{ color: 'var(--theme-text-primary)' }}>{getLocalizedTrustLabel(b, lang)}</span>
+                      <span className="text-xs sm:text-sm font-semibold" style={{ color: 'var(--theme-text-primary)' }}>{getLocalizedTrustLabel(b, lang)}</span>
                     </li>
                   ))}
                 </ul>
@@ -315,7 +323,7 @@ export default function MartHome({
           case 'reviews':
             if (reviews.length === 0) return null;
             return (
-              <div key={`reviews-${idx}`} className="mt-14 lg:mt-20">
+              <div key={`reviews-${idx}`} className="mt-9 lg:mt-12">
                 <ShopReviewsSection reviews={reviews} containerClass={containerClass} />
               </div>
             );

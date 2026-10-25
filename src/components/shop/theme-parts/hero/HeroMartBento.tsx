@@ -1,3 +1,4 @@
+import ShopImage from '../../../ShopImage';
 import { Link } from 'react-router-dom';
 import { useShopLanguage } from '../../../../context/ShopLanguageContext';
 import { getLocalizedHomeHeroTitle, getLocalizedHomeIntro } from '../../../../lib/shopContentLanguages';
@@ -34,7 +35,7 @@ function BentoPanel({
   return (
     <article className={`relative isolate overflow-hidden rounded-xl ${className}`} style={{ background: panel.tint, color: 'var(--theme-text-primary)' }}>
       {panel.image ? (
-        <img
+        <ShopImage
           src={panel.image}
           alt=""
           loading="eager"
@@ -46,22 +47,22 @@ function BentoPanel({
           style={{ WebkitMaskImage: tall ? bottomMask : sideMask, maskImage: tall ? bottomMask : sideMask }}
         />
       ) : null}
-      <div className={`relative z-10 flex h-full flex-col items-start gap-3 p-6 sm:p-8 ${tall ? '' : 'justify-center sm:max-w-[58%]'}`}>
+      <div className={`relative z-10 flex h-full flex-col items-start gap-2.5 p-5 sm:p-6 ${tall ? '' : 'justify-center sm:max-w-[58%]'}`}>
         {panel.eyebrow ? <MartEyebrow>{panel.eyebrow}</MartEyebrow> : null}
         <h2
-          className={`font-bold leading-[1.1] ${tall ? 'text-2xl sm:text-3xl' : 'text-[1.75rem] sm:text-4xl'}`}
+          className={`font-bold leading-[1.1] ${tall ? 'text-xl sm:text-2xl' : 'text-[1.35rem] sm:text-2xl lg:text-3xl'}`}
           style={{ fontFamily: 'var(--theme-font-heading)', letterSpacing: '-0.03em', textWrap: 'balance' as never }}
         >
           {panel.title}
         </h2>
         {panel.body ? (
-          <p className="line-clamp-3 max-w-xs text-[13px] leading-relaxed sm:text-sm" style={{ color: 'var(--theme-text-secondary)' }}>
+          <p className="line-clamp-2 max-w-xs text-xs leading-relaxed sm:text-xs" style={{ color: 'var(--theme-text-secondary)' }}>
             {panel.body}
           </p>
         ) : null}
         <Link
           to={panel.to}
-          className="mt-1 inline-flex h-10 items-center rounded-full px-6 text-xs font-semibold no-underline transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--theme-primary)]"
+          className="mt-1 inline-flex h-8 sm:h-9 items-center rounded-full px-4 sm:px-5 text-xs font-semibold no-underline transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--theme-primary)]"
           style={{ background: 'var(--theme-primary)', color: 'var(--theme-primary-contrast)' }}
         >
           {panel.cta}
@@ -110,18 +111,18 @@ export default function HeroMartBento({ shop, username, containerClass }: ThemeH
   const [tallPanel, smallA, smallB] = extras;
 
   return (
-    <section className={`${containerClass} pt-4 lg:pt-6`}>
-      <div className={`grid gap-4 ${tallPanel ? 'lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]' : ''}`}>
-        <div className="flex flex-col gap-4">
-          <BentoPanel panel={main} variant="wide" className="min-h-[19rem] lg:min-h-[22.5rem]" />
+    <section className={`${containerClass} pt-3 lg:pt-5`}>
+      <div className={`grid gap-3 sm:gap-4 ${tallPanel ? 'lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]' : ''}`}>
+        <div className="flex flex-col gap-3 sm:gap-4">
+          <BentoPanel panel={main} variant="wide" className="min-h-[14rem] sm:min-h-[16rem] lg:min-h-[18rem]" />
           {smallA && (
-            <div className={`grid gap-4 ${smallB ? 'sm:grid-cols-2' : ''}`}>
-              <BentoPanel panel={smallA} variant="wide" className="min-h-[13rem] lg:min-h-[14rem]" />
-              {smallB && <BentoPanel panel={smallB} variant="wide" className="min-h-[13rem] lg:min-h-[14rem]" />}
+            <div className={`grid gap-3 sm:gap-4 ${smallB ? 'sm:grid-cols-2' : ''}`}>
+              <BentoPanel panel={smallA} variant="wide" className="min-h-[10rem] sm:min-h-[11rem] lg:min-h-[11.5rem]" />
+              {smallB && <BentoPanel panel={smallB} variant="wide" className="min-h-[10rem] sm:min-h-[11rem] lg:min-h-[11.5rem]" />}
             </div>
           )}
         </div>
-        {tallPanel && <BentoPanel panel={tallPanel} variant="tall" className="min-h-[24rem] lg:min-h-0" />}
+        {tallPanel && <BentoPanel panel={tallPanel} variant="tall" className="min-h-[18rem] sm:min-h-[20rem] lg:min-h-0" />}
       </div>
     </section>
   );

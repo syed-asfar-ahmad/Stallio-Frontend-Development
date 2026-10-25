@@ -1,3 +1,4 @@
+import ShopImage from '../../../ShopImage';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight, LayoutGrid } from 'lucide-react';
 import type { CSSProperties, ReactNode } from 'react';
@@ -164,7 +165,7 @@ export function MartCategoryTile({
       style={{ background: MART_DEEP, boxShadow: 'var(--theme-shadow-card)' }}
     >
       {category.image ? (
-        <img
+        <ShopImage
           src={category.image}
           alt=""
           loading="lazy"
@@ -227,15 +228,15 @@ export function MartPromoBanner({
   return (
     <Link
       to={to}
-      className={`group relative isolate flex min-h-[11.5rem] overflow-hidden rounded-xl no-underline ${className}`}
+      className={`group relative isolate flex min-h-[12.5rem] sm:min-h-[14rem] overflow-hidden rounded-xl no-underline ${className}`}
       style={{ background: tint, color: 'var(--theme-text-primary)' }}
     >
       {image ? (
-        <img
+        <ShopImage
           src={image}
           alt=""
           loading="lazy"
-          className="absolute inset-y-0 end-0 h-full w-[62%] object-cover transition-transform duration-700 group-hover:scale-[1.04] motion-reduce:transition-none"
+          className="absolute inset-y-0 end-0 h-full w-[62%] object-cover object-center transition-transform duration-700 group-hover:scale-[1.04] motion-reduce:transition-none"
           style={{ WebkitMaskImage: mask, maskImage: mask }}
         />
       ) : null}

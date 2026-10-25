@@ -1,3 +1,4 @@
+import ShopImage from '../../../ShopImage';
 import { Link } from 'react-router-dom';
 import { LayoutGrid } from 'lucide-react';
 import type { ReactNode } from 'react';
@@ -20,20 +21,20 @@ export function CocoaHeading({
   className?: string;
 }) {
   return (
-    <div className={`mx-auto mb-9 max-w-2xl text-center lg:mb-12 ${className}`}>
+    <div className={`mx-auto mb-6 max-w-xl text-center lg:mb-8 ${className}`}>
       <Tag
-        className="text-[2rem] font-bold leading-[1.08] sm:text-5xl"
+        className="text-[1.65rem] font-bold leading-[1.1] sm:text-3xl lg:text-4xl"
         style={{
           color: 'var(--theme-text-primary)',
           fontFamily: 'var(--theme-font-heading)',
-          letterSpacing: '-0.035em',
+          letterSpacing: '-0.03em',
           textWrap: 'balance' as never,
         }}
       >
         {title}
       </Tag>
       {body ? (
-        <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed" style={{ color: 'var(--theme-text-muted)' }}>
+        <p className="mx-auto mt-2 max-w-md text-xs sm:text-sm leading-relaxed" style={{ color: 'var(--theme-text-muted)' }}>
           {body}
         </p>
       ) : null}
@@ -61,7 +62,7 @@ export function CocoaOutlineLink({ to, children }: { to: string; children: React
 
 function ImageOrFallback({ src, className = '' }: { src?: string | null; className?: string }) {
   return src ? (
-    <img
+    <ShopImage
       src={src}
       alt=""
       loading="lazy"
@@ -93,14 +94,14 @@ export function CocoaPromoCards({ items }: { items: CocoaPromoItem[] }) {
   if (items.length === 0) return null;
   const cols = items.length === 1 ? 'md:grid-cols-1 md:max-w-md md:mx-auto' : items.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3';
   return (
-    <div className={`grid grid-cols-1 gap-4 lg:gap-5 ${cols}`}>
+    <div className={`grid grid-cols-1 gap-3.5 lg:gap-4 ${cols}`}>
       {items.map((it, i) => {
         const centered = items.length >= 3 && i === 2;
         return (
           <Link
             key={it.key}
             to={it.to}
-            className="group relative isolate block min-h-[26rem] overflow-hidden rounded-[var(--theme-radius-card)] no-underline md:min-h-[28rem] lg:min-h-[30rem]"
+            className="group relative isolate block min-h-[18rem] overflow-hidden rounded-[var(--theme-radius-card)] no-underline sm:min-h-[20rem] lg:min-h-[22rem]"
             style={{ background: 'var(--theme-surface-secondary)', boxShadow: 'var(--theme-shadow-card)' }}
           >
             <ImageOrFallback src={it.image} />
@@ -114,25 +115,25 @@ export function CocoaPromoCards({ items }: { items: CocoaPromoItem[] }) {
               }}
             />
             {centered ? (
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-6 text-center">
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-5 text-center">
                 <span
-                  className="text-[2rem] font-medium uppercase leading-none sm:text-4xl"
+                  className="text-2xl font-medium uppercase leading-none sm:text-3xl"
                   style={{ color: '#fff', fontFamily: 'var(--theme-font-heading)', letterSpacing: '0.01em', textShadow: '0 2px 18px rgb(0 0 0 / 0.35)' }}
                 >
                   {it.title}
                 </span>
-                <span className="rounded-lg bg-white px-5 py-2.5 text-xs font-semibold" style={{ color: COCOA_INK }}>
+                <span className="rounded-lg bg-white px-4 py-2 text-xs font-semibold" style={{ color: COCOA_INK }}>
                   {it.cta}
                 </span>
               </div>
             ) : (
-              <div className="absolute inset-x-0 bottom-0 p-6 lg:p-7">
-                <p className="max-w-[16rem] text-[1.35rem] font-semibold leading-snug text-white lg:text-2xl" style={{ letterSpacing: '-0.015em' }}>
+              <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 lg:p-6">
+                <p className="max-w-[14rem] text-lg font-semibold leading-snug text-white sm:text-xl" style={{ letterSpacing: '-0.015em' }}>
                   {it.title}
                 </p>
-                {it.caption ? <p className="mt-1.5 text-xs text-white/75">{it.caption}</p> : null}
+                {it.caption ? <p className="mt-1 text-[11px] text-white/75">{it.caption}</p> : null}
                 <span
-                  className="mt-5 inline-flex rounded-lg px-5 py-2.5 text-xs font-semibold transition-colors group-hover:bg-black"
+                  className="mt-3.5 inline-flex rounded-lg px-4 py-2 text-xs font-semibold transition-colors group-hover:bg-black"
                   style={{ background: '#2b1b10', color: COCOA_CREAM }}
                 >
                   {it.cta}
@@ -179,17 +180,17 @@ function MosaicTile({
         }}
       />
       <div
-        className={`absolute inset-x-0 flex flex-col items-start gap-2.5 p-5 lg:p-6 ${
+        className={`absolute inset-x-0 flex flex-col items-start gap-2 p-4 sm:p-5 ${
           labelPosition === 'top' ? 'top-0' : 'bottom-0'
         }`}
       >
         <span
-          className="text-3xl font-medium leading-none text-white lg:text-[2.1rem]"
+          className="text-xl font-medium leading-none text-white sm:text-2xl lg:text-[1.65rem]"
           style={{ fontFamily: 'var(--theme-font-heading)', letterSpacing: '-0.02em', textShadow: '0 2px 16px rgb(0 0 0 / 0.3)' }}
         >
           {name}
         </span>
-        <span className="rounded-lg bg-white px-4 py-2 text-[11px] font-semibold transition-colors group-hover:bg-[#f7ead4]" style={{ color: COCOA_INK }}>
+        <span className="rounded-lg bg-white px-3.5 py-1.5 text-[10px] sm:text-[11px] font-semibold transition-colors group-hover:bg-[#f7ead4]" style={{ color: COCOA_INK }}>
           {t('viewCollection')}
         </span>
       </div>
@@ -205,22 +206,22 @@ export function CocoaMosaic({ categories, username }: { categories: ShopCategory
   if (!b) {
     return (
       <div className="grid grid-cols-1">
-        <MosaicTile category={a} username={username} labelPosition="bottom" className="min-h-[20rem] sm:min-h-[26rem]" />
+        <MosaicTile category={a} username={username} labelPosition="bottom" className="min-h-[15rem] sm:min-h-[18rem]" />
       </div>
     );
   }
 
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-12 lg:gap-5">
+    <div className="grid grid-cols-1 gap-3 sm:grid-cols-12 lg:gap-4">
       <MosaicTile
         category={a}
         username={username}
         labelPosition="bottom"
-        className={`min-h-[22rem] sm:col-span-7 ${c ? 'sm:row-span-2 sm:min-h-[34rem]' : 'sm:min-h-[26rem]'}`}
+        className={`min-h-[16rem] sm:col-span-7 ${c ? 'sm:row-span-2 sm:min-h-[25rem]' : 'sm:min-h-[18rem]'}`}
       />
-      <MosaicTile category={b} username={username} labelPosition="top" className="min-h-[16rem] sm:col-span-5" />
-      {c ? <MosaicTile category={c} username={username} labelPosition="top" className="min-h-[16rem] sm:col-span-5" /> : null}
-      {d ? <MosaicTile category={d} username={username} labelPosition="bottom" className="min-h-[13rem] sm:col-span-12 sm:min-h-[17rem]" /> : null}
+      <MosaicTile category={b} username={username} labelPosition="top" className="min-h-[12rem] sm:col-span-5" />
+      {c ? <MosaicTile category={c} username={username} labelPosition="top" className="min-h-[12rem] sm:col-span-5" /> : null}
+      {d ? <MosaicTile category={d} username={username} labelPosition="bottom" className="min-h-[10rem] sm:col-span-12 sm:min-h-[13rem]" /> : null}
     </div>
   );
 }

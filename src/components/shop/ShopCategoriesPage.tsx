@@ -1,3 +1,4 @@
+import ShopImage from '../ShopImage';
 import { useEffect, useMemo, useState } from 'react';
 import { LayoutGrid } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -61,7 +62,7 @@ export default function ShopCategoriesPage({ shop, products, username, container
                     style={{ background: shapeFor(c.slug, i) }}
                   >
                     {c.image ? (
-                      <img src={c.image} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+                      <ShopImage src={c.image} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
                     ) : (
                       <span className="text-5xl font-medium" style={{ fontFamily: 'var(--theme-font-heading)', color: '#1e1611' }}>{categoryName(c).slice(0, 1).toUpperCase()}</span>
                     )}

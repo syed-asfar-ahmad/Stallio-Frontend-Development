@@ -4,7 +4,10 @@ import { SHOP_CONTENT_LANGUAGES, type ShopContentLang } from '../../../lib/shopC
 import { useAdminShopContentLanguages, useAdminShopMultilingualEnabled } from '../../../hooks/useAdminShopContentLanguages';
 import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
-import { Upload, X } from 'lucide-react';
+import { Crop, Upload } from 'lucide-react';
+import ImageFocusButton from '../../ImageFocusButton';
+import { HERO_FOCAL_PREVIEWS } from '../../FocalPointPicker';
+import ShopImage from '../../ShopImage';
 import type { AdminSellerShopFields } from '../../../types/admin';
 import { getStoredToken } from '../../../context/AuthContext';
 import RichTextEditor from '../../RichTextEditor';
@@ -14,6 +17,7 @@ import {
   DASHBOARD_INPUT,
 } from '../../../lib/dashboardFormClasses';
 import { ABOUT_HERO_ASPECT_CLASS, ABOUT_HERO_VIEWPORT } from '../../../lib/imageCropViewports';
+import { getProductImageDisplayUrl } from '../../../lib/productImageUrl';
 import DashboardImageRemoveButton from '../../DashboardImageRemoveButton';
 import { ADMIN_FIELD_LABEL, SHOP_SETTINGS_CARD_PAD, ShopSettingsStack } from './shopSettingsLayout';
 
@@ -52,8 +56,11 @@ export default function AdminShopAboutFields({ form, set }: Props) {
   const activeLang = contentLangMeta.find((l) => l.id === formLang) ?? contentLangMeta[0] ?? SHOP_CONTENT_LANGUAGES[0];
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
+  const [cropLoading, setCropLoading] = useState(false);
   const [cropOpen, setCropOpen] = useState(false);
   const [cropFile, setCropFile] = useState<File | null>(null);
+  const [canSkipCrop, setCanSkipCrop] = useState(false);
+  const hero = form.aboutImages[0] ?? null;
 
   if (!form.aboutEnabled) return null;
 
@@ -66,18 +73,42 @@ export default function AdminShopAboutFields({ form, set }: Props) {
       return;
     }
     setCropFile(file);
+    setCanSkipCrop(true);
     setCropOpen(true);
+  }
+
+  async function handleCropExisting() {
+    if (!hero) return;
+    setCropLoading(true);
+    try {
+      const res = await fetch(getProductImageDisplayUrl(hero));
+      if (!res.ok) throw new Error(t('dashboard.productForm.toastUploadFail'));
+      const blob = await res.blob();
+      const mime = blob.type || 'image/png';
+      const ext = mime.includes('jpeg') || mime.includes('jpg') ? 'jpg' : 'png';
+      setCropFile(new File([blob], `about-hero.${ext}`, { type: mime }));
+      setCanSkipCrop(false);
+      setCropOpen(true);
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : t('dashboard.productForm.toastUploadFail'));
+    } finally {
+      setCropLoading(false);
+    }
   }
 
   async function uploadAboutHeroBlob(blob: Blob) {
     const token = getStoredToken();
-    if (!token) return;
+    if (!token) {
+      toast.error(t('dashboard.productForm.toastUploadFail'));
+      return;
+    }
     setCropOpen(false);
     setCropFile(null);
+    setCanSkipCrop(false);
     setUploading(true);
     try {
       const body = new FormData();
-      body.append('file', blob, 'about-hero.jpg');
+      body.append('file', blob, blob instanceof File ? blob.name : 'about-hero.png');
       body.append('type', 'product');
       const res = await fetch(`${API_BASE}/api/upload`, {
         method: 'POST',
@@ -94,8 +125,6 @@ export default function AdminShopAboutFields({ form, set }: Props) {
       setUploading(false);
     }
   }
-
-  const hero = form.aboutImages[0] ?? null;
 
   return (
     <ShopSettingsStack>
@@ -161,25 +190,52 @@ export default function AdminShopAboutFields({ form, set }: Props) {
             <label className={ADMIN_FIELD_LABEL}>
               {t('dashboard.about.heroImage')} <span className="text-red-500">*</span>
             </label>
-            <input ref={fileInputRef} type="file" accept="image/*" onChange={handleImagePick} disabled={uploading} className="hidden" />
-            <button
-              type="button"
-              onClick={() => fileInputRef.current?.click()}
-              disabled={uploading}
-              className="inline-flex w-full sm:w-auto items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium border-2 border-dashed border-stone-200 dark:border-zinc-700 bg-stone-50/30 dark:bg-zinc-950/60 text-stone-600 dark:text-zinc-400 hover:border-brand-300 hover:bg-brand-50 dark:hover:bg-brand-950/40 disabled:opacity-60"
-            >
-              <Upload className="w-4 h-4 shrink-0" />
-              {uploading ? t('dashboard.common.uploading') : hero ? t('dashboard.about.replaceImage') : t('dashboard.about.addImage')}
-            </button>
+            <input ref={fileInputRef} type="file" accept="image/*" onChange={handleImagePick} disabled={uploading || cropLoading} className="hidden" />
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                disabled={uploading || cropLoading}
+                className="inline-flex w-full sm:w-auto items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium border-2 border-dashed border-stone-200 dark:border-zinc-700 bg-stone-50/30 dark:bg-zinc-950/60 text-stone-600 dark:text-zinc-400 hover:border-brand-300 hover:bg-brand-50 dark:hover:bg-brand-950/40 disabled:opacity-60"
+              >
+                <Upload className="w-4 h-4 shrink-0" />
+                {uploading ? t('dashboard.common.uploading') : hero ? t('dashboard.about.replaceImage') : t('dashboard.about.addImage')}
+              </button>
+              {hero ? (
+                <button
+                  type="button"
+                  onClick={() => void handleCropExisting()}
+                  disabled={uploading || cropLoading}
+                  className="inline-flex w-full sm:w-auto items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium border border-stone-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-stone-700 dark:text-zinc-300 hover:border-brand-300 hover:bg-brand-50 dark:hover:bg-brand-950/40 disabled:opacity-60"
+                >
+                  {cropLoading ? (
+                    <AdminLoadingInline dotsOnly />
+                  ) : (
+                    <Crop className="h-4 w-4 shrink-0" aria-hidden />
+                  )}
+                  {t('dashboard.productForm.cropButton', 'Crop image')}
+                </button>
+              ) : null}
+            </div>
             {hero ? (
               <div className="mt-3 max-lg:mt-3 lg:mt-4 w-full min-w-0 overflow-visible">
                 <div className={`relative z-10 w-full max-w-[12rem] sm:max-w-xs overflow-visible ${ABOUT_HERO_ASPECT_CLASS}`}>
                   <div className="absolute inset-0 overflow-hidden rounded-lg max-lg:rounded-lg lg:rounded-xl border-2 border-stone-200 dark:border-zinc-700">
-                    <img src={hero} alt="" className="h-full w-full object-cover object-center" />
+                    <ShopImage src={hero} alt="" className="h-full w-full object-cover object-center" />
                   </div>
                   <DashboardImageRemoveButton
                     onClick={() => set('aboutImages', [])}
+                    disabled={uploading || cropLoading}
                     aria-label={t('dashboard.about.ariaRemove')}
+                  />
+                  <ImageFocusButton
+                    iconOnly
+                    src={hero}
+                    onChange={(next) => set('aboutImages', [next])}
+                    disabled={uploading || cropLoading}
+                    previews={HERO_FOCAL_PREVIEWS}
+                    iconClassName="h-3.5 w-3.5"
+                    className="absolute bottom-1.5 left-1.5 z-20 inline-flex h-7 w-7 items-center justify-center rounded-full bg-black/65 text-white shadow transition-colors hover:bg-brand-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 disabled:opacity-50"
                   />
                 </div>
               </div>
@@ -218,8 +274,10 @@ export default function AdminShopAboutFields({ form, set }: Props) {
         onClose={() => {
           setCropOpen(false);
           setCropFile(null);
+          setCanSkipCrop(false);
         }}
         onConfirm={uploadAboutHeroBlob}
+        onSkip={canSkipCrop && cropFile ? () => void uploadAboutHeroBlob(cropFile) : undefined}
       />
     </ShopSettingsStack>
   );

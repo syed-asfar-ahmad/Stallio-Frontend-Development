@@ -1,3 +1,4 @@
+import ShopImage from '../../../ShopImage';
 import { Link } from 'react-router-dom';
 import { ShoppingBag, ArrowRight, Sparkles, Leaf } from 'lucide-react';
 import type { CSSProperties } from 'react';
@@ -14,10 +15,10 @@ export default function HeroSanctuaryPanorama({ shop, username, containerClass }
   if (!showHero) return null;
 
   return (
-    <section className="w-full py-4 sm:py-6 lg:py-8">
+    <section className="w-full py-3 sm:py-4 lg:py-6">
       <div className={containerClass}>
         <div
-          className="relative min-h-[440px] sm:min-h-[520px] lg:min-h-[580px] rounded-[2.5rem] overflow-hidden border p-8 sm:p-14 lg:p-20 flex flex-col justify-end shadow-2xl"
+          className="relative min-h-[300px] sm:min-h-[360px] lg:min-h-[420px] rounded-[1.75rem] overflow-hidden border p-6 sm:p-10 lg:p-12 flex flex-col justify-end shadow-2xl"
           style={{
             borderColor: 'var(--theme-border)',
             background: 'var(--theme-surface)',
@@ -26,7 +27,7 @@ export default function HeroSanctuaryPanorama({ shop, username, containerClass }
           {/* Background Image Layer with Atmospheric Mist Gradient */}
           {shop.homeHeroImage ? (
             <>
-              <img
+              <ShopImage
                 src={shop.homeHeroImage}
                 alt=""
                 className="absolute inset-0 h-full w-full object-cover object-center"
@@ -49,14 +50,14 @@ export default function HeroSanctuaryPanorama({ shop, username, containerClass }
           )}
 
           {/* Centered / Wide Editorial Copy */}
-          <div className="relative z-10 max-w-3xl space-y-5">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-white text-xs font-bold uppercase tracking-widest">
-              <Leaf className="w-3.5 h-3.5 text-emerald-300" />
+          <div className="relative z-10 max-w-2xl space-y-3.5">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-white text-[11px] font-bold uppercase tracking-widest">
+              <Leaf className="w-3 h-3 text-emerald-300" />
               <span>Sanctuary Collection</span>
             </div>
 
             <h1
-              className="text-3xl sm:text-5xl lg:text-6xl font-normal leading-[1.1] tracking-tight text-white drop-shadow-md"
+              className="text-2xl sm:text-3xl lg:text-4xl font-normal leading-[1.1] tracking-tight text-white drop-shadow-md"
               style={{
                 fontFamily: 'var(--theme-font-heading)',
                 letterSpacing: 'var(--theme-heading-spacing)',

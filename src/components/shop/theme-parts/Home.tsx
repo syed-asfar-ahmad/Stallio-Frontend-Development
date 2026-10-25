@@ -78,7 +78,7 @@ function MinimalHome({
           </div>
         ) : (
           <>
-            <div className={`grid ${GRID_COLUMN_CLASS[layout.productGridColumns]} gap-3 lg:gap-5`}>
+            <div className={`grid ${GRID_COLUMN_CLASS[layout.productGridColumns]} gap-3 sm:gap-3.5 lg:gap-4`}>
               {displayProducts.map((p) => (
                 <ProductCard
                   key={p.id}
@@ -94,8 +94,7 @@ function MinimalHome({
               <div className="mt-8 flex justify-center">
                 <Link
                   to={`/${username}/products`}
-                  className="inline-flex items-center gap-2 rounded-[var(--theme-radius-btn)] border-2 px-7 py-3 text-sm font-semibold no-underline transition-colors hover:bg-[var(--theme-primary)] hover:text-[var(--theme-primary-contrast)] hover:border-[var(--theme-primary)]"
-                  style={{ borderColor: 'var(--theme-primary)', color: 'var(--theme-primary)' }}
+                  className="inline-flex items-center gap-2 rounded-[var(--theme-radius-btn)] border-2 border-[var(--theme-primary)] px-7 py-3 text-sm font-semibold text-[var(--theme-primary)] no-underline transition-colors hover:border-[var(--theme-primary)] hover:bg-[var(--theme-primary)] hover:text-[var(--theme-primary-contrast)]"
                 >
                   {t('linkViewAll')}
                   <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden>
@@ -157,23 +156,23 @@ function PacificHome({
   }));
 
   return (
-    <div className="flex flex-col space-y-8 sm:space-y-12 pb-12 lg:pb-20">
+    <div className="flex flex-col space-y-6 sm:space-y-9 pb-10 lg:pb-16">
       <Hero shop={shop} username={username} containerClass={containerClass} />
 
       {visibleCategories.length > 0 && (
         <div className={containerClass}>
           <div
-            className="flex items-center justify-between gap-3 p-2 sm:p-2.5 rounded-full border shadow-sm backdrop-blur-md overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="flex items-center justify-between gap-3 p-1.5 sm:p-2 rounded-full border shadow-sm backdrop-blur-md overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             style={{
               background: 'var(--theme-surface)',
               borderColor: 'var(--theme-border)',
             }}
           >
-            <div className="flex min-w-0 flex-1 items-center gap-2">
+            <div className="flex min-w-0 flex-1 items-center gap-1.5 sm:gap-2">
               <button
                 type="button"
                 onClick={() => setActiveCategory(null)}
-                className="inline-flex shrink-0 items-center gap-1.5 rounded-full px-4 py-2 text-xs font-bold transition-all duration-200"
+                className="inline-flex shrink-0 items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-bold transition-all duration-200"
                 style={
                   activeCategory === null
                     ? {
@@ -198,7 +197,7 @@ function PacificHome({
                     key={c.slug}
                     type="button"
                     onClick={() => setActiveCategory(isActive ? null : c.slug)}
-                    className="inline-flex shrink-0 items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold capitalize transition-all duration-200"
+                    className="inline-flex shrink-0 items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-semibold capitalize transition-all duration-200"
                     style={
                       isActive
                         ? {
@@ -215,7 +214,7 @@ function PacificHome({
                     <span>{name}</span>
                     {catCount > 0 && (
                       <span
-                        className="inline-flex items-center justify-center px-1.5 py-0.5 text-[10px] font-bold rounded-full opacity-80"
+                        className="inline-flex items-center justify-center px-1.5 py-0.5 text-[9px] font-bold rounded-full opacity-80"
                         style={{
                           background: isActive
                             ? 'color-mix(in srgb, var(--theme-primary-contrast) 20%, transparent)'
@@ -233,13 +232,13 @@ function PacificHome({
 
             <Link
               to={`/${username}/products`}
-              className="inline-flex shrink-0 items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold no-underline transition-colors hover:opacity-90"
+              className="inline-flex shrink-0 items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-semibold no-underline transition-colors hover:opacity-90"
               style={{
                 background: 'var(--theme-surface-secondary)',
                 color: 'var(--theme-text-primary)',
               }}
             >
-              <SlidersHorizontal className="h-3.5 w-3.5" aria-hidden />
+              <SlidersHorizontal className="h-3 w-3" aria-hidden />
               <span>{t('productsSort')}</span>
             </Link>
           </div>
@@ -249,7 +248,7 @@ function PacificHome({
       {trustBadges.length > 0 && (
         <section className={containerClass}>
           <div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 p-4 sm:p-6 rounded-[var(--theme-radius-card)] border shadow-sm"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 p-3.5 sm:p-4 rounded-[var(--theme-radius-card)] border shadow-sm"
             style={{
               background: 'linear-gradient(135deg, var(--theme-surface) 0%, var(--theme-surface-secondary) 100%)',
               borderColor: 'var(--theme-border)',
@@ -258,14 +257,14 @@ function PacificHome({
             {trustBadges.map((badge, i) => (
               <div
                 key={`${badge.label}-${i}`}
-                className="flex items-center gap-3 p-3 rounded-full border shadow-sm"
+                className="flex items-center gap-2.5 p-2.5 rounded-full border shadow-sm"
                 style={{
                   background: 'var(--theme-surface)',
                   borderColor: 'var(--theme-border)',
                 }}
               >
                 <div
-                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full"
+                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full"
                   style={{
                     background: 'var(--theme-primary-light)',
                     color: 'var(--theme-primary)',
@@ -273,7 +272,7 @@ function PacificHome({
                 >
                   <TrustBadgeTypeIcon
                     type={resolveTrustBadgeType(badge.icon)}
-                    className="h-4 w-4"
+                    className="h-3.5 w-3.5"
                   />
                 </div>
                 <span
@@ -289,11 +288,11 @@ function PacificHome({
       )}
 
       <main className={containerClass}>
-        <div className="flex items-end justify-between gap-4 mb-6 sm:mb-8 border-b pb-4" style={{ borderColor: 'var(--theme-border)' }}>
+        <div className="flex items-end justify-between gap-4 mb-5 sm:mb-6 border-b pb-3.5" style={{ borderColor: 'var(--theme-border)' }}>
           <div>
             <div className="flex items-center gap-2 mb-1">
               <span
-                className="inline-flex items-center gap-1 px-3 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-full"
+                className="inline-flex items-center gap-1 px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider rounded-full"
                 style={{
                   background: 'var(--theme-primary-light)',
                   color: 'var(--theme-primary)',
@@ -303,7 +302,7 @@ function PacificHome({
               </span>
             </div>
             <h2
-              className="text-2xl sm:text-3xl lg:text-4xl font-normal tracking-tight"
+              className="text-xl sm:text-2xl lg:text-3xl font-normal tracking-tight"
               style={{
                 color: 'var(--theme-text-primary)',
                 fontFamily: 'var(--theme-font-heading)',
@@ -319,7 +318,7 @@ function PacificHome({
 
           <Link
             to={`/${username}/products`}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold no-underline transition-all hover:scale-105"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold no-underline transition-all hover:scale-105"
             style={{
               background: 'var(--theme-surface-secondary)',
               color: 'var(--theme-text-primary)',
@@ -335,16 +334,16 @@ function PacificHome({
 
         {displayProducts.length === 0 ? (
           <div
-            className="flex flex-col items-center gap-4 rounded-[var(--theme-radius-card)] border border-dashed px-6 py-16 text-center"
+            className="flex flex-col items-center gap-4 rounded-[var(--theme-radius-card)] border border-dashed px-6 py-14 text-center"
             style={{ borderColor: 'var(--theme-border)', background: 'var(--theme-surface)' }}
           >
-            <ShoppingBag className="h-12 w-12 opacity-30" style={{ color: 'var(--theme-primary)' }} strokeWidth={1} />
+            <ShoppingBag className="h-10 w-10 opacity-30" style={{ color: 'var(--theme-primary)' }} strokeWidth={1} />
             <p className="text-sm font-medium" style={{ color: 'var(--theme-text-secondary)' }}>
               {t('homeNoProducts')}
             </p>
           </div>
         ) : (
-          <div className={`grid ${GRID_COLUMN_CLASS[layout.productGridColumns]} gap-4 sm:gap-6 lg:gap-8`}>
+          <div className={`grid ${GRID_COLUMN_CLASS[layout.productGridColumns]} gap-3.5 sm:gap-4 lg:gap-5`}>
             {displayProducts.map((p) => (
               <ProductCard
                 key={p.id}
@@ -361,7 +360,7 @@ function PacificHome({
       {reviews.length > 0 && (
         <section className={containerClass}>
           <div
-            className="p-6 sm:p-10 rounded-[var(--theme-radius-card)] border shadow-[var(--theme-shadow-card)]"
+            className="p-5 sm:p-7 rounded-[var(--theme-radius-card)] border shadow-[var(--theme-shadow-card)]"
             style={{
               background: 'var(--theme-surface)',
               borderColor: 'var(--theme-border)',
@@ -548,7 +547,7 @@ export default function Home({
                     ) : null
                   }
                 />
-                <div className={`grid ${gridColsClass} gap-4 lg:gap-5`}>
+                <div className={`grid ${gridColsClass} gap-3 sm:gap-3.5 lg:gap-4`}>
                   {homeFeatured.map((p) => (
                     <ProductCard
                       key={p.id}
@@ -564,7 +563,7 @@ export default function Home({
 
           case 'products':
             return (
-              <main key="section-products" className={`${containerClass} pb-8 lg:pb-14`}>
+              <main key="section-products" className={`${containerClass} pb-8 lg:pb-12`}>
                 <ShopSectionHeading
                   title={featuredProducts.length > 0 ? t('homeMoreTitle') : t('homeAllTitle')}
                   trailing={
@@ -585,7 +584,7 @@ export default function Home({
                     </p>
                   </div>
                 ) : (
-                  <div className={`grid ${gridColsClass} gap-4 lg:gap-5`}>
+                  <div className={`grid ${gridColsClass} gap-3 sm:gap-3.5 lg:gap-4`}>
                     {homeProducts.map((p) => (
                       <ProductCard
                         key={p.id}

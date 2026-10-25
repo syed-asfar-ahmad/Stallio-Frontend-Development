@@ -1,3 +1,4 @@
+import ShopImage from '../../../ShopImage';
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -68,7 +69,7 @@ export default function HeroCocoaBanner({ shop, username, containerClass }: Them
       className="relative isolate w-full overflow-hidden"
       style={{ background: 'color-mix(in srgb, var(--theme-primary) 42%, #1a0f07)' }}
     >
-      <div className="relative min-h-[34rem] sm:min-h-[38rem] lg:min-h-[44rem]">
+      <div className="relative min-h-[22rem] sm:min-h-[26rem] lg:min-h-[30rem]">
         {/* Photographs (cross-fade) */}
         {slides.map((s, i) => (
           <div
@@ -78,7 +79,7 @@ export default function HeroCocoaBanner({ shop, username, containerClass }: Them
             style={{ opacity: i === index ? 1 : 0 }}
           >
             {s.image ? (
-              <img
+              <ShopImage
                 src={s.image}
                 alt=""
                 className="h-full w-full object-cover object-[72%_30%] sm:object-[68%_30%]"
@@ -100,10 +101,10 @@ export default function HeroCocoaBanner({ shop, username, containerClass }: Them
         {/* Mobile: darken the whole frame so the headline always reads */}
         <div aria-hidden className="absolute inset-0 bg-[rgb(40_24_12/0.35)] sm:hidden" />
 
-        <div className={`${containerClass} relative flex min-h-[34rem] items-center pb-24 pt-32 sm:min-h-[38rem] lg:min-h-[44rem] lg:pt-36`}>
-          <div key={active.key} className="max-w-[40rem] animate-[cocoaRise_700ms_cubic-bezier(0.22,1,0.36,1)_both] motion-reduce:animate-none">
+        <div className={`${containerClass} relative flex min-h-[22rem] items-center pb-16 pt-20 sm:min-h-[26rem] lg:min-h-[30rem] lg:pb-20 lg:pt-24`}>
+          <div key={active.key} className="max-w-[34rem] animate-[cocoaRise_700ms_cubic-bezier(0.22,1,0.36,1)_both] motion-reduce:animate-none">
             <h1
-              className="text-[2.6rem] font-semibold leading-[1.03] sm:text-6xl lg:text-[4.6rem]"
+              className="text-[2rem] font-semibold leading-[1.06] sm:text-4xl lg:text-[3.25rem]"
               style={{
                 color: CREAM,
                 fontFamily: 'var(--theme-font-heading)',
@@ -114,13 +115,13 @@ export default function HeroCocoaBanner({ shop, username, containerClass }: Them
               {active.title}
             </h1>
             {active.body ? (
-              <p className="mt-5 line-clamp-3 max-w-md text-[15px] leading-relaxed sm:text-base" style={{ color: 'rgb(247 234 212 / 0.86)' }}>
+              <p className="mt-3.5 line-clamp-2 max-w-md text-xs leading-relaxed sm:text-sm" style={{ color: 'rgb(247 234 212 / 0.86)' }}>
                 {active.body}
               </p>
             ) : null}
             <Link
               to={active.to}
-              className="mt-8 inline-flex items-center justify-center rounded-[var(--theme-radius-btn)] px-7 py-3.5 text-sm font-semibold no-underline shadow-lg shadow-black/10 transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f7ead4]"
+              className="mt-6 inline-flex items-center justify-center rounded-[var(--theme-radius-btn)] px-5 py-2.5 sm:px-6 sm:py-3 text-xs sm:text-sm font-semibold no-underline shadow-lg shadow-black/10 transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f7ead4]"
               style={{ background: CREAM, color: '#2b1b10' }}
             >
               {active.cta}

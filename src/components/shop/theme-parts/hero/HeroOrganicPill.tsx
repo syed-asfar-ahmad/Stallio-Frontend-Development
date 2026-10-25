@@ -1,3 +1,4 @@
+import ShopImage from '../../../ShopImage';
 import { Link } from 'react-router-dom';
 import { ShoppingBag, ArrowRight, Sparkles, Leaf, ShieldCheck, Award } from 'lucide-react';
 import type { CSSProperties } from 'react';
@@ -14,10 +15,10 @@ export default function HeroOrganicPill({ shop, username, containerClass }: Them
   if (!showHero) return null;
 
   return (
-    <section className="w-full py-4 sm:py-6 lg:py-10">
+    <section className="w-full py-3 sm:py-4 lg:py-6">
       <div className={containerClass}>
         <div
-          className="relative overflow-hidden rounded-[var(--theme-radius-card)] border p-6 sm:p-10 lg:p-14 shadow-[var(--theme-shadow-card)] transition-all"
+          className="relative overflow-hidden rounded-[var(--theme-radius-card)] border p-5 sm:p-7 lg:p-9 shadow-[var(--theme-shadow-card)] transition-all"
           style={{
             borderColor: 'var(--theme-border)',
             background: 'linear-gradient(135deg, var(--theme-surface) 0%, var(--theme-surface-secondary) 100%)',
@@ -30,30 +31,30 @@ export default function HeroOrganicPill({ shop, username, containerClass }: Them
             aria-hidden
           />
 
-          <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
             {/* Left Editorial Copy */}
-            <div className="lg:col-span-7 space-y-5 lg:space-y-6">
+            <div className="lg:col-span-7 space-y-4 lg:space-y-4">
               {/* Botanical badge */}
               <div className="flex flex-wrap items-center gap-2">
                 <span
-                  className="inline-flex items-center gap-1.5 px-3.5 py-1 text-xs font-bold uppercase tracking-wider rounded-full shadow-sm"
+                  className="inline-flex items-center gap-1.5 px-3 py-0.5 text-[11px] font-bold uppercase tracking-wider rounded-full shadow-sm"
                   style={{
                     background: 'var(--theme-primary-light)',
                     color: 'var(--theme-primary)',
                     borderColor: 'var(--theme-border)',
                   }}
                 >
-                  <Leaf className="w-3.5 h-3.5" />
+                  <Leaf className="w-3 h-3" />
                   <span>Pure & Organic Living</span>
                 </span>
                 <span
-                  className="inline-flex items-center gap-1 px-3 py-1 text-xs font-medium rounded-full"
+                  className="inline-flex items-center gap-1 px-2.5 py-0.5 text-[11px] font-medium rounded-full"
                   style={{
                     color: 'var(--theme-text-muted)',
                     background: 'var(--theme-surface)',
                   }}
                 >
-                  <Award className="w-3.5 h-3.5" />
+                  <Award className="w-3 h-3" />
                   Verified Storefront
                 </span>
               </div>
@@ -145,7 +146,7 @@ export default function HeroOrganicPill({ shop, username, containerClass }: Them
               >
                 {shop.homeHeroImage ? (
                   <>
-                    <img
+                    <ShopImage
                       src={shop.homeHeroImage}
                       alt={shop.shopName}
                       className="h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"

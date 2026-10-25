@@ -14,6 +14,7 @@ import enAuth from '../locales/en/auth.json';
 import enLegal from '../locales/en/legal.json';
 import enNotFound from '../locales/en/notFound.json';
 import enDashboard from '../locales/en/dashboard.json';
+import enAffiliate from '../locales/en/affiliate.json';
 
 import esLayout from '../locales/es/layout.json';
 import esHome from '../locales/es/home.json';
@@ -27,6 +28,7 @@ import esAuth from '../locales/es/auth.json';
 import esLegal from '../locales/es/legal.json';
 import esNotFound from '../locales/es/notFound.json';
 import esDashboard from '../locales/es/dashboard.json';
+import esAffiliate from '../locales/es/affiliate.json';
 
 import arLayout from '../locales/ar/layout.json';
 import arHome from '../locales/ar/home.json';
@@ -40,6 +42,7 @@ import arAuth from '../locales/ar/auth.json';
 import arLegal from '../locales/ar/legal.json';
 import arNotFound from '../locales/ar/notFound.json';
 import arDashboard from '../locales/ar/dashboard.json';
+import arAffiliate from '../locales/ar/affiliate.json';
 
 const enTranslation = {
   ...enLayout,
@@ -54,6 +57,7 @@ const enTranslation = {
   ...enLegal,
   ...enNotFound,
   ...enDashboard,
+  ...enAffiliate,
 };
 
 const esTranslation = {
@@ -69,6 +73,7 @@ const esTranslation = {
   ...esLegal,
   ...esNotFound,
   ...esDashboard,
+  ...esAffiliate,
 };
 
 const arTranslation = {
@@ -84,6 +89,7 @@ const arTranslation = {
   ...arLegal,
   ...arNotFound,
   ...arDashboard,
+  ...arAffiliate,
 };
 
 export function syncDocumentLang(lng: string) {

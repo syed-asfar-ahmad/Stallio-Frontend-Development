@@ -243,7 +243,7 @@ export default function ShopProductsPage({ shop, products, username, containerCl
               </div>
             ) : (
               <>
-                <div className="relative z-0 mt-12 grid grid-cols-2 gap-x-5 gap-y-12 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-16">
+                <div className="relative z-0 mt-10 grid grid-cols-2 gap-x-4 gap-y-10 lg:grid-cols-3 lg:gap-x-6 lg:gap-y-14">
                   {displayed.map((p) => (
                     <ProductCard key={p.id} product={p} shopUsername={username} currency={shop.currency} linkState={{ from: 'products' }} />
                   ))}

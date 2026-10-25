@@ -1,5 +1,5 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 import Select from 'react-select';
@@ -15,6 +15,10 @@ import {
   Upload,
   Eye,
   EyeOff,
+  Gift,
+  CheckCircle2,
+  AlertCircle,
+  Loader2,
 } from 'lucide-react';
 import { useAuth, getStoredToken } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
@@ -22,6 +26,8 @@ import { api } from '../lib/api';
 import PublicLayout from '../components/PublicLayout';
 import { getCountryOptionsList, getCurrencyOptionsList } from '../lib/countryCurrencyOptions';
 import type { CountryOption, CurrencyOption } from '../lib/countryCurrencyOptions';
+import { getStoredReferralCode, clearStoredReferral, validateReferralCodeOnline } from '../lib/referral';
+import { normalizeSlug } from '../lib/reservedWords';
 
 const API_BASE = import.meta.env.VITE_API_URL ?? '';
 
@@ -109,6 +115,52 @@ export default function Signup() {
   const { signup, fetchUser } = useAuth();
   const navigate = useNavigate();
   const logoInputRef = useRef<HTMLInputElement>(null);
+
+  const [searchParams] = useSearchParams();
+  const urlRef = searchParams.get('ref') || searchParams.get('r') || '';
+  const initialRef = urlRef || getStoredReferralCode() || '';
+
+  const [referralCode, setReferralCode] = useState(initialRef);
+  const [isPrefilled, setIsPrefilled] = useState(Boolean(initialRef));
+  const [validatingRef, setValidatingRef] = useState(false);
+  const [refAffiliateName, setRefAffiliateName] = useState<string | null>(null);
+  const [refError, setRefError] = useState<string | null>(null);
+  const [refSoftWarning, setRefSoftWarning] = useState<string | null>(null);
+
+  useEffect(() => {
+    const trimmed = referralCode.trim();
+    if (!trimmed) {
+      setRefAffiliateName(null);
+      setRefError(null);
+      setRefSoftWarning(null);
+      setValidatingRef(false);
+      return;
+    }
+
+    const timer = setTimeout(async () => {
+      setValidatingRef(true);
+      setRefError(null);
+      setRefSoftWarning(null);
+
+      const result = await validateReferralCodeOnline(trimmed);
+      setValidatingRef(false);
+
+      if (result.valid) {
+        setRefAffiliateName(result.affiliateName || 'Affiliate Partner');
+        setRefError(null);
+        setRefSoftWarning(null);
+      } else {
+        setRefAffiliateName(null);
+        if (isPrefilled) {
+          setRefSoftWarning(t('affiliate.referralExpiredWarning'));
+        } else {
+          setRefError(t('affiliate.invalidReferralCode'));
+        }
+      }
+    }, 400);
+
+    return () => clearTimeout(timer);
+  }, [referralCode, isPrefilled, t]);
 
   useEffect(() => {
     return () => {
@@ -201,6 +253,10 @@ export default function Signup() {
       setError(mismatchError);
       return;
     }
+    if (!isPrefilled && refError) {
+      setError(refError);
+      return;
+    }
     setSubmitting(true);
     const result = await signup({
       email,
@@ -209,12 +265,14 @@ export default function Signup() {
       shopName,
       country: country.trim(),
       currency: currency.trim(),
+      referralCode: referralCode.trim() ? normalizeSlug(referralCode) : undefined,
     });
     if (result.error) {
       setSubmitting(false);
       setError(result.error);
       return;
     }
+    clearStoredReferral();
     if (result.requiresEmailVerification || !getStoredToken()) {
       setSubmitting(false);
       toast.success(t('auth.verify.toastSignupCheckEmail'));
@@ -517,6 +575,83 @@ export default function Signup() {
                       {logoFile ? t('auth.signup.changeLogo') : t('auth.signup.chooseLogo')}
                     </button>
                   </div>
+                </div>
+
+                <div className="md:col-span-2 rounded-2xl border border-stone-200/80 bg-stone-50/60 p-4 transition-colors dark:border-zinc-700/80 dark:bg-zinc-800/40">
+                  <div className="flex items-center justify-between gap-2 mb-1.5 sm:mb-2">
+                    <label
+                      htmlFor="referralCode"
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-stone-800 sm:text-sm dark:text-zinc-200"
+                    >
+                      <Gift className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+                      <span>{t('auth.signup.referralCode', 'Referral Code')}</span>
+                      <span className="text-[0.7rem] font-normal text-stone-400 dark:text-zinc-500">
+                        ({t('dashboard.common.optional', 'Optional')})
+                      </span>
+                    </label>
+
+                    {validatingRef && (
+                      <span className="inline-flex items-center gap-1 text-[0.7rem] font-medium text-stone-500 dark:text-zinc-400">
+                        <Loader2 className="h-3 w-3 animate-spin text-brand-600 dark:text-brand-400" />
+                        <span>{t('affiliate.checkingCode')}</span>
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="relative">
+                    <input
+                      id="referralCode"
+                      type="text"
+                      value={referralCode}
+                      onChange={(e) => {
+                        setIsPrefilled(false);
+                        setReferralCode(e.target.value.replace(/\s/g, '').toLowerCase());
+                      }}
+                      placeholder=" summer25"
+                      autoComplete="off"
+                      spellCheck={false}
+                      className={`${inputClass} font-mono uppercase tracking-wider text-xs sm:text-sm ps-4 pe-10`}
+                    />
+
+                    {/* Status icons at trailing edge */}
+                    <div className="pointer-events-none absolute end-3.5 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
+                      {validatingRef ? (
+                        <Loader2 className="h-4 w-4 animate-spin text-stone-400 dark:text-zinc-500" />
+                      ) : refAffiliateName ? (
+                        <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+                      ) : refError ? (
+                        <AlertCircle className="h-4 w-4 text-red-500" />
+                      ) : null}
+                    </div>
+                  </div>
+
+                  {/* Valid state badge */}
+                  {refAffiliateName && (
+                    <div className="mt-2.5 inline-flex items-center gap-1.5 rounded-xl border border-emerald-200 bg-emerald-50/90 px-3 py-1.5 text-xs font-semibold text-emerald-800 shadow-sm dark:border-emerald-800/60 dark:bg-emerald-950/40 dark:text-emerald-300">
+                      <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                      <span>
+                        {t('affiliate.referredBy', { name: refAffiliateName })}
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Soft warning for prefilled codes that became invalid/expired */}
+                  {refSoftWarning && (
+                    <div className="mt-2.5 flex items-start gap-2 rounded-xl border border-amber-200/80 bg-amber-50/90 p-2.5 text-xs text-amber-800 dark:border-amber-800/60 dark:bg-amber-950/40 dark:text-amber-300">
+                      <AlertCircle className="h-4 w-4 shrink-0 text-amber-600 dark:text-amber-400 mt-0.5" />
+                      <p className="flex-1 leading-relaxed">
+                        {refSoftWarning}
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Inline error for manually typed invalid codes */}
+                  {refError && (
+                    <p className="mt-2 flex items-center gap-1.5 text-xs font-medium text-red-600 dark:text-red-400">
+                      <AlertCircle className="h-3.5 w-3.5 shrink-0" />
+                      <span>{refError}</span>
+                    </p>
+                  )}
                 </div>
 
                 <button

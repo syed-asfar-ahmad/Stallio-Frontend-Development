@@ -1,3 +1,4 @@
+import ShopImage from '../../ShopImage';
 import { useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Check, Plus, ShoppingBag } from 'lucide-react';
@@ -40,7 +41,7 @@ function EverydayCard({ product, username, currency }: { product: Product; usern
       <Link to={detailTo} className="relative block aspect-[4/5] overflow-hidden rounded-xl no-underline" style={{ background: 'var(--theme-surface-secondary)' }}>
         <span aria-hidden className="absolute inset-x-[14%] bottom-0 h-[66%] rounded-t-full" style={{ background: shapeFor(product.id, 2), opacity: 0.55 }} />
         {product.image ? (
-          <img src={getProductImageDisplayUrl(product.image)} alt={productName(product)} loading="lazy" className="absolute inset-0 h-full w-full object-contain p-[12%] drop-shadow-[0_14px_14px_rgb(30_22_17/0.14)]" />
+          <ShopImage src={getProductImageDisplayUrl(product.image)} alt={productName(product)} loading="lazy" className="absolute inset-0 h-full w-full object-contain p-[12%] drop-shadow-[0_14px_14px_rgb(30_22_17/0.14)]" />
         ) : (
           <ShoppingBag className="absolute inset-0 m-auto h-10 w-10 opacity-30" strokeWidth={1} />
         )}
@@ -115,26 +116,26 @@ export default function FreshHome({
           case 'categories':
             if (!showCategories) return null;
             return (
-              <section key="cats" className={`${containerClass} mt-14 lg:mt-20`} aria-label={t('freshBrowseTitle')}>
+              <section key="cats" className={`${containerClass} mt-9 lg:mt-12`} aria-label={t('freshBrowseTitle')}>
                 <FreshHeading title={t('freshBrowseTitle')} />
-                <div className="grid grid-cols-3 gap-x-3 gap-y-6 sm:grid-cols-6 lg:gap-x-6">
+                <div className="grid grid-cols-3 gap-x-2.5 gap-y-4 sm:grid-cols-6 lg:gap-x-4">
                   {categories.slice(0, 6).map((c, i) => (
-                    <Link key={c.slug} to={`/${username}/category/${c.slug}`} className="group flex flex-col items-center gap-3 no-underline">
+                    <Link key={c.slug} to={`/${username}/category/${c.slug}`} className="group flex flex-col items-center gap-2 no-underline">
                       <span
-                        className="relative flex aspect-square w-full max-w-[9.5rem] items-center justify-center overflow-hidden rounded-full transition-transform duration-500 group-hover:-translate-y-1"
+                        className="relative flex aspect-square w-full max-w-[7rem] items-center justify-center overflow-hidden rounded-full transition-transform duration-500 group-hover:-translate-y-0.5"
                         style={{ background: shapeFor(c.slug, i) }}
                       >
                         {c.image ? (
-                          <img src={c.image} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+                          <ShopImage src={c.image} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
                         ) : (
-                          <span className="text-3xl font-medium" style={{ fontFamily: 'var(--theme-font-heading)', color: FRESH_INK }}>
+                          <span className="text-2xl font-medium" style={{ fontFamily: 'var(--theme-font-heading)', color: FRESH_INK }}>
                             {categoryName(c).slice(0, 1).toUpperCase()}
                           </span>
                         )}
                       </span>
-                      <span className="text-center text-xs font-medium sm:text-[13px]" style={{ color: 'var(--theme-text-primary)' }}>
+                      <span className="text-center text-[11px] font-medium sm:text-xs" style={{ color: 'var(--theme-text-primary)' }}>
                         {categoryName(c)}
-                        <span className="block text-[11px] font-normal" style={{ color: 'var(--theme-text-muted)' }}>{countOf(c.slug)}</span>
+                        <span className="block text-[10px] font-normal" style={{ color: 'var(--theme-text-muted)' }}>{countOf(c.slug)}</span>
                       </span>
                     </Link>
                   ))}
@@ -144,15 +145,15 @@ export default function FreshHome({
 
           case 'products':
             return (
-              <section key="popular" className={`${containerClass} mt-14 lg:mt-24`}>
+              <section key="popular" className={`${containerClass} mt-9 lg:mt-14`}>
                 <FreshHeading title={t('freshPopularTitle')} action={{ to: `/${username}/products`, label: t('viewAll') }} />
                 {popular.length === 0 ? (
-                  <div className="flex flex-col items-center gap-3 py-16 text-center">
+                  <div className="flex flex-col items-center gap-3 py-14 text-center">
                     <ShoppingBag className="h-8 w-8" style={{ color: 'var(--theme-text-muted)' }} strokeWidth={1} />
                     <p className="text-sm" style={{ color: 'var(--theme-text-secondary)' }}>{t('homeNoProducts')}</p>
                   </div>
                 ) : (
-                  <div className="grid grid-cols-2 gap-x-3 gap-y-8 sm:gap-x-4 lg:grid-cols-4 lg:gap-x-5 lg:gap-y-12">
+                  <div className="grid grid-cols-2 gap-x-3 gap-y-6 sm:gap-x-4 sm:gap-y-7 lg:grid-cols-4 lg:gap-x-4.5 lg:gap-y-8">
                     {popular.map((p) => (
                       <ProductCard key={p.id} product={p} shopUsername={username} currency={shop.currency} linkState={{ from: 'home' }} />
                     ))}
@@ -164,22 +165,22 @@ export default function FreshHome({
           case 'trust':
             if (trust.length === 0) return null;
             return (
-              <section key="why" className={`${containerClass} mt-16 lg:mt-28`} aria-label={t('freshWhyTitle')}>
-                <div className={`grid items-center gap-8 lg:gap-14 ${howImage ? 'lg:grid-cols-2' : ''}`}>
+              <section key="why" className={`${containerClass} mt-10 lg:mt-16`} aria-label={t('freshWhyTitle')}>
+                <div className={`grid items-center gap-6 lg:gap-10 ${howImage ? 'lg:grid-cols-2' : ''}`}>
                   {howImage ? (
                     <div className="overflow-hidden rounded-[var(--theme-radius-card)]" style={{ background: 'var(--theme-surface-secondary)' }}>
-                      <img src={howImage} alt="" loading="lazy" className="aspect-[4/3.4] w-full object-cover" />
+                      <ShopImage src={howImage} alt="" loading="lazy" className="aspect-[4/3] w-full object-cover" />
                     </div>
                   ) : null}
                   <div className={howImage ? '' : 'mx-auto w-full max-w-2xl'}>
-                    <h2 className="text-[1.6rem] font-medium leading-tight sm:text-3xl" style={{ color: 'var(--theme-text-primary)', fontFamily: 'var(--theme-font-heading)', letterSpacing: '-0.025em' }}>
+                    <h2 className="text-xl font-medium leading-tight sm:text-2xl lg:text-3xl" style={{ color: 'var(--theme-text-primary)', fontFamily: 'var(--theme-font-heading)', letterSpacing: '-0.025em' }}>
                       {t('freshWhyTitle')}
                     </h2>
-                    <ol className="mt-6">
+                    <ol className="mt-4 sm:mt-5">
                       {trust.map((b, i) => (
-                        <li key={`${b.label}-${i}`} className="flex items-baseline gap-5 border-b py-4 first:pt-0" style={{ borderColor: 'var(--theme-border)' }}>
-                          <span className="w-7 shrink-0 text-xs font-semibold tabular-nums" style={{ color: 'var(--theme-text-muted)' }}>{String(i + 1).padStart(2, '0')}.</span>
-                          <span className="text-sm font-medium sm:text-[15px]" style={{ color: 'var(--theme-text-primary)' }}>{getLocalizedTrustLabel(b, lang)}</span>
+                        <li key={`${b.label}-${i}`} className="flex items-baseline gap-4 border-b py-3 first:pt-0" style={{ borderColor: 'var(--theme-border)' }}>
+                          <span className="w-6 shrink-0 text-xs font-semibold tabular-nums" style={{ color: 'var(--theme-text-muted)' }}>{String(i + 1).padStart(2, '0')}.</span>
+                          <span className="text-xs sm:text-sm font-medium" style={{ color: 'var(--theme-text-primary)' }}>{getLocalizedTrustLabel(b, lang)}</span>
                         </li>
                       ))}
                     </ol>
@@ -191,15 +192,15 @@ export default function FreshHome({
           case 'collections':
             if (!bannerImage) return null;
             return (
-              <section key="banner" className="relative mt-16 isolate overflow-hidden lg:mt-28" aria-label={bannerTitle}>
-                <div className="relative h-[24rem] sm:h-[30rem] lg:h-[36rem]" style={{ background: FRESH_INK }}>
-                  <img src={bannerImage} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+              <section key="banner" className="relative mt-10 isolate overflow-hidden lg:mt-16" aria-label={bannerTitle}>
+                <div className="relative h-[18rem] sm:h-[22rem] lg:h-[26rem]" style={{ background: FRESH_INK }}>
+                  <ShopImage src={bannerImage} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
                   <div aria-hidden className="absolute inset-0" style={{ background: 'linear-gradient(0deg, rgb(10 8 6 / 0.7) 0%, rgb(10 8 6 / 0.1) 55%, rgb(10 8 6 / 0.25) 100%)' }} />
-                  <div className={`${containerClass} relative flex h-full flex-col items-start justify-end pb-10 lg:pb-14`}>
-                    <p className="max-w-lg text-3xl font-medium leading-tight text-white sm:text-5xl" style={{ fontFamily: 'var(--theme-font-heading)', letterSpacing: '-0.03em' }}>
+                  <div className={`${containerClass} relative flex h-full flex-col items-start justify-end pb-8 lg:pb-10`}>
+                    <p className="max-w-md text-2xl font-medium leading-tight text-white sm:text-3xl lg:text-4xl" style={{ fontFamily: 'var(--theme-font-heading)', letterSpacing: '-0.03em' }}>
                       {bannerTitle}
                     </p>
-                    <div className="mt-5">
+                    <div className="mt-4">
                       <FreshButton to={`/${username}/products`} arrow>{t('shopNow')}</FreshButton>
                     </div>
                   </div>
@@ -210,19 +211,19 @@ export default function FreshHome({
           case 'featured':
             if (!everyday) return null;
             return (
-              <section key="everyday" className={`${containerClass} mt-16 lg:mt-28`}>
-                <h2 className="mb-8 text-center text-sm font-medium uppercase tracking-[0.22em] lg:mb-10" style={{ color: 'var(--theme-text-primary)', fontFamily: 'var(--theme-font-heading)' }}>
+              <section key="everyday" className={`${containerClass} mt-10 lg:mt-16`}>
+                <h2 className="mb-6 text-center text-xs sm:text-sm font-medium uppercase tracking-[0.2em] lg:mb-8" style={{ color: 'var(--theme-text-primary)', fontFamily: 'var(--theme-font-heading)' }}>
                   {t('freshEverydayTitle')}
                 </h2>
-                <div className={`mx-auto grid max-w-5xl gap-4 lg:gap-6 ${pairImage ? 'md:grid-cols-[5fr_6fr]' : 'max-w-sm'}`}>
+                <div className={`mx-auto grid max-w-4xl gap-4 lg:gap-5 ${pairImage ? 'md:grid-cols-[5fr_6fr]' : 'max-w-sm'}`}>
                   <EverydayCard product={everyday} username={username} currency={shop.currency} />
                   {pairImage ? (
                     <Link
                       to={`/${username}/products`}
-                      className="group relative block min-h-[22rem] overflow-hidden rounded-[var(--theme-radius-card)] no-underline"
+                      className="group relative block min-h-[16rem] overflow-hidden rounded-[var(--theme-radius-card)] no-underline"
                       style={{ background: '#e5c196' }}
                     >
-                      <img src={pairImage} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04] motion-reduce:transition-none" />
+                      <ShopImage src={pairImage} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04] motion-reduce:transition-none" />
                     </Link>
                   ) : null}
                 </div>
@@ -232,7 +233,7 @@ export default function FreshHome({
           case 'reviews':
             if (reviews.length === 0) return null;
             return (
-              <div key={`reviews-${idx}`} className="mt-16 py-12 lg:mt-28 lg:py-16" style={{ background: 'var(--theme-surface-secondary)' }}>
+              <div key={`reviews-${idx}`} className="mt-10 py-9 lg:mt-16 lg:py-12" style={{ background: 'var(--theme-surface-secondary)' }}>
                 <ShopReviewsSection reviews={reviews} containerClass={containerClass} />
               </div>
             );

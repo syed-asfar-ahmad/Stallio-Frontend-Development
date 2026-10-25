@@ -19,11 +19,15 @@ import {
 } from '../lib/shopContentLanguages';
 import SharedLockedField, { sharedLockedInputClass } from '../components/SharedLockedField';
 import { useSellerContentLanguages, useSellerMultilingualEnabled } from '../hooks/useSellerContentLanguages';
-import { FileText, Save, Upload, X } from 'lucide-react';
+import { Crop, FileText, Save, Upload, X } from 'lucide-react';
+import ImageFocusButton from '../components/ImageFocusButton';
+import { HERO_FOCAL_PREVIEWS } from '../components/FocalPointPicker';
+import ShopImage from '../components/ShopImage';
 import { AdminLoadingInline } from '../components/DashboardLoading';
 import AboutHeroImageCropModal from '../components/AboutHeroImageCropModal';
 import DashboardImageRemoveButton from '../components/DashboardImageRemoveButton';
 import { ABOUT_HERO_ASPECT_CLASS, ABOUT_HERO_VIEWPORT } from '../lib/imageCropViewports';
+import { getProductImageDisplayUrl } from '../lib/productImageUrl';
 import { normalizeShopRichTextHtml } from '../lib/prepareShopAboutHtml';
 import {
   DASHBOARD_INPUT,
@@ -56,8 +60,10 @@ export default function DashboardAbout() {
   const [aboutTextColor, setAboutTextColor] = useState(DEFAULT_ABOUT_TEXT_COLOR);
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [cropLoading, setCropLoading] = useState(false);
   const [cropOpen, setCropOpen] = useState(false);
   const [cropFile, setCropFile] = useState<File | null>(null);
+  const [canSkipCrop, setCanSkipCrop] = useState(false);
   const [error, setError] = useState('');
   const [toggleConfirm, setToggleConfirm] = useState<boolean | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -90,19 +96,44 @@ export default function DashboardAbout() {
       return;
     }
     setCropFile(file);
+    setCanSkipCrop(true);
     setCropOpen(true);
+  }
+
+  async function handleCropExisting() {
+    const hero = aboutImages[0];
+    if (!hero) return;
+    setCropLoading(true);
+    try {
+      const res = await fetch(getProductImageDisplayUrl(hero));
+      if (!res.ok) throw new Error(t('dashboard.productForm.toastUploadFail'));
+      const blob = await res.blob();
+      const mime = blob.type || 'image/png';
+      const ext = mime.includes('jpeg') || mime.includes('jpg') ? 'jpg' : 'png';
+      setCropFile(new File([blob], `about-hero.${ext}`, { type: mime }));
+      setCanSkipCrop(false);
+      setCropOpen(true);
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : t('dashboard.productForm.toastUploadFail'));
+    } finally {
+      setCropLoading(false);
+    }
   }
 
   async function uploadAboutHeroBlob(blob: Blob) {
     const token = getStoredToken();
-    if (!token) return;
+    if (!token) {
+      toast.error(t('dashboard.productForm.toastUploadFail'));
+      return;
+    }
     setCropOpen(false);
     setCropFile(null);
+    setCanSkipCrop(false);
     setUploading(true);
     setError('');
     try {
       const form = new FormData();
-      form.append('file', blob, 'about-hero.jpg');
+      form.append('file', blob, blob instanceof File ? blob.name : 'about-hero.png');
       form.append('type', 'product');
       const res = await fetch(`${API_BASE}/api/upload`, {
         method: 'POST',
@@ -284,25 +315,43 @@ export default function DashboardAbout() {
                     type="file"
                     accept="image/*"
                     onChange={handleImagePick}
-                    disabled={uploading}
+                    disabled={uploading || cropLoading}
                     className="hidden"
                   />
-                  <button
-                    type="button"
-                    onClick={() => fileInputRef.current?.click()}
-                    disabled={uploading || sharedLocked}
-                    className="inline-flex w-full sm:w-auto items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium border-2 border-dashed border-stone-200 dark:border-zinc-700 bg-stone-50/30 dark:bg-zinc-950/60 text-stone-600 dark:text-zinc-400 hover:border-brand-300 hover:bg-brand-50 dark:hover:bg-brand-950/40 disabled:opacity-60"
-                  >
-                    <Upload className="w-4 h-4 shrink-0" />
-                    {uploading ? t('dashboard.common.uploading') : (aboutImages.length > 0 ? t('dashboard.about.replaceImage') : t('dashboard.about.addImage'))}
-                  </button>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => fileInputRef.current?.click()}
+                      disabled={uploading || cropLoading || sharedLocked}
+                      className="inline-flex w-full sm:w-auto items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium border-2 border-dashed border-stone-200 dark:border-zinc-700 bg-stone-50/30 dark:bg-zinc-950/60 text-stone-600 dark:text-zinc-400 hover:border-brand-300 hover:bg-brand-50 dark:hover:bg-brand-950/40 disabled:opacity-60"
+                    >
+                      <Upload className="w-4 h-4 shrink-0" />
+                      {uploading ? t('dashboard.common.uploading') : (aboutImages.length > 0 ? t('dashboard.about.replaceImage') : t('dashboard.about.addImage'))}
+                    </button>
+                    {aboutImages[0] ? (
+                      <button
+                        type="button"
+                        onClick={() => void handleCropExisting()}
+                        disabled={uploading || cropLoading || sharedLocked}
+                        className="inline-flex w-full sm:w-auto items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium border border-stone-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-stone-700 dark:text-zinc-300 hover:border-brand-300 hover:bg-brand-50 dark:hover:bg-brand-950/40 disabled:opacity-60"
+                        aria-label={t('dashboard.productForm.cropButton', 'Crop image')}
+                      >
+                        {cropLoading ? (
+                          <AdminLoadingInline dotsOnly />
+                        ) : (
+                          <Crop className="h-4 w-4 shrink-0" aria-hidden />
+                        )}
+                        {t('dashboard.productForm.cropButton', 'Crop image')}
+                      </button>
+                    ) : null}
+                  </div>
                   {(Array.isArray(aboutImages) ? aboutImages : []).length > 0 && (
                     <div className="mt-3 max-lg:mt-3 lg:mt-4 w-full min-w-0 overflow-visible">
                       <div
                         className={`relative z-10 w-full max-w-[12rem] sm:max-w-xs overflow-visible ${ABOUT_HERO_ASPECT_CLASS}`}
                       >
                         <div className="absolute inset-0 overflow-hidden rounded-lg max-lg:rounded-lg lg:rounded-xl border-2 border-stone-200 dark:border-zinc-700">
-                          <img
+                          <ShopImage
                             src={(Array.isArray(aboutImages) ? aboutImages : [])[0]}
                             alt=""
                             className="h-full w-full object-cover object-center"
@@ -312,6 +361,15 @@ export default function DashboardAbout() {
                           onClick={() => removeImage(0)}
                           disabled={sharedLocked}
                           aria-label={t('dashboard.about.ariaRemove')}
+                        />
+                        <ImageFocusButton
+                          iconOnly
+                          src={(Array.isArray(aboutImages) ? aboutImages : [])[0]}
+                          onChange={(next) => setAboutImages((prev) => [next, ...prev.slice(1)])}
+                          previews={HERO_FOCAL_PREVIEWS}
+                          disabled={sharedLocked}
+                          iconClassName="h-3.5 w-3.5"
+                          className="absolute bottom-1.5 left-1.5 z-20 inline-flex h-7 w-7 items-center justify-center rounded-full bg-black/65 text-white shadow transition-colors hover:bg-brand-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 disabled:opacity-50"
                         />
                       </div>
                     </div>
@@ -370,8 +428,10 @@ export default function DashboardAbout() {
         onClose={() => {
           setCropOpen(false);
           setCropFile(null);
+          setCanSkipCrop(false);
         }}
         onConfirm={uploadAboutHeroBlob}
+        onSkip={canSkipCrop && cropFile ? () => void uploadAboutHeroBlob(cropFile) : undefined}
       />
 
       <ConfirmDialog

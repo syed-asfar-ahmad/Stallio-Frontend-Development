@@ -1,3 +1,4 @@
+import ShopImage from '../../../ShopImage';
 import { Link } from 'react-router-dom';
 import { Sprout, Leaf, Sun, ShieldCheck, Award, Heart, ArrowRight } from 'lucide-react';
 import type { Shop } from '../../../../types';
@@ -50,7 +51,7 @@ export default function PacificAboutPage({
 
         {heroImage && (
           <div className="mt-8 lg:mt-12 relative overflow-hidden rounded-[var(--theme-radius-card)] border border-theme-border shadow-[var(--theme-shadow-card)] group">
-            <img
+            <ShopImage
               src={heroImage}
               alt={shop.shopName}
               className="w-full h-auto max-h-[560px] object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
@@ -116,7 +117,7 @@ export default function PacificAboutPage({
                 className="overflow-hidden rounded-[var(--theme-radius-card)] border border-theme-border shadow-sm group"
                 style={{ background: 'var(--theme-surface-secondary)' }}
               >
-                <img
+                <ShopImage
                   src={img}
                   alt=""
                   loading="lazy"

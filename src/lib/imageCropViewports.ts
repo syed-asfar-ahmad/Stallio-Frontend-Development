@@ -10,8 +10,16 @@ export const PRODUCT_CARD_ASPECT_CLASS = 'aspect-theme-product';
 export const PRODUCT_IMAGE_FRAME_CLASS =
   'relative overflow-hidden bg-stone-50 dark:bg-zinc-950 border-b border-stone-100 dark:border-zinc-800';
 
+/** Full-product view (detail galleries, dialogs): shows the whole photo, never cuts it. */
 export const PRODUCT_IMAGE_CLASS =
   'absolute inset-0 h-full w-full object-contain';
+
+/**
+ * Card / thumbnail fit used on every theme's product card and in the dashboard preview.
+ * Fills the theme frame and keeps the merchant's focal point in view (see ShopImage).
+ */
+export const PRODUCT_IMAGE_COVER_CLASS =
+  'absolute inset-0 h-full w-full object-cover';
 
 export const STORE_HERO_VIEWPORT: ImageCropViewport = {
   width: 1000,

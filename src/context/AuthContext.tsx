@@ -84,7 +84,7 @@ type AuthContextType = {
   token: string | null;
   loading: boolean;
   login: (email: string, password: string) => Promise<{ error?: string; role?: 'seller' | 'admin'; code?: string; email?: string }>;
-  signup: (data: { email: string; password: string; username: string; shopName: string; country?: string; currency?: string }) => Promise<{ error?: string; requiresEmailVerification?: boolean; email?: string; emailDeliveryFailed?: boolean }>;
+  signup: (data: { email: string; password: string; username: string; shopName: string; country?: string; currency?: string; referralCode?: string }) => Promise<{ error?: string; requiresEmailVerification?: boolean; email?: string; emailDeliveryFailed?: boolean }>;
   verifyEmail: (email: string, code: string) => Promise<{ error?: string }>;
   resendVerification: (email: string) => Promise<{ error?: string }>;
   logout: () => void;
@@ -190,6 +190,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     shopName: string;
     country?: string;
     currency?: string;
+    referralCode?: string;
   }) => {
     const res = await fetch(`${API_BASE}/api/auth/signup`, {
       method: 'POST',

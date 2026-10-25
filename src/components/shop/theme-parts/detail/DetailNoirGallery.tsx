@@ -1,3 +1,4 @@
+import ShopImage from '../../../ShopImage';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Loader2, Check } from 'lucide-react';
 import type { Product, Shop, ShopCategory } from '../../../../types';
@@ -74,7 +75,7 @@ export default function DetailNoirGallery(props: Props) {
                   className="relative aspect-[4/5] w-16 shrink-0 overflow-hidden border sm:w-full"
                   style={{ borderColor: i === activeIndex ? 'var(--theme-primary)' : 'var(--theme-border)' }}
                 >
-                  <img src={getProductImageDisplayUrl(img)} alt="" className="absolute inset-0 h-full w-full object-cover" />
+                  <ShopImage src={getProductImageDisplayUrl(img)} alt="" className="absolute inset-0 h-full w-full object-cover" />
                 </button>
               ))}
             </div>
@@ -83,7 +84,7 @@ export default function DetailNoirGallery(props: Props) {
             <span aria-hidden className="absolute -bottom-4 -end-4 h-full w-full border" style={{ borderColor: 'var(--theme-primary)' }} />
             <div className="relative aspect-[4/5] overflow-hidden" style={{ background: 'var(--theme-surface-secondary)' }}>
               {main ? (
-                <img src={getProductImageDisplayUrl(main)} alt={displayName} className="absolute inset-0 h-full w-full object-cover" />
+                <ShopImage src={getProductImageDisplayUrl(main)} alt={displayName} className="absolute inset-0 h-full w-full object-cover" />
               ) : null}
             </div>
           </div>

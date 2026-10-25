@@ -1,3 +1,4 @@
+import ShopImage from '../../../ShopImage';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Check, ChevronRight, Loader2, MessageCircle, Minus, Plus, ShoppingBag } from 'lucide-react';
 import { useShopLanguage } from '../../../../context/ShopLanguageContext';
@@ -58,7 +59,7 @@ export default function DetailFreshBloom(p: DetailCocoaGalleryProps) {
           <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--theme-radius-card)]" style={{ background: FRESH_PEACH }}>
             <span aria-hidden className="absolute inset-x-[14%] bottom-0 h-[66%] rounded-t-full" style={{ background: shapeFor(product.id) }} />
             {active ? (
-              <img
+              <ShopImage
                 key={active}
                 src={getProductImageDisplayUrl(active)}
                 alt={p.displayName}
@@ -88,7 +89,7 @@ export default function DetailFreshBloom(p: DetailCocoaGalleryProps) {
                     className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl transition-all"
                     style={{ background: FRESH_PEACH, outline: on ? `2px solid ${FRESH_LIME}` : '2px solid transparent', outlineOffset: 2, opacity: on ? 1 : 0.7 }}
                   >
-                    <img src={getProductImageDisplayUrl(img)} alt="" className="absolute inset-0 h-full w-full object-contain p-2" />
+                    <ShopImage src={getProductImageDisplayUrl(img)} alt="" className="absolute inset-0 h-full w-full object-contain p-2" />
                   </button>
                 );
               })}

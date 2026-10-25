@@ -1,3 +1,4 @@
+import ShopImage from '../../../ShopImage';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Check, ChevronRight, Loader2, MessageCircle, Minus, Plus, ShoppingBag } from 'lucide-react';
 import type { Dispatch, SetStateAction } from 'react';
@@ -117,7 +118,7 @@ export default function DetailCocoaGallery(p: DetailCocoaGalleryProps) {
             }}
           >
             {activeImage ? (
-              <img
+              <ShopImage
                 key={activeImage}
                 src={getProductImageDisplayUrl(activeImage)}
                 alt={p.displayName}
@@ -157,7 +158,7 @@ export default function DetailCocoaGallery(p: DetailCocoaGalleryProps) {
                       opacity: on ? 1 : 0.7,
                     }}
                   >
-                    <img src={getProductImageDisplayUrl(img)} alt="" className="absolute inset-0 h-full w-full object-contain p-1.5" />
+                    <ShopImage src={getProductImageDisplayUrl(img)} alt="" className="absolute inset-0 h-full w-full object-contain p-1.5" />
                   </button>
                 );
               })}
