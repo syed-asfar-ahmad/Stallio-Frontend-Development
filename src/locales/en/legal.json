@@ -1,7 +1,14 @@
 {
   "legalDoc": {
-    "backHome": "Back To Home",
-    "lastUpdated": "Last updated: 1st June 2026"
+    "backHome": "Back to home",
+    "lastUpdated": "Last updated: 1st June 2026",
+    "eyebrow": "Legal",
+    "alsoRead": "Also read",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "refund": "Refund Policy",
+    "contactNote": "Questions about this page? Reach us on the",
+    "contactLink": "Contact page"
   },
   "legalPrivacy": {
     "metaTitle": "Privacy Policy | Stallio",

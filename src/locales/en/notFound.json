@@ -1,10 +1,11 @@
 {
   "notFound": {
     "metaTitle": "Page not found | Stallio",
+    "eyebrow": "Off the map",
     "title": "Page not found",
     "body": "The page you requested does not exist or the link may be broken. Try one of the links below.",
-    "backHome": "Back To Home",
+    "backHome": "Back to home",
     "viewPricing": "Pricing",
-    "contactUs": "Contact Us"
+    "contactUs": "Contact us"
   }
 }
