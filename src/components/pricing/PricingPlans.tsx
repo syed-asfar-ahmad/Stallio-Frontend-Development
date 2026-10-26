@@ -155,7 +155,7 @@ export function PricingPlans() {
               <p className="text-muted-foreground text-xs leading-5">{t('pricing.plans.countryHelp')}</p>
               <div className="relative mt-2">
                 <IconGlobe
-                  className="text-brand/70 pointer-events-none absolute start-3.5 top-1/2 z-10 size-5 -translate-y-1/2"
+                  className="text-brand/70 pointer-events-none absolute start-3.5 top-1/2 z-10 size-5 -translate-y-1/2 dark:text-white/80"
                   stroke={1.5}
                   aria-hidden
                 />
@@ -293,10 +293,10 @@ export function PricingPlans() {
                     >
                       <div className="flex items-center justify-between gap-3">
                         <p className="text-[10px] font-medium tracking-[0.2em] uppercase">
-                          <span className="text-brand">{t(`pricing.plans.${plan.id}.label`)}</span>
+                          <span className="text-brand dark:text-white">{t(`pricing.plans.${plan.id}.label`)}</span>
                         </p>
                         {plan.featured ? (
-                          <span className="bg-brand/10 text-brand rounded-full px-2.5 py-1 text-[10px] font-medium tracking-[0.14em] uppercase">
+                          <span className="bg-brand/10 text-brand dark:text-white rounded-full px-2.5 py-1 text-[10px] font-medium tracking-[0.14em] uppercase">
                             {t('pricing.plans.save', {
                               amount: formatSubscriptionUsd(USD_SAVE_YEARLY),
                             })}
@@ -364,7 +364,7 @@ export function PricingPlans() {
                     key={line}
                     className="text-foreground/90 flex items-start gap-2 text-sm leading-6"
                   >
-                    <span className="bg-brand/10 text-brand mt-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-full">
+                    <span className="bg-brand/10 text-brand dark:text-white mt-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-full">
                       <IconCheck className="size-3" stroke={1.5} aria-hidden />
                     </span>
                     {line}
@@ -377,7 +377,7 @@ export function PricingPlans() {
               className="mt-5 rounded-[1.5rem]"
               innerClassName="flex flex-col gap-3 rounded-[calc(1.5rem-0.375rem)] p-5 sm:flex-row sm:items-center sm:gap-4 sm:p-6"
             >
-              <div className="bg-brand/10 text-brand inline-flex size-11 shrink-0 items-center justify-center rounded-2xl">
+              <div className="bg-brand/10 text-brand dark:text-white inline-flex size-11 shrink-0 items-center justify-center rounded-2xl">
                 <IconCheck className="size-5" stroke={1.5} aria-hidden />
               </div>
               <div className="min-w-0">

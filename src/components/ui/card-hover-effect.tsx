@@ -65,7 +65,7 @@ export function HoverEffect({ items, className }: HoverEffectProps) {
             </AnimatePresence>
             <div className="bg-background/90 ring-border/50 relative z-20 h-full space-y-3 overflow-hidden rounded-[1.2rem] p-5 shadow-[inset_0_1px_1px_rgba(255,255,255,0.35)] ring-1 md:p-6 dark:bg-card/90">
               {item.icon ? (
-                <div className="text-brand [&>svg]:size-6">{item.icon}</div>
+                <div className="text-brand dark:text-white [&>svg]:size-6">{item.icon}</div>
               ) : null}
               <h3 className="text-foreground text-base font-semibold tracking-tight md:text-lg">
                 {item.title}

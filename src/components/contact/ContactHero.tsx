@@ -99,7 +99,7 @@ export function ContactHero() {
             />
             <div className="relative space-y-6">
               <div className="flex items-center gap-3">
-                <span className="bg-brand/10 text-brand inline-flex size-11 items-center justify-center rounded-2xl">
+                <span className="bg-brand/10 text-brand dark:text-white inline-flex size-11 items-center justify-center rounded-2xl">
                   <IconMail className="size-5" stroke={1.5} aria-hidden />
                 </span>
                 <p className="text-muted-foreground text-[10px] font-medium tracking-[0.2em] uppercase">

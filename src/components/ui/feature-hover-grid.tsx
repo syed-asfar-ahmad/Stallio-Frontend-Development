@@ -59,7 +59,7 @@ export function FeatureHoverGrid({
               )}
             />
 
-            <div className="text-brand relative z-10 mb-4 px-6 md:px-8 [&>svg]:size-6">
+            <div className="text-brand relative z-10 mb-4 px-6 md:px-8 dark:text-white [&>svg]:size-6">
               {item.icon}
             </div>
 

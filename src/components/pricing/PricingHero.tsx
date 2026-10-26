@@ -91,13 +91,13 @@ export function PricingHero() {
 
           <motion.ul className="space-y-2.5" variants={fadeUp()}>
             <li className="text-foreground/90 flex items-center gap-2.5 text-sm leading-6 sm:text-base">
-              <span className="bg-brand/10 text-brand inline-flex size-8 shrink-0 items-center justify-center rounded-full">
+              <span className="bg-brand/10 text-brand dark:text-white inline-flex size-8 shrink-0 items-center justify-center rounded-full">
                 <IconTag className="size-4" stroke={1.5} aria-hidden />
               </span>
               {t('pricing.hero.fromPrice', { price: formatSubscriptionUsd(USD_MONTHLY) })}
             </li>
             <li className="text-foreground/90 flex items-center gap-2.5 text-sm leading-6 sm:text-base">
-              <span className="bg-brand/10 text-brand inline-flex size-8 shrink-0 items-center justify-center rounded-full">
+              <span className="bg-brand/10 text-brand dark:text-white inline-flex size-8 shrink-0 items-center justify-center rounded-full">
                 <IconCalendarOff className="size-4" stroke={1.5} aria-hidden />
               </span>
               {t('pricing.hero.noCard')}

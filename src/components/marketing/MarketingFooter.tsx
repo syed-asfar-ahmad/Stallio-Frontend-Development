@@ -31,7 +31,7 @@ function FooterLink({
     <Link
       to={to}
       onClick={() => window.scrollTo(0, 0)}
-      className="group inline-flex min-w-0 w-full items-center gap-2.5 rounded-xl py-1.5 ps-2.5 pe-3 text-sm font-medium text-stone-600 no-underline transition-[color,background-color,box-shadow] duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-brand-50 hover:text-brand-800 hover:shadow-[inset_0_0_0_1px_color-mix(in_srgb,var(--brand)_18%,transparent)] dark:text-zinc-300 dark:hover:bg-brand-950/55 dark:hover:text-brand-100 dark:hover:shadow-[inset_0_0_0_1px_color-mix(in_srgb,var(--brand)_28%,transparent)]"
+      className="group inline-flex min-w-0 w-full items-center gap-2.5 rounded-xl py-1.5 pe-2 text-sm font-medium text-stone-600 no-underline transition-[color,background-color,box-shadow] duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-brand-50 hover:text-brand-800 hover:shadow-[inset_0_0_0_1px_color-mix(in_srgb,var(--brand)_18%,transparent)] dark:text-zinc-300 dark:hover:bg-brand-950/55 dark:hover:text-brand-100 dark:hover:shadow-[inset_0_0_0_1px_color-mix(in_srgb,var(--brand)_28%,transparent)]"
     >
       <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-stone-100 text-brand-600 ring-1 ring-stone-200/80 transition-[transform,background-color,color,box-shadow,ring-color] duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-[1.04] group-hover:bg-white group-hover:text-brand-700 group-hover:ring-brand-200/80 group-hover:shadow-sm dark:bg-zinc-800 dark:text-brand-400 dark:ring-zinc-600 dark:group-hover:bg-zinc-900 dark:group-hover:text-brand-200 dark:group-hover:ring-brand-700/50">
         <Icon
@@ -39,7 +39,7 @@ function FooterLink({
           aria-hidden
         />
       </span>
-      <span className="min-w-0 flex-1 truncate leading-none">{label}</span>
+      <span className="min-w-0 flex-1 text-pretty leading-snug">{label}</span>
     </Link>
   );
 }

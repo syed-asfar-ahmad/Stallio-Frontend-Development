@@ -142,7 +142,7 @@ export function AboutHero() {
               {pillars.map(({ label, icon: Icon }) => (
                 <li key={label}>
                   <div className="group flex items-start gap-3.5 px-5 py-4 transition-colors duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-brand/[0.05] sm:gap-4 sm:px-6 sm:py-5 dark:hover:bg-brand/[0.1]">
-                    <span className="bg-brand/10 text-brand inline-flex size-10 shrink-0 items-center justify-center rounded-full transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-105">
+                    <span className="bg-brand/10 text-brand dark:text-white inline-flex size-10 shrink-0 items-center justify-center rounded-full transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-105">
                       <Icon className="size-[1.125rem]" stroke={1.5} aria-hidden />
                     </span>
                     <p className="text-foreground min-w-0 flex-1 pt-1.5 text-start text-[0.9375rem] font-semibold leading-snug">

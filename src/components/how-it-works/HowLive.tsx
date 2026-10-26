@@ -85,7 +85,7 @@ export function HowLive() {
                         key={text}
                         className="flex items-start gap-3 text-sm leading-6 sm:text-base"
                       >
-                        <span className="bg-brand/10 text-brand mt-0.5 inline-flex size-8 shrink-0 items-center justify-center rounded-2xl">
+                        <span className="bg-brand/10 text-brand dark:text-white mt-0.5 inline-flex size-8 shrink-0 items-center justify-center rounded-2xl">
                           <Icon className="size-4" stroke={1.5} aria-hidden />
                         </span>
                         <span className="text-foreground/90">{text}</span>
@@ -121,7 +121,7 @@ export function HowLive() {
                     {t('howItWorks.live.phoneBody')}
                   </p>
                 </div>
-                <span className="bg-brand/10 text-brand inline-flex size-10 shrink-0 items-center justify-center rounded-2xl">
+                <span className="bg-brand/10 text-brand dark:text-white inline-flex size-10 shrink-0 items-center justify-center rounded-2xl">
                   <IconDeviceMobile
                     className="size-5"
                     stroke={1.5}

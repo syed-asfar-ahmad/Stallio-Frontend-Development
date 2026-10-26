@@ -27,7 +27,7 @@ export function ContactSuccess() {
         }}
       >
         <motion.div
-          className="bg-brand/10 text-brand mb-6 inline-flex size-14 items-center justify-center rounded-2xl"
+          className="bg-brand/10 text-brand dark:text-white mb-6 inline-flex size-14 items-center justify-center rounded-2xl"
           variants={fadeUp(0.6, 14)}
         >
           <IconCheck className="size-7" stroke={1.5} aria-hidden />

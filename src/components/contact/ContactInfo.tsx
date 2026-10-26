@@ -40,7 +40,7 @@ export function ContactInfo({ className }: ContactInfoProps) {
       </motion.div>
 
       <motion.div className="flex items-start gap-3" variants={fadeUp()}>
-        <span className="bg-brand/10 text-brand mt-0.5 inline-flex size-9 shrink-0 items-center justify-center rounded-full">
+        <span className="bg-brand/10 text-brand dark:text-white mt-0.5 inline-flex size-9 shrink-0 items-center justify-center rounded-full">
           <IconClockHour4 className="size-4" stroke={1.5} aria-hidden />
         </span>
         <p className="text-foreground/90 max-w-[34ch] text-sm leading-6 sm:text-base">

@@ -68,7 +68,7 @@ export function FeaturesLoop() {
                     <span
                       key={n}
                       aria-hidden
-                      className="bg-background text-brand ring-border/60 absolute top-1/2 left-1/2 flex size-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full font-mono text-[10px] tracking-[0.12em] ring-1"
+                      className="bg-background text-brand ring-border/60 absolute top-1/2 left-1/2 flex size-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full font-mono text-[10px] tracking-[0.12em] ring-1 dark:text-white"
                       style={{
                         transform: `translate(-50%, -50%) rotate(${angle}deg) translateY(-5.6rem) rotate(${-angle}deg)`,
                       }}
@@ -117,7 +117,7 @@ export function FeaturesLoop() {
                         <span className="text-muted-foreground font-mono text-xs tracking-[0.18em] tabular-nums">
                           {n}
                         </span>
-                        <span className="bg-brand/10 text-brand inline-flex size-11 items-center justify-center rounded-2xl transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-105">
+                        <span className="bg-brand/10 text-brand dark:text-white inline-flex size-11 items-center justify-center rounded-2xl transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-105">
                           <Icon className="size-5" stroke={1.5} aria-hidden />
                         </span>
                       </div>

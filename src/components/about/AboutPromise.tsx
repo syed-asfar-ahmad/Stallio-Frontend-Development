@@ -125,7 +125,7 @@ export function AboutPromise() {
                                   className="border-border/70 bg-background/80 text-foreground inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium dark:bg-zinc-900/70"
                                 >
                                   <IconCheck
-                                    className="text-brand size-3.5 shrink-0"
+                                    className="text-brand size-3.5 shrink-0 dark:text-white"
                                     stroke={1.75}
                                     aria-hidden
                                   />

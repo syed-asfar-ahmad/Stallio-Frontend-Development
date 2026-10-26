@@ -121,6 +121,9 @@ export function ContactForm({ onSuccess, className }: ContactFormProps) {
       <div key={field.key} className={field.half ? undefined : 'sm:col-span-2'}>
         <label htmlFor={id} className="text-foreground mb-2 block text-sm font-medium">
           {t(`contact.form.${field.key}`)}
+          <span className="text-destructive ms-0.5" aria-hidden>
+            *
+          </span>
         </label>
         {field.type === 'textarea' ? (
           <textarea

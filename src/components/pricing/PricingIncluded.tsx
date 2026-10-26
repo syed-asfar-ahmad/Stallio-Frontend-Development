@@ -51,7 +51,7 @@ export function PricingIncluded() {
                     key={item}
                     className="text-foreground/90 flex items-start gap-2.5 text-sm leading-6"
                   >
-                    <span className="bg-brand/10 text-brand mt-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-full">
+                    <span className="bg-brand/10 text-brand dark:text-white mt-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-full">
                       <IconCheck className="size-3" stroke={1.5} aria-hidden />
                     </span>
                     {item}
