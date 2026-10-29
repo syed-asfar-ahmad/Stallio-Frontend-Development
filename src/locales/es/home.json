@@ -199,6 +199,37 @@
         }
       ]
     },
+    "reviews": {
+      "eyebrow": "Historias de vendedores",
+      "title": "Vendedores que dejaron de vender en los DMs.",
+      "body": "Tiendas reales que pasaron catálogo, pedidos y seguimiento a un solo enlace de Stallio.",
+      "prev": "Reseñas anteriores",
+      "next": "Siguientes reseñas",
+      "carouselAria": "Reseñas de vendedores",
+      "starsLabel": "5 de 5 estrellas",
+      "items": [
+        {
+          "name": "Maya Ortega",
+          "role": "Repostería casera, Austin",
+          "quote": "Perdía pedidos de fin de semana en los DMs de Instagram. Ahora abren mi enlace de Stallio, eligen sabores y me despierto con una lista limpia."
+        },
+        {
+          "name": "Karim Haddad",
+          "role": "Streetwear, Beirut",
+          "quote": "Variantes y stock por fin en un solo lugar. Menos \"¿queda talla M?\" y más checkouts."
+        },
+        {
+          "name": "Sofia Reyes",
+          "role": "Cerámica artesanal, Valencia",
+          "quote": "Fotos, precio y envío en una página. Los clientes confían más en la tienda que en una captura del chat."
+        },
+        {
+          "name": "Noah Patel",
+          "role": "Despensa local, Toronto",
+          "quote": "Cupones y facturas PDF me quitaron una hoja de cálculo cada viernes. Stallio se siente hecho para quien envía, no para dashboards empresariales."
+        }
+      ]
+    },
     "cta": {
       "eyebrow": "Listo cuando tú lo estés",
       "title": "Listo cuando tú lo estés",

@@ -12,6 +12,7 @@ import {
   Scale,
   RotateCcw,
   Briefcase,
+  Newspaper,
 } from 'lucide-react';
 
 import { getSocialBrandColor, SocialIcon } from '@/components/SocialIcons';
@@ -56,6 +57,7 @@ export function MarketingFooter() {
     { to: '/how-it-works', label: t('layout.footer.howItWorks'), icon: ListOrdered },
     { to: '/contact', label: t('layout.nav.contact'), icon: Mail },
     { to: '/careers', label: t('layout.nav.careers'), icon: Briefcase },
+    { to: '/blog', label: t('layout.nav.blog'), icon: Newspaper },
   ];
 
   const footerLegal = [

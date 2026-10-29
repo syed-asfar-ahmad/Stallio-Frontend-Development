@@ -1,0 +1,101 @@
+{
+  "blog": {
+    "metaTitle": "Blog | Stallio",
+    "metaTitlePost": "{{title}} | Stallio Blog",
+    "hero": {
+      "eyebrow": "Blog",
+      "title": "Notes for sellers who ship.",
+      "body": "Practical guides on storefronts, social selling, and keeping orders out of your DMs."
+    },
+    "readMore": "Read article",
+    "backToBlog": "Back to blog",
+    "byAuthor": "By {{author}}",
+    "notFound": {
+      "title": "Post not found",
+      "body": "That article is not on the shelf. Pick another from the blog.",
+      "cta": "View all posts"
+    },
+    "posts": [
+      {
+        "slug": "coupons-and-delivery-fees-without-confusion",
+        "title": "Coupons and delivery fees without confusing buyers",
+        "excerpt": "Promos should feel generous, not mysterious. Make the total clear before checkout.",
+        "date": "2026-10-22",
+        "author": "Stallio Team",
+        "category": "Growth",
+        "readMinutes": 5,
+        "paragraphs": [
+          "A good promo is easy to explain in one sentence. A bad promo lives in five story slides and still needs a DM to decode. Put the code on the cart, name the discount plainly, and set an end date you will actually honor.",
+          "Delivery fees deserve the same clarity. Flat fees work for local drops. Tiered fees work when distance changes cost. What fails is surprising buyers at the last message with a number they never saw on the product page.",
+          "Test the path yourself: add two items, apply the code, and check the total with delivery. If you cannot predict the number, neither can your customer. Fix the rules before you advertise the deal.",
+          "Use coupons for moments that matter: first order, weekend bakery rush, end-of-season clearance. Avoid stacking five overlapping codes that fight each other. One clean offer converts better than a puzzle.",
+          "When the order lands, send a PDF invoice that matches what they paid. That small paper trail builds trust faster than another \"thanks, will ship soon\" message with no numbers attached."
+        ]
+      },
+      {
+        "slug": "product-variants-for-clothing-sellers",
+        "title": "Product variants that clothing sellers actually need",
+        "excerpt": "Sizes and colors should live on the product page, not in a thread of clarifying questions.",
+        "date": "2026-10-14",
+        "author": "Stallio Team",
+        "category": "Catalog",
+        "readMinutes": 7,
+        "paragraphs": [
+          "Clothing sellers lose time on the same loop: photo in the feed, \"what sizes?\" in the DMs, then a guess about what is left in stock. Variants fix the loop when they are honest and easy to tap.",
+          "List each sellable combination you can fulfill this week. Size and color are enough for most drops. Attach a clear photo when a colorway looks different in real life. Hide or zero out stock the moment a size is gone so buyers never checkout something you cannot ship.",
+          "Use sale prices on the variants that need a push, not a vague \"DM for discount.\" Shoppers compare on the page. If the markdown is real, show it next to the original price and keep the cart math obvious.",
+          "Group related pieces into categories buyers recognize: new drop, restock, accessories. A short About page with sizing notes reduces returns and long measurement chats. Link that page from your story when you announce a drop.",
+          "Before you go live, open the shop on your phone and place a test order for the trickiest size. If you hesitate, a customer will too. Polish the variant labels until the choice feels obvious in under ten seconds."
+        ]
+      },
+      {
+        "slug": "why-social-sellers-skip-custom-domains",
+        "title": "Why social sellers can skip a custom domain (for now)",
+        "excerpt": "Domains and DNS are not the bottleneck. Getting a clean link in front of buyers is.",
+        "date": "2026-10-05",
+        "author": "Stallio Team",
+        "category": "Getting started",
+        "readMinutes": 4,
+        "paragraphs": [
+          "A custom domain sounds professional. For many social sellers, it is also a delay: registrars, DNS records, SSL waiting rooms, and a weekend spent on setup instead of products.",
+          "Buyers care that the link works, loads fast on mobile, and looks like a real shop. A path on stallio.shop does that on day one. You can still brand the storefront with your name, photos, and About page. The URL is the address. The trust comes from what they see after they open it.",
+          "Save domain work for when you have steady order volume and a reason to own the hostname. Until then, put energy into catalog clarity, delivery rules, and reply speed. Those move revenue. Nameserver settings do not.",
+          "Share your Stallio link everywhere you already post: bio, WhatsApp status, packaging cards, and story stickers. Consistency beats a vanity domain that points at an empty theme.",
+          "When you are ready for a custom domain later, you will bring a shop that already works. Starting without one is not a compromise. It is how you open tonight."
+        ]
+      },
+      {
+        "slug": "whatsapp-orders-to-storefront",
+        "title": "Turn WhatsApp orders into a real storefront",
+        "excerpt": "Chat is great for trust. It is a terrible catalog. Here is how to keep the conversation and lose the chaos.",
+        "date": "2026-09-28",
+        "author": "Stallio Team",
+        "category": "Operations",
+        "readMinutes": 5,
+        "paragraphs": [
+          "WhatsApp feels personal because it is. Buyers already message you there. The problem is not the chat. It is using the chat as inventory, price list, and order book at once.",
+          "A storefront does not replace WhatsApp. It gives the chat something solid to point at. When someone asks for the menu, you send one link. When they want three items in two sizes, they build the cart themselves. You still confirm, answer questions, and arrange delivery in the thread you already use.",
+          "Move your best-selling products first. Upload photos you already send as attachments. Add sale prices and delivery fees so buyers see the total before they ping you. Mark orders paid and shipped in one place so nothing hides in an unread bubble.",
+          "Coupons work better when the code lives on the cart, not in a screenshot that expires. If you run weekend promos, publish the code on the shop and remind buyers in your status. You spend less time explaining the deal and more time packing.",
+          "Keep WhatsApp for hospitality. Let the storefront hold the shelf. That split is how small sellers scale without hiring a full-time inbox manager."
+        ]
+      },
+      {
+        "slug": "sell-from-instagram-without-a-website",
+        "title": "How to sell from Instagram without building a website",
+        "excerpt": "Your audience already taps your bio. Give them a catalog they can browse, not another DM thread.",
+        "date": "2026-09-12",
+        "author": "Stallio Team",
+        "category": "Social selling",
+        "readMinutes": 6,
+        "paragraphs": [
+          "If you sell through Instagram, you already have the hard part: people who want what you make. The friction shows up after they tap your profile. A bio that says \"DM to order\" turns every sale into a private chat, a price you typed twice, and a payment screenshot you hope you saved.",
+          "You do not need a custom domain or a theme marketplace to fix that. You need one shareable storefront link: photos, prices, variants, and a cart buyers understand on a phone. Put that link in your bio, stories, and Highlights so the path from interest to order stays the same every time.",
+          "Start with a short catalog of what you actually sell this week. Clear titles, one strong photo per product, and stock that matches reality beat a half-finished \"coming soon\" page. Share the product URL in replies when someone asks \"how much?\" instead of retyping the answer.",
+          "Keep payments the way your buyers already pay you: bank transfer, cash on delivery, or the link you trust. The storefront's job is the shelf and the order list, not sitting in the middle of the money. When Friday comes, export or invoice from one dashboard instead of scrolling three apps.",
+          "The test is simple. If a first-time buyer can open your link, pick a size, and place an order without messaging you first, your Instagram is finally working like a shop."
+        ]
+      }
+    ]
+  }
+}

@@ -199,6 +199,37 @@
         }
       ]
     },
+    "reviews": {
+      "eyebrow": "Seller stories",
+      "title": "Sellers who stopped selling in DMs.",
+      "body": "Real shops that moved catalogs, orders, and follow-ups onto one Stallio link.",
+      "prev": "Previous reviews",
+      "next": "Next reviews",
+      "carouselAria": "Seller reviews",
+      "starsLabel": "5 out of 5 stars",
+      "items": [
+        {
+          "name": "Maya Ortega",
+          "role": "Home bakery, Austin",
+          "quote": "I used to lose weekend orders in Instagram DMs. Now buyers open my Stallio link, pick flavors, and I wake up to a clean order list."
+        },
+        {
+          "name": "Karim Haddad",
+          "role": "Streetwear drops, Beirut",
+          "quote": "Variants and stock finally live in one place. Less \"is size M left?\" noise, more checkouts."
+        },
+        {
+          "name": "Sofia Reyes",
+          "role": "Handmade ceramics, Valencia",
+          "quote": "Photos, price, and delivery fee on one page. Customers trust the shop more than a chat screenshot."
+        },
+        {
+          "name": "Noah Patel",
+          "role": "Local pantry shop, Toronto",
+          "quote": "Coupons and PDF invoices saved me a spreadsheet every Friday. Stallio feels built for people who ship, not for enterprise dashboards."
+        }
+      ]
+    },
     "cta": {
       "eyebrow": "Ready when you are",
       "title": "Ready when you are",

@@ -5,6 +5,7 @@ import {
   HomeCta,
   HomeDemo,
   HomeHero,
+  HomeReviews,
   HomeSteps,
   HomeToolkit,
   HomeWhy,
@@ -20,6 +21,7 @@ export default function Home() {
       <HomeDemo />
       <HomeToolkit />
       <HomeWhy />
+      <HomeReviews />
       <HomeCta />
     </PublicLayout>
   );

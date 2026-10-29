@@ -1,0 +1,101 @@
+{
+  "blog": {
+    "metaTitle": "Blog | Stallio",
+    "metaTitlePost": "{{title}} | Blog de Stallio",
+    "hero": {
+      "eyebrow": "Blog",
+      "title": "Notas para vendedores que envían.",
+      "body": "Guías prácticas sobre escaparates, venta social y sacar los pedidos de tus DMs."
+    },
+    "readMore": "Leer artículo",
+    "backToBlog": "Volver al blog",
+    "byAuthor": "Por {{author}}",
+    "notFound": {
+      "title": "Artículo no encontrado",
+      "body": "Ese artículo no está en la estantería. Elige otro del blog.",
+      "cta": "Ver todos los artículos"
+    },
+    "posts": [
+      {
+        "slug": "coupons-and-delivery-fees-without-confusion",
+        "title": "Cupones y costos de envío sin confundir al comprador",
+        "excerpt": "Las promos deben sentirse generosas, no misteriosas. Deja el total claro antes del checkout.",
+        "date": "2026-10-22",
+        "author": "Equipo Stallio",
+        "category": "Crecimiento",
+        "readMinutes": 5,
+        "paragraphs": [
+          "Una buena promo se explica en una frase. Una mala vive en cinco stories y aún necesita un DM para decodificarla. Pon el código en el carrito, nombra el descuento con claridad y fija una fecha final que sí vas a respetar.",
+          "Los costos de envío merecen la misma claridad. Tarifas fijas funcionan en entregas locales. Tarifas por tramos, cuando la distancia cambia el costo. Lo que falla es sorprender al comprador en el último mensaje con un número que nunca vio en la página del producto.",
+          "Prueba el camino tú: agrega dos artículos, aplica el código y revisa el total con envío. Si no puedes predecir el número, el cliente tampoco. Arregla las reglas antes de anunciar la oferta.",
+          "Usa cupones en momentos que importan: primer pedido, rush del fin de semana, liquidación de temporada. Evita apilar cinco códigos que se pelean. Una oferta limpia convierte mejor que un rompecabezas.",
+          "Cuando llegue el pedido, envía una factura PDF que coincida con lo pagado. Ese rastro construye confianza más rápido que otro \"gracias, envío pronto\" sin números."
+        ]
+      },
+      {
+        "slug": "product-variants-for-clothing-sellers",
+        "title": "Variantes de producto que los vendedores de ropa sí necesitan",
+        "excerpt": "Tallas y colores deben vivir en la página del producto, no en un hilo de preguntas.",
+        "date": "2026-10-14",
+        "author": "Equipo Stallio",
+        "category": "Catálogo",
+        "readMinutes": 7,
+        "paragraphs": [
+          "Los vendedores de ropa pierden tiempo en el mismo ciclo: foto en el feed, \"¿qué tallas?\" en los DMs y una duda sobre el stock. Las variantes lo arreglan cuando son honestas y fáciles de tocar.",
+          "Lista cada combinación que puedas cumplir esta semana. Talla y color bastan para la mayoría de drops. Adjunta una foto clara cuando un color se vea distinto en la vida real. Oculta o pon a cero el stock en cuanto se agote una talla para que nadie pida lo que no puedes enviar.",
+          "Usa precios de oferta en las variantes que necesiten impulso, no un vago \"DM para descuento\". Los compradores comparan en la página. Si la rebaja es real, muéstrala junto al precio original y deja la cuenta del carrito obvia.",
+          "Agrupa piezas relacionadas en categorías que reconozcan: nuevo drop, restock, accesorios. Una página About corta con notas de talla reduce devoluciones y chats largos de medidas. Enlázala desde tu story cuando anuncies un drop.",
+          "Antes de publicar, abre la tienda en el teléfono y haz un pedido de prueba con la talla más complicada. Si dudas, el cliente también. Pule las etiquetas de variante hasta que la elección sea obvia en menos de diez segundos."
+        ]
+      },
+      {
+        "slug": "why-social-sellers-skip-custom-domains",
+        "title": "Por qué los vendedores sociales pueden saltarse el dominio propio (por ahora)",
+        "excerpt": "Dominios y DNS no son el cuello de botella. Poner un enlace limpio frente al comprador sí lo es.",
+        "date": "2026-10-05",
+        "author": "Equipo Stallio",
+        "category": "Primeros pasos",
+        "readMinutes": 4,
+        "paragraphs": [
+          "Un dominio propio suena profesional. Para muchos vendedores sociales también es una demora: registradores, DNS, SSL y un fin de semana en configuración en lugar de productos.",
+          "Al comprador le importa que el enlace funcione, cargue rápido en el móvil y se vea como una tienda real. Una ruta en stallio.shop lo logra el primer día. Sigues pudiendo marcar el escaparate con tu nombre, fotos y página About. La URL es la dirección. La confianza viene de lo que ven al abrirla.",
+          "Guarda el trabajo de dominio para cuando tengas volumen estable y un motivo para poseer el hostname. Hasta entonces, invierte en claridad de catálogo, reglas de envío y velocidad de respuesta. Eso mueve ingresos. Los nameservers no.",
+          "Comparte tu enlace de Stallio donde ya publicas: bio, estado de WhatsApp, tarjetas de empaque y stickers de stories. La consistencia gana a un dominio vanidoso que apunta a un tema vacío.",
+          "Cuando quieras un dominio propio más adelante, llevarás una tienda que ya funciona. Empezar sin uno no es un compromiso. Es cómo abres esta noche."
+        ]
+      },
+      {
+        "slug": "whatsapp-orders-to-storefront",
+        "title": "Convierte pedidos de WhatsApp en un escaparate real",
+        "excerpt": "El chat es bueno para la confianza. Es un catálogo terrible. Así mantienes la conversación y pierdes el caos.",
+        "date": "2026-09-28",
+        "author": "Equipo Stallio",
+        "category": "Operaciones",
+        "readMinutes": 5,
+        "paragraphs": [
+          "WhatsApp se siente personal porque lo es. Los compradores ya te escriben ahí. El problema no es el chat. Es usarlo a la vez como inventario, lista de precios y libro de pedidos.",
+          "Un escaparate no reemplaza WhatsApp. Le da al chat algo sólido a lo que apuntar. Cuando piden el menú, envías un enlace. Cuando quieren tres artículos en dos tallas, arman el carrito ellos. Tú sigues confirmando, respondiendo y acordando entrega en el hilo de siempre.",
+          "Mueve primero tus productos más vendidos. Sube las fotos que ya envías como adjuntos. Añade precios de oferta y costos de envío para que vean el total antes de escribirte. Marca pedidos pagados y enviados en un solo lugar para que nada se oculte en un mensaje sin leer.",
+          "Los cupones funcionan mejor cuando el código vive en el carrito, no en una captura que caduca. Si haces promos de fin de semana, publica el código en la tienda y recuérdalo en tu estado. Menos tiempo explicando la oferta y más tiempo empacando.",
+          "Deja WhatsApp para la hospitalidad. Que el escaparate sostenga la estantería. Esa división es cómo escalan los vendedores pequeños sin contratar a alguien solo para la bandeja."
+        ]
+      },
+      {
+        "slug": "sell-from-instagram-without-a-website",
+        "title": "Cómo vender en Instagram sin crear un sitio web",
+        "excerpt": "Tu audiencia ya toca tu bio. Dales un catálogo que puedan recorrer, no otro hilo de DMs.",
+        "date": "2026-09-12",
+        "author": "Equipo Stallio",
+        "category": "Venta social",
+        "readMinutes": 6,
+        "paragraphs": [
+          "Si vendes por Instagram, ya tienes lo difícil: gente que quiere lo que haces. La fricción aparece después de tocar tu perfil. Una bio que dice \"DM para pedir\" convierte cada venta en un chat privado, un precio que escribiste dos veces y una captura de pago que esperas haber guardado.",
+          "No necesitas un dominio propio ni un marketplace de temas para arreglarlo. Necesitas un enlace de escaparate compartible: fotos, precios, variantes y un carrito que se entienda en el teléfono. Pon ese enlace en la bio, stories y Highlights para que el camino del interés al pedido sea siempre el mismo.",
+          "Empieza con un catálogo corto de lo que realmente vendes esta semana. Títulos claros, una foto fuerte por producto y stock real ganan a una página a medias de \"próximamente\". Comparte la URL del producto cuando pregunten \"¿cuánto cuesta?\" en lugar de volver a escribir la respuesta.",
+          "Mantén los pagos como ya te pagan: transferencia, contraentrega o el enlace que confías. El escaparate es la estantería y la lista de pedidos, no el intermediario del dinero. El viernes exportas o facturas desde un solo panel en lugar de tres apps.",
+          "La prueba es simple. Si un comprador nuevo abre tu enlace, elige talla y pide sin escribirte antes, tu Instagram por fin funciona como una tienda."
+        ]
+      }
+    ]
+  }
+}
