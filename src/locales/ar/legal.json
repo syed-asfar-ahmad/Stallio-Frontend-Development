@@ -1,7 +1,14 @@
 {
   "legalDoc": {
     "backHome": "العودة إلى الرئيسية",
-    "lastUpdated": "آخر تحديث: ١ يونيو ٢٠٢٦"
+    "lastUpdated": "آخر تحديث: ١ يونيو ٢٠٢٦",
+    "eyebrow": "قانوني",
+    "alsoRead": "اقرأ أيضاً",
+    "privacy": "سياسة الخصوصية",
+    "terms": "شروط الخدمة",
+    "refund": "سياسة الاسترداد",
+    "contactNote": "أسئلة حول هذه الصفحة؟ تواصل معنا عبر",
+    "contactLink": "صفحة الاتصال"
   },
   "legalPrivacy": {
     "metaTitle": "سياسة الخصوصية | Stallio",

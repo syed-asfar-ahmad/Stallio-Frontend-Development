@@ -1,7 +1,14 @@
 {
   "legalDoc": {
     "backHome": "Volver al inicio",
-    "lastUpdated": "Última actualización: 1 de junio de 2026"
+    "lastUpdated": "Última actualización: 1 de junio de 2026",
+    "eyebrow": "Legal",
+    "alsoRead": "También lee",
+    "privacy": "Política de privacidad",
+    "terms": "Términos del servicio",
+    "refund": "Política de reembolso",
+    "contactNote": "¿Preguntas sobre esta página? Escríbenos en la",
+    "contactLink": "página de contacto"
   },
   "legalPrivacy": {
     "metaTitle": "Política de privacidad | Stallio",

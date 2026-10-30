@@ -1,81 +1,126 @@
 {
   "features": {
     "hero": {
-      "eyebrow": "Características",
-      "titleLine1": "Todo lo que necesitas",
-      "titleLine2": "para vender desde un enlace.",
-      "subtitle": "Una mini tienda centrada para quienes ya tienen compradores: productos claros, un solo camino de pedido y pedidos que no desaparecen en el desplazamiento del chat.",
-      "checklist": [
-        "Un enlace para la biografía, historias y chat",
-        "Cuadrícula de productos con fotos y precios",
-        "Pedidos mostrados en un solo panel",
-        "Flujo de pedido pensado primero para el teléfono"
+      "eyebrow": "Funciones",
+      "titleBefore": "Todo lo que necesitas",
+      "titleAccent": "para vender desde un solo enlace.",
+      "body": "Escaparate, panel y herramientas de vendedor en un solo lugar: enlace alojado, catálogo y pedidos ilimitados, sin pasarela de pago del comprador.",
+      "secondary": "Ver cómo funciona",
+      "bullets": [
+        "Enlace stallio.shop, sin comprar dominio",
+        "Productos, fotos y pedidos ilimitados",
+        "Facturas PDF y exportación de pedidos",
+        "Cupones, costos de envío y COD en el checkout"
       ],
-      "startFree": "Empieza gratis",
-      "seeHowItWorks": "Ver cómo funciona",
-      "mockRows": [
-        "Pedidos en vivo con el estado a la vista",
-        "Productos, fotos y precios en una cuadrícula",
-        "Tu enlace de tienda, listo para pegar",
-        "Del carrito al pedido en un solo flujo"
-      ],
-      "flowHeading": "Cuatro pasos en un solo ciclo: ver pedidos, mostrar productos, compartir tu enlace y cerrar ventas."
+      "alts": {
+        "catalog": "Panel del catálogo de Stallio",
+        "product": "Página de producto móvil en Stallio",
+        "checkout": "Checkout móvil en Stallio"
+      }
     },
-    "grid": {
-      "eyebrow": "Lo que obtienes",
-      "title": "Capacidades que no se interponen",
-      "subtitle": "Lo esencial para mostrar productos con claridad, compartir un enlace en todas partes y mantener el cumplimiento bajo control.",
-      "flagship": {
-        "title": "Un escaparate, no un proyecto científico",
-        "description": "Los compradores obtienen una cuadrícula clara, páginas de producto y un camino de pedido que se siente intencionado. Tú obtienes algo que puedes compartir esta noche sin tocar DNS ni claves de despliegue.",
-        "bullets": [
-          "Se ve creíble en el móvil",
-          "Fácil de ajustar entre lanzamientos",
-          "La misma URL dondequiera que vendas"
-        ]
-      },
-      "core": [
+    "bento": {
+      "eyebrow": "Núcleo",
+      "title": "Las piezas que sienten compradores y vendedores.",
+      "items": [
         {
           "title": "Enlace de tienda personalizado",
-          "description": "Una ruta de marca que pegas en biografías, respuestas y códigos QR. Sin malabarismos de «enlace en la biografía» entre cinco herramientas."
+          "body": "Una ruta para bio, WhatsApp, stories y QR. Copia y pega; nosotros alojamos la tienda.",
+          "badge": "stallio.shop/you"
         },
         {
-          "title": "Gestión de productos",
-          "description": "Fotos, precios y texto en un catálogo. Actualiza existencias entre entregas sin reconstruir una página."
+          "title": "Catálogo de productos",
+          "body": "Productos e imágenes ilimitados. Variantes, precios de oferta, stock, y ocultar/mostrar sin borrar.",
+          "badge": "Un estante"
         },
         {
           "title": "Panel de pedidos",
-          "description": "Las solicitudes y los pedidos llegan a una sola vista para que nada desaparezca bajo una avalancha de mensajes directos."
+          "body": "Cada pedido en una bandeja. Busca, filtra, marca pagado, define el estado de entrega, agrega tracking.",
+          "badge": "Fulfillment"
         },
         {
-          "title": "Diseño primero para móvil",
-          "description": "Objetivos de toque, espaciado y tipografía pensados primero para el pulgar, porque ahí es donde deciden los compradores."
+          "title": "Escaparate mobile-first",
+          "body": "Cuadrícula, páginas de producto y checkout afinados para el pulgar, donde están tus compradores.",
+          "badge": "Listo para el pulgar"
         }
+      ]
+    },
+    "loop": {
+      "eyebrow": "Ritmo diario",
+      "title": "Actualiza una vez. Vende en todas partes.",
+      "items": [
+        {
+          "title": "Pedidos con estado de pago y entrega",
+          "body": "Cada pedido llega a una sola bandeja. Marca pagado, define la entrega y sigue."
+        },
+        {
+          "title": "Productos con variantes, ofertas y stock",
+          "body": "Actualiza el estante una vez. Stories, bio y chats apuntan al mismo catálogo."
+        },
+        {
+          "title": "Cupones y envío en el checkout",
+          "body": "Códigos promo y costos de envío viven en el flujo que los compradores ya usan."
+        },
+        {
+          "title": "Factura PDF lista para enviar",
+          "body": "Una factura limpia por cada pedido, lista para reenviar o imprimir."
+        }
+      ]
+    },
+    "spotlight": {
+      "eyebrow": "Tu cara pública",
+      "title": "Un escaparate que se ve intencional desde el día uno.",
+      "body": "Comparte un solo enlace. Los compradores llegan a una tienda real, no a un hilo de capturas.",
+      "points": [
+        "Alojado en stallio.shop/yourname",
+        "Escaparate en inglés, español o árabe",
+        "Páginas de Nosotros, Contacto e Inicio incluidas"
       ],
-      "quality": [
+      "altWorkspace": "Escaparate en el teléfono abierto junto a un espacio de ropa",
+      "altCatalog": "Catálogo móvil de Stallio"
+    },
+    "tools": {
+      "eyebrow": "Herramientas de vendedor",
+      "title": "Los extras discretos que mantienen los pedidos en movimiento.",
+      "items": [
         {
-          "title": "Presentación pulida",
-          "description": "Tipografía y espaciado limpios para que tu catálogo se lea como una tienda de verdad, no como un formulario improvisado."
+          "title": "Cupones y promociones",
+          "description": "Códigos de porcentaje o monto fijo, con vencimiento opcional. Los compradores los aplican en el checkout."
         },
         {
-          "title": "Rápido de lanzar",
-          "description": "Pon nombre a tu tienda, añade unos anuncios y ya estás en línea. Sin laberinto de temas ni de complementos."
+          "title": "Facturas PDF",
+          "description": "Descarga una factura profesional por pedido para enviar por WhatsApp o correo."
         },
         {
-          "title": "Hecho para seguir siendo fiable",
-          "description": "Flujos sencillos y menos piezas móviles para que pases el tiempo vendiendo, no depurando."
+          "title": "Envío y COD",
+          "description": "Envío fijo o gratis por encima de un mínimo, texto de ETA, notas en checkout y pago contra entrega."
         },
         {
-          "title": "Espacio para crecer",
-          "description": "Empieza con un catálogo ajustado y amplía a medida que crece tu audiencia. El mismo enlace crece contigo."
+          "title": "Categorías y páginas",
+          "description": "Agrupa productos, hero personalizado en inicio, líneas de confianza, reseñas, más Nosotros y Contacto."
+        },
+        {
+          "title": "Tú controlas el pago",
+          "description": "Dile a los compradores cómo pagar: banco, enlace o COD. Stallio rastrea el pedido; tú confirmas el dinero."
+        },
+        {
+          "title": "Resumen de ingresos",
+          "description": "Gráficos y totales de pedidos pagados de hoy, de la semana o de un rango personalizado."
+        },
+        {
+          "title": "Mensajes de compradores",
+          "description": "Los envíos del formulario de contacto llegan a tu bandeja para que nada quede solo en Instagram."
+        },
+        {
+          "title": "Soporte al vendedor",
+          "description": "Chatea con el equipo de Stallio desde tu panel cuando necesites una mano."
         }
       ]
     },
     "cta": {
-      "title": "Míralo en un escaparate real",
-      "subtitle": "Monta tu tienda en minutos, o explora primero la demostración. Sin tarjeta registrada.",
-      "createYourShop": "Empieza gratis",
-      "viewDemoStore": "Ver tienda de demostración"
+      "eyebrow": "Pruébalo",
+      "title": "Míralo en un escaparate real.",
+      "body": "Levanta tu tienda en minutos, o mira la demo primero. Sin tarjeta en archivo.",
+      "secondary": "Ver tienda demo"
     }
   }
 }

@@ -38,8 +38,17 @@ yarn-error.log*
 
 # test coverage
 coverage/
-node_modules/
-.env
-dist/
-build/
-.DS_Store
+# Agent / Cursor project docs and rules (local only)
+.cursor/rules/
+.agents/
+.claude/
+AGENTS.md
+CLAUDE.md
+agent.md
+cursor.md
+context.md
+about.md
+.cursor
+vite.config.d.ts
+vite.config.js
+.playwright-mcp

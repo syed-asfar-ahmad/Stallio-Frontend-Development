@@ -9,7 +9,9 @@ import enHowItWorks from '../locales/en/howItWorks.json';
 import enFeatures from '../locales/en/features.json';
 import enPricing from '../locales/en/pricing.json';
 import enContact from '../locales/en/contact.json';
+import enHelp from '../locales/en/help.json';
 import enCareers from '../locales/en/careers.json';
+import enBlog from '../locales/en/blog.json';
 import enAmbassador from '../locales/en/ambassador.json';
 import enAuth from '../locales/en/auth.json';
 import enLegal from '../locales/en/legal.json';
@@ -23,7 +25,9 @@ import esHowItWorks from '../locales/es/howItWorks.json';
 import esFeatures from '../locales/es/features.json';
 import esPricing from '../locales/es/pricing.json';
 import esContact from '../locales/es/contact.json';
+import esHelp from '../locales/es/help.json';
 import esCareers from '../locales/es/careers.json';
+import esBlog from '../locales/es/blog.json';
 import esAmbassador from '../locales/es/ambassador.json';
 import esAuth from '../locales/es/auth.json';
 import esLegal from '../locales/es/legal.json';
@@ -37,7 +41,9 @@ import arHowItWorks from '../locales/ar/howItWorks.json';
 import arFeatures from '../locales/ar/features.json';
 import arPricing from '../locales/ar/pricing.json';
 import arContact from '../locales/ar/contact.json';
+import arHelp from '../locales/ar/help.json';
 import arCareers from '../locales/ar/careers.json';
+import arBlog from '../locales/ar/blog.json';
 import arAmbassador from '../locales/ar/ambassador.json';
 import arAuth from '../locales/ar/auth.json';
 import arLegal from '../locales/ar/legal.json';
@@ -52,7 +58,9 @@ const enTranslation = {
   ...enFeatures,
   ...enPricing,
   ...enContact,
+  ...enHelp,
   ...enCareers,
+  ...enBlog,
   ...enAmbassador,
   ...enAuth,
   ...enLegal,
@@ -68,7 +76,9 @@ const esTranslation = {
   ...esFeatures,
   ...esPricing,
   ...esContact,
+  ...esHelp,
   ...esCareers,
+  ...esBlog,
   ...esAmbassador,
   ...esAuth,
   ...esLegal,
@@ -84,7 +94,9 @@ const arTranslation = {
   ...arFeatures,
   ...arPricing,
   ...arContact,
+  ...arHelp,
   ...arCareers,
+  ...arBlog,
   ...arAmbassador,
   ...arAuth,
   ...arLegal,

@@ -1,11 +1,21 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Home, CreditCard, Mail } from 'lucide-react';
-import PublicLayout from '../components/PublicLayout';
+import { motion, useReducedMotion } from 'motion/react';
+import { IconArrowUpRight, IconHome, IconMail } from '@tabler/icons-react';
+
+import PublicLayout from '@/components/PublicLayout';
+import {
+  HeroAtmosphere,
+  heroBleedClassName,
+} from '@/components/marketing/HeroAtmosphere';
+import { Button } from '@/components/ui/button';
+import { MovingBorderButton } from '@/components/ui/moving-border';
+import { fadeUp } from '@/lib/motion';
 
 export default function NotFound() {
   const { t } = useTranslation();
+  const reduce = useReducedMotion();
 
   useEffect(() => {
     document.title = t('notFound.metaTitle');
@@ -13,37 +23,91 @@ export default function NotFound() {
 
   return (
     <PublicLayout>
-      <div className="home-marketing flex min-h-0 min-w-0 w-full flex-1 flex-col items-center justify-center overflow-x-clip px-4 py-12 text-center max-lg:py-16 sm:py-20 md:py-28">
-        <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-brand-600 sm:text-sm dark:text-brand-400">404</p>
-        <h1 className="home-headline mt-3 max-w-lg text-pretty text-2xl font-extrabold text-stone-900 max-lg:text-2xl dark:text-zinc-50 sm:text-3xl md:text-4xl">
-          {t('notFound.title')}
-        </h1>
-        <p className="mt-4 max-w-md text-pretty text-[0.9375rem] font-medium leading-relaxed text-stone-600 sm:text-base dark:text-zinc-300">
-          {t('notFound.body')}
-        </p>
-        <div className="mt-8 flex w-full max-w-sm flex-col gap-3 sm:mt-10 sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
-          <Link
-            to="/"
-            className="home-btn-primary inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-brand-400 via-brand-500 to-brand-600 px-6 py-3.5 text-sm font-bold text-white no-underline sm:w-auto sm:text-base"
-          >
-            <Home className="h-4 w-4" aria-hidden />
-            {t('notFound.backHome')}
-          </Link>
-          <Link
-            to="/pricing"
-            className="home-btn-secondary inline-flex w-full items-center justify-center gap-2 rounded-2xl px-6 py-3.5 text-sm font-bold text-stone-800 no-underline sm:w-auto sm:text-base"
-          >
-            <CreditCard className="h-4 w-4" aria-hidden />
-            {t('notFound.viewPricing')}
-          </Link>
-          <Link
-            to="/contact"
-            className="home-btn-secondary inline-flex w-full items-center justify-center gap-2 rounded-2xl px-6 py-3.5 text-sm font-bold text-stone-800 no-underline sm:w-auto sm:text-base"
-          >
-            <Mail className="h-4 w-4" aria-hidden />
-            {t('notFound.contactUs')}
-          </Link>
-        </div>
+      <div className="home-marketing min-w-0 w-full overflow-x-clip">
+        <section className={heroBleedClassName}>
+          <HeroAtmosphere sparkleId="not-found-hero-sparkles" />
+
+          <div className="relative z-10 mx-auto flex min-h-[70dvh] w-full max-w-6xl flex-col items-start justify-center px-4 py-24 sm:px-6 md:min-h-[78dvh] md:py-28">
+            <motion.div
+              className="flex max-w-xl flex-col gap-5"
+              initial={reduce ? false : 'hidden'}
+              animate="show"
+              variants={{
+                hidden: {},
+                show: { transition: { staggerChildren: reduce ? 0 : 0.1 } },
+              }}
+            >
+              <motion.span
+                className="border-border/70 bg-background/80 text-muted-foreground inline-flex w-fit rounded-full border px-3 py-1 text-[10px] font-medium tracking-[0.2em] uppercase"
+                variants={fadeUp(0.6, 14)}
+              >
+                {t('notFound.eyebrow')}
+              </motion.span>
+
+              <motion.p
+                className="text-brand text-[clamp(4.5rem,14vw,8rem)] leading-[0.9] font-semibold tracking-tight tabular-nums"
+                variants={fadeUp(0.75, 22)}
+                aria-hidden
+              >
+                404
+              </motion.p>
+
+              <motion.h1
+                className="text-foreground max-w-[14ch] text-4xl font-semibold tracking-tight text-balance sm:text-5xl lg:text-[3.1rem] lg:leading-[1.06]"
+                variants={fadeUp(0.7, 18)}
+              >
+                {t('notFound.title')}
+              </motion.h1>
+
+              <motion.p
+                className="text-muted-foreground max-w-[40ch] text-base leading-7 sm:text-lg sm:leading-8"
+                variants={fadeUp(0.65, 16)}
+              >
+                {t('notFound.body')}
+              </motion.p>
+
+              <motion.div
+                className="flex flex-wrap items-center gap-3 pt-2"
+                variants={fadeUp()}
+              >
+                <MovingBorderButton
+                  as={Link}
+                  to="/"
+                  borderRadius="9999px"
+                  containerClassName="h-11"
+                  className="px-5"
+                >
+                  <IconHome className="size-4" stroke={1.5} aria-hidden />
+                  {t('notFound.backHome')}
+                </MovingBorderButton>
+
+                <Button
+                  asChild
+                  size="lg"
+                  variant="ghost"
+                  className="rounded-full px-5 active:scale-[0.98]"
+                >
+                  <Link to="/pricing" className="inline-flex items-center gap-2">
+                    {t('notFound.viewPricing')}
+                    <IconArrowUpRight className="size-4" stroke={1.5} aria-hidden />
+                  </Link>
+                </Button>
+
+                <Button
+                  asChild
+                  size="lg"
+                  variant="ghost"
+                  className="rounded-full px-5 active:scale-[0.98]"
+                >
+                  <Link to="/contact" className="inline-flex items-center gap-2">
+                    <IconMail className="size-4" stroke={1.5} aria-hidden />
+                    {t('notFound.contactUs')}
+                  </Link>
+                </Button>
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
       </div>
     </PublicLayout>
   );

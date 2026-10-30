@@ -37,6 +37,7 @@
     "pillars": {
       "eyebrow": "What you get",
       "title": "Everything in one loop: show, sell, ship.",
+      "body": "Six pieces that stay connected: catalog, link, orders, and the seller tools that keep fulfillment calm.",
       "offers": [
         {
           "title": "Live in minutes",
@@ -87,14 +88,23 @@
       "visionBody": "We want independent sellers to have tools that feel premium and honest: clear pricing, clear fulfillment, and a storefront that respects the buyer's time as much as yours."
     },
     "promise": {
+      "eyebrow": "The promise",
+      "title": "Simple, fast, and credible by default.",
+      "body": "Three things every seller should feel on day one, without plugins, themes, or a weekend of setup.",
       "simple": "Simple",
-      "simpleSub": "No code, no theme maze",
+      "simpleDetail": "A clear path from signup to a shareable shelf. No plugins to wire, no theme rabbit hole.",
+      "simplePoints": [
+        "Name your shop",
+        "Add products",
+        "Share one link"
+      ],
       "fast": "Fast",
-      "fastSub": "Draft a store in minutes",
+      "fastDetail": "Most sellers go live the same evening they sign up, with a catalog buyers can browse on a phone.",
       "credible": "Credible",
-      "credibleSub": "A link buyers recognize"
+      "credibleDetail": "A real storefront at stallio.shop looks intentional, so chats and stories stop doing the heavy lifting alone."
     },
     "cta": {
+      "eyebrow": "Start tonight",
       "title": "Ready to look as serious as you are?",
       "subtitle": "Create a free store, add a few products, and drop your link where people already find you.",
       "createFreeStore": "Start Free",
