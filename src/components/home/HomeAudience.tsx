@@ -39,7 +39,7 @@ export function HomeAudience() {
 
         <div className="grid gap-4 md:grid-cols-12 md:gap-5">
           <motion.article
-            className="group relative min-h-[22rem] overflow-hidden rounded-3xl md:col-span-7 md:row-span-2 md:min-h-[28rem]"
+            className="group relative min-h-88 overflow-hidden rounded-3xl md:col-span-7 md:row-span-2 md:min-h-112"
             initial={reduce ? false : { opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
@@ -50,7 +50,7 @@ export function HomeAudience() {
               alt={items[0].alt}
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent dark:from-black/85 dark:via-black/35" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/75 via-black/25 to-transparent dark:from-black/85 dark:via-black/35" />
             <div className="absolute inset-x-0 bottom-0 space-y-2 p-6 sm:p-8">
               <h3 className="text-2xl font-semibold tracking-tight text-white">
                 {items[0].title}
@@ -62,7 +62,7 @@ export function HomeAudience() {
           </motion.article>
 
           <motion.article
-            className="group relative min-h-[10.5rem] overflow-hidden rounded-3xl md:col-span-5 md:min-h-[13.5rem]"
+            className="group relative min-h-42 overflow-hidden rounded-3xl md:col-span-5 md:min-h-54"
             initial={reduce ? false : { opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
@@ -73,7 +73,7 @@ export function HomeAudience() {
               alt={items[1].alt}
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent dark:from-black/85 dark:via-black/35" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/75 via-black/25 to-transparent dark:from-black/85 dark:via-black/35" />
             <div className="absolute inset-x-0 bottom-0 space-y-1.5 p-6 sm:p-7">
               <h3 className="text-xl font-semibold tracking-tight text-white">
                 {items[1].title}
@@ -85,7 +85,7 @@ export function HomeAudience() {
           </motion.article>
 
           <motion.article
-            className="group relative min-h-[10.5rem] overflow-hidden rounded-3xl md:col-span-5 md:min-h-[13.5rem]"
+            className="group relative min-h-42 overflow-hidden rounded-3xl md:col-span-5 md:min-h-54"
             initial={reduce ? false : { opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
@@ -96,7 +96,7 @@ export function HomeAudience() {
               alt={items[2].alt}
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent dark:from-black/85 dark:via-black/40" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent dark:from-black/85 dark:via-black/40" />
             <div className="absolute inset-x-0 bottom-0 space-y-1.5 p-6 sm:p-7">
               <h3 className="text-xl font-semibold tracking-tight text-white">
                 {items[2].title}
@@ -108,7 +108,7 @@ export function HomeAudience() {
           </motion.article>
 
           <motion.article
-            className="group relative min-h-[16rem] overflow-hidden rounded-3xl sm:min-h-[18rem] md:col-span-6"
+            className="group relative min-h-64 overflow-hidden rounded-3xl sm:min-h-72 md:col-span-6"
             initial={reduce ? false : { opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.25 }}
@@ -119,7 +119,7 @@ export function HomeAudience() {
               alt={items[3].alt}
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent dark:from-black/80 dark:via-black/30" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/25 to-transparent dark:from-black/80 dark:via-black/30" />
             <div className="absolute inset-x-0 bottom-0 space-y-1.5 p-5 sm:p-6">
               <h3 className="text-xl font-semibold tracking-tight text-white sm:text-2xl">
                 {items[3].title}
@@ -131,7 +131,7 @@ export function HomeAudience() {
           </motion.article>
 
           <motion.article
-            className="group relative min-h-[16rem] overflow-hidden rounded-3xl sm:min-h-[18rem] md:col-span-6"
+            className="group relative min-h-64 overflow-hidden rounded-3xl sm:min-h-72 md:col-span-6"
             initial={reduce ? false : { opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.25 }}
@@ -142,7 +142,7 @@ export function HomeAudience() {
               alt={items[4].alt}
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent dark:from-black/80 dark:via-black/30" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent dark:from-black/80 dark:via-black/30" />
             <div className="absolute inset-x-0 bottom-0 space-y-1.5 p-5 sm:p-6">
               <h3 className="text-lg font-semibold tracking-tight text-white sm:text-xl">
                 {items[4].title}

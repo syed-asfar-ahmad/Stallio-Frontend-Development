@@ -1,4 +1,3 @@
-
 import React, { useRef } from "react";
 import {
   motion,
@@ -33,7 +32,7 @@ export function MovingBorderButton({
   return (
     <Component
       className={cn(
-        "relative h-11 overflow-hidden bg-transparent p-[1px] text-sm",
+        "relative h-11 overflow-hidden bg-transparent p-px text-sm",
         containerClassName,
       )}
       style={{ borderRadius }}
@@ -90,11 +89,13 @@ export const MovingBorder = ({
     }
   });
 
-  const x = useTransform(progress, (val) =>
-    pathRef.current?.getPointAtLength(val).x,
+  const x = useTransform(
+    progress,
+    (val) => pathRef.current?.getPointAtLength(val).x,
   );
-  const y = useTransform(progress, (val) =>
-    pathRef.current?.getPointAtLength(val).y,
+  const y = useTransform(
+    progress,
+    (val) => pathRef.current?.getPointAtLength(val).y,
   );
 
   const transform = useMotionTemplate`translateX(${x}px) translateY(${y}px) translateX(-50%) translateY(-50%)`;

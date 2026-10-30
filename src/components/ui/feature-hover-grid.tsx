@@ -43,8 +43,8 @@ export function FeatureHoverGrid({
             className={cn(
               "group/feature relative flex flex-col py-8 md:py-10",
               "border-border/55 border-b last:border-b-0",
-              "md:border-border/55 md:border-r md:[&:nth-child(even)]:border-r-0 md:border-b",
-              "lg:border-border/55 lg:border-r lg:[&:nth-child(3n)]:border-r-0",
+              "md:border-border/55 md:border-r md:even:border-r-0 md:border-b",
+              "lg:border-border/55 lg:border-r lg:nth-[3n]:border-r-0",
               isFirstInLgRow && "lg:border-l",
               showBottomBorder ? "lg:border-b" : "lg:border-b-0",
             )}
@@ -54,8 +54,8 @@ export function FeatureHoverGrid({
               className={cn(
                 "pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover/feature:opacity-100",
                 washFromBottom
-                  ? "bg-gradient-to-t from-brand/[0.07] to-transparent dark:from-brand/[0.14]"
-                  : "bg-gradient-to-b from-brand/[0.07] to-transparent dark:from-brand/[0.14]",
+                  ? "bg-linear-to-t from-brand/[0.07] to-transparent dark:from-brand/[0.14]"
+                  : "bg-linear-to-b from-brand/[0.07] to-transparent dark:from-brand/[0.14]",
               )}
             />
 
