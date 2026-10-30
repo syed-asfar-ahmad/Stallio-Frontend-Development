@@ -13,6 +13,7 @@ import {
   RotateCcw,
   Briefcase,
   Newspaper,
+  CircleHelp,
 } from 'lucide-react';
 
 import { getSocialBrandColor, SocialIcon } from '@/components/SocialIcons';
@@ -56,6 +57,7 @@ export function MarketingFooter() {
     { to: '/pricing', label: t('layout.nav.pricing'), icon: CreditCard },
     { to: '/how-it-works', label: t('layout.footer.howItWorks'), icon: ListOrdered },
     { to: '/contact', label: t('layout.nav.contact'), icon: Mail },
+    { to: '/help', label: t('layout.nav.help'), icon: CircleHelp },
     { to: '/careers', label: t('layout.nav.careers'), icon: Briefcase },
     { to: '/blog', label: t('layout.nav.blog'), icon: Newspaper },
   ];
