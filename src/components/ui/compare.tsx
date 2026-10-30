@@ -91,7 +91,7 @@ export const Compare = ({
   );
 
   useEffect(() => {
-    startAutoplay(0);
+    startAutoplay();
     return () => stopAutoplay();
   }, [startAutoplay, stopAutoplay]);
 

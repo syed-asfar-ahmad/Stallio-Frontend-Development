@@ -92,7 +92,7 @@ export function HomeAudience() {
             transition={{ duration: 0.65, delay: reduce ? 0 : 0.12, ease: motionEase }}
           >
             <img
-              src="/assets/images/product-1.jpg"
+              src="/assets/images/audience-local-shops.png"
               alt={items[2].alt}
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
             />
