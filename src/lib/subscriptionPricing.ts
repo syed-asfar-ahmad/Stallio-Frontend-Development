@@ -1,7 +1,13 @@
+import { wrapLtrIsolate } from './ltrIsolate';
+
 export type SubscriptionPlan = 'monthly' | 'yearly';
 
 export const SUBSCRIPTION_USD_MONTHLY = 5;
 export const SUBSCRIPTION_USD_YEARLY = 50;
+
+export function formatSubscriptionUsd(amount: number) {
+  return wrapLtrIsolate(`$${amount}`);
+}
 
 export function subscriptionAmountForPlan(plan: SubscriptionPlan): number {
   return plan === 'yearly' ? SUBSCRIPTION_USD_YEARLY : SUBSCRIPTION_USD_MONTHLY;

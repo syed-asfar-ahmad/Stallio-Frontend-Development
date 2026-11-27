@@ -1,0 +1,149 @@
+{
+  "help": {
+    "metaTitle": "Help | Stallio",
+    "metaTitleArticle": "{{title}} | Stallio Help",
+    "hero": {
+      "eyebrow": "Help center",
+      "title": "Find answers fast",
+      "body": "Search common seller problems and follow short step-by-step guides. If you still need a person, use Contact."
+    },
+    "searchPlaceholder": "Search for a problem, like delete account or password reset",
+    "searchLabel": "Search help articles",
+    "categories": {
+      "all": "All",
+      "account": "Account",
+      "access": "Login and access",
+      "billing": "Billing and plans"
+    },
+    "resultsCount": "{{count}} guides",
+    "noResults": {
+      "title": "No matching guides",
+      "body": "Try different words, or send us a note and we will point you the right way.",
+      "cta": "Contact support"
+    },
+    "article": {
+      "back": "Back to Help",
+      "stepsHeading": "Steps",
+      "related": "Related guides",
+      "stillNeedHelp": "Still need help?",
+      "stillNeedHelpBody": "Tell us what went wrong and include the email on your Stallio account.",
+      "contactCta": "Contact support",
+      "refundPolicyLink": "Read the Refund Policy"
+    },
+    "notFound": {
+      "title": "Guide not found",
+      "body": "That help page does not exist or the link is outdated.",
+      "cta": "Browse Help"
+    },
+    "articles": {
+      "delete-account": {
+        "title": "How to delete your Stallio account",
+        "excerpt": "Permanently remove your shop, products, orders, and messages from Settings.",
+        "intro": "Deleting your account removes your shop and dashboard data. This cannot be undone from the product. Sign in first.",
+        "steps": [
+          "Sign in at stallio.shop/login and open your seller dashboard.",
+          "Go to Settings in the dashboard sidebar.",
+          "Scroll to Delete Account and choose Delete My Account.",
+          "In the confirmation box, type DELETE MY ACCOUNT exactly, then confirm.",
+          "When deletion finishes, you are signed out and returned to the home page."
+        ]
+      },
+      "restore-account": {
+        "title": "Recover a deleted Stallio account",
+        "excerpt": "Deletion is permanent in the product. Contact support if you need to ask about recovery.",
+        "intro": "Account deletion is designed to be permanent. There is no self-serve restore button after you confirm DELETE MY ACCOUNT.",
+        "steps": [
+          "Check whether you can still sign in at stallio.shop/login. If login works, the account was not deleted.",
+          "If login fails and you already deleted the account, open the Contact page.",
+          "Use a clear subject such as Account recovery and include the email and shop username you used.",
+          "Explain when you deleted the account and why you need it back.",
+          "Wait for a reply. Recovery is not guaranteed and depends on what data is still available on our side."
+        ]
+      },
+      "account-suspended": {
+        "title": "Why an account can be suspended",
+        "excerpt": "Shop or dashboard access may pause for non-payment, abuse, or risk to other users.",
+        "intro": "Stallio can suspend a shop, the seller dashboard, or both. You may see a message that dashboard access is suspended when you try to sign in or open the dashboard.",
+        "steps": [
+          "Common reasons include unpaid subscription fees, abuse, illegal or harmful shop content, or risk to other users, as described in the Terms of Service.",
+          "If only the dashboard is blocked, your public shop may still behave differently than a full account close.",
+          "Check the email inbox for the address on your Stallio account for a suspension or billing note from us.",
+          "Review Pricing and your last payment status if the issue may be billing related.",
+          "Use the after-suspension guide for what to do next, including how to contact support."
+        ]
+      },
+      "after-suspension": {
+        "title": "What to do after a suspension",
+        "excerpt": "Contact support with context, fix billing if needed, and ask for a review.",
+        "intro": "There is no automatic unsuspend button. Clear the cause when you can, then ask the team to review your account.",
+        "steps": [
+          "Read any email Stallio sent about the suspension and note the reason if one is given.",
+          "If the issue is billing, resolve the unpaid plan or failed payment first when you can.",
+          "If you can still open the dashboard, use Support Chat with Admin and describe what happened.",
+          "If you cannot open the dashboard, use the Contact page. Include your account email, shop username, and a short explanation or appeal.",
+          "Do not create a second account to bypass a suspension. Wait for a human reply before changing shop content that was flagged."
+        ]
+      },
+      "login-issues": {
+        "title": "Fix common login problems",
+        "excerpt": "Check email, password, verification, and suspension before assuming the account is gone.",
+        "intro": "Most sign-in problems come from the wrong email, a forgotten password, an unverified email, or a suspended dashboard.",
+        "steps": [
+          "Open stallio.shop/login and confirm you are using the same email you used at signup.",
+          "If the password fails, use Forgot Password and follow the reset email.",
+          "If you never finished email verification, open the verification link from your signup email or request a new one from the verify-email flow.",
+          "If you see a message that dashboard access is suspended, follow the suspension guides instead of repeatedly trying passwords.",
+          "Still stuck? Use Contact with the email you think belongs to the account."
+        ]
+      },
+      "reset-password": {
+        "title": "Reset your password",
+        "excerpt": "Use Forgot Password, open the email link, and set a new password.",
+        "intro": "You can reset a seller password without knowing the old one, as long as you can access the account email inbox.",
+        "steps": [
+          "Go to stallio.shop/forgot-password.",
+          "Enter the email on your Stallio account and submit.",
+          "Open the inbox for that email and find the Stallio reset message. Check spam if needed.",
+          "Follow the link to the reset page and choose a new password that meets the strength rules shown on signup.",
+          "Sign in at stallio.shop/login with the new password. If the link expired, request a fresh reset email."
+        ]
+      },
+      "cancel-or-change-plan": {
+        "title": "Cancel or change your subscription",
+        "excerpt": "Plans and billing cycles are shown on Pricing. Cancel or change through account messages and Contact when needed.",
+        "intro": "Stallio shows monthly and yearly options on Pricing. You can start without a card. Cancelling a paid monthly plan stops future charges; you keep access through the period already paid, as described on Pricing and the Refund Policy.",
+        "steps": [
+          "Review current options on stallio.shop/pricing, including monthly and yearly billing.",
+          "If you are still in a free trial, you can stay on free features or subscribe when ready. You are not charged a subscription fee until you subscribe.",
+          "To cancel or change a paid plan, use the Contact page with subject Billing or plans, and include your account email and shop username.",
+          "Say clearly whether you want to cancel, move monthly to yearly, or the other way around.",
+          "After cancellation of a monthly plan, expect access to continue until the end of the period you already paid for, unless we confirm something different in writing."
+        ]
+      },
+      "billing-problems": {
+        "title": "Billing and payment problems",
+        "excerpt": "Double charges, wrong amounts, and failed payments: what to gather and where to write.",
+        "intro": "Subscription fees for seller plans are billed as described on Pricing. Shop orders between you and your customers are separate and are not Stallio subscription billing.",
+        "steps": [
+          "Confirm the charge is a Stallio subscription fee, not a payout or payment you collected from a customer.",
+          "Note the charge date, amount, currency, and the email or shop username on the account.",
+          "For a possible billing mistake such as a double charge or billing after a confirmed cancellation, contact us within 30 days of the charge.",
+          "Use the Contact page, choose a billing-related subject, and include the details above.",
+          "If dashboard access was limited after a failed payment, mention that in the same note so we can connect billing and access."
+        ]
+      },
+      "request-refund": {
+        "title": "Request a subscription refund",
+        "excerpt": "Refunds follow the Refund Policy. Free plans have no subscription fee to refund.",
+        "intro": "This covers subscription fees you pay Stallio. It does not cover refunds for orders on your shop. Those stay between you and your customers.",
+        "steps": [
+          "Read the Refund Policy so you know how monthly, yearly, free, and billing-mistake cases are handled.",
+          "Open the Contact page and include your account email, shop username, charge date, and a short description of the issue.",
+          "If you cancelled a monthly plan, remember unused days in a paid month are usually not refunded unless the law requires it or we confirm a billing mistake.",
+          "Yearly plans paid in advance are not automatically refunded for remaining months unless we confirm it in writing or local law requires it.",
+          "After we verify an approved refund, it is usually processed within 5 to 10 business days, depending on your payment provider."
+        ]
+      }
+    }
+  }
+}

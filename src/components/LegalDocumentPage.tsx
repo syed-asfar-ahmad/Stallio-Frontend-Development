@@ -1,80 +1,146 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ArrowLeft } from 'lucide-react';
+import { motion, useReducedMotion } from 'motion/react';
+import { IconArrowLeft } from '@tabler/icons-react';
+
 import PublicLayout from './PublicLayout';
+import {
+  HeroAtmosphere,
+  heroBleedClassName,
+} from '@/components/marketing/HeroAtmosphere';
+import { motionEase } from '@/lib/motion';
 
 export type LegalDocKey = 'legalPrivacy' | 'legalTerms' | 'legalRefund';
 
 type Section = { heading: string; paragraphs: string[] };
 
+const LEGAL_NAV: { key: LegalDocKey; href: string; labelKey: string }[] = [
+  { key: 'legalPrivacy', href: '/privacy', labelKey: 'legalDoc.privacy' },
+  { key: 'legalTerms', href: '/terms', labelKey: 'legalDoc.terms' },
+  { key: 'legalRefund', href: '/refund-policy', labelKey: 'legalDoc.refund' },
+];
+
 export default function LegalDocumentPage({ docKey }: { docKey: LegalDocKey }) {
   const { t } = useTranslation();
-  const sections = useMemo(
-    () => t(`${docKey}.sections`, { returnObjects: true }) as Section[],
-    [docKey, t],
-  );
+  const reduce = useReducedMotion();
+  const sections = t(`${docKey}.sections`, { returnObjects: true }) as Section[];
 
   useEffect(() => {
     document.title = t(`${docKey}.metaTitle`);
   }, [docKey, t]);
 
+  const otherDocs = LEGAL_NAV.filter((item) => item.key !== docKey);
+
   return (
     <PublicLayout>
-      <div className="home-marketing relative flex min-h-0 w-full min-w-0 flex-1 flex-col overflow-x-clip border-b border-stone-200/80 bg-white dark:border-zinc-700 dark:bg-zinc-950">
-        <div
-          className="pointer-events-none absolute inset-x-0 top-0 z-10 h-px bg-gradient-to-r from-transparent via-brand-200/70 to-transparent dark:via-brand-800/40"
-          aria-hidden
-        />
-        <div className="relative mx-auto w-full min-w-0 max-w-7xl px-4 py-10 max-lg:px-4 max-lg:py-12 sm:py-12 md:px-5 md:py-14 lg:py-16">
-          <Link
-            to="/"
-            className="inline-flex min-h-11 items-center gap-2 rounded-lg py-1 text-sm font-semibold text-brand-700 no-underline transition-colors hover:text-brand-800 dark:text-brand-400 dark:hover:text-brand-300"
-          >
-            <ArrowLeft className="h-4 w-4 shrink-0 rtl:rotate-180" aria-hidden />
-            {t('legalDoc.backHome')}
-          </Link>
+      <div className="home-marketing min-w-0 w-full overflow-x-clip">
+        <section className={heroBleedClassName}>
+          <HeroAtmosphere sparkleId={`legal-${docKey}-sparkles`} />
 
-          <div className="marketing-pricing-shell mt-6 min-w-0 overflow-hidden rounded-2xl border border-stone-200/90 bg-white shadow-[0_24px_80px_-48px_rgba(15,23,42,0.25)] max-lg:mt-6 sm:mt-8 sm:rounded-[1.75rem] md:mt-10 md:rounded-[2rem]">
-            <div className="border-b border-stone-100 bg-gradient-to-br from-brand-50/70 via-white to-white px-4 py-6 max-lg:py-6 sm:px-8 sm:py-10 dark:border-zinc-700/80 dark:from-brand-950/30 dark:via-zinc-900 dark:to-zinc-900">
-              <h1 className="home-headline text-pretty text-2xl font-extrabold tracking-tight text-stone-900 dark:text-zinc-50 max-lg:text-2xl sm:text-3xl md:text-4xl">
+          <div className="relative z-10 mx-auto grid w-full max-w-6xl gap-10 px-4 py-20 sm:px-6 md:grid-cols-12 md:gap-12 md:py-28 lg:py-32">
+            <motion.div
+              className="flex max-w-2xl flex-col gap-5 md:col-span-8"
+              initial={reduce ? false : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.75, ease: motionEase }}
+            >
+              <Link
+                to="/"
+                className="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center gap-2 text-sm font-medium no-underline transition-colors duration-300"
+              >
+                <IconArrowLeft
+                  className="size-4 shrink-0 rtl:rotate-180"
+                  stroke={1.5}
+                  aria-hidden
+                />
+                {t('legalDoc.backHome')}
+              </Link>
+
+              <span className="border-border/70 bg-background/80 text-muted-foreground inline-flex w-fit rounded-full border px-3 py-1 text-[10px] font-medium tracking-[0.2em] uppercase">
+                {t('legalDoc.eyebrow')}
+              </span>
+
+              <h1 className="text-foreground max-w-[16ch] text-4xl font-semibold tracking-tight text-balance sm:text-5xl lg:text-[3.25rem] lg:leading-[1.06]">
                 {t(`${docKey}.title`)}
               </h1>
-              <p className="mt-3 text-sm font-semibold text-stone-500 dark:text-zinc-400">
+
+              <p className="text-muted-foreground text-sm font-medium">
                 {t('legalDoc.lastUpdated')}
               </p>
-              <p className="mt-3 max-w-none text-[0.9375rem] font-medium leading-relaxed text-stone-600 dark:text-zinc-300 max-lg:mt-3 sm:mt-4 sm:text-base md:text-lg">
+
+              <p className="text-muted-foreground max-w-[48ch] text-base leading-7 sm:text-lg sm:leading-8">
                 {t(`${docKey}.intro`)}
               </p>
+            </motion.div>
+
+            <motion.aside
+              className="md:col-span-4 md:pt-16"
+              initial={reduce ? false : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.75, delay: reduce ? 0 : 0.12, ease: motionEase }}
+            >
+              <p className="text-muted-foreground text-[10px] font-medium tracking-[0.2em] uppercase">
+                {t('legalDoc.alsoRead')}
+              </p>
+              <ul className="mt-4 space-y-3">
+                {otherDocs.map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      to={item.href}
+                      className="text-foreground hover:text-brand group inline-flex items-baseline gap-2 text-base font-medium no-underline transition-colors duration-300"
+                    >
+                      <span
+                        className="bg-border group-hover:bg-brand mt-2 h-px w-4 shrink-0 transition-colors duration-300"
+                        aria-hidden
+                      />
+                      {t(item.labelKey)}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </motion.aside>
+          </div>
+        </section>
+
+        <section className="border-border relative border-y bg-surface dark:bg-background">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_8%_0%,color-mix(in_srgb,var(--brand)_8%,transparent),transparent_45%)] dark:bg-[radial-gradient(ellipse_at_8%_0%,color-mix(in_srgb,var(--brand)_14%,transparent),transparent_45%)]"
+          />
+
+          <article className="relative mx-auto w-full max-w-3xl px-4 py-16 sm:px-6 md:py-24 lg:py-28">
+            <div className="divide-border/60 divide-y">
+              {sections.map((sec) => (
+                <section key={sec.heading} className="scroll-mt-28 py-10 first:pt-0 last:pb-0 sm:py-12">
+                  <h2 className="text-foreground text-xl font-semibold tracking-tight text-pretty sm:text-2xl">
+                    {sec.heading}
+                  </h2>
+                  <div className="mt-4 max-w-[65ch] space-y-4 text-base font-medium leading-7 text-stone-600 sm:leading-8 dark:text-zinc-300">
+                    {sec.paragraphs.map((p, i) => (
+                      <p key={i} className="text-pretty">
+                        {p}
+                      </p>
+                    ))}
+                  </div>
+                </section>
+              ))}
             </div>
 
-            <div className="min-w-0 px-4 py-6 max-lg:py-6 sm:px-8 sm:py-10">
-              <div className="space-y-4 sm:space-y-8 lg:space-y-10">
-                {sections.map((sec, si) => (
-                  <section
-                    key={sec.heading}
-                    className="relative isolate scroll-mt-24 rounded-xl border border-stone-100 bg-stone-50/50 p-3.5 max-lg:p-3.5 sm:rounded-2xl sm:p-6 dark:border-zinc-700/80 dark:bg-zinc-800/25"
-                  >
-                    <div
-                      className="absolute start-0 top-4 bottom-4 w-1 rounded-full bg-brand-500 dark:bg-brand-500 sm:top-6 sm:bottom-6"
-                      aria-hidden
-                    />
-                    <div className="min-w-0 ps-3.5 sm:ps-5">
-                      <h2 className="text-pretty text-base font-extrabold tracking-tight text-stone-900 dark:text-zinc-50 sm:text-xl">
-                        {sec.heading}
-                      </h2>
-                      <div className="mt-3 space-y-3 text-[0.875rem] font-medium leading-[1.65] break-words text-stone-600 [overflow-wrap:anywhere] dark:text-zinc-300 sm:mt-4 sm:space-y-3.5 sm:text-[0.9375rem] sm:leading-[1.7]">
-                        {sec.paragraphs.map((p, pi) => (
-                          <p key={`${si}-${pi}`}>{p}</p>
-                        ))}
-                      </div>
-                    </div>
-                  </section>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+            <footer className="border-border/60 mt-14 border-t pt-10 sm:mt-16">
+              <p className="text-muted-foreground max-w-[48ch] text-sm leading-6">
+                {t('legalDoc.contactNote')}{' '}
+                <Link
+                  to="/contact"
+                  className="text-foreground hover:text-brand font-medium underline-offset-4 transition-colors hover:underline"
+                >
+                  {t('legalDoc.contactLink')}
+                </Link>
+                .
+              </p>
+            </footer>
+          </article>
+        </section>
       </div>
     </PublicLayout>
   );

@@ -36,6 +36,7 @@
     "pillars": {
       "eyebrow": "Lo que obtienes",
       "title": "Todo en un solo ciclo: mostrar, vender, enviar.",
+      "body": "Seis piezas que se mantienen conectadas: catálogo, enlace, pedidos y las herramientas de vendedor que mantienen el envío en calma.",
       "offers": [
         {
           "title": "En línea en minutos",
@@ -82,14 +83,23 @@
       "visionBody": "Queremos que los vendedores independientes tengan herramientas que se sientan premium y honestas: precios claros, cumplimiento claro y un escaparate que respete el tiempo del comprador tanto como el tuyo."
     },
     "promise": {
+      "eyebrow": "La promesa",
+      "title": "Simple, rápido y creíble por defecto.",
+      "body": "Tres cosas que todo vendedor debería sentir el primer día, sin plugins, temas ni un fin de semana de configuración.",
       "simple": "Sencillo",
-      "simpleSub": "Sin código, sin laberinto de temas",
+      "simpleDetail": "Un camino claro del registro a un escaparate para compartir. Sin plugins ni laberinto de temas.",
+      "simplePoints": [
+        "Nombra tu tienda",
+        "Añade productos",
+        "Comparte un enlace"
+      ],
       "fast": "Rápido",
-      "fastSub": "Crea el borrador de una tienda en minutos",
+      "fastDetail": "La mayoría de vendedores publica la misma noche que se registra, con un catálogo que se ve bien en el móvil.",
       "credible": "Creíble",
-      "credibleSub": "Un enlace que los compradores reconocen"
+      "credibleDetail": "Un escaparate real en stallio.shop se ve intencional, así que chats e historias dejan de cargar todo el trabajo."
     },
     "cta": {
+      "eyebrow": "Empieza esta noche",
       "title": "¿Listo para verte tan serio como eres?",
       "subtitle": "Crea una tienda gratis, añade unos cuantos productos y deja tu enlace donde la gente ya te encuentra.",
       "createFreeStore": "Empieza gratis",

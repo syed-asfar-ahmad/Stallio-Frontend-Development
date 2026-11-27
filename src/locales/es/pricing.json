@@ -2,56 +2,84 @@
   "pricing": {
     "hero": {
       "eyebrow": "Precios",
-      "titleLine1": "Números sencillos.",
-      "titleLine2": "Un producto completo.",
-      "subtitle": "Un mes por nuestra cuenta; luego elige mensual o anual. Las mismas funciones en ambos casos: escaparate, panel y herramientas incluidas.",
-      "fromMonthly": "Desde ${{amount}}/mes después de la prueba",
+      "titleBefore": "Números sencillos.",
+      "titleAccent": "Un producto completo.",
+      "body": "Un mes por nuestra cuenta; luego elige mensual o anual. Las mismas funciones en ambos casos: escaparate, panel y herramientas incluidas.",
+      "fromPrice": "Desde {{price}}/mes después de la prueba",
       "noCard": "Sin tarjeta para empezar",
-      "startFreeTrial": "Empieza gratis",
-      "whatYouGet": "Lo que obtienes"
+      "startFree": "Empieza gratis",
+      "whatYouGet": "Lo que obtienes",
+      "chooseBilling": "Elige la facturación",
+      "previewNote": "Vista previa de precios mensuales y anuales en USD después de tu prueba gratuita.",
+      "monthly": {
+        "label": "Mensual",
+        "note": "Flexible, cancela cuando quieras",
+        "price": "{{price}}/mes"
+      },
+      "yearly": {
+        "label": "Anual",
+        "note": "Mejor valor por un año completo",
+        "price": "{{price}}/año"
+      }
     },
-    "billing": {
+    "plans": {
       "eyebrow": "Elige la facturación",
       "title": "Mensual o anual, tú eliges",
-      "subtitle": "Previsualiza importes locales por país. Las suscripciones se cobran en dólares estadounidenses.",
-      "estimate": "Estimación",
+      "body": "Previsualiza importes locales por país. Las suscripciones se cobran en dólares estadounidenses.",
       "yourCountry": "Tu país",
       "countryHelp": "Busca y selecciona para ver precios aproximados en tu moneda en los planes.",
-      "countryLabelSr": "País para estimar el precio",
       "searchCountryPlaceholder": "Buscar país...",
       "noCountryFound": "No se encontró el país",
       "updatingRates": "Actualizando tipos de cambio...",
-      "fxError": "No se pudieron cargar los tipos para esta moneda. Los importes de abajo permanecen en USD.",
-      "plansBillUsd": "Los planes se facturan en USD.",
-      "monthly": "Mensual",
-      "yearly": "Anual",
-      "saveAmount": "Ahorra ${{amount}}",
-      "perMo": "/mes",
-      "perYr": "/año",
+      "fxError": "Aún no hay estimación local para este país. Los importes de abajo permanecen en USD.",
+      "billingCycle": "Ciclo de facturación",
+      "save": "Ahorra {{amount}}",
+      "afterTrial": "Después de la prueba",
       "approxPerMonth": "≈ {{amount}} / mes",
       "approxPerYear": "≈ {{amount}} / año",
-      "afterTrial": "Después de la prueba",
-      "monthlyDesc": "Facturación flexible. Cancela en cualquier momento desde tu cuenta.",
-      "startMonthly": "Empezar mensual",
-      "yearlyDesc": "Paga una vez al año. Lo mejor si te comprometes a hacer crecer tu tienda.",
-      "startYearly": "Empezar anual",
-      "includedEyebrow": "Incluido",
-      "includedTitle": "Todo en ambos planes",
-      "includedItems": [
+      "highlights": [
+        "El mismo producto completo en ambos planes",
+        "Enlace alojado en stallio.shop",
+        "Productos y pedidos ilimitados"
+      ],
+      "monthly": {
+        "label": "Mensual",
+        "cadence": "/mes",
+        "blurb": "Facturación flexible. Cancela en cualquier momento desde tu cuenta.",
+        "cta": "Empezar mensual"
+      },
+      "yearly": {
+        "label": "Anual",
+        "cadence": "/año",
+        "blurb": "Paga una vez al año. Lo mejor si te comprometes a hacer crecer tu tienda.",
+        "cta": "Empezar anual"
+      },
+      "trustTitle": "Primero la prueba, luego tú eliges",
+      "trustBody": "Tu primer mes es gratis. Te recordaremos antes de que termine la prueba para que puedas elegir mensual o anual, o cancelar si no encaja."
+    },
+    "included": {
+      "eyebrow": "Incluido",
+      "title": "Todo en ambos planes",
+      "body": "Un solo producto. Mensual y anual desbloquean el mismo escaparate, panel y herramientas.",
+      "items": [
         "Escaparate completo y enlace de tienda personalizado",
         "Productos y fotos ilimitados",
         "Panel de pedidos y solicitudes de compradores",
         "Experiencia de escaparate pensada primero para móvil",
         "Ajustes de cuenta y tienda",
-        "Soporte por correo electrónico durante la prueba y los planes de pago"
-      ],
-      "trustTitle": "Primero la prueba, luego tú eliges",
-      "trustBody": "Tu primer mes es gratis. Te recordaremos antes de que termine la prueba para que puedas elegir mensual o anual, o cancelar si no encaja."
+        "Soporte por correo electrónico durante la prueba y los planes de pago",
+        "Variantes, precios de oferta y stock",
+        "Cupones y tarifas de entrega",
+        "Factura PDF por pedido",
+        "Marcar pagado, enviar y exportar CSV",
+        "Tienda y panel en EN, ES y AR",
+        "Gráficos de ingresos y pedidos"
+      ]
     },
     "faq": {
       "eyebrow": "Preguntas frecuentes",
       "title": "Dudas sobre precios, resueltas",
-      "subtitle": "Respuestas rápidas sobre pruebas, facturación y qué pasa al suscribirte.",
+      "body": "Respuestas rápidas sobre pruebas, facturación y qué pasa al suscribirte.",
       "items": [
         {
           "q": "¿Necesito tarjeta para empezar?",
@@ -79,11 +107,11 @@
         }
       ]
     },
-    "bottomCta": {
-      "title": "¿Sigues decidiendo?",
-      "subtitle": "Pregúntanos lo que quieras en la página de contacto, o empieza una prueba y ve el producto por ti mismo.",
-      "contactUs": "Contáctanos",
-      "createYourShop": "Empieza gratis"
+    "cta": {
+      "eyebrow": "Sigues decidiendo",
+      "title": "Pregúntanos, o pruébalo tú mismo",
+      "body": "Escríbenos en la página de contacto, o empieza una prueba y ve el producto por ti mismo.",
+      "secondary": "Contáctanos"
     }
   }
 }

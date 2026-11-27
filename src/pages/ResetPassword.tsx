@@ -3,27 +3,10 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 import { Lock, LogIn, Eye, EyeOff, ArrowLeft } from 'lucide-react';
+import { PasswordStrengthMeter } from '@/components/auth/PasswordStrengthMeter';
 import PublicLayout from '../components/PublicLayout';
 
 const API_BASE = import.meta.env.VITE_API_URL ?? '';
-
-function getPasswordStrength(pwd: string): {
-  score: number;
-  strengthKey: 'weak' | 'fair' | 'good' | 'strong' | null;
-  color: string;
-} {
-  if (!pwd) return { score: 0, strengthKey: null, color: '' };
-  const hasMinLen = pwd.length >= 8;
-  const hasLower = /[a-z]/.test(pwd);
-  const hasUpper = /[A-Z]/.test(pwd);
-  const hasNumber = /[0-9]/.test(pwd);
-  const hasSpecial = /[^a-zA-Z0-9]/.test(pwd);
-  const score = [hasMinLen, hasLower, hasUpper, hasNumber, hasSpecial].filter(Boolean).length;
-  if (score <= 1) return { score, strengthKey: 'weak', color: 'bg-red-500' };
-  if (score === 2) return { score, strengthKey: 'fair', color: 'bg-amber-500' };
-  if (score === 3) return { score, strengthKey: 'good', color: 'bg-lime-500' };
-  return { score, strengthKey: 'strong', color: 'bg-brand-500' };
-}
 
 export default function ResetPassword() {
   const { t } = useTranslation();
@@ -36,7 +19,6 @@ export default function ResetPassword() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const { score, strengthKey, color } = useMemo(() => getPasswordStrength(password), [password]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -138,27 +120,7 @@ export default function ResetPassword() {
                   </button>
                 </div>
                 {passwordFocused && password ? (
-                  <div className="mt-2">
-                    <div className="flex gap-1">
-                      {[1, 2, 3, 4].map((i) => (
-                        <div key={i} className={`h-1 flex-1 rounded-full transition-colors ${i <= score ? color : 'bg-stone-200 dark:bg-zinc-600'}`} />
-                      ))}
-                    </div>
-                    <p
-                      className={`mt-1.5 text-xs font-medium ${
-                        score <= 1 ? 'text-red-600' : score === 2 ? 'text-amber-600' : score === 3 ? 'text-lime-600' : 'text-brand-600'
-                      }`}
-                    >
-                      {t('auth.signup.passwordStrength')} {strengthKey ? t(`auth.signup.strength.${strengthKey}`) : ''}
-                    </p>
-                    <ul className="mt-1 space-y-0.5 text-[0.7rem] text-stone-500 sm:text-xs dark:text-zinc-500">
-                      <li className={password.length >= 8 ? 'text-brand-600' : ''}>{t('auth.signup.rules.min8')}</li>
-                      <li className={/[a-z]/.test(password) ? 'text-brand-600' : ''}>{t('auth.signup.rules.lower')}</li>
-                      <li className={/[A-Z]/.test(password) ? 'text-brand-600' : ''}>{t('auth.signup.rules.upper')}</li>
-                      <li className={/[0-9]/.test(password) ? 'text-brand-600' : ''}>{t('auth.signup.rules.number')}</li>
-                      <li className={/[^a-zA-Z0-9]/.test(password) ? 'text-brand-600' : ''}>{t('auth.signup.rules.special')}</li>
-                    </ul>
-                  </div>
+                  <PasswordStrengthMeter password={password} />
                 ) : null}
               </div>
               <div>

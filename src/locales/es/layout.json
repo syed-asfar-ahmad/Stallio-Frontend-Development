@@ -11,7 +11,9 @@
       "features": "Funciones",
       "pricing": "Precios",
       "contact": "Contacto",
-      "careers": "Carreras"
+      "help": "Ayuda",
+      "careers": "Carreras",
+      "blog": "Blog"
     },
     "navCta": {
       "logIn": "Iniciar sesión",
@@ -35,7 +37,7 @@
       "refund": "Política de reembolso",
       "contactHeading": "Contacto",
       "socialHeading": "Redes sociales",
-      "legalHeading": "Legales",
+      "legalHeading": "Legal",
       "copyright": "© {{year}} Stallio. Todos los derechos reservados."
     },
     "theme": {

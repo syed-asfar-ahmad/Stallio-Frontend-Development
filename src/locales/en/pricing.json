@@ -2,42 +2,66 @@
   "pricing": {
     "hero": {
       "eyebrow": "Pricing",
-      "titleLine1": "Simple numbers.",
-      "titleLine2": "One full product.",
-      "subtitle": "One month on us, then choose monthly or yearly. Same features either way: storefront, dashboard, and tools included.",
-      "fromMonthly": "From ${{amount}}/mo after trial",
+      "titleBefore": "Simple numbers.",
+      "titleAccent": "One full product.",
+      "body": "One month on us, then choose monthly or yearly. Same features either way: storefront, dashboard, and tools included.",
+      "fromPrice": "From {{price}}/mo after trial",
       "noCard": "No card to start",
-      "startFreeTrial": "Start Free",
-      "whatYouGet": "What You Get"
+      "startFree": "Start free",
+      "whatYouGet": "What you get",
+      "chooseBilling": "Choose billing",
+      "previewNote": "Preview of monthly and yearly USD pricing after your free trial.",
+      "monthly": {
+        "label": "Monthly",
+        "note": "Flexible, cancel anytime",
+        "price": "{{price}}/mo"
+      },
+      "yearly": {
+        "label": "Yearly",
+        "note": "Best value for a full year",
+        "price": "{{price}}/yr"
+      }
     },
-    "billing": {
+    "plans": {
       "eyebrow": "Choose billing",
       "title": "Monthly or yearly, your choice",
-      "subtitle": "Preview local amounts by country. Subscriptions are charged in US dollars.",
-      "estimate": "Estimate",
+      "body": "Preview local amounts by country. Subscriptions are charged in US dollars.",
       "yourCountry": "Your country",
       "countryHelp": "Search and select to see approximate prices in your currency on the plans.",
-      "countryLabelSr": "Country for price estimate",
       "searchCountryPlaceholder": "Search country...",
       "noCountryFound": "No country found",
       "updatingRates": "Updating rates...",
-      "fxError": "Could not load rates for this currency. Amounts below stay in USD.",
-      "plansBillUsd": "Plans bill in USD.",
-      "monthly": "Monthly",
-      "yearly": "Yearly",
-      "saveAmount": "Save ${{amount}}",
-      "perMo": "/mo",
-      "perYr": "/yr",
+      "fxError": "No local estimate for this country yet. Amounts below stay in USD.",
+      "billingCycle": "Billing cycle",
+      "save": "Save {{amount}}",
+      "afterTrial": "After trial",
       "approxPerMonth": "≈ {{amount}} / month",
       "approxPerYear": "≈ {{amount}} / year",
-      "afterTrial": "After trial",
-      "monthlyDesc": "Flexible billing. Cancel anytime from your account.",
-      "startMonthly": "Start Monthly",
-      "yearlyDesc": "Pay once per year. Best if you are committed to growing your shop.",
-      "startYearly": "Start Yearly",
-      "includedEyebrow": "Included",
-      "includedTitle": "Everything in both plans",
-      "includedItems": [
+      "highlights": [
+        "Same full product on either plan",
+        "Hosted stallio.shop link",
+        "Unlimited products and orders"
+      ],
+      "monthly": {
+        "label": "Monthly",
+        "cadence": "/mo",
+        "blurb": "Flexible billing. Cancel anytime from your account.",
+        "cta": "Start monthly"
+      },
+      "yearly": {
+        "label": "Yearly",
+        "cadence": "/yr",
+        "blurb": "Pay once per year. Best if you are committed to growing your shop.",
+        "cta": "Start yearly"
+      },
+      "trustTitle": "Trial first, then you choose",
+      "trustBody": "Your first month is free. We will remind you before the trial ends so you can pick monthly or yearly, or cancel if it is not a fit."
+    },
+    "included": {
+      "eyebrow": "Included",
+      "title": "Everything in both plans",
+      "body": "One product. Monthly and yearly unlock the same storefront, dashboard, and tools.",
+      "items": [
         "Hosted stallio.shop link (no domain)",
         "Unlimited products, photos, and orders",
         "Mobile storefront, cart, and checkout",
@@ -50,14 +74,12 @@
         "Revenue and order charts",
         "Buyer messages and support chat",
         "First month free, no card required"
-      ],
-      "trustTitle": "Trial first, then you choose",
-      "trustBody": "Your first month is free. We will remind you before the trial ends so you can pick monthly or yearly, or cancel if it is not a fit."
+      ]
     },
     "faq": {
       "eyebrow": "FAQ",
       "title": "Pricing questions, answered",
-      "subtitle": "Quick answers about trials, billing, and what happens when you subscribe.",
+      "body": "Quick answers about trials, billing, and what happens when you subscribe.",
       "items": [
         {
           "q": "Do I need my own domain or hosting?",
@@ -97,11 +119,11 @@
         }
       ]
     },
-    "bottomCta": {
-      "title": "Still deciding?",
-      "subtitle": "Ask us anything on the contact page, or start a trial and see the product for yourself.",
-      "contactUs": "Contact Us",
-      "createYourShop": "Start Free"
+    "cta": {
+      "eyebrow": "Still deciding",
+      "title": "Ask us, or try it yourself",
+      "body": "Reach out on the contact page, or start a trial and see the product for yourself.",
+      "secondary": "Contact us"
     }
   }
 }
