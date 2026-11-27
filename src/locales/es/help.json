@@ -1,0 +1,149 @@
+{
+  "help": {
+    "metaTitle": "Ayuda | Stallio",
+    "metaTitleArticle": "{{title}} | Ayuda de Stallio",
+    "hero": {
+      "eyebrow": "Centro de ayuda",
+      "title": "Encuentra respuestas rápido",
+      "body": "Busca problemas habituales de vendedores y sigue guías paso a paso. Si aún necesitas a una persona, usa Contacto."
+    },
+    "searchPlaceholder": "Busca un problema, como eliminar cuenta o restablecer contraseña",
+    "searchLabel": "Buscar artículos de ayuda",
+    "categories": {
+      "all": "Todos",
+      "account": "Cuenta",
+      "access": "Acceso e inicio de sesión",
+      "billing": "Facturación y planes"
+    },
+    "resultsCount": "{{count}} guías",
+    "noResults": {
+      "title": "No hay guías coincidentes",
+      "body": "Prueba otras palabras, o envíanos un mensaje y te orientaremos.",
+      "cta": "Contactar soporte"
+    },
+    "article": {
+      "back": "Volver a Ayuda",
+      "stepsHeading": "Pasos",
+      "related": "Guías relacionadas",
+      "stillNeedHelp": "¿Sigues necesitando ayuda?",
+      "stillNeedHelpBody": "Cuéntanos qué falló e incluye el correo de tu cuenta de Stallio.",
+      "contactCta": "Contactar soporte",
+      "refundPolicyLink": "Leer la Política de reembolso"
+    },
+    "notFound": {
+      "title": "Guía no encontrada",
+      "body": "Esa página de ayuda no existe o el enlace está desactualizado.",
+      "cta": "Ver Ayuda"
+    },
+    "articles": {
+      "delete-account": {
+        "title": "Cómo eliminar tu cuenta de Stallio",
+        "excerpt": "Elimina de forma permanente tu tienda, productos, pedidos y mensajes desde Ajustes.",
+        "intro": "Eliminar la cuenta quita tu tienda y los datos del panel. No se puede deshacer desde el producto. Primero inicia sesión.",
+        "steps": [
+          "Inicia sesión en stallio.shop/login y abre tu panel de vendedor.",
+          "Ve a Ajustes en la barra lateral del panel.",
+          "Desplázate hasta Eliminar cuenta y elige Eliminar mi cuenta.",
+          "En el cuadro de confirmación, escribe DELETE MY ACCOUNT exactamente y confirma.",
+          "Cuando termine, se cierra la sesión y vuelves a la página de inicio."
+        ]
+      },
+      "restore-account": {
+        "title": "Recuperar una cuenta de Stallio eliminada",
+        "excerpt": "La eliminación es permanente en el producto. Contacta soporte si quieres pedir una recuperación.",
+        "intro": "La eliminación de cuenta está pensada para ser permanente. No hay un botón de restauración después de confirmar DELETE MY ACCOUNT.",
+        "steps": [
+          "Comprueba si aún puedes iniciar sesión en stallio.shop/login. Si funciona, la cuenta no se eliminó.",
+          "Si el acceso falla y ya eliminaste la cuenta, abre la página de Contacto.",
+          "Usa un asunto claro como Recuperación de cuenta e incluye el correo y el nombre de usuario de la tienda.",
+          "Indica cuándo eliminaste la cuenta y por qué la necesitas de nuevo.",
+          "Espera la respuesta. La recuperación no está garantizada y depende de los datos que aún existan de nuestra parte."
+        ]
+      },
+      "account-suspended": {
+        "title": "Por qué se puede suspender una cuenta",
+        "excerpt": "El acceso a la tienda o al panel puede pausarse por impago, abuso o riesgo para otros usuarios.",
+        "intro": "Stallio puede suspender una tienda, el panel del vendedor, o ambos. Puedes ver un mensaje de que el acceso al panel está suspendido al iniciar sesión o abrir el panel.",
+        "steps": [
+          "Motivos habituales: cuotas de suscripción sin pagar, abuso, contenido ilegal o dañino, o riesgo para otros usuarios, según los Términos del servicio.",
+          "Si solo está bloqueado el panel, la tienda pública puede comportarse distinto a un cierre total de cuenta.",
+          "Revisa la bandeja del correo de tu cuenta de Stallio por un aviso de suspensión o facturación.",
+          "Revisa Precios y tu último pago si el problema puede ser de facturación.",
+          "Usa la guía de qué hacer tras una suspensión para los siguientes pasos, incluido cómo contactar soporte."
+        ]
+      },
+      "after-suspension": {
+        "title": "Qué hacer después de una suspensión",
+        "excerpt": "Contacta soporte con contexto, corrige la facturación si hace falta y pide una revisión.",
+        "intro": "No hay un botón automático para quitar la suspensión. Corrige la causa cuando puedas y pide al equipo que revise tu cuenta.",
+        "steps": [
+          "Lee cualquier correo de Stallio sobre la suspensión y anota el motivo si aparece.",
+          "Si el problema es de facturación, resuelve el plan impago o el pago fallido primero cuando puedas.",
+          "Si aún puedes abrir el panel, usa el chat de soporte con el admin y describe qué pasó.",
+          "Si no puedes abrir el panel, usa Contacto. Incluye tu correo, el usuario de la tienda y una breve explicación o apelación.",
+          "No crees una segunda cuenta para evitar la suspensión. Espera una respuesta humana antes de cambiar contenido señalado."
+        ]
+      },
+      "login-issues": {
+        "title": "Resolver problemas habituales de inicio de sesión",
+        "excerpt": "Revisa correo, contraseña, verificación y suspensión antes de asumir que la cuenta desapareció.",
+        "intro": "La mayoría de fallos vienen de un correo incorrecto, una contraseña olvidada, un correo sin verificar o un panel suspendido.",
+        "steps": [
+          "Abre stallio.shop/login y confirma que usas el mismo correo del registro.",
+          "Si la contraseña falla, usa Olvidé mi contraseña y sigue el correo de restablecimiento.",
+          "Si no terminaste la verificación del correo, abre el enlace del correo de registro o pide uno nuevo en el flujo de verificación.",
+          "Si ves un mensaje de que el acceso al panel está suspendido, sigue las guías de suspensión en lugar de reintentar la contraseña.",
+          "¿Sigues bloqueado? Usa Contacto con el correo que crees que pertenece a la cuenta."
+        ]
+      },
+      "reset-password": {
+        "title": "Restablecer tu contraseña",
+        "excerpt": "Usa Olvidé mi contraseña, abre el enlace del correo y elige una nueva.",
+        "intro": "Puedes restablecer la contraseña de vendedor sin conocer la anterior, si puedes abrir la bandeja del correo de la cuenta.",
+        "steps": [
+          "Ve a stallio.shop/forgot-password.",
+          "Introduce el correo de tu cuenta de Stallio y envía.",
+          "Abre esa bandeja y busca el mensaje de restablecimiento de Stallio. Revisa spam si hace falta.",
+          "Sigue el enlace a la página de restablecimiento y elige una contraseña que cumpla las reglas de fortaleza del registro.",
+          "Inicia sesión en stallio.shop/login con la nueva contraseña. Si el enlace caducó, pide un correo nuevo."
+        ]
+      },
+      "cancel-or-change-plan": {
+        "title": "Cancelar o cambiar tu suscripción",
+        "excerpt": "Los planes y ciclos están en Precios. Cancela o cambia con mensajes de cuenta y Contacto cuando haga falta.",
+        "intro": "Stallio muestra opciones mensuales y anuales en Precios. Puedes empezar sin tarjeta. Cancelar un plan mensual de pago detiene cargos futuros; conservas el acceso hasta el final del período ya pagado, según Precios y la Política de reembolso.",
+        "steps": [
+          "Revisa las opciones actuales en stallio.shop/pricing, incluidas facturación mensual y anual.",
+          "Si aún estás en prueba gratuita, puedes quedarte en funciones gratis o suscribirte cuando quieras. No se cobra cuota de suscripción hasta que te suscribas.",
+          "Para cancelar o cambiar un plan de pago, usa Contacto con asunto Facturación o planes, e incluye tu correo y el usuario de la tienda.",
+          "Indica con claridad si quieres cancelar, pasar de mensual a anual, o al revés.",
+          "Tras cancelar un plan mensual, el acceso suele continuar hasta el final del período ya pagado, salvo que confirmemos otra cosa por escrito."
+        ]
+      },
+      "billing-problems": {
+        "title": "Problemas de facturación y pagos",
+        "excerpt": "Cargos duplicados, importes incorrectos y pagos fallidos: qué reunir y dónde escribir.",
+        "intro": "Las cuotas de suscripción de planes de vendedor se facturan según Precios. Los pedidos de tu tienda con clientes son aparte y no son facturación de suscripción de Stallio.",
+        "steps": [
+          "Confirma que el cargo es una cuota de suscripción de Stallio, no un cobro o pago que recibiste de un cliente.",
+          "Anota la fecha del cargo, el importe, la moneda y el correo o usuario de la tienda.",
+          "Si hay un posible error de facturación, como un cargo duplicado o facturación tras una cancelación confirmada, contáctanos en un plazo de 30 días desde el cargo.",
+          "Usa Contacto, elige un asunto de facturación e incluye los datos anteriores.",
+          "Si el acceso al panel se limitó tras un pago fallido, menciónalo en el mismo mensaje para conectar facturación y acceso."
+        ]
+      },
+      "request-refund": {
+        "title": "Solicitar un reembolso de suscripción",
+        "excerpt": "Los reembolsos siguen la Política de reembolso. Los planes gratis no tienen cuota que reembolsar.",
+        "intro": "Esto cubre las cuotas de suscripción que pagas a Stallio. No cubre reembolsos de pedidos de tu tienda. Esos quedan entre tú y tus clientes.",
+        "steps": [
+          "Lee la Política de reembolso para saber cómo se tratan los casos mensuales, anuales, gratis y de error de facturación.",
+          "Abre Contacto e incluye tu correo, el usuario de la tienda, la fecha del cargo y una breve descripción.",
+          "Si cancelaste un plan mensual, recuerda que los días no usados de un mes ya pagado no suelen reembolsarse salvo que la ley lo exija o confirmemos un error de facturación.",
+          "Los planes anuales pagados por adelantado no se reembolsan automáticamente por los meses restantes salvo confirmación por escrito o lo que exija la ley local.",
+          "Tras verificar un reembolso aprobado, suele procesarse en 5 a 10 días hábiles, según tu proveedor de pago."
+        ]
+      }
+    }
+  }
+}

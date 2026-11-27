@@ -11,7 +11,10 @@
       "features": "Features",
       "pricing": "Pricing",
       "contact": "Contact",
-      "careers": "Careers"
+      "help": "Help",
+      "careers": "Careers",
+      "blog": "Blog",
+      "ambassador": "Ambassador"
     },
     "navCta": {
       "logIn": "Log In",
